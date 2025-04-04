@@ -54,4 +54,8 @@ public class Quiz {
     public void setTopic(String topic) {
         this.topic = topic;
     }
+
+    public String getQuizDetails(){
+        return title + " " + topic +  " " + description + " " + numOfQuestions;
+    }
 }
