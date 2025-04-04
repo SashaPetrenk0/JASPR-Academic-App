@@ -1,4 +1,5 @@
-package org.jaspr.hr.demo;
+package org.jaspr.hr.demo.model;
+
 import java.util.List;
 /**
  * Interface for the Contact Data Access Object that handles

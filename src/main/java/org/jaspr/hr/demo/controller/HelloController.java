@@ -1,13 +1,13 @@
-package org.jaspr.hr.demo;
+package org.jaspr.hr.demo.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import org.jaspr.hr.demo.HelloApplication;
 
 import java.io.IOException;
 

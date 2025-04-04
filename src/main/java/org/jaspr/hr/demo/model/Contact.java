@@ -1,4 +1,4 @@
-package org.jaspr.hr.demo;
+package org.jaspr.hr.demo.model;
 
 public class Contact {
     private int id;

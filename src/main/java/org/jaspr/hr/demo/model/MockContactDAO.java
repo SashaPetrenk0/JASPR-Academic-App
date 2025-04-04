@@ -1,4 +1,4 @@
-package org.jaspr.hr.demo;
+package org.jaspr.hr.demo.model;
 
 import java.util.ArrayList;
 import java.util.List;

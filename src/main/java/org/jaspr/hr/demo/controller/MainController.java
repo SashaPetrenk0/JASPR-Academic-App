@@ -1,4 +1,4 @@
-package org.jaspr.hr.demo;
+package org.jaspr.hr.demo.controller;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -6,6 +6,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import org.jaspr.hr.demo.model.Contact;
+import org.jaspr.hr.demo.model.IContactDAO;
+import org.jaspr.hr.demo.model.SqliteConnection;
+import org.jaspr.hr.demo.model.SqliteContactDAO;
+
 
 
 public class MainController {
@@ -17,7 +22,7 @@ public class MainController {
     private IContactDAO contactDAO;
     public MainController() {
 
-        contactDAO = new MockContactDAO();
+        contactDAO = new SqliteContactDAO();
     }
     /**
      * Renders a cell in the contacts list view by setting the text to the contact's full name.
@@ -33,8 +38,9 @@ public class MainController {
         contactsListView.getSelectionModel().select(contact);
         firstNameTextField.setText(contact.getFirstName());
         lastNameTextField.setText(contact.getLastName());
-        emailTextField.setText(contact.getEmail());
         phoneTextField.setText(contact.getPhone());
+        emailTextField.setText(contact.getEmail());
+
     }
     private ListCell<Contact> renderCell(ListView<Contact> contactListView) {
         return new ListCell<>() {
@@ -73,8 +79,8 @@ public class MainController {
         if (selectedContact != null) {
             selectedContact.setFirstName(firstNameTextField.getText());
             selectedContact.setLastName(lastNameTextField.getText());
-            selectedContact.setEmail(emailTextField.getText());
             selectedContact.setPhone(phoneTextField.getText());
+            selectedContact.setEmail(emailTextField.getText());
             contactDAO.updateContact(selectedContact);
             syncContacts();
         }
