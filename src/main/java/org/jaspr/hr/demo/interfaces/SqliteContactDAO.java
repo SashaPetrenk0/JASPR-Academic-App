@@ -1,4 +1,7 @@
-package org.jaspr.hr.demo.model;
+package org.jaspr.hr.demo.interfaces;
+
+import org.jaspr.hr.demo.model.Contact;
+import org.jaspr.hr.demo.model.SqliteConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

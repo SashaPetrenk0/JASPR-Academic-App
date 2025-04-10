@@ -1,4 +1,6 @@
-package org.jaspr.hr.demo.model;
+package org.jaspr.hr.demo.interfaces;
+
+import org.jaspr.hr.demo.model.Contact;
 
 import java.util.ArrayList;
 import java.util.List;

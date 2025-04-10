@@ -7,9 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import org.jaspr.hr.demo.model.Contact;
-import org.jaspr.hr.demo.model.IContactDAO;
-import org.jaspr.hr.demo.model.SqliteConnection;
-import org.jaspr.hr.demo.model.SqliteContactDAO;
+import org.jaspr.hr.demo.interfaces.IContactDAO;
+import org.jaspr.hr.demo.interfaces.SqliteContactDAO;
 
 
 

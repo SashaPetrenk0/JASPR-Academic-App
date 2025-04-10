@@ -13,4 +13,6 @@ module org.jaspr.hr.demo {
     opens org.jaspr.hr.demo.controller to javafx.fxml;
     exports org.jaspr.hr.demo.model.usersDeleteFolderEventually;
     opens org.jaspr.hr.demo.model.usersDeleteFolderEventually to javafx.fxml;
+    exports org.jaspr.hr.demo.interfaces;
+    opens org.jaspr.hr.demo.interfaces to javafx.fxml;
 }
