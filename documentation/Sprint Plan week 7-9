@@ -1,0 +1,140 @@
+Due Date: Thursday week 9
+
+Student sign up (2 units)
+Must have - As a student, I want to be able to sign up to a “learning management system” so that I can view my assigned quizzes and study for my exams
+
+a. Given I would like to sign in,
+b. when I select the sign in button on the first page of the interface and fill in my full name, a distinct student ID, email, and a password,
+c. Then I will have an account made in my name
+Components:
+-	UI: create signup page in JavaFX
+-	Database: create table for users
+-	Backend: get data from form and put into database
+Teacher signup  (1 unit)
+Must have - As a teacher , I want to be able to sign up to a “learning management system” so that I can assign quizzes and view how my students are progressing
+
+a. Given I would like to sign in,
+b. when I select the sign in button on the first page of the interface and fill in my full name, a distinct staff ID, email, and a password,
+c. Then I will have an account made in my name
+Components:
+-	UI: create signup page in JavaFX
+-	Database: create table for users
+-	Backend: get data from form and put into database
+
+Admin signup (1 unit)
+User story: Must have - As an administrator, I want to be able to sign up to a “learning management system” so that I can manage class lists and enrolment
+
+a. given I would like to sign in,
+b. when I select the sign in button on the first page of the interface and fill in my full name, a distinct admin ID, email, and password,
+c. then I will have an account made in my name
+Components:
+-	UI: create signup page in JavaFX
+-	Database: create table for users
+-	Backend: get data from form and put into database, hash passwords
+User login (3 units)
+Must have - As a user I want to be able to log into the “learning management system” so that I can access any data relevant to me
+
+a. Given I have created an account,
+b. When I select the log in menu and enter my correct email and password
+c. Then I will be logged into my account and can access my relevant the data in the system
+Components:
+-	UI: create login page in JavaFX
+-	Backend: retrieve data from login form, compare to data in database
+
+Student view details (1 unit)
+Must have - As a student, I want to be able to view all of my details including what class I am in and who is my teacher, so that I know which class to go to.
+
+a. Given I am logged in and enrolled in at least one class,
+b. when I select the profile icon in the top right of the screen
+c. Then I should be able to view all of my details
+Components:
+-	UI: Create student profile page in JavaFX
+-	Backend: create toString method in student class that gets user’s details from database
+
+Teacher view details (1 unit)
+Must have - As a teacher, I want to be able to view all of my details including what classes I am teaching and the students in my class, so that I  can teach different subjects.
+
+a. Given I am logged in,
+b. when I select the profile icon in the top right of the screen
+c. Then I should be able to view all of my details
+
+Components:
+-	UI: Create student profile page in JavaFX
+-	Backend: create toString method in teacher class that gets user’s details from database
+
+Admin assign class code to student (4 units)
+Must have - As an administrator, I want to assign students to class codes so that I can ensure every class has at least one student and the number of students are even between classes
+
+a. Given that I am logged in, and there is at least one teacher and one student signed up,
+b. When I select the assign class button, select a class code from a list, select the student drop down and selects a student from those that have signed in, and clicks ‘assign’
+c. Then that teacher will be assigned to that class code
+Components:
+-	Create admin dashboard in JavaFx
+-	Add ‘assign class’ button to admin dashboard
+-	Add student option to dropdown in assign class
+-	Backend: Add teacher to classroom class and database
+
+Admin assign class code to teacher (2 units)
+Must have - As an administrator, I want to assign teachers to class codes so that I can ensure every class has a teacher running that lesson
+
+a. Given there is at least one teacher signed up and I am logged in,
+b. When I select the assign class button, select a class code from a list, select the teacher drop down and selects a teacher from those that have signed in, and clicks ‘assign’
+c. Then that teacher will be assigned to that class code
+Components:
+-	Create admin dashboard in JavaFx
+-	Add ‘assign class’ button to admin dashboard
+-	Add teacher option to dropdown in assign class
+-	Backend: Add teacher to classroom class and database
+
+Teacher create quiz (3 units)
+Must have - As a teacher, I want to generate quizzes with AI so that I can save time.
+
+a. Given I am logged into the system as a teacher
+b. When I navigate to the 'quizzes' page and fill out the form to generate a quiz
+c. Then I should see a practice quiz that I can assign to my students
+Components:
+-	UI: create quizzes page
+-	UI: create generate quiz form
+-	Backend: get data from form and insert into quiz database and class
+Teacher assign quiz to class (4 units)
+Must have - As a teacher I want to assign quizzes to my classes so they can access my learning materials
+a.	Given I am logged into my account as a teacher and have been assigned at least one class,
+b.	When I select the ‘assign quiz’ button and choose from a list of my classes,
+c.	then I will see a success message detailing the successful assignment of a quiz to that class and the quiz should appear in my students quizzes
+Components:
+-	UI: create assign quiz button in teacher view
+-	UI: create form to assign quizzes
+-	UI: create success/failure pop up messages
+-	Backend: add data to ‘class’ table from form
+Student view assigned quizzes (3 units)
+Must have - As a student, I want to see the quizzes assigned to me by my teacher separately to the quizzes I have made and separately to the quizzes other students have made.
+
+a. Given I am logged into my account as a student
+b. When I view my dashboard, I should be able to see assigned quizzes in a separate section to my personally generated quizzes
+c. Then I won’t get confused between the quizzes with deadlines and my own quizzes.
+Components:
+-	UI: create user dashboard in JavaFX
+-	Create assigned quizzes section in user dashboard in JavaFX
+-	Backend: add assigned quizzes to dashboard based on assigned quizzes in database
+Student complete quiz (3 units)
+
+Student view grades (2 units)
+Must have - As a student, I wish to view my graded results from my quizzes so that I can review topics that I struggle with
+
+a. Given I am logged in, assigned to at least one class, and has completed at least one quiz, either self-created or teacher-assigned,
+b. When I navigate to the assignments section of the application and select my graded quiz,
+c. Then I will be able to view my result for the quiz
+Components:
+-	UI: create assignments section in JavaFX
+-	Backend: create toString method to display results
+Teacher view class results (3 units)
+Should have - As a teacher, I want to view my class's overall results in a graph so that I can see their collective strengths and weaknesses at a glance.
+
+a. Given I am logged in to the system as a teacher and my students have completed at least one quiz
+b. When I navigate to the 'student results' page
+c. Then I should be able to view my students' results in a graph
+Components:
+-	UI: create student results page in teacher dashboard
+-	UI: create styles for displaying students in graph
+-	Backend: create tostring method in student class to display results
+-	Backend: gather results for each student and create graph
