@@ -113,9 +113,9 @@ public class MainController {
         // Default values for a new contact
         final String DEFAULT_FIRST_NAME = "New";
         final String DEFAULT_LAST_NAME = "Contact";
-        final String DEFAULT_EMAIL = "";
         final String DEFAULT_PHONE = "";
-        Contact newContact = new Contact(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
+        final String DEFAULT_EMAIL = "";
+        Contact newContact = new Contact(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_PHONE, DEFAULT_EMAIL);
         // Add the new contact to the database
         contactDAO.addContact(newContact);
         syncContacts();
