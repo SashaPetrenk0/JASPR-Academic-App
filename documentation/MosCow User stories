@@ -1,0 +1,158 @@
+
+Must have:
+1.	As a student, I want to be able to sign up to a “learning management system” so that I can view my assigned quizzes and study for my exams
+a.	Given I would like to sign in,
+b.	when I select the sign in button on the first page of the interface and fill in my full name, a distinct student ID, email, and a password,
+c.	Then I will have an account made in my name
+
+2.	As a teacher , I want to be able to sign up to a “learning management system” so that I can assign quizzes and view how my students are progressing
+a.	Given I would like to sign in,
+b.	when I select the sign in button on the first page of the interface and fill in my full name, a distinct staff ID, email, and a password,
+c.	Then I will have an account made in my name
+
+3.	As an administrator, I want to be able to sign up to a “learning management system” so that I can manage class lists and enrolment
+a.	given I would like to sign in,
+b.	when I select the sign in button on the first page of the interface and fill in my full name, a distinct admin ID, email, and password,
+c.	then I will have an account made in my name
+
+4.	As a user I want to be able to log into the “learning management system” so that I can access any data relevant to me
+a.	Given I have created an account,
+b.	When I select the log in menu and enter my correct email and password
+c.	Then I will be logged into my account and can access my relevant the data in the system
+
+5.	As a student, I want to be able to view all of my details including what class I am in and who is my teacher, so that I know which class to go to.
+a.	Given I am logged in and enrolled in at least one class,
+b.	when I select the profile icon in the top right of the screen
+c.	Then I should be able to view all of my details
+
+6.	As an administrator, I want to assign teachers to class codes so that I can ensure every class has a teacher running that lesson
+a.	Given there is at least one teacher signed up and I am logged in,
+b.	When I select the assign class button, select a class code from a list, select the teacher drop down and selects a teacher from those that have signed in, and clicks ‘assign’
+c.	Then that teacher will be assigned to that class code
+
+7.	As an administrator, I want to assign students to class codes so that I can ensure every class has at least one student and the number of students are even between classes
+a.	Given that I am logged in, and there is at least one teacher and one student signed up,
+b.	When I select the assign class button, select a class code from a list, select the student drop down and selects a student from those that have signed in, and clicks ‘assign’
+c.	Then that teacher will be assigned to that class code
+
+8.	As a student, I should be able to complete the quizzes assigned to me by my teachers so that I can further my understanding of the content
+a.	Given I am logged in, enrolled in a class, has been assigned a teacher, and has been assigned a quiz,
+b.	when I select the ‘assignments’ and select pending quizzes,
+c.	then I should be able to select that quiz and complete it.
+
+
+9.	As a student, I wish to view my graded results from my quizzes so that I can review topics that I struggle with
+a.	Given I am logged in, assigned to at least one class, and has completed at least one quiz, either self-created or teacher-assigned,
+b.	When I navigate to the assignments section of the application and select my graded quiz,
+c.	Then I will be able to view my result for the quiz
+
+10.	  As a teacher, I want to generate quizzes with AI so that I can save time.
+a.	Given I am logged into the system as a teacher
+b.	When I navigate to the 'quizzes' page and fill out the form to generate a quiz
+c.	Then I should see a practice quiz that I can assign to my students
+
+11.	As a teacher, I want to assign quizzes I've generated to a specific class so that my students can complete them.
+a.	Given I am logged in as a teacher and I have at least one class of students
+b.	When I create a quiz and assign it to one of my classes
+c.	Then it should appear in their 'assigned quizzes' tab with a due date to complete by.
+
+
+12.	  As a student, I want to see the quizzes assigned to me by my teacher separately to the quizzes I have made and separately to the quizzes other students have made.
+a.	Given I am logged into my account as a student
+b.	When I view my dashboard, I should be able to see assigned quizzes in a separate section to my personally generated quizzes
+c.	Then I won’t get confused between the quizzes with deadlines and my own quizzes.
+
+
+
+Should have:
+13.	 As a student, I want to generate custom quizzes for revision based on my selected topics and past performance so that I can effectively target my weaker areas.
+a.	Given I am is logged in and assigned to at least one class,
+b.	When I navigate to the quiz section of the application, select the ‘create a quiz’ subcategory, choose topics I wish to test and the number of questions I desire
+c.	Then when I click ‘create quiz’ a quiz pertaining to my requirements will be generated
+
+14.		SH - As I teacher I want to see how an individual student is performing so that I can tailor their education to their needs and support their success
+a.	Given I am logged in, assigned to a class, has at least one student, and that student has completed a quiz,
+b.	when I select the Analytics tab and scroll through a list of students to the desired student,
+c.	Then I should be able to see how that student is performing in each topic as a % of correct questions, their score on every quiz, and recommendations for where they need improvement
+
+15.	SH - As a teacher I wish to see how my entire class is performing so that I can decide what topics to cover during class to best utilise our time
+a.	Given I am logged in, enrolled to a class, has students in that class, and at least one student has completed a quiz,
+b.	When I navigate to the analytics tab and click on the desired class,
+c.	Then I should see the average class score and the topics the students are performing best on
+
+16.	SH - As a parent, I want to be able to sign up to a “learning management system” so that I can track how my child is performing
+a.	Given I would like to sign in,
+b.	When I select the sign in button on the first page of the interface and fill in my full name, my child's full name, student ID, email, and a password,
+c.	Then I will have an account made in my name
+
+17.	SH - As a teacher, I want to view my class's overall results in a graph so that I can see their collective strengths and weaknesses at a glance.
+a.	Given I am logged in to the system as a teacher and my students have completed at least one quiz
+b.	When I navigate to the 'student results' page
+c.	Then I should be able to view my students' results in a graph
+
+18.	SH - As a student, I want to view my past results and learning insights so that I can focus on improving weak areas.
+a.	Given I am logged in as a student and have taken at least one quiz
+b.	When I navigate to the 'my results' page
+c.	Then I should see the results from my completed quizzes with scores and performance breakdowns
+
+19.	SH - As a user, I want to change my password so that I can secure my account.
+a.	Given I am logged into my account
+b.	When I navigate to the settings page and enter a new password
+c.	Then my password should be successfully updated in the system.
+
+20.	As a teacher I want to be able to see a list of “at risk” students who are averaging a failing grade across the assigned quizzes so I can offer them additional support.
+a.	Given that I am logged in as a teacher, I have assigned at least one quiz to my class, and at least one student has completed it
+b.	When I select to view the analytics of the class
+c.	Then I should see a list of all students who are averaging less than 40% across the quizzes to date.
+
+Could have:
+21.	As a student, I want to receive study recommendations based on my quiz results so that I can focus on improving weak areas.
+a.	Given I am logged in as a student and have taken at least one quiz
+b.	When I navigate to my student dashboard
+c.	Then I should be able to view the areas I should improve upon, using data from across all my classes and study areas
+
+22.	As a student, I want to receive a 'fortune cookie' message about my predicted exam results so I am motivated to study.
+a.	UAC: Given I am logged in as a student and have at least one upcoming quiz
+b.	When I navigate to my student dashboard
+c.	Then I should see a message predicting my potential exam result based on my previous results, along with a cute motivational message.
+
+23.	As a teacher, I want to be able to edit quizzes that I have already created so that I can correct any mistakes I may have made or update a couple of questions without needing to generate a new quiz.
+a.	Given I am logged in as a teacher
+b.	When I navigate to the quiz section of the application and click on the quiz I want to alter from a list of my quizzes
+c.	Then I can click on ‘edit quiz’ which will take me to an editable version of all of the quiz questions.
+24.	As a teacher, I want to assign quizzes I've generated to specific students who are struggling with specific content
+a.	Given I am logged in as a teacher and I have at least one class of students
+b.	When I create a quiz and assign it to a specific student by selecting their name in my class list
+c.	Then it should appear in their 'assigned quizzes' tab with a due date to complete by.
+
+25.	As a student I want to be able to make it so that my guardian(s) can’t view the results of any non-assessed quizzes or the quizzes I generate for my individual studies.
+a.	Given I am logged in as a student, have been assigned to a class, and have completed at least one assigned quiz
+b.	When I create quizzes as a personal resource, and toggle whether my guardian(s) can see the results or not
+c.	Should also be allowed to toggle retrospectively
+d.	Then my guardian(s) should only be able to see the results of assigned quizzes and the quizzes that I designated them able to see
+26.	As a student I want to be able to see detailed breakdowns of my quizzes, individually and averaged across all the quizzes I have completed (assign or otherwise)
+a.	Given I am logged in as a student, have completed at least one assigned quiz and completed at least one personally generated quiz
+b.	When I navigate to view my analytics/statistics
+c.	Then I should see for my assigned quizzes, my result, the time I spent on each question, the topics covered in the quiz and my “score” for each topic and when taking into account all of my quizzes I should see my average score, my average score for individual topics, my average time on particular topics, my average time on particular questions types, as well as tracking previous results to show my progression.
+d.	E.g. a graph that has no. of quizzes on the x axis and shows the student’s average and how it changes each time they complete another quiz.
+
+27.	As a teacher I want to be able to sort each quiz to identify the topics the class is struggling with so that I can cover them again.
+a.	Given that I am logged in as a teacher, I have assigned at least one quiz which has been completed by at least one student
+b.	When I am looking at the class analytics page and press the “Sort topics” button
+c.	Then every topic that has been addressed in all quizzes to date should be listed with the associated average of the class in successfully completing questions that test that topics knowledge
+d.	Also should be able to sort ascending and descending
+28.	As a teacher, I want to be able to sort/filter the analytics of any given quiz so that the questions are displayed in a descending list based on the questions with the lowest successful completion.
+a.	Given that I am logged as a teacher, I have assigned at least one quiz which has been completed by at least one student
+b.	When I select to see the associated analytics of the quiz
+c.	Then I should be displayed a list of the questions in descending order based on the percentage of students who completed the quiz that got the question wrong.
+Won’t have:
+29.	As a teacher I want to be able to view an individual student’s profile and see adjusted analytics that consider the additional quizzes they have completed that were generated personally
+a.	Given that I am logged in as a teacher, I have assigned at least one quiz which has been completed by at least one student, and that student has generated and completed at least one quiz for themselves
+b.	When I view their analytics, I should be able to toggle whether the analytics are considering only the results of their assigned quizzes or all the quizzes they have completed for the class including personal quizzes
+c.	Then the statistics being displayed should be adjusted to account for their individual study results
+30.	As a student, I want to publish my quizzes publicly so that other students in my class can also complete them.
+a.	UAC: Given I am logged into my account as a student
+b.	When I create a new quiz, I should be able to click on a make public’ button
+c.	Then the quiz I create should be seen by everyone in the class under the quizzes page
+
+
