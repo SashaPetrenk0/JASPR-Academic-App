@@ -1,10 +1,10 @@
 package org.jaspr.hr.demo;
 
 public class Student {
-    private String name;
-    private int age;
-    private String email;
-    private String password;
+    private final String name;
+    private final int age;
+    private final String email;
+    private final String password;
 
     public Student(String name, int age, String email, String password){
         this.name = name;
@@ -12,4 +12,21 @@ public class Student {
         this.email = email;
         this.password = password;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
 }
