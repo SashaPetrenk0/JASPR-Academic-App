@@ -31,6 +31,8 @@ public class StudentController {
 
         currentStudent = new Student(name, age, email, password);
 
+        System.out.println("Created Student: " + currentStudent.getName());
+
         // TODO: Error handling for incorrect user inputs
     }
 }
