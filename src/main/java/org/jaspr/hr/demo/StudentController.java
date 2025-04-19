@@ -1,4 +1,23 @@
 package org.jaspr.hr.demo;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+
 public class StudentController {
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField ageField;
+
+    @FXML
+    private TextField emailField;
+
+    @FXML
+    private TextField passwordField;
+
+    private Student currentStudent;
 }
