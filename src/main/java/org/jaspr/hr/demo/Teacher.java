@@ -1,6 +1,6 @@
 package org.jaspr.hr.demo;
 
-public class Teacher {
+public class Teacher implements User{
     private String name, email, password;
     private int age;
     private int staffID;
@@ -13,6 +13,7 @@ public class Teacher {
         this.password = password;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -25,10 +26,12 @@ public class Teacher {
         return staffID;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
