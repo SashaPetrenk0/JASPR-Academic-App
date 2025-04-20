@@ -20,7 +20,7 @@ public class RegisterController {
     @FXML
     private VBox studentForm, teacherForm, parentForm, adminForm;
 
-    public void initialise(){
+    public void initialize(){
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
     }
 
