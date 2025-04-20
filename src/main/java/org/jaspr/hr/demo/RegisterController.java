@@ -17,16 +17,38 @@ public class RegisterController {
     private VBox studentForm, teacherForm, parentForm, adminForm;
 
     @FXML
-    private TextField nameField;
+    private TextField nameFieldStudent;
+    @FXML
+    private TextField ageFieldStudent;
+    @FXML
+    private TextField studentIDField;
+    @FXML
+    private TextField emailFieldStudent;
+    @FXML
+    private TextField passwordFieldStudent;
 
     @FXML
-    private TextField ageField;
+    private TextField nameFieldTeacher;
+    @FXML
+    private TextField ageFieldTeacher;
+    @FXML
+    private TextField teacherIDField;
+    @FXML
+    private TextField emailFieldTeacher;
+    @FXML
+    private TextField passwordFieldTeacher;
 
     @FXML
-    private TextField emailField;
-
+    private TextField nameFieldParent;
     @FXML
-    private TextField passwordField;
+    private TextField childNameField;
+    @FXML
+    private TextField childIDField;
+    @FXML
+    private TextField emailFieldParent;
+    @FXML
+    private TextField passwordFieldParent;
+
 
     public void initialize(){
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
@@ -49,5 +71,7 @@ public class RegisterController {
         String selectedRole = roleComboBox.getValue();
 
     }
+
+
 
 }
