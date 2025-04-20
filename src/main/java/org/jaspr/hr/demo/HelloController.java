@@ -22,7 +22,7 @@ public class HelloController {
     @FXML
     public void initialize() {
         TandC.setText("""
-jamie says hola""");
+jamie says bonjour""");
     }
     @FXML
     private CheckBox agreeCheckBox;
