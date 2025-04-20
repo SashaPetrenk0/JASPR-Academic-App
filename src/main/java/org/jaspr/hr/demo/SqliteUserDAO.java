@@ -1,14 +1,16 @@
-package org.jaspr.hr.demo.model;
+package org.jaspr.hr.demo;
+
+import org.jaspr.hr.demo.model.Contact;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SqliteContactDAO implements IContactDAO {
+public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
 
-    public SqliteContactDAO() {
+    public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
         createTable();
     }
@@ -17,12 +19,18 @@ public class SqliteContactDAO implements IContactDAO {
         // Create table if not exists
         try {
             Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS contacts ("
-                    + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + "firstName VARCHAR NOT NULL,"
-                    + "lastName VARCHAR NOT NULL,"
-                    + "phone VARCHAR NOT NULL,"
-                    + "email VARCHAR NOT NULL"
+            String query = "CREATE TABLE IF NOT EXISTS users ("
+                    + "userID INTEGER PRIMARY KEY AUTOINCREMENT"
+                    + "name STRING NOT NULL,"
+                    + "email VARCHAR NOT NULL,"
+                    + "password VARCHAR NOT NULL,"
+                    + "role VARCHAR NOT NULL,"
+                    + "age INTEGER NOT NULL,"
+                    + "studentID INTEGER NOT NULL,"
+                    + "teacherID INTEGER NOT NULL,"
+                    + "adminID INTEGER NOT NULL,"
+                    + "childID INTEGER NOT NULL,"
+                    + "childName STRING NOT NULL,"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -32,12 +40,14 @@ public class SqliteContactDAO implements IContactDAO {
 
 
     @Override
-    public void addContact(Contact contact) {
+    public void addUser(User user) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO contacts (firstName, lastName, phone, email) VALUES (?, ?, ?, ?)");
-            statement.setString(1, contact.getFirstName());
-            statement.setString(2, contact.getLastName());
-            statement.setString(3, contact.getPhone());
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email, password, role, age, " +
+                    "studentID, teacherID, adminID, childID, childName) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getRole());
             statement.setString(4, contact.getEmail());
             statement.executeUpdate();
             // Set the id of the new contact
@@ -126,5 +136,25 @@ public class SqliteContactDAO implements IContactDAO {
         } catch (SQLException ex) {
             System.err.println(ex);
         }
+    }
+
+    @Override
+    public void addUser(User user) {
+
+    }
+
+    @Override
+    public void getUser(User user) {
+
+    }
+
+    @Override
+    public void changePassword(User user) {
+
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return List.of();
     }
 }
