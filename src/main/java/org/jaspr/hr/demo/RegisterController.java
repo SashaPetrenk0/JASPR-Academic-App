@@ -76,7 +76,6 @@ public class RegisterController {
     private Admin newAdmin;
 
     public void initialize(){
-        System.out.println("RegisterController initialized!");
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
     }
 
