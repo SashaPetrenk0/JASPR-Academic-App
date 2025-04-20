@@ -18,4 +18,5 @@
     <TextField fx:id="emailField" promptText = "Email" />
     <TextField fx:id="passwordField" promptText = "Password" />
     <Button text = "Submit" onAction="#onSubmitClicked" />
+    <Label fx:id="successfulSignUpLabel" text="" visible="false" />
 </VBox>
