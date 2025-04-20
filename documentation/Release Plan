@@ -1,0 +1,34 @@
+CAB302 RELEASE PLAN
+
+Scope: 
+The features of this release include:
+•	Students, Teachers, Administrators, and Parents being able to sign up and log in to the learning management system
+•	Students, Teachers, Administration, and Parents should be able to view their respective dashboards upon logging in 
+•	Administrators should be able to assign both teacher and students to class codes
+•	Students, Teachers, Administrators, and Parents should be able to view their details, including their personal information and class assignments
+•	Students, Teachers, Administrators, and Parents should be able to change their passwords for the learning management system
+•	Students should be able to generate custom practice quizzes using AI, where they can customise the topics being tested, the number of questions, and type of questions (MC, short answer, long answer, combination)
+•	Students should be able to view their quiz grades from their teacher
+•	Students should be able to view their own analytics (past quiz results, best and worst topics) and get recommendations on what topics to study
+•	Students should be able to view quizzes assigned to them by their teacher
+•	Student should have a fortune cookie graphic on their dashboard which cracks open to reveal a predictive score for their exam based on quiz results (designed to motivate)
+•	Teachers should be able to generate quizzes to assign their students using AI, where they can customise the topics being tested, the number of questions, and type of questions (MC, short answer, long answer, combination)
+•	Teachers should be able to assign these quizzes to their classes or specific students
+•	Teachers should be able to view their students performance and analytics (highest/lowest/average quiz scores, best topics, worst topics, most incorrectly answered questions etc.), both for the entire class and for a specific student
+•	Teachers should be able to view these in visual, easily interpreted formats including pie charts and graphs for tracking progress
+•	Parents should be able to view their childs progress, track their scores, and view recommendations on topics they should cover
+
+Timeline:
+The intended release date is the 30th May 2025, where the entire application with a fully developed graphical user interface will be rolled out.
+
+Resources:
+Team Members:  The team members operating on this project include Roman Pearson, Pragati Vijayakumar, Sasha Petrenko, Jamie Corrie and Audrey Wren. These team members will be utilising Agile methodologies as a project management approach through GitHub. 
+Tools and Infrastructure: 
+-	Trello is our chosen project management tool (PM) which houses our product backlog and two-week sprints
+-	Git-Hub is our chosen location to house our files (documentation folder)
+-	Discord is our main communication channel, where our server is split into channels pertaining to specific tasks and team members
+
+Dependencies: Dependencies include bi-weekly checkpoints with the client aligning with our sprint plans, and a prerequisite use of artificial intelligence in the development of the application. In this context, this will be implemented to generate quizzes for both students and teachers. 
+
+Risk Assessment: Potential risks involve team members being unable to complete the “must-have” and “should-have” components of the product backlog. To mitigate this risk, having a thorough sprint plan for the next few weeks planned in advance ensures that critical deadlines are enforced and all the main functionality is complete. 
+Another risk involves the project code breaking. This can be mitigated by testing new code in a separate, appropriately named branch before merging it with the master, to test for potential bugs. Additionally, have a dense, frequent commit history with descriptive, appropriately named commit messages allows the error to be tracked backwards and quickly remedied. 

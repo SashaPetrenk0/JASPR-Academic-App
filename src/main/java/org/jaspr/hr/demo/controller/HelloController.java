@@ -1,55 +1,42 @@
-package org.jaspr.hr.demo.controller;
+package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import org.jaspr.hr.demo.HelloApplication;
 
 import java.io.IOException;
 
 public class HelloController {
 
-    @FXML
-    private Button Cancel;
 
     @FXML
-    private TextArea TandC;
-
+    private Button signUpButton;
     @FXML
-    public void initialize() {
-        TandC.setText("""
-jamie says hola
-roman says hi""");
-    }
-    @FXML
-    private CheckBox agreeCheckBox;
-    @FXML
-    private Button nextButton;
+    private Button loginButton;
 
     // ... other methods
 
     @FXML
-    protected void onAgreeCheckBoxClick() {
-        boolean accepted = agreeCheckBox.isSelected();
-        nextButton.setDisable(!accepted);
-    }
-    @FXML
-    protected void onNextButtonClick() throws IOException {
-        Stage stage = (Stage) nextButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+    protected void onLoginButtonClick() throws IOException {
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("student-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
     }
 
     @FXML
-    protected void onCancelButtonClick() {
-        Stage stage = (Stage) nextButton.getScene().getWindow();
-        stage.close();
+    protected void onSignUpButtonClick() throws IOException {
+        Stage stage = (Stage) signUpButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("register-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
     }
+
 
 
 }
