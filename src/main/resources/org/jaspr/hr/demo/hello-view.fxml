@@ -30,6 +30,8 @@
             <Button text="Cancel" onAction="#onCancelButtonClick"/>
             <Button fx:id="nextButton" text="Next" disable="true"
             onAction="#onNextButtonClick"/>
+        <Button fx:id="quiz" text="Quiz" disable="false"
+                onAction="#onQuizButtonClick"/>
     </HBox>
 
 

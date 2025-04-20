@@ -42,6 +42,8 @@ Elementum nibh tellus molestie nunc non blandit massa.""");
     private CheckBox agreeCheckBox;
     @FXML
     private Button nextButton;
+    @FXML
+    private Button quiz;
 
     // ... other methods
 
@@ -62,6 +64,14 @@ Elementum nibh tellus molestie nunc non blandit massa.""");
     protected void onCancelButtonClick() {
         Stage stage = (Stage) nextButton.getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    protected void onQuizButtonClick() throws IOException {
+        Stage stage = (Stage) quiz.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("quiz-overview-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
     }
 
 

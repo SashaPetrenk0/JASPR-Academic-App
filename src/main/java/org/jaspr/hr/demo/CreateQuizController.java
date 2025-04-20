@@ -16,12 +16,12 @@ public class CreateQuizController {
         final String DEFAULT_PHONE = "";
         Contact newContact = new Contact(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
         // Add the new contact to the database
-        contactDAO.addContact(newContact);
-        syncContacts();
-        // Select the new contact in the list view
-        // and focus the first name text field
-        selectContact(newContact);
-        firstNameTextField.requestFocus();
+//        contactDAO.addContact(newContact);
+//        syncContacts();
+//        // Select the new contact in the list view
+//        // and focus the first name text field
+//        selectContact(newContact);
+//        firstNameTextField.requestFocus();
     }
 
 
