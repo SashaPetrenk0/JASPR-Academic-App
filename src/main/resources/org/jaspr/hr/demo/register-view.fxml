@@ -25,7 +25,7 @@
     <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected"/>
 
 
-    <VBox fx:id="studentForm" visible="false">
+    <VBox fx:id="studentForm" visible="false" >
         <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
         <TextField fx:id="nameFieldStudent" promptText = "Name" />
         <TextField fx:id="ageFieldStudent" promptText = "Age" />
@@ -37,7 +37,7 @@
     </VBox>
 
     <VBox fx:id="teacherForm" visible="false">
-        <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
+        <Label text="Teacher Sign Up" style="-fx-font-size: 18px;" />
         <TextField fx:id="nameFieldTeacher" promptText = "Name" />
         <TextField fx:id="ageFieldTeacher" promptText = "Age" />
         <TextField fx:id="teacherIDField" promptText = "Teacher ID" />
@@ -48,8 +48,8 @@
     </VBox>
 
     <VBox fx:id="parentForm" visible="false">
-        <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
-        <TextField fx:id="nameField" promptText = "Name" />
+        <Label text="Parent Sign Up" style="-fx-font-size: 18px;" />
+        <TextField fx:id="nameFieldParent" promptText = "Name" />
         <TextField fx:id="childNameField" promptText = "Child Name" />
         <TextField fx:id="childIDField" promptText = "Child Student ID" />
         <TextField fx:id="emailFieldParent" promptText = "Email" />
@@ -59,12 +59,12 @@
     </VBox>
 
     <VBox fx:id="adminForm" visible="false">
-        <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
+        <Label text="Admin Sign Up" style="-fx-font-size: 18px;" />
         <TextField fx:id="nameFieldAdmin" promptText = "Name" />
         <TextField fx:id="ageFieldAdmin" promptText = "Age" />
         <TextField fx:id="adminIDField" promptText = "Admin ID" />
-        <TextField fx:id="emailField" promptText = "Email" />
-        <TextField fx:id="passwordField" promptText = "Password" />
+        <TextField fx:id="emailFieldAdmin" promptText = "Email" />
+        <TextField fx:id="passwordFieldAdmin" promptText = "Password" />
         <Button text = "Submit" onAction="#onSubmitClicked" />
         <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
     </VBox>

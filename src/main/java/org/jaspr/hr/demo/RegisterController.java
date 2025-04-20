@@ -76,28 +76,30 @@ public class RegisterController {
     private Admin newAdmin;
 
     public void initialize(){
+        System.out.println("RegisterController initialized!");
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
     }
 
     @FXML
-    private void onRoleSelected(){
-        String role = roleComboBox.getValue();
+    private void onRoleSelected() {
+        // First hide everything
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
         parentForm.setVisible(false);
         adminForm.setVisible(false);
 
+        // Then show the selected one
+        String role = roleComboBox.getValue();
         switch(role){
             case "Student" -> studentForm.setVisible(true);
-            case "Teacher" -> studentForm.setVisible(true);
-            case "Parent" -> studentForm.setVisible(true);
-            case "Admin" -> studentForm.setVisible(true);
+            case "Teacher" -> teacherForm.setVisible(true);
+            case "Parent" -> parentForm.setVisible(true);
+            case "Admin" -> adminForm.setVisible(true);
         }
-        String selectedRole = roleComboBox.getValue();
-
     }
 
-        @FXML
+
+    @FXML
         private void onSubmitClicked(){
             String role = roleComboBox.getValue();
             String name, email, password;
@@ -113,6 +115,7 @@ public class RegisterController {
 
                     Student newStudent = new Student(name, age, studentID, email, password);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
+                    successfulSignUpLabelStudent.setVisible(true);
 
 
 
@@ -126,6 +129,7 @@ public class RegisterController {
 
                     Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
                     successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
+                    successfulSignUpLabelTeacher.setVisible(true);
 
 
                 }
@@ -138,6 +142,7 @@ public class RegisterController {
 
                     Parent newParent = new Parent(name, child, childID, email, password);
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
+                    successfulSignUpLabelParent.setVisible(true);
 
 
 
@@ -151,8 +156,7 @@ public class RegisterController {
 
                     Admin newAdmin = new Admin(name, age, adminID, email, password);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
-
-//                    successfulSignUpLabel.setVisible(true);
+                    successfulSignUpLabelAdmin.setVisible(true);
 
                     // TODO: Error handling for incorrect user inputs
                 }
