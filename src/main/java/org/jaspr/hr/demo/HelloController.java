@@ -15,13 +15,15 @@ public class HelloController {
 
 
     @FXML
-    private Button nextButton;
+    private Button signUpButton;
+    @FXML
+    private Button loginButton;
 
     // ... other methods
 
     @FXML
     protected void onLoginButtonClick() throws IOException {
-        Stage stage = (Stage) nextButton.getScene().getWindow();
+        Stage stage = (Stage) loginButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("student-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
@@ -29,7 +31,7 @@ public class HelloController {
 
     @FXML
     protected void onSignUpButtonClick() throws IOException {
-        Stage stage = (Stage) nextButton.getScene().getWindow();
+        Stage stage = (Stage) signUpButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("student-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);

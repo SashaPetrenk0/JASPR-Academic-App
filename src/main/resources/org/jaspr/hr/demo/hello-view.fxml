@@ -18,8 +18,8 @@
     <Label text="Hi, welcome to our app!" style="-fx-font-size: 18px;"/>
     <Label text="Would you like to login or sign up?" />
     <HBox alignment="CENTER" spacing="10.0">
-            <Button text = "Login" onAction="#onLoginButtonClick"/>
-            <Button text = "Sign Up" onAction = "#onSignUpButtonClick"/>
+            <Button fx:id="loginButton" text = "Login" onAction="#onLoginButtonClick"/>
+            <Button fx:id="signUpButton" text = "Sign Up" onAction = "#onSignUpButtonClick"/>
     </HBox>
 
 </VBox>
