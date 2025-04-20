@@ -25,7 +25,7 @@
     <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected"/>
 
 
-    <VBox fx:id="studentForm" visible="false" >
+    <VBox fx:id="studentForm" visible="false" managed="false">
         <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
         <TextField fx:id="nameFieldStudent" promptText = "Name" />
         <TextField fx:id="ageFieldStudent" promptText = "Age" />
@@ -36,7 +36,7 @@
         <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
     </VBox>
 
-    <VBox fx:id="teacherForm" visible="false">
+    <VBox fx:id="teacherForm" visible="false" managed="false">
         <Label text="Teacher Sign Up" style="-fx-font-size: 18px;" />
         <TextField fx:id="nameFieldTeacher" promptText = "Name" />
         <TextField fx:id="ageFieldTeacher" promptText = "Age" />
@@ -47,7 +47,7 @@
         <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
     </VBox>
 
-    <VBox fx:id="parentForm" visible="false">
+    <VBox fx:id="parentForm" visible="false" managed="false">
         <Label text="Parent Sign Up" style="-fx-font-size: 18px;" />
         <TextField fx:id="nameFieldParent" promptText = "Name" />
         <TextField fx:id="childNameField" promptText = "Child Name" />
@@ -58,7 +58,7 @@
         <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
     </VBox>
 
-    <VBox fx:id="adminForm" visible="false">
+    <VBox fx:id="adminForm" visible="false" managed="false">
         <Label text="Admin Sign Up" style="-fx-font-size: 18px;" />
         <TextField fx:id="nameFieldAdmin" promptText = "Name" />
         <TextField fx:id="ageFieldAdmin" promptText = "Age" />

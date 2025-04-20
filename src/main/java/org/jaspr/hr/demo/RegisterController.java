@@ -91,11 +91,28 @@ public class RegisterController {
         // Then show the selected one
         String role = roleComboBox.getValue();
         switch(role){
-            case "Student" -> studentForm.setVisible(true);
-            case "Teacher" -> teacherForm.setVisible(true);
-            case "Parent" -> parentForm.setVisible(true);
-            case "Admin" -> adminForm.setVisible(true);
+            case "Student" -> showOnlyForm(studentForm);
+            case "Teacher" -> showOnlyForm(teacherForm);
+            case "Parent" -> showOnlyForm(parentForm);
+            case "Admin" -> showOnlyForm(adminForm);
         }
+    }
+
+    private void showOnlyForm(VBox formToShow) {
+        studentForm.setVisible(false);
+        studentForm.setManaged(false);
+
+        teacherForm.setVisible(false);
+        teacherForm.setManaged(false);
+
+        parentForm.setVisible(false);
+        parentForm.setManaged(false);
+
+        adminForm.setVisible(false);
+        adminForm.setManaged(false);
+
+        formToShow.setVisible(true);
+        formToShow.setManaged(true);
     }
 
 
