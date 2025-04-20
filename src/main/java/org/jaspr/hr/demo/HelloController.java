@@ -13,42 +13,28 @@ import java.io.IOException;
 
 public class HelloController {
 
-    @FXML
-    private Button Cancel;
 
-    @FXML
-    private TextArea TandC;
-
-    @FXML
-    public void initialize() {
-        TandC.setText("""
-jamie says hola""");
-    }
-    @FXML
-    private CheckBox agreeCheckBox;
     @FXML
     private Button nextButton;
 
     // ... other methods
 
     @FXML
-    protected void onAgreeCheckBoxClick() {
-        boolean accepted = agreeCheckBox.isSelected();
-        nextButton.setDisable(!accepted);
-    }
-    @FXML
-    protected void onNextButtonClick() throws IOException {
+    protected void onLoginButtonClick() throws IOException {
         Stage stage = (Stage) nextButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("student-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
     }
 
     @FXML
-    protected void onCancelButtonClick() {
+    protected void onSignUpButtonClick() throws IOException {
         Stage stage = (Stage) nextButton.getScene().getWindow();
-        stage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("student-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
     }
+
 
 
 }
