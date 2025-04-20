@@ -1,10 +1,8 @@
 package org.jaspr.hr.demo;
 
-public class Student {
-    private final String name;
-    private final int age;
-    private final String email;
-    private final String password;
+public class Student implements User{
+    private String name, email, password;
+    private int age;
 
     public Student(String name, int age, String email, String password){
         this.name = name;
