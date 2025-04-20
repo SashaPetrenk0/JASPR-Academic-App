@@ -16,34 +16,45 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
-    <Label text="Select a contact to view or edit." />
+    <Label text="Quiz Catalogue" />
 
     <HBox VBox.vgrow="ALWAYS" spacing="20.0">
-        <VBox spacing="10.0">
-            <ListView fx:id="contactsListView"  />
-            <Button fx:id="create" text="Create Quiz" maxWidth="Infinity" onAction="#onAdd"/>
-        </VBox>
-        <VBox spacing="10.0" prefWidth="400" fx:id="contactContainer">
-            <Label text="Enter the contact's details below." />
-            <GridPane hgap="5.0" vgap="5.0" >
-                <columnConstraints>
-                    <ColumnConstraints minWidth="70" />
-                    <ColumnConstraints hgrow="ALWAYS"/>
-                </columnConstraints>
-                <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Topic:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="titleTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity"/>
-                <TextField fx:id="topicTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="descriptionTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-
-            </GridPane>
+        <Button fx:id="create" text="Create Quiz" maxWidth="Infinity" onAction="#onAdd"/>
+    </HBox>
+    <Label text ="Assigned to me"/>
+    <HBox>
+        <!-- need to figure out a way to make this for the number of quizes there are   -->
+        <!-- Box 1 -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;" prefWidth="150" prefHeight="150">
+            <Label text="Box 1" />
             <HBox spacing="10.0" alignment="CENTER">
                 <Button text="Edit" onAction="#onEditConfirm" />
-                <Button text="Cancel" onAction="#onCancel" />
+                <Button text="start" onAction="#onCancel" />
                 <Button text="Delete" onAction="#onDelete" />
             </HBox>
         </VBox>
+
+        <!-- Box 2 -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;" prefWidth="150" prefHeight="150">
+            <Label text="Box 2" />
+            <HBox spacing="10.0" alignment="CENTER">
+                <Button text="Edit" onAction="#onEditConfirm" />
+                <Button text="start" onAction="#onCancel" />
+                <Button text="Delete" onAction="#onDelete" />
+            </HBox>
+        </VBox>
+
+        <!-- Box 3 -->
+        <VBox alignment="CENTER" spacing="10" style="-fx-border-color: black; -fx-border-width: 2; -fx-background-color: #f0f0f0;" prefWidth="150" prefHeight="150">
+            <Label text="Box 3" />
+            <HBox spacing="10.0" alignment="CENTER">
+                <Button text="Edit" onAction="#onEditConfirm" />
+                <Button text="start" onAction="#onCancel" />
+                <Button text="Delete" onAction="#onDelete" />
+            </HBox>
+        </VBox>
+
     </HBox>
+
+
 </VBox>
