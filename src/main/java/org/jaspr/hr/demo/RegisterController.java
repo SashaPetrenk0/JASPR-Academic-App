@@ -1,5 +1,6 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,6 +20,10 @@ public class RegisterController {
     @FXML
     private VBox studentForm, teacherForm, parentForm, adminForm;
 
+    public void initialise(){
+        roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
+    }
+
     @FXML
     private void onRoleSelected(){
         String role = roleComboBox.getValue();
@@ -33,6 +38,8 @@ public class RegisterController {
             case "Parent" -> studentForm.setVisible(true);
             case "Admin" -> studentForm.setVisible(true);
         }
+        String selectedRole = roleComboBox.getValue();
+
     }
 
 }
