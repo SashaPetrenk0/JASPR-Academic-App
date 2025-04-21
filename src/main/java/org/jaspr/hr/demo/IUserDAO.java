@@ -1,7 +1,5 @@
 package org.jaspr.hr.demo;
 
-import org.jaspr.hr.demo.model.Contact;
-
 import java.util.List;
 /**
  * Interface for the Contact Data Access Object that handles
@@ -9,10 +7,25 @@ import java.util.List;
  */
 public interface IUserDAO {
     /**
-     * Adds a new contact to the database.
-     * @param user The user to add.
+     * Adds a new student to the database.
+     * @param student The user to add.
      */
-    public void addUser(User user);
+    public void addStudent(Student student);
+    /**
+     * Adds a new teacher to the database.
+     * @param teacher The user to add.
+     */
+    public void addTeacher(Teacher teacher);
+    /**
+     * Adds a new admin to the database.
+     * @param admin The user to add.
+     */
+    public void addAdmin(Admin admin);
+    /**
+     * Adds a new parent to the database.
+     * @param parent The user to add.
+     */
+    public void addParent(Parent parent);
     /**
      * Updates an existing contact in the database.
      * @param studentID The contact to update.
@@ -35,7 +48,7 @@ public interface IUserDAO {
      * @param oldPassword Password that confirms identity.
      * @param newPassword New Password to be changed to.
      */
-    public void changePassword(String email, String oldPassword, String newPassword);
+    public void changePassword(String email, String oldPassword, String newPassword, String role);
 
     /**
      * Retrieves all contacts from the database.
