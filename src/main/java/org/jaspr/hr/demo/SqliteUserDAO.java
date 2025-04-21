@@ -220,10 +220,10 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     @Override
-    public String Authenticate(String email, String password){
+    public String Authenticate(String email, String password) {
         // Check authentication information against all four user tables
         String[] tables = {"students", "teachers", "parents", "admins"};
-        for(String table : tables){
+        for (String table : tables) {
             try {
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE email = ? AND password = ?");
                 statement.setString(1, email);
@@ -231,7 +231,7 @@ public class SqliteUserDAO implements IUserDAO {
 
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
-                    switch(table){
+                    switch (table) {
                         case "students":
                             return "Student";
                         case "teachers":
@@ -249,7 +249,6 @@ public class SqliteUserDAO implements IUserDAO {
         }
         return null;
     }
-
 
 
     @Override

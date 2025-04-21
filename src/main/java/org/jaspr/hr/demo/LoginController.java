@@ -36,7 +36,7 @@ public class LoginController {
             loginEmptyError.setVisible(true);
             return;
         }
-
+        // Calls authentication method
         String role = userDAO.Authenticate(email, password);
 
         // If no matches
@@ -47,34 +47,38 @@ public class LoginController {
         }
         // If "Student" role returned
         if ("Student".equals(role)){
+            System.out.println("Student successfully logged in");
             // Change scene to student dashboard
-            // TODO: Whoever is doing the dasboard pages replace INSERT FXML HERE with student dasboard
-            Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.student-dashboard-view");
+            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with student dasboard
+//            Stage stage = (Stage) LoginButton.getScene().getWindow();
+//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.student-dashboard-view");
         }
 
         // If "Teacher" role returned
         if ("Teacher".equals(role)){
+            System.out.println("Teacher successfully logged in");
             // Change scene to student dashboard
-            // TODO: Whoever is doing the dasboard pages replace INSERT FXML HERE with teacher dashboard
-            Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.teacher-dashboard-view");
+            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
+//            Stage stage = (Stage) LoginButton.getScene().getWindow();
+//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.teacher-dashboard-view");
         }
 
         // If "Parent" role returned
         if ("Parent".equals(role)){
+            System.out.println("Parent successfully logged in");
             // Change scene to student dashboard
-            // TODO: Whoever is doing the dasboard pages replace INSERT FXML HERE with parent dashboard
-            Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.parent-dashboard-view");
+            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with parent dashboard
+//            Stage stage = (Stage) LoginButton.getScene().getWindow();
+//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.parent-dashboard-view");
         }
 
         // If "Admin" role returned
         if ("Admin".equals(role)){
             // Change scene to student dashboard
-            // TODO: Whoever is doing the dasboard pages replace INSERT FXML HERE with admin dashboard
-            Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view");
+            System.out.println("Admin successfully logged in");
+            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with admin dashboard
+//            Stage stage = (Stage) LoginButton.getScene().getWindow();
+//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view");
         }
 
     }
