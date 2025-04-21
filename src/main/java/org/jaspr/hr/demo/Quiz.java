@@ -6,14 +6,24 @@ public class Quiz {
     private String description;
     private String topic;
     private int numOfQuestions;
+    private int author;
 
 
-    public Quiz(String title, String description, String topic, int numOfQuestions){
+    public Quiz(String title, String description, String topic, int numOfQuestions, int author){
         this.title = title;
         this.description = description;
         this.topic = topic;
         this.numOfQuestions = numOfQuestions;
+        this.author = author;
 
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
+    }
+
+    public int getAuthor() {
+        return author;
     }
 
     public int getId() {

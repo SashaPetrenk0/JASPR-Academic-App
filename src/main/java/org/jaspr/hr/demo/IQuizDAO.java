@@ -12,6 +12,7 @@ public interface IQuizDAO {
      */
     public void addQuiz(Quiz quiz);
 
+    public Quiz getQuiz(Quiz quiz);
 
     /**
      * Deletes a contact from the database.
@@ -19,21 +20,21 @@ public interface IQuizDAO {
      * @param oldPassword Password that confirms identity.
      * @param newPassword New Password to be changed to.
      */
-    public void changePassword(String email, String oldPassword, String newPassword, String role);
+    public void editQuiz(String email, String oldPassword, String newPassword, String role);
 
     /**
      * Retrieves all quizzes created by a teacher from the database.
      * @return A list of all quizzes created by a specific teacher.
      * @param teacher teacher who owns the quizzes.
      */
-    public List<String> getAllQuizzes(Teacher teacher);
+    public List<Quiz> getAllQuizzes(Teacher teacher);
 
     /**
      * Retrieves all quizzes created by a specific student from the database.
      * @return A list of all quizzes created by a specific student.
      * @param student student who owns the quizzes.
      */
-    public List<String> getAllQuizzes(Student student);
+    public List<Quiz> getAllQuizzes(Student student);
 
     /**
      * Retrieves all quizzes assigned by a teacher to a student from the database.
@@ -42,7 +43,7 @@ public interface IQuizDAO {
      * @param student who is assigned to the quiz.
      */
 
-    public List<String> getAllQuizzes(Teacher teacher, Student student );
+    public List<Quiz> getAllQuizzes(Teacher teacher, Student student );
 
 
 }
