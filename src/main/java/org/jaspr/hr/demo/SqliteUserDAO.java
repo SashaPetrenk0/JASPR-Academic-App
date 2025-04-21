@@ -57,7 +57,7 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS parents ("
                     + "name STRING NOT NULL,"
                     + "childName STRING NOT NULL,"
-                    + "childID INTEGER NOT NULL"
+                    + "childID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL"
                     + ")";
