@@ -10,11 +10,12 @@ public class CreateQuizController {
     @FXML
     private void onAdd() {
         // Default values for a new contact
-        final String DEFAULT_FIRST_NAME = "New";
-        final String DEFAULT_LAST_NAME = "Contact";
-        final String DEFAULT_EMAIL = "";
-        final String DEFAULT_PHONE = "";
-        Contact newContact = new Contact(DEFAULT_FIRST_NAME, DEFAULT_LAST_NAME, DEFAULT_EMAIL, DEFAULT_PHONE);
+        final String DEFAULT_TITLE = "New Quiz";
+        final String DEFAULT_DESCRIPTION = "This is what your quiz is about";
+        final String DEFAULT_TOPIC = "Chemistry";
+        final int DEFAULT_LENGTH= 1;
+
+        Quiz newQuiz = new Quiz(DEFAULT_TITLE, DEFAULT_DESCRIPTION, DEFAULT_TOPIC, DEFAULT_LENGTH);
         // Add the new contact to the database
 //        contactDAO.addContact(newContact);
 //        syncContacts();
