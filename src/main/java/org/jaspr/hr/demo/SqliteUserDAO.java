@@ -238,7 +238,7 @@ public class SqliteUserDAO implements IUserDAO {
                             return "Teacher";
                         case "parents":
                             return "Parent";
-                        case "admin":
+                        case "admins":
                             return "Admin";
                     }
                 }
