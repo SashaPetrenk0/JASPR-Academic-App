@@ -26,6 +26,10 @@ public interface IUserDAO {
      * @param parent The user to add.
      */
     public void addParent(Parent parent);
+
+
+    public String Authenticate(String email, String password);
+
     /**
      * Updates an existing contact in the database.
      * @param studentID The contact to update.
