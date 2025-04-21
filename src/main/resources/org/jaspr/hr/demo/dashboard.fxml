@@ -18,7 +18,7 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="298.0" text="Admin Dashboard">
+            <Label alignment="CENTER" prefHeight="47.0" prefWidth="279.0" text="Teach Dashboard">
                <font>
                   <Font name="Avenir Heavy" size="32.0" />
                </font>
@@ -97,7 +97,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="47.0" prefWidth="290.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                  <HBox alignment="CENTER" prefHeight="62.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
                            <image>
