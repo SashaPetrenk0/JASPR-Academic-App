@@ -1,3 +1,28 @@
 .gradient-background {
-    -fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #D91F4E, #FF854C);
+    -fx-background-color: linear-gradient(to right, #A8DADC, #E0F7FA);
+}
+
+.container {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+    -fx-background-radius: 10;
+}
+
+.decorative-line {
+    -fx-background-color: #000000;
+
+}
+
+.elements-shadows {
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.2), 10.0, 0.0, 0.0, 10.0);
+
+}
+
+.selected-button {
+    -fx-background-color: rgba(0,0,0,0.15);
+
+}
+
+.selected-button-mouse-moved: hover {
+    -fx-background-color: rgba(0,0,0,0.1);
+
 }
