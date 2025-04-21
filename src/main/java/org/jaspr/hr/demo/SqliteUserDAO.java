@@ -22,8 +22,8 @@ public class SqliteUserDAO implements IUserDAO {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS students ("
                     + "name STRING NOT NULL,"
-                    + "age INTEGER,"
-                    + "studentID INTEGER,"
+                    + "age INTEGER NOT NULL,"
+                    + "studentID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL"
                     + ")";
@@ -39,8 +39,25 @@ public class SqliteUserDAO implements IUserDAO {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS teachers ("
                     + "name STRING NOT NULL,"
-                    + "age INTEGER,"
-                    + "teacherID INTEGER"
+                    + "age INTEGER NOT NULL,"
+                    + "teacherID INTEGER NOT NULL,"
+                    + "email VARCHAR NOT NULL,"
+                    + "password VARCHAR NOT NULL"
+                    + ")";
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createParentTable() {
+        // Create table if not exists
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS parents ("
+                    + "name STRING NOT NULL,"
+                    + "chlidName STRING NOT NULL,"
+                    + "childID INTEGER NOT NULL"
                     + "email VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL"
                     + ")";
