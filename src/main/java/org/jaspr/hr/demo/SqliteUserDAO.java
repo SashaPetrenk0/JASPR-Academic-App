@@ -79,31 +79,6 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-
-
-    @Override
-    public List<Contact> getAllContacts() {
-        List<Contact> contacts = new ArrayList<>();
-        try {
-            Statement statement = connection.createStatement();
-            String query = "SELECT * FROM contacts";
-            ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                Contact contact = new Contact(firstName, lastName, phone, email);
-                contact.setId(id);
-                contacts.add(contact);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return contacts;
-    }
-
     public void close() {
         try {
             connection.close();
@@ -112,6 +87,7 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    // Pull all attributes of a specific student for Display Details functionality in profile
     @Override
     public Student getStudent(int studentID) {
         try {
@@ -133,6 +109,7 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
+    // Pull all attributes of a specific teacher for Display Details functionality in profile
     @Override
     public Teacher getTeacher(int teacherID) {
         try {
@@ -154,6 +131,7 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
+    // Pull all attributes of a specific admin for Display Details functionality in profile
     @Override
     public Admin getAdmin(int adminID) {
         try {
@@ -189,6 +167,50 @@ public class SqliteUserDAO implements IUserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    // For use when viewing student names in lists of quiz results etc.
+    @Override
+    public List<String> getAllStudentNames() {
+        List<String> studentNames = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT name FROM users WHERE role = 'Student'");
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                String name = resultSet.getString("name");
+                studentNames.add(name);
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return studentNames;
+    }
+
+    // For use when a teacher is viewing their class list and details
+    @Override
+    public List<Student> getAllStudents(){
+        List<Student> students = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Student'");
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                String name = resultSet.getString("name");
+                int age = resultSet.getInt("age");
+                int studentID = resultSet.getInt("studentID");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+
+                Student student = new Student(name, age, studentID, email, password);
+                students.add(student);
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return students;
     }
 
 }
