@@ -59,8 +59,9 @@ public class LoginController {
             System.out.println("Teacher successfully logged in");
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
-//            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.teacher-dashboard-view");
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+            SceneChanger.changeScene(stage, "temp-home-view");
+            //TODO: Get the id of the logged in teacher and send it to the dashboard somehow lol
         }
 
         // If "Parent" role returned
