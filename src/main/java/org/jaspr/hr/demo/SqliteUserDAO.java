@@ -299,4 +299,22 @@ public class SqliteUserDAO implements IUserDAO {
         return students;
     }
 
+    // Testing successful database appending
+    public void printAllStudents() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
+            ResultSet resultSet = statement.executeQuery();
+
+            System.out.println("---- All Students ----");
+            while (resultSet.next()) {
+                System.out.println("Name: " + resultSet.getString("name") +
+                        ", Age: " + resultSet.getInt("age") +
+                        ", ID: " + resultSet.getInt("studentID") +
+                        ", Email: " + resultSet.getString("email"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
