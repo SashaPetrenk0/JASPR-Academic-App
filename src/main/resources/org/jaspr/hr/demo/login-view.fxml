@@ -5,10 +5,19 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jaspr.hr.demo.LoginController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jaspr.hr.demo.LoginController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
 
-</AnchorPane>
+    <Label text="Please enter your login details!" style="-fx-font-size: 18px;"/>
+    <TextField fx:id="loginEmailField" promptText = "Email" />
+    <TextField fx:id="loginPasswordField" promptText = "Password" />
+    <Button text = "Submit" onAction="#onLoginClicked" />
+    <Label fx:id="loginEmptyError" text="" visible="false" />
+
+</VBox>
+
