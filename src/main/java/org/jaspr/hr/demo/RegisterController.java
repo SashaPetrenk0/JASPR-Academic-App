@@ -133,7 +133,7 @@ public class RegisterController {
                     int studentID = Integer.parseInt(studentIDField.getText().trim());
 
                     Student newStudent = new Student(name, age, studentID, email, password);
-                    userDAO.addUser(newStudent);
+                    userDAO.addStudent(newStudent);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
 
@@ -148,7 +148,7 @@ public class RegisterController {
                     int teacherID = Integer.parseInt(teacherIDField.getText().trim());
 
                     Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
-                    userDAO.addUser(newTeacher);
+                    userDAO.addTeacher(newTeacher);
                     successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
                     successfulSignUpLabelTeacher.setVisible(true);
 
@@ -162,7 +162,7 @@ public class RegisterController {
                     password = passwordFieldParent.getText();
 
                     Parent newParent = new Parent(name, child, childID, email, password);
-                    userDAO.addUser(newParent);
+                    userDAO.addParent(newParent);
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                     successfulSignUpLabelParent.setVisible(true);
 
@@ -177,7 +177,7 @@ public class RegisterController {
                     int adminID = Integer.parseInt(adminIDField.getText().trim());
 
                     Admin newAdmin = new Admin(name, age, adminID, email, password);
-                    userDAO.addUser(newAdmin);
+                    userDAO.addAdmin(newAdmin);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
                     successfulSignUpLabelAdmin.setVisible(true);
 
