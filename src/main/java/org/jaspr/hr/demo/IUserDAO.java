@@ -15,18 +15,33 @@ public interface IUserDAO {
     public void addUser(User user);
     /**
      * Updates an existing contact in the database.
-     * @param user The contact to update.
+     * @param studentID The contact to update.
      */
-    public void getUser(User user);
+    public Student getStudent(int studentID);
+    /**
+     * Updates an existing contact in the database.
+     * @param teacherID The contact to update.
+     */
+    public Teacher getTeacher(int teacherID);
+    /**
+     * Updates an existing contact in the database.
+     * @param adminID The contact to update.
+     */
+    public Admin getAdmin(int adminID);
+
     /**
      * Deletes a contact from the database.
-     * @param user The contact to delete.
+     * @param email Email that confirms identity.
+     * @param oldPassword Password that confirms identity.
+     * @param newPassword New Password to be changed to.
      */
-    public void changePassword(User user);
+    public void changePassword(String email, String oldPassword, String newPassword);
 
     /**
      * Retrieves all contacts from the database.
      * @return A list of all contacts in the database.
      */
+    public List<String> getAllStudentNames();
+
     public List<Student> getAllStudents();
 }
