@@ -9,9 +9,9 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    public static final String TITLE = "Address Book";
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 360;
+    public static final String TITLE = "APP NAME";
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));

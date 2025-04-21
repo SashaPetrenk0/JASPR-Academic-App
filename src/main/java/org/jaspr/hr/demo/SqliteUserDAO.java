@@ -1,5 +1,6 @@
 package org.jaspr.hr.demo;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -218,6 +219,36 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
+    @Override
+    public String Authenticate(String email, String password) {
+        // Check authentication information against all four user tables
+        String[] tables = {"students", "teachers", "parents", "admins"};
+        for (String table : tables) {
+            try {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE email = ? AND password = ?");
+                statement.setString(1, email);
+                statement.setString(2, password);
+
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    switch (table) {
+                        case "students":
+                            return "Student";
+                        case "teachers":
+                            return "Teacher";
+                        case "parents":
+                            return "Parent";
+                        case "admins":
+                            return "Admin";
+                    }
+                }
+                //TODO: Error Handling
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
 
 
     @Override

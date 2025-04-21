@@ -72,6 +72,9 @@ public class RegisterController {
     @FXML
     private Label successfulSignUpLabelAdmin;
 
+    @FXML
+    private Button returnToPrevious;
+
 
     private Student newStudent;
     private Teacher newTeacher;
@@ -190,7 +193,13 @@ public class RegisterController {
 
         }
 
+    @FXML private void returnToHomePage() throws IOException {
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
 
     }
+
+
+}
 
 

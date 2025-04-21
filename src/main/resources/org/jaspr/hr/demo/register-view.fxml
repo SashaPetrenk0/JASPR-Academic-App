@@ -24,6 +24,8 @@
     <!-- Drop Box Menu Creation -->
     <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected"/>
 
+    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToHomePage" />
+
 
     <VBox fx:id="studentForm" visible="false" managed="false">
         <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
