@@ -22,4 +22,28 @@ public class SceneChanger {
             // You can show an error dialog or handle the error gracefully
         }
     }
+
+
+
+    public static void changeScene(Stage stage, String fxmlFileName, Teacher teacher) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFileName));
+            Parent root = fxmlLoader.load();
+
+            // If teacher is provided, pass it to the controller (must have setTeacher)
+            if (teacher != null) {
+                Object controller = fxmlLoader.getController();
+                if (controller instanceof TempHome) {
+                    ((TempHome) controller).setTeacher(teacher);
+                }
+            }
+
+            Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
+            stage.setScene(scene);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optional: show user-friendly error
+        }
+    }
 }

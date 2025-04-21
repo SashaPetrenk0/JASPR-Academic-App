@@ -220,6 +220,32 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     @Override
+    public Teacher getLoggedInTeacher(String email, String password){
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE email = ? AND password = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Teacher(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        resultSet.getInt("teacherID"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+
+
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     public String Authenticate(String email, String password) {
         // Check authentication information against all four user tables
         String[] tables = {"students", "teachers", "parents", "admins"};

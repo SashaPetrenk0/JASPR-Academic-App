@@ -30,6 +30,10 @@ public interface IUserDAO {
 
     public String Authenticate(String email, String password);
 
+
+
+    public Teacher getLoggedInTeacher (String email, String password);
+
     /**
      * Updates an existing contact in the database.
      * @param studentID The contact to update.

@@ -57,11 +57,17 @@ public class LoginController {
         // If "Teacher" role returned
         if ("Teacher".equals(role)){
             System.out.println("Teacher successfully logged in");
+            Teacher loggedInTeacher = userDAO.getLoggedInTeacher(email, password);
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
             Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "temp-home-view");
-            //TODO: Get the id of the logged in teacher and send it to the dashboard somehow lol
+            SceneChanger.changeScene(stage, "temp-home-view", loggedInTeacher);
+
+
+
+
+
+
         }
 
         // If "Parent" role returned
