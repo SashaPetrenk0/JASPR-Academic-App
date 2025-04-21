@@ -47,14 +47,33 @@ public class SqliteUserDAO implements IUserDAO {
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
-            statement.setString(3, user.getRole());
-            statement.setString(4, contact.getEmail());
-            statement.executeUpdate();
-            // Set the id of the new contact
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                contact.setId(generatedKeys.getInt(1));
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getRole());
+
+            statement.setNull(5, java.sql.Types.INTEGER); // age
+            statement.setNull(6, java.sql.Types.INTEGER); // studentID
+            statement.setNull(7, java.sql.Types.INTEGER); // teacherID
+            statement.setNull(8, java.sql.Types.INTEGER); // adminID
+            statement.setNull(9, java.sql.Types.VARCHAR); // childID
+            statement.setNull(10, java.sql.Types.VARCHAR); // childName
+
+            // Role specific values
+            if (user instanceof Student student){
+                statement.setInt(5, student.getAge());
+                statement.setInt(6, student.getStudentID());
+            } else if (user instanceof Teacher teacher){
+                statement.setInt(5, teacher.getAge());
+                statement.setInt(7, teacher.getTeacherID());
+            } else if (user instanceof Admin admin){
+                statement.setInt(5, admin.getAge());
+                statement.setInt(8, admin.getAdminID());
+            } else if (user instanceof Parent parent){
+                statement.setInt(9, parent.getChildID());
+                statement.setString(10, parent.getChildName());
             }
+
+            statement.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -136,11 +155,6 @@ public class SqliteUserDAO implements IUserDAO {
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-    }
-
-    @Override
-    public void addUser(User user) {
-
     }
 
     @Override
