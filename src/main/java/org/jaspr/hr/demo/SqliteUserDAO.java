@@ -133,6 +133,49 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
+    @Override
+    public Teacher getTeacher(int teacherID) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Teacher' AND teacherID = ?");
+            statement.setInt(1, teacherID);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Teacher(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        teacherID,
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Admin getAdmin(int adminID) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Admin' AND adminID = ?");
+            statement.setInt(1, adminID);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Admin(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        adminID,
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
     @Override
     public void changePassword(String email, String oldPassword, String newPassword) {
@@ -148,8 +191,4 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-    @Override
-    public List<Student> getAllStudents() {
-        return List.of();
-    }
 }
