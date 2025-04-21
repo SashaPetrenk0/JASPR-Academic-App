@@ -2,12 +2,12 @@ package org.jaspr.hr.demo;
 
 public class Teacher extends User{
     private int age;
-    private int staffID;
+    private int teacherID;
 
-    public Teacher(String name, int age, int staffID, String email, String password){
+    public Teacher(String name, int age, int teacherID, String email, String password){
         super(name, email, password);
         this.age = age;
-        this.staffID = staffID;
+        this.teacherID = teacherID;
     }
 
     @Override
@@ -19,8 +19,8 @@ public class Teacher extends User{
         return age;
     }
 
-    public int getStaffID(){
-        return staffID;
+    public int getTeacherID(){
+        return teacherID;
     }
 
 }
