@@ -16,8 +16,9 @@
     <Label text="Please enter your login details!" style="-fx-font-size: 18px;"/>
     <TextField fx:id="loginEmailField" promptText = "Email" />
     <TextField fx:id="loginPasswordField" promptText = "Password" />
-    <Button text = "Submit" onAction="#onLoginClicked" />
+    <Button fx:id="LoginButton" text = "Submit" onAction="#onLoginClicked" />
     <Label fx:id="loginEmptyError" text="" visible="false" />
+    <Label fx:id="loginIncorrectError" text="" visible="false" />
 
 </VBox>
 
