@@ -299,7 +299,7 @@ public class SqliteUserDAO implements IUserDAO {
         return students;
     }
 
-    // Testing successful database appending
+    // For database checking
     public void printAllStudents() {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
@@ -317,4 +317,17 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    // For database checking
+    public void clearStudentsTable() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM students");
+            statement.executeUpdate();
+            System.out.println("All student records deleted.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
+
