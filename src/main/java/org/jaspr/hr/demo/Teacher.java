@@ -1,21 +1,18 @@
 package org.jaspr.hr.demo;
 
-public class Teacher implements User{
-    private String name, email, password;
+public class Teacher extends User{
     private int age;
     private int staffID;
 
     public Teacher(String name, int age, int staffID, String email, String password){
-        this.name = name;
+        super(name, email, password);
         this.age = age;
         this.staffID = staffID;
-        this.email = email;
-        this.password = password;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public String getRole() {
+        return "Teacher";
     }
 
     public int getAge() {
@@ -26,13 +23,4 @@ public class Teacher implements User{
         return staffID;
     }
 
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
 }
