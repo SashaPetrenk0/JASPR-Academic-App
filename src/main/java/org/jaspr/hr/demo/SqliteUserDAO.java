@@ -23,12 +23,12 @@ public class SqliteUserDAO implements IUserDAO {
                     + "email VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL,"
                     + "role VARCHAR NOT NULL,"
-                    + "age INTEGER NOT NULL,"
-                    + "studentID INTEGER NOT NULL,"
-                    + "teacherID INTEGER NOT NULL,"
-                    + "adminID INTEGER NOT NULL,"
-                    + "childID INTEGER NOT NULL,"
-                    + "childName STRING NOT NULL"
+                    + "age INTEGER,"
+                    + "studentID INTEGER,"
+                    + "teacherID INTEGER"
+                    + "adminID INTEGER,"
+                    + "childID INTEGER,"
+                    + "childName STRING"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
