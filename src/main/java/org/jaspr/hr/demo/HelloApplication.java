@@ -9,14 +9,16 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    public static final String TITLE = "Address Book";
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 360;
+    public static final String TITLE = "App Dashboard"; // Updated title
+    public static final int WIDTH = 1315;  // Updated to match your dashboard size
+    public static final int HEIGHT = 890;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1315, 890);
-        stage.setTitle("App Dashboard");
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard.fxml")); // <-- load dashboard.fxml
+        Scene scene = new Scene(fxmlLoader.load(), 1315, 800);
+        stage.setTitle(TITLE);
+        stage.sizeToScene(); // This will resize the window to match your layout size
         stage.setScene(scene);
         stage.show();
     }
