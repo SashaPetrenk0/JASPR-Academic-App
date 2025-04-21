@@ -1,7 +1,5 @@
 package org.jaspr.hr.demo;
 
-import org.jaspr.hr.demo.model.Contact;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class SqliteUserDAO implements IUserDAO {
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS users ("
-                    + "userID INTEGER PRIMARY KEY AUTOINCREMENT"
+                    + "userID INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "name STRING NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL,"
@@ -30,7 +28,7 @@ public class SqliteUserDAO implements IUserDAO {
                     + "teacherID INTEGER NOT NULL,"
                     + "adminID INTEGER NOT NULL,"
                     + "childID INTEGER NOT NULL,"
-                    + "childName STRING NOT NULL,"
+                    + "childName STRING NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -43,7 +41,7 @@ public class SqliteUserDAO implements IUserDAO {
     public void addUser(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email, password, role, age, " +
-                    "studentID, teacherID, adminID, childID, childName) " +
+                    "studentID, teacherID, adminID, childID, childName)" +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
