@@ -1,4 +1,4 @@
-package org.jaspr.hr.demo.model;
+package org.jaspr.hr.demo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ public class SqliteConnection {
     private static Connection instance = null;
 
     private SqliteConnection() {
-        String url = "jdbc:sqlite:contacts.db";
+        String url = "jdbc:sqlite:users.db";
         try {
             instance = DriverManager.getConnection(url);
         } catch (SQLException sqlEx) {
