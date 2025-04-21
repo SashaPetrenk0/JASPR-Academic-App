@@ -10,31 +10,47 @@ public class SqliteUserDAO implements IUserDAO {
 
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
-        createTable();
+        createStudentTable();
+        createTeacherTable();
+        createParentTable();
+        createAdminTable();
     }
 
-    private void createTable() {
+    private void createStudentTable() {
         // Create table if not exists
         try {
             Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS users ("
-                    + "userID INTEGER PRIMARY KEY AUTOINCREMENT,"
+            String query = "CREATE TABLE IF NOT EXISTS students ("
                     + "name STRING NOT NULL,"
-                    + "email VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL,"
-                    + "role VARCHAR NOT NULL,"
                     + "age INTEGER,"
                     + "studentID INTEGER,"
-                    + "teacherID INTEGER"
-                    + "adminID INTEGER,"
-                    + "childID INTEGER,"
-                    + "childName STRING"
+                    + "email VARCHAR NOT NULL,"
+                    + "password VARCHAR NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    private void createTeacherTable() {
+        // Create table if not exists
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS teachers ("
+                    + "name STRING NOT NULL,"
+                    + "age INTEGER,"
+                    + "teacherID INTEGER"
+                    + "email VARCHAR NOT NULL,"
+                    + "password VARCHAR NOT NULL"
+                    + ")";
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     @Override
