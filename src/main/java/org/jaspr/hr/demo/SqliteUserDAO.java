@@ -79,52 +79,7 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-    @Override
-    public void updateContact(Contact contact) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE contacts SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE id = ?");
-            statement.setString(1, contact.getFirstName());
-            statement.setString(2, contact.getLastName());
-            statement.setString(3, contact.getPhone());
-            statement.setString(4, contact.getEmail());
-            statement.setInt(5, contact.getId());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    @Override
-    public void deleteContact(Contact contact) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM contacts WHERE id = ?");
-            statement.setInt(1, contact.getId());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public Contact getContact(int id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM contacts WHERE id = ?");
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String lastName = resultSet.getString("lastName");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                Contact contact = new Contact(firstName, lastName, phone, email);
-                contact.setId(id);
-                return contact;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @Override
     public List<Contact> getAllContacts() {
@@ -158,13 +113,39 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     @Override
-    public void getUser(User user) {
-
+    public Student getStudent(int studentID) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Student' AND studentID = ?");
+            statement.setInt(1, studentID);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Student(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        studentID,
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    @Override
-    public void changePassword(User user) {
 
+    @Override
+    public void changePassword(String email, String oldPassword, String newPassword) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE users SET password = ?, WHERE email = ? AND password = ?");
+            statement.setString(1, newPassword);
+            statement.setString(2, email);
+            statement.setString(3, oldPassword);
+            //TODO: Error Handling
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
