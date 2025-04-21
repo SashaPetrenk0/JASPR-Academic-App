@@ -84,6 +84,65 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    public void addStudent (Student student){
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password)" +
+                    "VALUES (?, ?, ?, ?, ?)");
+            statement.setString(1, student.getName());
+            statement.setInt(2, student.getAge());
+            statement.setInt(3, student.getStudentID());
+            statement.setString(4, student.getEmail());
+            statement.setString(5, student.getPassword());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addTeacher (Teacher teacher){
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password)" +
+                    "VALUES (?, ?, ?, ?, ?)");
+            statement.setString(1, teacher.getName());
+            statement.setInt(2, teacher.getAge());
+            statement.setInt(3, teacher.getTeacherID());
+            statement.setString(4, teacher.getEmail());
+            statement.setString(5, teacher.getPassword());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addStudent (Admin admin){
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, password)" +
+                    "VALUES (?, ?, ?, ?, ?)");
+            statement.setString(1, admin.getName());
+            statement.setInt(2, admin.getAge());
+            statement.setInt(3, admin.getAdminID());
+            statement.setString(4, admin.getEmail());
+            statement.setString(5, admin.getPassword());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addStudent (Parent parent){
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, password)" +
+                    "VALUES (?, ?, ?, ?, ?)");
+            statement.setString(1, parent.getName());
+            statement.setInt(2, parent.getChildID());
+            statement.setString(3, parent.getChildName());
+            statement.setString(4, parent.getEmail());
+            statement.setString(5, parent.getPassword());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
