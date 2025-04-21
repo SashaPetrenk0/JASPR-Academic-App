@@ -41,7 +41,7 @@ public class StudentController {
         String email = emailField.getText();
         String password = passwordField.getText();
 
-        currentStudent = new Student(name, age, email, password);
+//        currentStudent = new Student(name, age, email, password);
 
         successfulSignUpLabel.setText("Successful Student Signup! Welcome " + name);
         successfulSignUpLabel.setVisible(true);
