@@ -83,7 +83,7 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    @Override
     public void addStudent (Student student){
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password)" +
@@ -98,7 +98,7 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
+    @Override
     public void addTeacher (Teacher teacher){
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password)" +
@@ -113,8 +113,8 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
-    public void addStudent (Admin admin){
+    @Override
+    public void addAdmin (Admin admin){
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
@@ -128,8 +128,8 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
-
-    public void addStudent (Parent parent){
+    @Override
+    public void addParent (Parent parent){
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
@@ -139,50 +139,6 @@ public class SqliteUserDAO implements IUserDAO {
             statement.setString(4, parent.getEmail());
             statement.setString(5, parent.getPassword());
             statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-
-    @Override
-    public void addUser(User user) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email, password, role, age, " +
-                    "studentID, teacherID, adminID, childID, childName)" +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getRole());
-
-            statement.setNull(5, java.sql.Types.INTEGER); // age
-            statement.setNull(6, java.sql.Types.INTEGER); // studentID
-            statement.setNull(7, java.sql.Types.INTEGER); // teacherID
-            statement.setNull(8, java.sql.Types.INTEGER); // adminID
-            statement.setNull(9, java.sql.Types.VARCHAR); // childID
-            statement.setNull(10, java.sql.Types.VARCHAR); // childName
-
-            // Role specific values
-            if (user instanceof Student student){
-                statement.setInt(5, student.getAge());
-                statement.setInt(6, student.getStudentID());
-            } else if (user instanceof Teacher teacher){
-                statement.setInt(5, teacher.getAge());
-                statement.setInt(7, teacher.getTeacherID());
-            } else if (user instanceof Admin admin){
-                statement.setInt(5, admin.getAge());
-                statement.setInt(8, admin.getAdminID());
-            } else if (user instanceof Parent parent){
-                statement.setInt(9, parent.getChildID());
-                statement.setString(10, parent.getChildName());
-            }
-
-            statement.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -200,7 +156,7 @@ public class SqliteUserDAO implements IUserDAO {
     @Override
     public Student getStudent(int studentID) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Student' AND studentID = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students WHERE studentID = ?");
             statement.setInt(1, studentID);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -222,7 +178,7 @@ public class SqliteUserDAO implements IUserDAO {
     @Override
     public Teacher getTeacher(int teacherID) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Teacher' AND teacherID = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE teacherID = ?");
             statement.setInt(1, teacherID);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -244,7 +200,7 @@ public class SqliteUserDAO implements IUserDAO {
     @Override
     public Admin getAdmin(int adminID) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Admin' AND adminID = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM admins WHERE adminID = ?");
             statement.setInt(1, adminID);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
@@ -265,9 +221,30 @@ public class SqliteUserDAO implements IUserDAO {
 
 
     @Override
-    public void changePassword(String email, String oldPassword, String newPassword) {
+    public void changePassword(String email, String oldPassword, String newPassword, String role) {
+        String tableName = "";
+
+        switch (role){
+            case "Student":
+                tableName = "students";
+                break;
+            case "Teacher":
+                tableName = "teachers";
+                break;
+            case "Admin":
+                tableName = "admin";
+                break;
+            case "Parent":
+                tableName = "parent";
+                break;
+            default:
+                System.out.println("Invalid role provided.");
+                return;
+        }
+
+
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE users SET password = ?, WHERE email = ? AND password = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE " + tableName + " SET password = ?, WHERE email = ? AND password = ?");
             statement.setString(1, newPassword);
             statement.setString(2, email);
             statement.setString(3, oldPassword);
@@ -284,7 +261,7 @@ public class SqliteUserDAO implements IUserDAO {
     public List<String> getAllStudentNames() {
         List<String> studentNames = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT name FROM users WHERE role = 'Student'");
+            PreparedStatement statement = connection.prepareStatement("SELECT name FROM students");
             ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()){
@@ -303,7 +280,7 @@ public class SqliteUserDAO implements IUserDAO {
     public List<Student> getAllStudents(){
         List<Student> students = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE role = 'Student'");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
                 String name = resultSet.getString("name");
