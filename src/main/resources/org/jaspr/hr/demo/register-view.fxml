@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.control.TextField?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jaspr.hr.demo.RegisterController">
+
+    <padding>
+        <Insets top = "20" right = "20" bottom = "20" left = "20"/>
+    </padding>
+
+    <Label text="Select Your Role" />
+
+    <!-- Drop Box Menu Creation -->
+    <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected"/>
+
+
+    <VBox fx:id="studentForm" visible="false" managed="false">
+        <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
+        <TextField fx:id="nameFieldStudent" promptText = "Name" />
+        <TextField fx:id="ageFieldStudent" promptText = "Age" />
+        <TextField fx:id="studentIDField" promptText = "Student ID" />
+        <TextField fx:id="emailFieldStudent" promptText = "Email" />
+        <TextField fx:id="passwordFieldStudent" promptText = "Password" />
+        <Button text = "Submit" onAction="#onSubmitClicked" />
+        <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
+    </VBox>
+
+    <VBox fx:id="teacherForm" visible="false" managed="false">
+        <Label text="Teacher Sign Up" style="-fx-font-size: 18px;" />
+        <TextField fx:id="nameFieldTeacher" promptText = "Name" />
+        <TextField fx:id="ageFieldTeacher" promptText = "Age" />
+        <TextField fx:id="teacherIDField" promptText = "Teacher ID" />
+        <TextField fx:id="emailFieldTeacher" promptText = "Email" />
+        <TextField fx:id="passwordFieldTeacher" promptText = "Password" />
+        <Button text = "Submit" onAction="#onSubmitClicked" />
+        <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
+    </VBox>
+
+    <VBox fx:id="parentForm" visible="false" managed="false">
+        <Label text="Parent Sign Up" style="-fx-font-size: 18px;" />
+        <TextField fx:id="nameFieldParent" promptText = "Name" />
+        <TextField fx:id="childNameField" promptText = "Child Name" />
+        <TextField fx:id="childIDField" promptText = "Child Student ID" />
+        <TextField fx:id="emailFieldParent" promptText = "Email" />
+        <TextField fx:id="passwordFieldParent" promptText = "Password" />
+        <Button text = "Submit" onAction="#onSubmitClicked" />
+        <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
+    </VBox>
+
+    <VBox fx:id="adminForm" visible="false" managed="false">
+        <Label text="Admin Sign Up" style="-fx-font-size: 18px;" />
+        <TextField fx:id="nameFieldAdmin" promptText = "Name" />
+        <TextField fx:id="ageFieldAdmin" promptText = "Age" />
+        <TextField fx:id="adminIDField" promptText = "Admin ID" />
+        <TextField fx:id="emailFieldAdmin" promptText = "Email" />
+        <TextField fx:id="passwordFieldAdmin" promptText = "Password" />
+        <Button text = "Submit" onAction="#onSubmitClicked" />
+        <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
+    </VBox>
+
+</VBox>
+
+
