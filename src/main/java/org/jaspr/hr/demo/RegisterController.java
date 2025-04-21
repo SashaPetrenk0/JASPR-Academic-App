@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RegisterController {
+
+    private final SqliteUserDAO userDAO = new SqliteUserDAO();
+
     @FXML
     private ComboBox<String> roleComboBox;
     @FXML
@@ -130,6 +133,7 @@ public class RegisterController {
                     int studentID = Integer.parseInt(studentIDField.getText().trim());
 
                     Student newStudent = new Student(name, age, studentID, email, password);
+                    userDAO.addUser(newStudent);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
 
@@ -144,6 +148,7 @@ public class RegisterController {
                     int teacherID = Integer.parseInt(teacherIDField.getText().trim());
 
                     Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
+                    userDAO.addUser(newTeacher);
                     successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
                     successfulSignUpLabelTeacher.setVisible(true);
 
@@ -157,6 +162,7 @@ public class RegisterController {
                     password = passwordFieldParent.getText();
 
                     Parent newParent = new Parent(name, child, childID, email, password);
+                    userDAO.addUser(newParent);
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                     successfulSignUpLabelParent.setVisible(true);
 
@@ -171,11 +177,13 @@ public class RegisterController {
                     int adminID = Integer.parseInt(adminIDField.getText().trim());
 
                     Admin newAdmin = new Admin(name, age, adminID, email, password);
+                    userDAO.addUser(newAdmin);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
                     successfulSignUpLabelAdmin.setVisible(true);
 
                     // TODO: Error handling for incorrect user inputs
                 }
+
             }
 
 
