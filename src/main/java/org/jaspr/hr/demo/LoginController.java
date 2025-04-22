@@ -56,7 +56,7 @@ public class LoginController {
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
             Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.passSceneData(stage, "temp-home-view.fxml", loggedInTeacher);
+            SceneChanger.passSceneData(stage, "temp-home-view.fxml");
 
 
 

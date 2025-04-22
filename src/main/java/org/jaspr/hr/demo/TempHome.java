@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 public class TempHome {
+    User user = UserSession.getInstance().getCurrentUser();
+    String role = UserSession.getInstance().getRole();
 
     @FXML
     private Label personalisedGreeting;
@@ -16,14 +18,21 @@ public class TempHome {
     @FXML
     private Button createQuiz;
 
-    private Teacher teacher;
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+
+    public void setTeacher() {
 
         // Personalized greeting
         System.out.println("methid cAKKED");
-        personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
+
+        if ("Teacher".equals(role) && user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+            personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
+
+            System.out.println(teacher.getName() + teacher.getTeacherID());
+
+
+        }
     }
 
 

@@ -28,7 +28,7 @@ public class SceneChanger {
 
 
 
-    public static void passSceneData(Stage stage, String fxmlFileName, Teacher teacher) {
+    public static void passSceneData(Stage stage, String fxmlFileName) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFileName));
             Parent root = fxmlLoader.load();
@@ -36,16 +36,16 @@ public class SceneChanger {
             // If teacher is provided, pass it to the controller (must have setTeacher)
             Object controller = fxmlLoader.getController();
 
-            if (teacher != null) {
-                System.out.println("teacher not null");
+            //if (teacher != null) {
+               // System.out.println("teacher not null");
                 if( controller instanceof TempHome){
                     System.out.println("has controller");
                     // Check if the controller is of the correct type and pass the teacher
-                    ((TempHome) controller).setTeacher(teacher);
+                    ((TempHome) controller).setTeacher();
                 }
 
 
-            }
+           // }
 
             Scene scene = new Scene(root, WIDTH, HEIGHT);
             stage.setScene(scene);
