@@ -1,15 +1,9 @@
 package org.jaspr.hr.demo;
 
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class LoginController {
 
@@ -51,7 +45,7 @@ public class LoginController {
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with student dasboard
 //            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.student-dashboard-view");
+//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.student-dashboard-view.fxml");
         }
 
         // If "Teacher" role returned
@@ -61,7 +55,7 @@ public class LoginController {
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
             Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "temp-home-view", loggedInTeacher);
+            SceneChanger.passSceneData(stage, "temp-home-view.fxml", loggedInTeacher);
 
 
 
@@ -76,7 +70,7 @@ public class LoginController {
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with parent dashboard
 //            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.parent-dashboard-view");
+//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.parent-dashboard-view.fxml");
         }
 
         // If "Admin" role returned
@@ -85,7 +79,7 @@ public class LoginController {
             System.out.println("Admin successfully logged in");
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with admin dashboard
 //            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view");
+//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view.fxml");
         }
 
     }
