@@ -20,7 +20,7 @@ public class TempHome {
 
         // Personalized greeting
         System.out.println("methid cAKKED");
-        personalisedGreeting.setText("Hi, " + teacher.getTeacherID() + "!");
+        personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
     }
 
 }

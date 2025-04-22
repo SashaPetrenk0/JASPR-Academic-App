@@ -19,6 +19,11 @@ public class Teacher extends User{
         return age;
     }
 
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
     public int getTeacherID(){
         return teacherID;
     }
