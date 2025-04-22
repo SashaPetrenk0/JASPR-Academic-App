@@ -11,7 +11,7 @@ import java.io.IOException;
 public class TempHome {
 
     @FXML
-    private Label greetingLabel;
+    private Label personalisedGreeting;
 
     private Teacher teacher;
 
@@ -19,7 +19,8 @@ public class TempHome {
         this.teacher = teacher;
 
         // Personalized greeting
-        greetingLabel.setText("Hi, " + teacher.getTeacherID() + "!");
+        System.out.println("methid cAKKED");
+        personalisedGreeting.setText("Hi, " + teacher.getTeacherID() + "!");
     }
 
 }
