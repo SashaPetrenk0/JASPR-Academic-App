@@ -13,6 +13,19 @@ public class Classroom {
         this.teacher = teacher;
         this.students = new ArrayList<>();
     }
+    // getters
+    public int getClassRoomNumber(){
+        return classRoomNumber;
+    }
+
+    public Teacher getTeacher(){
+        return teacher;
+    }
+
+    public List<Student> getStudents(){
+        return students;
+    }
+
 
 
 
