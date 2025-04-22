@@ -119,25 +119,18 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
     @Override
-    public List<Quiz> getAllQuizzes(Teacher teacher) {
+    public List<String> getAllQuizzes(Teacher teacher) {
 
-        List<Quiz> quizzes = new ArrayList<>();
+        List<String> quizzes = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE author = ?");
             statement.setInt(1, teacher.getTeacherID());
             ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()){
-                Quiz quiz = new Quiz(
-                        resultSet.getString("title"),
-                        resultSet.getString("description"),
-                        resultSet.getString("topic"),
-                        resultSet.getInt("numOfQuestions"),
-                        resultSet.getInt("author")
-                );
+                String title = resultSet.getString("title");
 
-
-                quizzes.add(quiz);
+                quizzes.add(title);
             }
             //TODO: Error Handling
         } catch (Exception e) {
