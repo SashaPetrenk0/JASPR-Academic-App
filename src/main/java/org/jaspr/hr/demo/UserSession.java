@@ -5,10 +5,9 @@ public class UserSession {
         private static UserSession instance;
 
         // Example: store the currently logged-in teacher
-        private Teacher currentTeacher;
-        private Student currentStudent;
-        private Admin currentAdmin;
-        private Parent currentParent;
+        private User currentUser;
+        private String role;
+
 
         // Private constructor to prevent direct instantiation
         private UserSession() {
@@ -23,26 +22,20 @@ public class UserSession {
         }
 
         // Getter and setter for the logged-in teacher
-        public Teacher getCurrentTeacher() {
-            return currentTeacher;
+        public User getCurrentUser() {
+            return currentUser;
         }
 
-        public void setCurrentTeacher(Teacher teacher) {
-            this.currentTeacher = teacher;
+        public void setCurrentUser(User user, String role) {
+            this.currentUser = user;
+            this.role = role;
         }
 
-    // Getter and setter for the logged-in student
-    public Student getCurrentStudent() {
-        return currentStudent;
-    }
-
-    public void setCurrentStudent(Student student) {
-        this.currentStudent = student;
-    }
 
         // Clear the session when user logs out
         public void clearSession() {
-            currentTeacher = null;
+            currentUser = null;
+            role = null;
         }
 
 
