@@ -17,14 +17,14 @@ public class SqliteQuizDAO implements IQuizDAO {
         // Create table if not exists
         try {
             Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS quizzes ("
-                    + "id INTEGER PRIMARY KEY AUTOINCREMENT"
-                    + "title STRING NOT NULL,"
-                    + "description STRING NOT NULL,"
-                    + "topic STRING NOT NULL,"
-                    + "numOfQuestions INTEGER NOT NULL,"
-                    + "author INT,"
-                    + ")";
+            String query = "CREATE TABLE IF NOT EXISTS quizzes (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "title TEXT NOT NULL," +
+                    "description TEXT NOT NULL," +
+                    "topic TEXT NOT NULL," +
+                    "numOfQuestions INTEGER NOT NULL," +
+                    "author INTEGER" +
+                    ");";
             statement.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
