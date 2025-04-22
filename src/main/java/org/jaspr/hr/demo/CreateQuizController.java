@@ -21,12 +21,6 @@ public class CreateQuizController {
 
     @FXML
     private void onCreateQuiz() {
-        // Default values for a new contact
-        final String DEFAULT_TITLE = "New Quiz";
-        final String DEFAULT_DESCRIPTION = "This is what your quiz is about";
-        final String DEFAULT_TOPIC = "Chemistry";
-        final int DEFAULT_LENGTH= 1;
-        final int DEFAULT_AUTHOR = 0;
 
         String title = titleField.getText();
         String desc = descriptionField.getText();
