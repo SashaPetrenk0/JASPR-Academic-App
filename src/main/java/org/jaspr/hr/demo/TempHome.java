@@ -13,6 +13,9 @@ public class TempHome {
     @FXML
     private Label personalisedGreeting;
 
+    @FXML
+    private Button createQuiz;
+
     private Teacher teacher;
 
     public void setTeacher(Teacher teacher) {
@@ -21,6 +24,20 @@ public class TempHome {
         // Personalized greeting
         System.out.println("methid cAKKED");
         personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
+    }
+
+
+
+
+
+
+    /// go to create quiz page
+    @FXML
+    protected void onAdd() throws IOException {
+        Stage stage = (Stage) createQuiz.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-quiz-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        stage.setScene(scene);
     }
 
 }

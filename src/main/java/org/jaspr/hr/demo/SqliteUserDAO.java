@@ -235,8 +235,6 @@ public class SqliteUserDAO implements IUserDAO {
                         resultSet.getString("email"),
                         resultSet.getString("password")
                 );
-
-
             }
             //TODO: Error Handling
         } catch (Exception e) {
