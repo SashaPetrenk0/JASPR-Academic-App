@@ -20,10 +20,16 @@
     <Label text="Create a quiz (as a teacher for now)" />
 
     <Label text="How many questions do you want?"/>
+    <TextField fx:id="lengthField" promptText = "Name" />
 
     <Label text = "What is the title of your quiz"/>
+    <TextField fx:id="titleField" promptText = "Name" />
     <Label text = "What is the topic of your quiz"/>
+    <TextField fx:id="topicField" promptText = "Name" />
     <Label text = "What is the description of your quiz"/>
+    <TextField fx:id="descriptionField" promptText = "Name" />
+
+    <Button text = "Create" onAction="#onCreateQuiz" />
 
 
 </VBox>

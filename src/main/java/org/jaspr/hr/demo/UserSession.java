@@ -31,8 +31,11 @@ public class UserSession {
             this.role = role;
         }
 
+    public String getRole() {
+        return role;
+    }
 
-        // Clear the session when user logs out
+    // Clear the session when user logs out
         public void clearSession() {
             currentUser = null;
             role = null;

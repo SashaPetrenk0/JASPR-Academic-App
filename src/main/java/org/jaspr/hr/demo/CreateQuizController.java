@@ -1,32 +1,50 @@
 package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 public class CreateQuizController {
+    private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
 
-
-
-
+    User user = UserSession.getInstance().getCurrentUser();
+    String role = UserSession.getInstance().getRole();
 
     @FXML
-    private void onAdd() {
+    private TextField titleField;
+    @FXML
+    private TextField descriptionField;
+    @FXML
+    private TextField topicField;
+    @FXML
+    private TextField lengthField;
+
+    @FXML
+    private void onCreateQuiz() {
         // Default values for a new contact
         final String DEFAULT_TITLE = "New Quiz";
         final String DEFAULT_DESCRIPTION = "This is what your quiz is about";
         final String DEFAULT_TOPIC = "Chemistry";
         final int DEFAULT_LENGTH= 1;
-        final int DEFAULT_AUTHOR = 1;
+        final int DEFAULT_AUTHOR = 0;
 
-        Quiz newQuiz = new Quiz(DEFAULT_TITLE, DEFAULT_DESCRIPTION, DEFAULT_TOPIC, DEFAULT_LENGTH, DEFAULT_AUTHOR);
+        String title = titleField.getText();
+        String desc = descriptionField.getText();
+        String topic = topicField.getText();
+        int length = Integer.parseInt(lengthField.getText().trim());
+        int author = 0;
 
-        // Add the new contact to the database
-//        contactDAO.addContact(newContact);
-//        syncContacts();
-//        // Select the new contact in the list view
-//        // and focus the first name text field
-//        selectContact(newContact);
-//        firstNameTextField.requestFocus();
+
+
+        if ("Teacher".equals(role) && user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+            author = teacher.getTeacherID();
+        }
+
+        Quiz newQuiz = new Quiz(title, desc, topic, length, author);
+        quizDAO.addQuiz(newQuiz);
+
+
     }
 
 
