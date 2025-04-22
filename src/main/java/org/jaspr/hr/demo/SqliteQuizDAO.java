@@ -75,6 +75,7 @@ public class SqliteQuizDAO implements IQuizDAO {
             statement.setInt(4, quiz.getNumOfQuestions());
             statement.setInt(5, quiz.getAuthor());
 
+
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
