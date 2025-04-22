@@ -14,8 +14,10 @@ public class CreateQuizController {
         final String DEFAULT_DESCRIPTION = "This is what your quiz is about";
         final String DEFAULT_TOPIC = "Chemistry";
         final int DEFAULT_LENGTH= 1;
+        final int DEFAULT_AUTHOR = 1;
 
-        Quiz newQuiz = new Quiz(DEFAULT_TITLE, DEFAULT_DESCRIPTION, DEFAULT_TOPIC, DEFAULT_LENGTH);
+        Quiz newQuiz = new Quiz(DEFAULT_TITLE, DEFAULT_DESCRIPTION, DEFAULT_TOPIC, DEFAULT_LENGTH, DEFAULT_AUTHOR);
+
         // Add the new contact to the database
 //        contactDAO.addContact(newContact);
 //        syncContacts();
