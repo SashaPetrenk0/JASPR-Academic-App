@@ -1,7 +1,11 @@
 package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class CreateQuizController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
@@ -18,6 +22,8 @@ public class CreateQuizController {
     private TextField topicField;
     @FXML
     private TextField lengthField;
+    @FXML
+    private Button returnToPrevious;
 
     @FXML
     private void onCreateQuiz() {
@@ -40,6 +46,13 @@ public class CreateQuizController {
 
 
     }
+
+    @FXML private void returnToPage() throws IOException {
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        SceneChanger.changeScene(stage, "temp-home-view.fxml");
+
+    }
+
 
 
 

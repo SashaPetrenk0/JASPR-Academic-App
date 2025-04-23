@@ -30,6 +30,7 @@
     <TextField fx:id="descriptionField" promptText = "Name" />
 
     <Button text = "Create" onAction="#onCreateQuiz" />
+    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToPage" />
 
 
 </VBox>
