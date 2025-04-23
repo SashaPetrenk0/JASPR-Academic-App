@@ -40,7 +40,7 @@
 
             <Button fx:id="returnToPrevious" onAction="#returnToHomePage" prefHeight="26.0" prefWidth="101.0" style="-fx-background-radius: 50; -fx-background-color: #E8E8E8;" text="Return" />
 
-            <VBox fx:id="studentForm" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
+            <VBox fx:id="studentForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
                 <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Student Sign Up">
                     <font>
                         <Font name="Telugu Sangam MN" size="14.0" />
@@ -86,5 +86,17 @@
     <bottom>
         <Pane />
     </bottom>
+
+    <VBox fx:id="teacherForm" visible="false" managed="false">
+        <Label text="Teacher Sign Up" style="-fx-font-size: 18px;" />
+        <TextField fx:id="nameFieldTeacher" promptText = "Name" />
+        <TextField fx:id="ageFieldTeacher" promptText = "Age" />
+        <TextField fx:id="teacherIDField" promptText = "Teacher ID" />
+        <TextField fx:id="emailFieldTeacher" promptText = "Email" />
+        <TextField fx:id="passwordFieldTeacher" promptText = "Password" />
+        <Button text = "Submit" onAction="#onSubmitClicked" />
+        <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
+    </VBox>
+
 
 </BorderPane>
