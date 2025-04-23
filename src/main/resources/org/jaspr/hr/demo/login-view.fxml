@@ -25,7 +25,7 @@
             <Circle fill="#FFD54F80" radius="80.0" translateX="0.0" translateY="230.0" />
             <Circle fill="#BA68C880" radius="124.0" translateX="150.0" translateY="150.0" />
             <Circle fill="#d7909040" radius="44.0" translateX="-90.0" translateY="-50.0" />
-         <ImageView fitHeight="159.0" fitWidth="155.0" opacity="0.84" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="142.0" fitWidth="133.0" opacity="0.84" pickOnBounds="true" preserveRatio="true">
             <image>
                <Image url="@../../../../images_2/eco.png" />
             </image>
