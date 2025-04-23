@@ -36,6 +36,8 @@ public class CreateQuizController {
     @FXML
     private Button returnToPrevious;
 
+
+
     @FXML
     private void onCreateQuiz() {
 
@@ -58,6 +60,7 @@ public class CreateQuizController {
         successMessage.setVisible(true);
         createQuiz.setDisable(true);
         //TODO: create error handling for if from is not complete
+        AIGenQuestions.genQuestions("Write 2 multiple choice questions about chemistry stored in a java array");
 
 
     }
@@ -68,27 +71,6 @@ public class CreateQuizController {
 
     }
 
-    //trying ai implementation
-    public class SimplestCompletion {
-        public static void main(String[] args) {
-
-            String apiURL = "http://127.0.0.1:11434/api/generate/";
-            String model = "llama3.2";
-            String prompt = "Write 2 multiple choice questions about chemistry shown in a java array";
-
-            OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
-
-            OllamaResponse response = fetcher.fetchOllamaResponse(model, prompt);
-
-            System.out.println("======================================================");
-            System.out.print("You asked: ");
-            System.out.println(prompt);
-            System.out.println("======================================================");
-            System.out.print("Ollama says: ");
-            System.out.println(response.getResponse());
-            System.out.println("======================================================");
-        }
-    }
 
 
 
