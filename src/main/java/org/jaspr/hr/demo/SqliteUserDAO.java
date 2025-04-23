@@ -100,21 +100,32 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    public boolean isStudentIDExists(int studentID) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM students WHERE studentID = ?");
+        stmt.setInt(1, studentID);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt(1) > 0;
+    }
+
     @Override
-    public void addStudent(Student student) throws SQLException, IllegalArgumentException {
-        if (isUserExists(student.getEmail())) {
+    public void addStudent(Student students) throws SQLException, IllegalArgumentException {
+        if (isUserExists(students.getEmail())) {
             throw new IllegalArgumentException("Email already in use.");
+        }
+        if (isStudentIDExists(students.getStudentID())) {
+            throw new IllegalArgumentException("Student ID already exists.");
         }
 
         // Insert new student into the database
-        PreparedStatement stmt = connection.prepareStatement("INSERT INTO students (name, email, password) VALUES (?, ?, ?)");
-        stmt.setString(1, student.getName());
-        stmt.setString(2, student.getEmail());
-        stmt.setString(3, student.getPassword());
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password) VALUES (?, ?, ?, ?, ?)");
+        stmt.setString(1, students.getName());
+        stmt.setInt(2, students.getAge());
+        stmt.setInt(3, students.getStudentID());
+        stmt.setString(4, students.getEmail());
+        stmt.setString(5, students.getPassword());
         stmt.executeUpdate();
     }
-
-
 
 
 

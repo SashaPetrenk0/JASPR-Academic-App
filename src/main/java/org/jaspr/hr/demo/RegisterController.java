@@ -39,7 +39,7 @@ public class RegisterController {
     @FXML
     private Button returnToPrevious;
     @FXML
-    private Label successLabel, errorLabel;  // For global success and error messages
+    private Label errorLabel;  // For global success and error messages
 
 
 
@@ -121,6 +121,8 @@ public class RegisterController {
                     email = emailFieldStudent.getText();
                     password = passwordFieldStudent.getText();
 
+                    resetErrorLabels();
+
                     // Validation for empty fields
                     if (name.isEmpty()) {
                         showError("Name cannot be empty.", nameErrorLabel);
@@ -143,18 +145,37 @@ public class RegisterController {
                         return; // stop if any validation fails
                     }
 
+                    // Handle age input with validation and error handling
+                    String ageText = ageFieldStudent.getText().trim();
+                    if (ageText.isEmpty() || !ageText.matches("\\d+")) {  // Check if age is empty or contains non-numeric characters
+                        showError("Please enter a valid age.", ageErrorLabel);
+                        return;
+                    }
+
                     try {
-                        int ageInput = Integer.parseInt(ageFieldStudent.getText().trim());
+                        age = Integer.parseInt(ageText);  // Try parsing the age input
+                    } catch (NumberFormatException e) {
+                        showError("Invalid age input, please enter a valid number.", ageErrorLabel);
+                        return;
+                    }
+
+                    try {
                         int studentID = Integer.parseInt(studentIDField.getText().trim());
 
-                        Student newStudent = new Student(name, ageInput, studentID, email, password);
+                        // Create the new student object
+                        Student newStudent = new Student(name, age, studentID, email, password);
+
+                        // Add the student to the database
                         userDAO.addStudent(newStudent);
-                        showSuccess("Registration successful!");
+
+                        // Show success message
+                        //showSuccess("Registration successful!");
                         successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                         successfulSignUpLabelStudent.setVisible(true);
                     } catch (IllegalArgumentException e) {
-                        showError(e.getMessage(), emailErrorLabel);
+                        showError(e.getMessage(), generalErrorLabel);
                     } catch (SQLException e) {
+                        e.printStackTrace();  // Add this line to see what actually failed
                         showError("Database error, please try again.", generalErrorLabel);
                     }
                 }
@@ -218,20 +239,25 @@ public class RegisterController {
 
     // ---------- ERROR HANDLING CODE BELOW ----------
 
-    // Method to show success message
-    private void showSuccess(String message) {
-        successLabel.setText(message);                // Set the success message text
-        successLabel.setStyle("-fx-text-fill: green;"); // Set the text color to green
-        successLabel.setVisible(true);                // Make the success label visible
-
-        // Optionally hide the error label if a success message is displayed
-        errorLabel.setVisible(false);
-    }
+//    // Method to show success message
+//    private void showSuccess(String message) {
+//        successLabel.setText(message);                // Set the success message text
+//        successLabel.setStyle("-fx-text-fill: green;"); // Set the text color to green
+//        successLabel.setVisible(true);                // Make the success label visible
+//
+//        // Optionally hide the error label if a success message is displayed
+//        errorLabel.setVisible(false);
+//    }
 
     // Method to show error message
     private void showError(String message, Label fieldErrorLabel) {
         fieldErrorLabel.setText(message);
         fieldErrorLabel.setVisible(true);
+    }
+
+    // Reset all error labels
+    private void resetErrorLabels() {
+        generalErrorLabel.setVisible(false);
     }
 
     private boolean validateName(String name) {
