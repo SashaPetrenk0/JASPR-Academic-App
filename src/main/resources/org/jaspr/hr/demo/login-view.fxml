@@ -20,7 +20,7 @@
         <StackPane prefWidth="449.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
             <!-- Big decorative bubbles for left side -->
             <Circle fill="#86C5FF80" radius="122.0" translateX="-220.0" translateY="-100.0" />
-            <Circle fill="#cfb9e880" radius="112.0" translateX="60.0" translateY="-170.0" />
+            <Circle fill="#cfb9e880" radius="112.0" translateX="60.0" translateY="-180.0" />
             <Circle fill="#FFB74D80" radius="65.0" translateX="-120.0" translateY="100.0" />
             <Circle fill="#FFD54F80" radius="80.0" translateX="0.0" translateY="230.0" />
             <Circle fill="#BA68C880" radius="124.0" translateX="150.0" translateY="150.0" />
