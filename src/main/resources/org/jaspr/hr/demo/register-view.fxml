@@ -8,201 +8,125 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="460.0" prefWidth="780.0" style="-fx-background-color: #FEFEFE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.RegisterController">
+<BorderPane maxHeight="470.0" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0" style="-fx-background-color: #FEFEFE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.RegisterController">
     <center>
-        <VBox alignment="CENTER" spacing="20.0">
-            <padding>
-                <Insets bottom="20" left="20" right="20" top="20" />
-            </padding>
-            <Pane>
-                // Top left circle Styling
-                <Circle fill="#ab8cab80" layoutX="15.0" layoutY="15.0" radius="55.0" translateX="-20.0" translateY="15.0" />
-                // Second top left circle Styling
-                <Circle fill="rgba(200, 200, 200, 0.5)" radius="50" translateX="-60" translateY="-70" />
-                // Bottom right circle Styling
-                <Circle fill="#82bfbb80" layoutX="659.0" layoutY="111.0" radius="62.0" translateX="80.0" translateY="-100.0" />
-                // Second bottom right circle Styling
+        <StackPane maxHeight="470.0" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
+
+            <!-- Background bubbles (fixed in place) -->
+            <Pane maxHeight="470.0" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
+                <Circle fill="#ab8cab80" layoutX="15.0" layoutY="10.0" radius="77.0" translateX="-20.0" translateY="15.0" />
+                <Circle fill="#82bfbb80" layoutX="672.0" layoutY="98.0" radius="75.0" translateX="80.0" translateY="-100.0" />
                 <Circle fill="#e2ee9a80" layoutX="652.0" layoutY="81.0" radius="34.0" translateX="40.0" translateY="-30.0" />
-                <Circle fill="#e2ee9a80" layoutX="100.0" layoutY="81.0" radius="34.0" translateX="40.0" translateY="-30.0" />
+                <Circle fill="#A8DADC80" layoutX="58.0" layoutY="538.0" radius="46.0" translateX="40.0" translateY="-30.0" />
+                <Circle fill="#2C3E5080" layoutX="-31.0" layoutY="541.0" radius="73.0" translateX="40.0" translateY="-30.0" />
             </Pane>
 
-            // Role-selection label styling
-            <Label prefHeight="21.0" prefWidth="151.0" text="Select Your Role:">
-                <font>
-                    <Font name="Arial" size="18.0" />
-                </font>
-            </Label>
+            <!-- Foreground content -->
+            <VBox alignment="CENTER" maxHeight="470.0" maxWidth="760.0" spacing="20.0">
 
-            // Drop-down Role Menu styling
-            <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
+                <!-- Select Role Section (centered vertically and horizontally) -->
+                <VBox alignment="CENTER" spacing="10.0">
+                    <Label style="-fx-font-size: 20px;" text="Select Your Role:">
+                        <font>
+                            <Font name="Arial" size="15.0" />
+                        </font>
+                        <VBox.margin>
+                            <Insets top="50.0" />
+                        </VBox.margin>
+                    </Label>
+                    <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);">
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin></ComboBox>
+                    <Button fx:id="returnToPrevious" onAction="#returnToHomePage" prefHeight="26.0" prefWidth="101.0" style="-fx-background-radius: 50; -fx-background-color: #E8E8E8;" text="Return">
+                        <VBox.margin>
+                            <Insets top="10.0" />
+                        </VBox.margin>
+                  <font>
+                     <Font name="Telugu Sangam MN" size="14.0" />
+                  </font>
+                    </Button>
+                </VBox>
 
-            // Return Button styling
-            <Button fx:id="returnToPrevious" onAction="#returnToHomePage" prefHeight="26.0" prefWidth="101.0" style="-fx-background-radius: 50; -fx-background-color: #E8E8E8;" text="Return" />
+                <!-- Student Form -->
+                <VBox fx:id="studentForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
+                    <Label style="-fx-font-size: 18px;" text="Student Sign Up">
+                        <font>
+                            <Font name="Telugu Sangam MN" size="14.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="nameFieldStudent" promptText="Name" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="ageFieldStudent" promptText="Age" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="studentIDField" promptText="Student ID" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="emailFieldStudent" promptText="Email" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="passwordFieldStudent" promptText="Password" style="-fx-background-radius: 50;" />
+                    <HBox alignment="CENTER">
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                    </HBox>
+                    <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
+                </VBox>
 
-            // Student Form Styling
-            <VBox fx:id="studentForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
-                <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Student Sign Up">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="14.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="nameFieldStudent" prefHeight="35.0" prefWidth="619.0" promptText="Name" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="ageFieldStudent" promptText="Age" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="studentIDField" promptText="Student ID" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="emailFieldStudent" promptText="Email" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="passwordFieldStudent" promptText="Password" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onSubmitClicked" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
-                    </children>
-                </HBox>
-                <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
+                <!-- Teacher Form -->
+                <VBox fx:id="teacherForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
+                    <Label style="-fx-font-size: 18px;" text="Teacher Sign Up">
+                        <font>
+                            <Font name="Telugu Sangam MN" size="14.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="nameFieldTeacher" promptText="Name" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="ageFieldTeacher" promptText="Age" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="teacherIDField" promptText="Teacher ID" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="emailFieldTeacher" promptText="Email" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="passwordFieldTeacher" promptText="Password" style="-fx-background-radius: 50;" />
+                    <HBox alignment="CENTER">
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                    </HBox>
+                    <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
+                </VBox>
+
+                <!-- Parent Form -->
+                <VBox fx:id="parentForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
+                    <Label style="-fx-font-size: 18px;" text="Parent Sign Up">
+                        <font>
+                            <Font name="Telugu Sangam MN" size="14.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="nameFieldParent" promptText="Name" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="ageFieldParent" promptText="Age" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="parentIDField" promptText="Parent ID" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="emailFieldParent" promptText="Email" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="passwordFieldParent" promptText="Password" style="-fx-background-radius: 50;" />
+                    <HBox alignment="CENTER">
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                    </HBox>
+                    <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
+                </VBox>
+
+                <!-- Admin Form -->
+                <VBox fx:id="adminForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
+                    <Label style="-fx-font-size: 18px;" text="Admin Sign Up">
+                        <font>
+                            <Font name="Telugu Sangam MN" size="14.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="nameFieldAdmin" promptText="Name" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="ageFieldAdmin" promptText="Age" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="adminIDField" promptText="Admin ID" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="emailFieldAdmin" promptText="Email" style="-fx-background-radius: 50;" />
+                    <TextField fx:id="passwordFieldAdmin" promptText="Password" style="-fx-background-radius: 50;" />
+                    <HBox alignment="CENTER">
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                    </HBox>
+                    <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
+                </VBox>
+
             </VBox>
 
-            // Teacher Form Styling
-            <VBox fx:id="teacherForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
-                <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Teacher Sign Up">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="14.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="nameFieldTeacher" prefHeight="35.0" prefWidth="619.0" promptText="Name" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="ageFieldTeacher" promptText="Age" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="teacherIDField" promptText="Teacher ID" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="emailFieldTeacher" promptText="Email" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="passwordFieldTeacher" promptText="Password" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onSubmitClicked" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
-                    </children>
-                </HBox>
-                <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
-            </VBox>
-
-            // Parent Form Styling
-            <VBox fx:id="parentForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
-                <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Parent Sign Up">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="14.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="nameFieldParent" prefHeight="35.0" prefWidth="619.0" promptText="Name" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="ageFieldParent" promptText="Age" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="parentIDField" promptText="Parent ID" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="emailFieldParent" promptText="Email" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="passwordFieldParent" promptText="Password" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onSubmitClicked" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
-                    </children>
-                </HBox>
-                <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
-            </VBox>
-
-            // Admin Form Styling
-            <VBox fx:id="adminForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
-                <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Admin Sign Up">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="14.0" />
-                    </font>
-                </Label>
-                <TextField fx:id="nameFieldAdmin" prefHeight="35.0" prefWidth="619.0" promptText="Name" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="ageFieldAdmin" promptText="Age" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="adminIDField" promptText="Admin ID" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="emailFieldAdmin" promptText="Email" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <TextField fx:id="passwordFieldAdmin" promptText="Password" style="-fx-background-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
-                    </font>
-                </TextField>
-                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onSubmitClicked" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
-                    </children>
-                </HBox>
-                <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
-            </VBox>
-        </VBox>
+        </StackPane>
     </center>
 </BorderPane>
-
