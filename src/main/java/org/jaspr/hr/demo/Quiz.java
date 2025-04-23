@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import java.util.List;
+
 public class Quiz {
     private int id;
     private String title;
@@ -7,14 +9,17 @@ public class Quiz {
     private String topic;
     private int numOfQuestions;
     private int author;
+    private List<Question> questions;
 
 
-    public Quiz(String title, String description, String topic, int numOfQuestions, int author){
+
+    public Quiz(String title, String description, String topic, int numOfQuestions, int author, List<Question> questions){
         this.title = title;
         this.description = description;
         this.topic = topic;
         this.numOfQuestions = numOfQuestions;
         this.author = author;
+        this.questions = questions;
 
     }
 
