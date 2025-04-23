@@ -9,6 +9,7 @@ public class Quiz {
     private int author;
 
 
+
     public Quiz(String title, String description, String topic, int numOfQuestions, int author){
         this.title = title;
         this.description = description;

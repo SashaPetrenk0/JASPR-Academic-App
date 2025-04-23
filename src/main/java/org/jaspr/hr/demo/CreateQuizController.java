@@ -6,6 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+
+
+
+
 import java.io.IOException;
 
 public class CreateQuizController {
@@ -62,6 +66,28 @@ public class CreateQuizController {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
         SceneChanger.changeScene(stage, "temp-home-view.fxml");
 
+    }
+
+    //trying ai implementation
+    public class SimplestCompletion {
+        public static void main(String[] args) {
+
+            String apiURL = "http://127.0.0.1:11434/api/generate/";
+            String model = "llama3.2";
+            String prompt = "Write 2 multiple choice questions about chemistry shown in a java array";
+
+            OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
+
+            OllamaResponse response = fetcher.fetchOllamaResponse(model, prompt);
+
+            System.out.println("======================================================");
+            System.out.print("You asked: ");
+            System.out.println(prompt);
+            System.out.println("======================================================");
+            System.out.print("Ollama says: ");
+            System.out.println(response.getResponse());
+            System.out.println("======================================================");
+        }
     }
 
 
