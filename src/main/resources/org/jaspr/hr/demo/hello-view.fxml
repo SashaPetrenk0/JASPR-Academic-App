@@ -31,7 +31,7 @@
             </ImageView>
             <Label text="Would you like to Login or Sign Up?">
                 <font>
-                    <Font name="Telugu Sangam MN Bold" size="13.0" />
+                    <Font name="Arial Italic" size="13.0" />
                 </font>
             </Label>
             <HBox alignment="CENTER" spacing="10.0">
@@ -50,7 +50,7 @@
         </VBox>
     </center>
    <left>
-      <VBox alignment="CENTER" prefHeight="460.0" prefWidth="368.0" style="-fx-background-color: #10C69A;" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="460.0" prefWidth="368.0" style="-fx-background-color: #5FD7BB;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="301.0" fitWidth="337.0" pickOnBounds="true" preserveRatio="true">
                <image>
