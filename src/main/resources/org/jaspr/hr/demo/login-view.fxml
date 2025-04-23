@@ -1,24 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jaspr.hr.demo.LoginController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<BorderPane prefHeight="460.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.LoginController">
 
-    <Label text="Please enter your login details!" style="-fx-font-size: 18px;"/>
-    <TextField fx:id="loginEmailField" promptText = "Email" />
-    <TextField fx:id="loginPasswordField" promptText = "Password" />
-    <Button fx:id="LoginButton" text = "Submit" onAction="#onLoginClicked" />
-    <Label fx:id="loginEmptyError" text="" visible="false" />
-    <Label fx:id="loginIncorrectError" text="" visible="false" />
+    <left>
+        <StackPane prefWidth="449.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
+            <!-- Big decorative bubbles for left side -->
+            <Circle fill="#86C5FF80" radius="120.0" translateX="-220.0" translateY="-100.0" />
+            <Circle fill="#A5D6A780" radius="103.0" translateX="60.0" translateY="-120.0" />
+            <Circle fill="#FFB74D80" radius="65.0" translateX="-100.0" translateY="100.0" />
+            <Circle fill="#FFD54F80" radius="80.0" translateX="0.0" translateY="230.0" />
+            <Circle fill="#BA68C880" radius="116.0" translateX="150.0" translateY="150.0" />
+        </StackPane>
+    </left>
 
-</VBox>
+    <center>
+        <StackPane>
+            <!-- Decorative background bubbles for center (optional) -->
+            <Circle fill="#86C5FF40" radius="72.0" translateX="-200.0" translateY="-150.0" />
+            <Circle fill="#A5D6A740" radius="60.0" translateX="-100.0" translateY="200.0" />
 
+            <!-- Actual login form (on top layer) -->
+            <VBox alignment="CENTER" maxWidth="333.0" prefHeight="460.0" prefWidth="333.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                </padding>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="291.0">
+               <children>
+                  <Text fill="#63aba8" strokeType="OUTSIDE" strokeWidth="0.0" text="AcademIQ" wrappingWidth="150.076416015625">
+                     <font>
+                        <Font name="Impact" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#00000098" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning Hub" wrappingWidth="107.109375">
+                     <font>
+                        <Font name="Arial Italic" size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please Log In">
+               <font>
+                  <Font name="Telugu Sangam MN" size="14.0" />
+               </font>
+            </Text>
+                <TextField fx:id="loginEmailField" maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0" promptText="Email" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+               <font>
+                  <Font name="Telugu Sangam MN Bold" size="13.0" />
+               </font></TextField>
+                <TextField fx:id="loginPasswordField" maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0" promptText="Password" style="-fx-border-radius: 50; -fx-background-radius: 50;">
+               <font>
+                  <Font name="Telugu Sangam MN Bold" size="13.0" />
+               </font></TextField>
+                <Button fx:id="LoginButton" onAction="#onLoginClicked" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: #A8DDDC;" text="Submit" textFill="WHITE">
+               <font>
+                  <Font name="Telugu Sangam MN Bold" size="13.0" />
+               </font></Button>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0">
+               <children>
+                  <Label alignment="BOTTOM_RIGHT" prefHeight="9.0" prefWidth="106.0" text="Forgot Password?" textFill="#1f70bc" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0" />
+                <Label fx:id="loginEmptyError" text="" visible="false" />
+                <Label fx:id="loginIncorrectError" text="" visible="false" />
+            </VBox>
+        </StackPane>
+    </center>
+
+</BorderPane>
