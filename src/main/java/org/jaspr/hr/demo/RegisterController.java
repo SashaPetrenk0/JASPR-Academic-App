@@ -140,24 +140,27 @@ public class RegisterController {
                         return;
                     }
 
-                    age = Integer.parseInt(ageFieldStudent.getText().trim());
-                    int studentID = Integer.parseInt(studentIDField.getText().trim());
-
-                    Student newStudent = new Student(name, age, studentID, email, password);
+                    // Validate age and student ID
                     try {
+                        age = Integer.parseInt(ageFieldStudent.getText().trim());
+                        int studentID = Integer.parseInt(studentIDField.getText().trim());
+
+                        Student newStudent = new Student(name, age, studentID, email, password);
                         userDAO.addStudent(newStudent);
                         showSuccess("Registration successful!");
-                    } catch (IllegalArgumentException e) {
-                        showError(e.getMessage());
+                        successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
+                        successfulSignUpLabelStudent.setVisible(true);
+
+                    } catch (NumberFormatException e) {
+                        showError("Please enter valid numbers for age and student ID.");
                     } catch (SQLException e) {
                         showError("Database error, please try again.");
+                    } catch (IllegalArgumentException e) {
+                        showError(e.getMessage());
                     }
-                    successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
-                    successfulSignUpLabelStudent.setVisible(true);
-
-
-
                 }
+
+
                 case "Teacher" -> {
                     name = nameFieldTeacher.getText();
                     email = emailFieldTeacher.getText();
