@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="470.0" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0" style="-fx-background-color: #FEFEFE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.RegisterController">
@@ -22,14 +23,16 @@
                 <Circle fill="#ab8cab80" layoutX="15.0" layoutY="10.0" radius="77.0" translateX="-20.0" translateY="15.0" />
                 <Circle fill="#82bfbb80" layoutX="672.0" layoutY="98.0" radius="75.0" translateX="80.0" translateY="-100.0" />
                 <Circle fill="#e2ee9a80" layoutX="652.0" layoutY="81.0" radius="34.0" translateX="40.0" translateY="-30.0" />
-                <Circle fill="#A8DADC80" layoutX="58.0" layoutY="538.0" radius="46.0" translateX="40.0" translateY="-30.0" />
-                <Circle fill="#2C3E5080" layoutX="-31.0" layoutY="541.0" radius="73.0" translateX="40.0" translateY="-30.0" />
+                <Circle fill="#a8dadc80" layoutX="58.0" layoutY="538.0" radius="46.0" translateX="40.0" translateY="-30.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a8dadc" height="306.0" layoutX="86.0" layoutY="-106.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" translateX="168.0" translateY="210.0" width="248.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a9dadba4" height="306.0" layoutX="96.0" layoutY="-96.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" translateX="145.0" translateY="190.0" width="248.0" />
+                <Circle fill="#2c3e5080" layoutX="-31.0" layoutY="541.0" radius="73.0" translateX="40.0" translateY="-30.0" />
             </Pane>
 
-            <!-- Foreground content -->
+               <!-- Foreground content -->
             <VBox alignment="CENTER" maxHeight="470.0" maxWidth="760.0" spacing="20.0">
 
-                <!-- Select Role Section (centered vertically and horizontally) -->
+                   <!-- Select Role Section (centered vertically and horizontally) -->
                 <VBox alignment="CENTER" spacing="10.0">
                     <Label style="-fx-font-size: 20px;" text="Select Your Role:">
                         <font>
@@ -42,7 +45,8 @@
                     <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);">
                   <VBox.margin>
                      <Insets top="10.0" />
-                  </VBox.margin></ComboBox>
+                  </VBox.margin>
+               </ComboBox>
                     <Button fx:id="returnToPrevious" onAction="#returnToHomePage" prefHeight="26.0" prefWidth="101.0" style="-fx-background-radius: 50; -fx-background-color: #E8E8E8;" text="Return">
                         <VBox.margin>
                             <Insets top="10.0" />
@@ -53,7 +57,7 @@
                     </Button>
                 </VBox>
 
-                <!-- Student Form -->
+                   <!-- Student Form -->
                 <VBox fx:id="studentForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
                     <Label style="-fx-font-size: 18px;" text="Student Sign Up">
                         <font>
@@ -71,7 +75,7 @@
                     <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
                 </VBox>
 
-                <!-- Teacher Form -->
+                   <!-- Teacher Form -->
                 <VBox fx:id="teacherForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
                     <Label style="-fx-font-size: 18px;" text="Teacher Sign Up">
                         <font>
@@ -89,7 +93,7 @@
                     <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
                 </VBox>
 
-                <!-- Parent Form -->
+                   <!-- Parent Form -->
                 <VBox fx:id="parentForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
                     <Label style="-fx-font-size: 18px;" text="Parent Sign Up">
                         <font>
@@ -107,7 +111,7 @@
                     <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
                 </VBox>
 
-                <!-- Admin Form -->
+                   <!-- Admin Form -->
                 <VBox fx:id="adminForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
                     <Label style="-fx-font-size: 18px;" text="Admin Sign Up">
                         <font>
@@ -125,7 +129,7 @@
                     <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
                 </VBox>
 
-            </VBox>
+               </VBox>
 
         </StackPane>
     </center>
