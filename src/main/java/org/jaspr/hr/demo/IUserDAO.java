@@ -1,16 +1,19 @@
 package org.jaspr.hr.demo;
 
+import java.sql.SQLException;
 import java.util.List;
 /**
  * Interface for the Contact Data Access Object that handles
  * the CRUD operations for the Contact class with the database.
  */
 public interface IUserDAO {
+    boolean isUserExists(String email);
+
     /**
      * Adds a new student to the database.
      * @param student The user to add.
      */
-    public void addStudent(Student student);
+    public void addStudent(Student student) throws SQLException;
     /**
      * Adds a new teacher to the database.
      * @param teacher The user to add.

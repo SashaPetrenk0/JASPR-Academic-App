@@ -1,6 +1,5 @@
 package org.jaspr.hr.demo;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,21 +83,41 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addStudent (Student student){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
-            statement.setString(1, student.getName());
-            statement.setInt(2, student.getAge());
-            statement.setInt(3, student.getStudentID());
-            statement.setString(4, student.getEmail());
-            statement.setString(5, student.getPassword());
-            statement.executeUpdate();
-        } catch (Exception e) {
+    public boolean isUserExists(String email) {
+        try {
+            // SQL query to check if a user with the provided email exists
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students WHERE email = ?");
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            // If the result set has any rows, the user already exists
+            return rs.next();  // Returns true if there's a match, false otherwise
+        } catch (SQLException e) {
             e.printStackTrace();
+            return false;  // In case of error, assume user does not exist
         }
     }
+
+    @Override
+    public void addStudent(Student student) throws SQLException, IllegalArgumentException {
+        if (isUserExists(student.getEmail())) {
+            throw new IllegalArgumentException("Email already in use.");
+        }
+
+        // Insert new student into the database
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO students (name, email, password) VALUES (?, ?, ?)");
+        stmt.setString(1, student.getName());
+        stmt.setString(2, student.getEmail());
+        stmt.setString(3, student.getPassword());
+        stmt.executeUpdate();
+    }
+
+
+
+
+
     @Override
     public void addTeacher (Teacher teacher){
         try{

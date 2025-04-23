@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RegisterController {
 
@@ -136,7 +137,14 @@ public class RegisterController {
                     int studentID = Integer.parseInt(studentIDField.getText().trim());
 
                     Student newStudent = new Student(name, age, studentID, email, password);
-                    userDAO.addStudent(newStudent);
+                    try {
+                        userDAO.addStudent(newStudent);
+                        showSuccess("Registration successful!");
+                    } catch (IllegalArgumentException e) {
+                        showError(e.getMessage());
+                    } catch (SQLException e) {
+                        showError("Database error, please try again.");
+                    }
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
 
@@ -198,6 +206,33 @@ public class RegisterController {
         SceneChanger.changeScene(stage, "hello-view.fxml");
 
     }
+
+    // ---------- ERROR HANDLING CODE BELOW ----------
+    @FXML
+    private Label successLabel;  // This will display success messages
+    @FXML
+    private Label errorLabel;    // This will display error messages
+
+    // Method to show success message
+    private void showSuccess(String message) {
+        successLabel.setText(message);                // Set the success message text
+        successLabel.setStyle("-fx-text-fill: green;"); // Set the text color to green
+        successLabel.setVisible(true);                // Make the success label visible
+
+        // Optionally hide the error label if a success message is displayed
+        errorLabel.setVisible(false);
+    }
+
+    // Method to show error message
+    private void showError(String message) {
+        errorLabel.setText(message);                // Set the error message text
+        errorLabel.setStyle("-fx-text-fill: red;");  // Set the text color to red
+        errorLabel.setVisible(true);                 // Make the error label visible
+
+        // Optionally hide the success label if an error message is displayed
+        successLabel.setVisible(false);
+    }
+
 
 
 }
