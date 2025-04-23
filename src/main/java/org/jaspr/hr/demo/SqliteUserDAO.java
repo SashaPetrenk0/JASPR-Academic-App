@@ -349,7 +349,7 @@ public class SqliteUserDAO implements IUserDAO {
             }
             //TODO: Error Handling
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to retrieve students", e);
         }
         return students;
     }
@@ -382,6 +382,63 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean hasAnyStudents() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyTeachers() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM teachers LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyParents() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM parents LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyAdmins() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM admins LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyRegisteredUsers() {
+        return hasAnyStudents()
+                || hasAnyTeachers()
+                || hasAnyParents()
+                || hasAnyAdmins();
+    }
+
 
 
 }
