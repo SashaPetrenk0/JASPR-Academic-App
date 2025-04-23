@@ -133,6 +133,13 @@ public class RegisterController {
                     name = nameFieldStudent.getText();
                     email = emailFieldStudent.getText();
                     password = passwordFieldStudent.getText();
+
+                    // Validation for empty fields
+                    if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                        showError("Please fill out all fields.");
+                        return;
+                    }
+
                     age = Integer.parseInt(ageFieldStudent.getText().trim());
                     int studentID = Integer.parseInt(studentIDField.getText().trim());
 
