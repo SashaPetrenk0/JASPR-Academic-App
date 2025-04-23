@@ -84,16 +84,19 @@ public class RegisterController {
     public void initialize(){
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
     }
-
     @FXML
     private void onRoleSelected() {
-        // First hide everything
+        // Hide everything from the role selection page (roleComboBox and "Select your role" label)
+        roleComboBox.setVisible(false);
+        returnToPrevious.setVisible(false); // Hide the 'Enter' button or any other selection UI elements
+
+        // Hide all forms first
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
         parentForm.setVisible(false);
         adminForm.setVisible(false);
 
-        // Then show the selected one
+        // Then show the selected form based on the role
         String role = roleComboBox.getValue();
         switch(role){
             case "Student" -> showOnlyForm(studentForm);
@@ -104,6 +107,7 @@ public class RegisterController {
     }
 
     private void showOnlyForm(VBox formToShow) {
+        // Hide all other forms
         studentForm.setVisible(false);
         studentForm.setManaged(false);
 
@@ -116,9 +120,11 @@ public class RegisterController {
         adminForm.setVisible(false);
         adminForm.setManaged(false);
 
+        // Show the selected form
         formToShow.setVisible(true);
         formToShow.setManaged(true);
     }
+
 
 
     @FXML
