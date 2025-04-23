@@ -87,8 +87,7 @@ public class RegisterController {
     @FXML
     private void onRoleSelected() {
         // Hide everything from the role selection page (roleComboBox and "Select your role" label)
-        roleComboBox.setVisible(false);
-        returnToPrevious.setVisible(false); // Hide the 'Enter' button or any other selection UI elements
+        // Hide the 'Enter' button or any other selection UI elements
 
         // Hide all forms first
         studentForm.setVisible(false);
