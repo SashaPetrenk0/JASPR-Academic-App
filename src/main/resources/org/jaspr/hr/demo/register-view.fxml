@@ -43,7 +43,7 @@
             <VBox fx:id="studentForm" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
                 <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Student Sign Up">
                     <font>
-                        <Font name="Telugu Sangam MN" size="13.0" />
+                        <Font name="Telugu Sangam MN" size="14.0" />
                     </font>
                 </Label>
                 <TextField fx:id="nameFieldStudent" prefHeight="35.0" prefWidth="619.0" promptText="Name" style="-fx-background-radius: 50;">
