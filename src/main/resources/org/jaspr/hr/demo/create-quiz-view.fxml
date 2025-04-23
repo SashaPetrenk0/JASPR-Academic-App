@@ -19,6 +19,8 @@
 
     <Label text="Create a quiz (as a teacher for now)" />
 
+    <Label fx:id="successMessage" text="" visible="false" />
+
     <Label text="How many questions do you want?"/>
     <TextField fx:id="lengthField" promptText = "Name" />
 
@@ -29,7 +31,7 @@
     <Label text = "What is the description of your quiz"/>
     <TextField fx:id="descriptionField" promptText = "Name" />
 
-    <Button text = "Create" onAction="#onCreateQuiz" />
+    <Button fx:id="createQuiz" text = "Create" onAction="#onCreateQuiz" disable="false"/>
     <Button fx:id="returnToPrevious" text="Return" onAction="#returnToPage" />
 
 

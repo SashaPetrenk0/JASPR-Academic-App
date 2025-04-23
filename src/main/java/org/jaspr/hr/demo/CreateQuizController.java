@@ -2,6 +2,7 @@ package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -11,8 +12,14 @@ public class CreateQuizController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
 
+
     User user = UserSession.getInstance().getCurrentUser();
     String role = UserSession.getInstance().getRole();
+
+    @FXML
+    private Button createQuiz;
+    @FXML
+    private Label successMessage;
 
     @FXML
     private TextField titleField;
@@ -43,6 +50,10 @@ public class CreateQuizController {
 
         Quiz newQuiz = new Quiz(title, desc, topic, length, author);
         quizDAO.addQuiz(newQuiz);
+        successMessage.setText("Quiz " + title + " created successfully! Yay :)");
+        successMessage.setVisible(true);
+        createQuiz.setDisable(true);
+        //TODO: create error handling for if from is not complete
 
 
     }
