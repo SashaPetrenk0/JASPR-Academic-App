@@ -41,7 +41,14 @@
         </VBox>
     </center>
    <left>
-      <VBox prefHeight="460.0" prefWidth="342.0" style="-fx-background-color: #10C69A;" BorderPane.alignment="CENTER" />
+      <VBox alignment="CENTER" prefHeight="460.0" prefWidth="368.0" style="-fx-background-color: #10C69A;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="301.0" fitWidth="337.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../images_2/education-png-10.png" />
+               </image>
+            </ImageView>
+         </children></VBox>
    </left>
 
 </BorderPane>
