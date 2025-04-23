@@ -60,7 +60,7 @@ public class CreateQuizController {
         successMessage.setVisible(true);
         createQuiz.setDisable(true);
         //TODO: create error handling for if from is not complete
-        AIGenQuestions.genQuestions("Write 2 multiple choice questions about chemistry stored in a java array");
+        AIGenQuestions.genQuestions("Write 2 short response questions about chemical reactions");
 
 
     }

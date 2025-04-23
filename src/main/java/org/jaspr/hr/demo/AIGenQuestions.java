@@ -1,6 +1,16 @@
 package org.jaspr.hr.demo;
 
 public class AIGenQuestions {
+    static class MyResponseListener implements ResponseListener {
+
+        @Override
+        public void onResponseReceived(OllamaResponse response) {
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.print("Ollama says: ");
+            System.out.println(response.getResponse());
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        }
+    };
 
 
     //trying ai implementation
@@ -12,15 +22,12 @@ public class AIGenQuestions {
             //String prompt = "Write 2 multiple choice questions about chemistry stored in a java array";
 
             OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
+            fetcher.fetchAsynchronousOllamaResponse(model, prompt, new MyResponseListener());
 
-            OllamaResponse response = fetcher.fetchOllamaResponse(model, prompt);
-
+            // note that fetcher returns immediately, and the answer is printed by MyResponseListener when a response becomes available
             System.out.println("======================================================");
             System.out.print("You asked: ");
             System.out.println(prompt);
-            System.out.println("======================================================");
-            System.out.print("Ollama says: ");
-            System.out.println(response.getResponse());
             System.out.println("======================================================");
         }
 
