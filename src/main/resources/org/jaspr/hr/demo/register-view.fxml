@@ -7,76 +7,69 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="460.0" prefWidth="780.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.RegisterController">
+<BorderPane prefHeight="460.0" prefWidth="780.0" style="-fx-background-color: #FEFEFE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.RegisterController">
 
     <center>
         <VBox alignment="CENTER" spacing="20.0">
             <padding>
                 <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
+           <Pane>
+               <!-- Circle 1: Top-left bubble -->
+               <Circle fill="#ab8cab80" layoutX="15.0" layoutY="15.0" radius="55.0" translateX="-20.0" translateY="15.0" />
+               <!-- Circle 2: Top-left bubble (bigger) -->
+               <Circle fill="rgba(200, 200, 200, 0.5)" radius="50" translateX="-60" translateY="-70" />
+               <!-- Circle 2: Bottom-right bubble (bigger) -->
+               <Circle fill="#82bfbb80" layoutX="671.0" layoutY="99.0" radius="50" translateX="80.0" translateY="-100.0" />
+               <!-- Circle 1: Bottom-right bubble -->
+               <Circle fill="#e2ee9a80" layoutX="658.0" layoutY="75.0" radius="28.0" translateX="50.0" translateY="-40.0" />
+           </Pane>
 
-            <Label text="Select Your Role:" />
+            <Label prefHeight="15.0" prefWidth="102.0" text="Select Your Role:">
+            <font>
+               <Font name="Telugu Sangam MN Bold" size="13.0" />
+            </font></Label>
 
             <!-- Drop Box Menu Creation -->
-            <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected" prefHeight="26.0" prefWidth="183.0" style="-fx-background-radius: 50;" />
+            <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
 
-            <Button fx:id="returnToPrevious" onAction="#returnToHomePage" prefHeight="26.0" prefWidth="120.0" style="-fx-background-radius: 50; -fx-background-color: #E0E0E0;" text="Return" />
+            <Button fx:id="returnToPrevious" onAction="#returnToHomePage" prefHeight="26.0" prefWidth="101.0" style="-fx-background-radius: 50; -fx-background-color: #E8E8E8;" text="Return" />
 
-            <VBox fx:id="studentForm" spacing="20.0">
+            <VBox fx:id="studentForm" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
                 <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Student Sign Up">
-               <font>
-                  <Font name="Telugu Sangam MN" size="13.0" />
-               </font></Label>
+                    <font>
+                        <Font name="Telugu Sangam MN" size="13.0" />
+                    </font>
+                </Label>
                 <TextField fx:id="nameFieldStudent" prefHeight="67.0" prefWidth="740.0" promptText="Name" style="-fx-background-radius: 50;" />
                 <TextField fx:id="ageFieldStudent" promptText="Age" style="-fx-background-radius: 50;" />
                 <TextField fx:id="studentIDField" promptText="Student ID" style="-fx-background-radius: 50;" />
                 <TextField fx:id="emailFieldStudent" promptText="Email" style="-fx-background-radius: 50;" />
                 <TextField fx:id="passwordFieldStudent" promptText="Password" style="-fx-background-radius: 50;" />
-            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                      <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onSubmitClicked" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC;" text="Submit" textFill="WHITE" />
-               </children>
-            </HBox>
+                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onSubmitClicked" prefHeight="26.0" prefWidth="170.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                    </children>
+                </HBox>
                 <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
             </VBox>
-
-            <VBox fx:id="teacherForm" managed="false" visible="false">
-                <Label style="-fx-font-size: 18px;" text="Teacher Sign Up" />
-                <TextField fx:id="nameFieldTeacher" promptText="Name" />
-                <TextField fx:id="ageFieldTeacher" promptText="Age" />
-                <TextField fx:id="teacherIDField" promptText="Teacher ID" />
-                <TextField fx:id="emailFieldTeacher" promptText="Email" />
-                <TextField fx:id="passwordFieldTeacher" promptText="Password" />
-                <Button onAction="#onSubmitClicked" text="Submit" />
-                <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
-            </VBox>
-
-            <VBox fx:id="parentForm" managed="false" visible="false">
-                <Label style="-fx-font-size: 18px;" text="Parent Sign Up" />
-                <TextField fx:id="nameFieldParent" promptText="Name" />
-                <TextField fx:id="childNameField" promptText="Child Name" />
-                <TextField fx:id="childIDField" promptText="Child Student ID" />
-                <TextField fx:id="emailFieldParent" promptText="Email" />
-                <TextField fx:id="passwordFieldParent" promptText="Password" />
-                <Button onAction="#onSubmitClicked" text="Submit" />
-                <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
-            </VBox>
-
-            <VBox fx:id="adminForm" managed="false" visible="false">
-                <Label style="-fx-font-size: 18px;" text="Admin Sign Up" />
-                <TextField fx:id="nameFieldAdmin" promptText="Name" />
-                <TextField fx:id="ageFieldAdmin" promptText="Age" />
-                <TextField fx:id="adminIDField" promptText="Admin ID" />
-                <TextField fx:id="emailFieldAdmin" promptText="Email" />
-                <TextField fx:id="passwordFieldAdmin" promptText="Password" />
-                <Button onAction="#onSubmitClicked" text="Submit" />
-                <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
-            </VBox>
-
+         <Pane>
+            <children>
+               <Circle fill="#97d2f280" layoutX="15.0" layoutY="15.0" radius="55.0" translateX="-10.0" translateY="10.0" />
+               <Circle fill="#849ada80" layoutX="13.0" layoutY="37.0" radius="43.0" translateX="50.0" />
+            </children>
+         </Pane>
         </VBox>
     </center>
+
+    <!-- Bottom Pane for bubbles (positioned outside of main content area) -->
+    <bottom>
+        <Pane />
+    </bottom>
 
 </BorderPane>
