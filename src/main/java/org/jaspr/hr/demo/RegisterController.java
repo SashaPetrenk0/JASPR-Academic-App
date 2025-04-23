@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
@@ -75,6 +76,13 @@ public class RegisterController {
     @FXML
     private Button returnToPrevious;
 
+    @FXML
+    private Rectangle Rectangle1;
+    @FXML
+    private Rectangle Rectangle2;
+
+
+
 
     private Student newStudent;
     private Teacher newTeacher;
@@ -87,6 +95,10 @@ public class RegisterController {
 
     @FXML
     private void onRoleSelected() {
+        // Hide decorative rectangles
+        Rectangle1.setVisible(false);
+        Rectangle2.setVisible(false);
+
         // First hide everything
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
