@@ -1,0 +1,35 @@
+CAB302 Project Requirements
+
+A user should be provided with an initial menu to select whether they would like to sign up or log in to their dashboard.
+
+TEACHER
+A teacher should be able to sign up for a subject by entering their first name, last name, staff number, email, and password.
+A teacher should be able to log in to their dashboard using their email and password
+A teacher should be able to assign themselves to a class via a selection of class codes
+•	[list menu where they select a class code to join so they can join multiple]
+A teacher should have an easy to understand, well-designed dashboard to view student academic data.
+A teacher should be able to create and assign quizzes to distinct classes.
+A teacher should be able to see how an individual student is performing by viewing their quiz results and generated statistics tracking their strengths and weaknesses in the content
+•	[so each question in the quiz needs some kind of marker assigning it to a topic to generate stats - not too hard to do right?]
+A teacher should be able to see how an entire class is performing, by tracking their overall quiz results, and their best and weakest topics to optimise their teaching time.
+A teacher should be able to view these class trends visually in a graph and filter by the most incorrectly answered questions for easy interpretation of class strengths and weaknesses
+•	[can be removed if not enough time]
+A teacher should be able to publish private quizzes to ______________
+•	[(why again?)]
+
+
+STUDENT
+A student should be able to sign up for a class by providing their first name, last name, year level, student number, email and password.
+A student should be able to select a class to enrol in during sign up by choosing from a list of class codes.
+A student should be able to log in to their dashboard using their email and password.
+A student should be able to view their academic results including quiz results, assigned quizes and _____ in a succinct, easily understandable dashboard
+A student should be able to generate a quiz to assist them with their revision.
+A student should be able to view the quizzes assigned to them by their teacher and filter them by topic and difficulty.
+•	[are the stats from the teacher assigned quizes and the student created quizzes going to be differnet or?]
+A student should be able to check their grades for a quiz and view their previous results.
+A student should be provided recommendations on areas to study depending on quiz results.
+A student should view messages describing their predicted results for their exam based on their current quiz results in the form of a fortune cookie to motivate students to work hard or continue the good work.
+
+POSSIBLE ADDITIONS
+A user should be able to change their password. 
+A user should be able to view their profile which displays their information
