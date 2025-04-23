@@ -19,7 +19,7 @@ public class AIGenQuestions {
 
             String apiURL = "http://127.0.0.1:11434/api/generate/";
             String model = "llama3.2";
-            //String prompt = "Write 2 multiple choice questions about chemistry stored in a java array";
+
 
             OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
             fetcher.fetchAsynchronousOllamaResponse(model, prompt, new MyResponseListener());
@@ -29,6 +29,7 @@ public class AIGenQuestions {
             System.out.print("You asked: ");
             System.out.println(prompt);
             System.out.println("======================================================");
+            //TODO: get the respons to the prompt to go into a questions array
         }
 
 }

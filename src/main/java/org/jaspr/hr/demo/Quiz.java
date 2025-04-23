@@ -13,12 +13,13 @@ public class Quiz {
 
 
 
-    public Quiz(String title, String description, String topic, int numOfQuestions, int author){
+    public Quiz(String title, String description, String topic, int numOfQuestions, int author, List<Question> questions){
         this.title = title;
         this.description = description;
         this.topic = topic;
         this.numOfQuestions = numOfQuestions;
         this.author = author;
+        this.questions = questions;
 
     }
 
