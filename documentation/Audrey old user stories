@@ -1,0 +1,61 @@
+these are unsorted, after they're finished we should sort into categories based on feasibility 
+
+1. As a teacher, I want to generate quizzes with AI so that I can save time. 
+User Acceptance Criteria (UAC):
+Given I am logged into the system as a teacher
+When I navigate to the 'quizzes' page and fill out the form to generate a quiz
+Then I should see a practice quiz that I can assign to my students
+
+2. As a teacher, I want to assign quizzes I've generated to a specific class so that my students can complete them. 
+UAC: 
+Given I am logged in as a teacher and I have at least one class of students
+When I create a quiz and assign it to one of my classes
+Then it should appear in their 'assigned quizzes' tab with a due date to complete by. 
+
+3. As a teacher, I want to view my class's overall results in a graph so that I can see their collective strengths and weaknesses at a glance. 
+UAC:
+Given I am logged in to the system as a teacher and my students have completed at least one quiz
+When I navigate to the 'student results' page
+Then I should be able to view my students' results in a graph 
+
+4. As a student, I want to sign up for a class using a class code so that I can access my assigned quizzes. 
+UAC:
+Given I am logged in as a student 
+When I enter the class code I have been given by my teacher
+Then I should become successfully enrolled in the class 
+
+5. As a student, I want to generate my own quizzes for revision so that I can address topics I struggle with.
+UAC:
+Given I am logged in as a student
+When I navigate to the 'quizzes' page and fill out the form to generate a quiz
+Then I should receive a quiz based on my past performance and selected topics
+
+6. As a student, I want to view my past results and learning insights so that I can focus on improving weak areas.
+UAC:
+Given I am logged in as a student and have taken at least one quiz
+When I navigate to the 'my results' page
+Then I should see the results from my completed quizzes with scores and performance breakdowns
+
+7. As a student, I want to view the quizzes I have been assigned so that I know when I need to complete them by.
+UAC:
+Given I am logged in as a student, belong to a class and have been assigned a quiz
+When I navigate to the 'assigned quizzes' tab 
+Then I should see the quizzes I have been assigned and their due dates
+
+8. As a student, I want to receive study recommendations based on my quiz results so that I can focus on improving weak areas.
+UAC:
+Given I am logged in as a student and have taken at least one quiz
+When I navigate to my student dashboard
+Then I should be able to view the areas I should improve upon, using data from across all my classes and study areas 
+
+9. As a student, I want to receive a 'fortune cookie' message about my predicted exam results so I am motivated to study.
+UAC:
+Given I am logged in as a student and have at least one upcoming quiz
+When I navigate to my student dashboard
+Then I should see a message predicting my potential exam result based on my previous results, along with a cute motivational message.
+
+10. As a user, I want to change my password so that I can secure my account.
+UAC:
+Given I am logged into my account
+When I navigate to the settings page and enter a new password
+Then my password should be successfully updated in the system. 
