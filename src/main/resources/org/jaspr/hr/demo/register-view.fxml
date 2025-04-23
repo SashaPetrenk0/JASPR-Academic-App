@@ -19,30 +19,31 @@
                 <Insets bottom="20" left="20" right="20" top="20" />
             </padding>
             <Pane>
-                <!-- Circle 1: Top-left bubble -->
+                // Top left circle Styling
                 <Circle fill="#ab8cab80" layoutX="15.0" layoutY="15.0" radius="55.0" translateX="-20.0" translateY="15.0" />
-                <!-- Circle 2: Top-left bubble (bigger) -->
+                // Second top left circle Styling
                 <Circle fill="rgba(200, 200, 200, 0.5)" radius="50" translateX="-60" translateY="-70" />
-                <!-- Circle 2: Bottom-right bubble (bigger) -->
+                // Bottom right circle Styling
                 <Circle fill="#82bfbb80" layoutX="659.0" layoutY="111.0" radius="62.0" translateX="80.0" translateY="-100.0" />
-                <!-- Circle 1: Bottom-right bubble -->
+                // Second bottom right circle Styling
                 <Circle fill="#e2ee9a80" layoutX="652.0" layoutY="81.0" radius="34.0" translateX="40.0" translateY="-30.0" />
+                <Circle fill="#e2ee9a80" layoutX="100.0" layoutY="81.0" radius="34.0" translateX="40.0" translateY="-30.0" />
             </Pane>
 
-            <!-- Select Role Label -->
+            // Role-selection label styling
             <Label prefHeight="21.0" prefWidth="151.0" text="Select Your Role:">
                 <font>
                     <Font name="Arial" size="18.0" />
                 </font>
             </Label>
 
-            <!-- Drop Box Menu for Role Selection -->
+            // Drop-down Role Menu styling
             <ComboBox fx:id="roleComboBox" onAction="#onRoleSelected" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
 
-            <!-- Return Button -->
+            // Return Button styling
             <Button fx:id="returnToPrevious" onAction="#returnToHomePage" prefHeight="26.0" prefWidth="101.0" style="-fx-background-radius: 50; -fx-background-color: #E8E8E8;" text="Return" />
 
-            <!-- Student Form -->
+            // Student Form Styling
             <VBox fx:id="studentForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
                 <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Student Sign Up">
                     <font>
@@ -82,7 +83,7 @@
                 <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
             </VBox>
 
-            <!-- Teacher Form -->
+            // Teacher Form Styling
             <VBox fx:id="teacherForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
                 <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Teacher Sign Up">
                     <font>
@@ -122,7 +123,7 @@
                 <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
             </VBox>
 
-            <!-- Parent Form -->
+            // Parent Form Styling
             <VBox fx:id="parentForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
                 <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Parent Sign Up">
                     <font>
@@ -162,7 +163,7 @@
                 <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
             </VBox>
 
-            <!-- Admin Form -->
+            // Admin Form Styling
             <VBox fx:id="adminForm" visible="false" managed="false" prefHeight="304.0" prefWidth="740.0" spacing="20.0">
                 <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 18px;" text="Admin Sign Up">
                     <font>
