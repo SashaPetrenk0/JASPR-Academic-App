@@ -20,61 +20,27 @@ public class RegisterController {
     @FXML
     private VBox studentForm, teacherForm, parentForm, adminForm;
 
-    @FXML
-    private TextField nameFieldStudent;
-    @FXML
-    private TextField ageFieldStudent;
-    @FXML
-    private TextField studentIDField;
-    @FXML
-    private TextField emailFieldStudent;
-    @FXML
-    private TextField passwordFieldStudent;
 
     @FXML
-    private TextField nameFieldTeacher;
+    private TextField nameFieldStudent, ageFieldStudent, studentIDField, emailFieldStudent, passwordFieldStudent;
     @FXML
-    private TextField ageFieldTeacher;
+    private TextField nameFieldTeacher, ageFieldTeacher, teacherIDField, emailFieldTeacher, passwordFieldTeacher;
     @FXML
-    private TextField teacherIDField;
+    private TextField nameFieldParent, childNameField, childIDField, emailFieldParent, passwordFieldParent;
     @FXML
-    private TextField emailFieldTeacher;
+    private TextField nameFieldAdmin, ageFieldAdmin, adminIDField, emailFieldAdmin, passwordFieldAdmin;
+
+    // Error Labels for each field (Student sign up)
     @FXML
-    private TextField passwordFieldTeacher;
+    private Label nameErrorLabel, ageErrorLabel, studentIDErrorLabel, emailErrorLabel, passwordErrorLabel, generalErrorLabel;;
 
     @FXML
-    private TextField nameFieldParent;
-    @FXML
-    private TextField childNameField;
-    @FXML
-    private TextField childIDField;
-    @FXML
-    private TextField emailFieldParent;
-    @FXML
-    private TextField passwordFieldParent;
-
-    @FXML
-    private TextField nameFieldAdmin;
-    @FXML
-    private TextField ageFieldAdmin;
-    @FXML
-    private TextField adminIDField;
-    @FXML
-    private TextField emailFieldAdmin;
-    @FXML
-    private TextField passwordFieldAdmin;
-
-    @FXML
-    private Label successfulSignUpLabelStudent;
-    @FXML
-    private Label successfulSignUpLabelTeacher;
-    @FXML
-    private Label successfulSignUpLabelParent;
-    @FXML
-    private Label successfulSignUpLabelAdmin;
-
+    private Label successfulSignUpLabelStudent, successfulSignUpLabelTeacher, successfulSignUpLabelParent, successfulSignUpLabelAdmin;
     @FXML
     private Button returnToPrevious;
+    @FXML
+    private Label successLabel, errorLabel;  // For global success and error messages
+
 
 
     private Student newStudent;
@@ -84,6 +50,27 @@ public class RegisterController {
 
     public void initialize(){
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
+
+        // Real-time validation: when focus is lost
+        nameFieldStudent.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateName(nameFieldStudent.getText());
+        });
+
+        ageFieldStudent.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateAge(ageFieldStudent.getText());
+        });
+
+        studentIDField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateStudentID(studentIDField.getText());
+        });
+
+        emailFieldStudent.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validateEmail(emailFieldStudent.getText());
+        });
+
+        passwordFieldStudent.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (!newVal) validatePassword(passwordFieldStudent.getText());
+        });
     }
 
     @FXML
@@ -135,28 +122,40 @@ public class RegisterController {
                     password = passwordFieldStudent.getText();
 
                     // Validation for empty fields
-                    if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                        showError("Please fill out all fields.");
+                    if (name.isEmpty()) {
+                        showError("Name cannot be empty.", nameErrorLabel);
+                        return;
+                    }
+                    if (email.isEmpty()) {
+                        showError("Email cannot be empty.", emailErrorLabel);
+                        return;
+                    }
+                    if (password.isEmpty()) {
+                        showError("Password cannot be empty.", passwordErrorLabel);
                         return;
                     }
 
-                    // Validate age and student ID
+                    if (!validateName(name) ||
+                            !validateEmail(email) ||
+                            !validatePassword(password) ||
+                            !validateAge(ageFieldStudent.getText()) ||
+                            !validateStudentID(studentIDField.getText())) {
+                        return; // stop if any validation fails
+                    }
+
                     try {
-                        age = Integer.parseInt(ageFieldStudent.getText().trim());
+                        int ageInput = Integer.parseInt(ageFieldStudent.getText().trim());
                         int studentID = Integer.parseInt(studentIDField.getText().trim());
 
-                        Student newStudent = new Student(name, age, studentID, email, password);
+                        Student newStudent = new Student(name, ageInput, studentID, email, password);
                         userDAO.addStudent(newStudent);
                         showSuccess("Registration successful!");
                         successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                         successfulSignUpLabelStudent.setVisible(true);
-
-                    } catch (NumberFormatException e) {
-                        showError("Please enter valid numbers for age and student ID.");
-                    } catch (SQLException e) {
-                        showError("Database error, please try again.");
                     } catch (IllegalArgumentException e) {
-                        showError(e.getMessage());
+                        showError(e.getMessage(), emailErrorLabel);
+                    } catch (SQLException e) {
+                        showError("Database error, please try again.", generalErrorLabel);
                     }
                 }
 
@@ -218,10 +217,6 @@ public class RegisterController {
     }
 
     // ---------- ERROR HANDLING CODE BELOW ----------
-    @FXML
-    private Label successLabel;  // This will display success messages
-    @FXML
-    private Label errorLabel;    // This will display error messages
 
     // Method to show success message
     private void showSuccess(String message) {
@@ -234,14 +229,65 @@ public class RegisterController {
     }
 
     // Method to show error message
-    private void showError(String message) {
-        errorLabel.setText(message);                // Set the error message text
-        errorLabel.setStyle("-fx-text-fill: red;");  // Set the text color to red
-        errorLabel.setVisible(true);                 // Make the error label visible
-
-        // Optionally hide the success label if an error message is displayed
-        successLabel.setVisible(false);
+    private void showError(String message, Label fieldErrorLabel) {
+        fieldErrorLabel.setText(message);
+        fieldErrorLabel.setVisible(true);
     }
+
+    private boolean validateName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            showError("Name cannot be empty.", nameErrorLabel);
+            return false;
+        }
+        nameErrorLabel.setVisible(false); // Hide the error if valid
+        return true;
+    }
+
+    private boolean validateAge(String ageText) {
+        try {
+            int age = Integer.parseInt(ageText);
+            if (age < 0 || age > 120) {
+                showError("Enter a valid age (0–120).", ageErrorLabel);
+                return false;
+            }
+            ageErrorLabel.setVisible(false); // Hide the error if valid
+            return true;
+        } catch (NumberFormatException e) {
+            showError("Age must be a number.", ageErrorLabel);
+            return false;
+        }
+    }
+
+    private boolean validateStudentID(String idText) {
+        try {
+            Integer.parseInt(idText);
+            studentIDErrorLabel.setVisible(false); // Hide the error if valid
+            return true;
+        } catch (NumberFormatException e) {
+            showError("Student ID must be a number.", studentIDErrorLabel);
+            return false;
+        }
+    }
+
+    private boolean validateEmail(String email) {
+        if (email == null || !email.matches("^\\S+@\\S+\\.\\S+$")) {
+            showError("Invalid email format.", emailErrorLabel);
+            return false;
+        }
+        emailErrorLabel.setVisible(false); // Hide the error if valid
+        return true;
+    }
+
+    private boolean validatePassword(String password) {
+        if (password == null || password.length() < 6) {
+            showError("Password must be at least 6 characters.", passwordErrorLabel);
+            return false;
+        }
+        passwordErrorLabel.setVisible(false); // Hide the error if valid
+        return true;
+    }
+
+
 
 
 
