@@ -52,7 +52,7 @@
                             <Insets top="10.0" />
                         </VBox.margin>
                   <font>
-                     <Font name="Telugu Sangam MN" size="14.0" />
+                     <Font name="Telugu Sangam MN Bold" size="14.0" />
                   </font>
                     </Button>
                 </VBox>
@@ -70,7 +70,7 @@
                     <TextField fx:id="emailFieldStudent" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <TextField fx:id="passwordFieldStudent" promptText="Password" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <HBox alignment="CENTER">
-                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
                     </HBox>
                     <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
                 </VBox>
@@ -88,7 +88,7 @@
                     <TextField fx:id="emailFieldTeacher" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <TextField fx:id="passwordFieldTeacher" promptText="Password" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <HBox alignment="CENTER">
-                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
                     </HBox>
                     <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
                 </VBox>
@@ -106,7 +106,7 @@
                     <TextField fx:id="emailFieldParent" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <TextField fx:id="passwordFieldParent" promptText="Password" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <HBox alignment="CENTER">
-                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
                     </HBox>
                     <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
                 </VBox>
@@ -124,7 +124,7 @@
                     <TextField fx:id="emailFieldAdmin" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <TextField fx:id="passwordFieldAdmin" promptText="Password" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <HBox alignment="CENTER">
-                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                        <Button onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
                     </HBox>
                     <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
                 </VBox>
