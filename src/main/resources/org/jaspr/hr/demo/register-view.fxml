@@ -7,19 +7,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="460.0" prefWidth="780.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.RegisterController">
 
-    <!-- OPTIONAL: Add padding for the whole border pane -->
     <padding>
         <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
-    <!-- Put everything you already had into the center of the border pane -->
+    <!-- Role Selection Section -->
     <center>
         <VBox alignment="CENTER" spacing="20.0">
-            <Label text="Select Your Role:">
+            <Label fx:id="selectRoleLabel" text="Select Your Role:">
                 <font>
                     <Font name="Telugu Sangam MN Bold" size="13.0" />
                 </font>
@@ -29,95 +29,78 @@
 
             <Button fx:id="returnToPrevious" onAction="#onRoleSelected" prefHeight="26.0" prefWidth="281.0" style="-fx-background-radius: 50;" text="Enter" />
 
+            <!-- Student Form (Initially Hidden) -->
             <VBox fx:id="studentForm" managed="false" visible="false" spacing="10.0">
-                <Label style="-fx-font-size: 18px;" text="Student Sign Up" />
-
-                <TextField fx:id="nameFieldStudent" promptText="Name"
-                           maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0"
-                           style="-fx-background-radius: 50; -fx-border-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font>
-                </TextField>
-
-                <TextField fx:id="ageFieldStudent" promptText="Age"
-                           maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0"
-                           style="-fx-background-radius: 50; -fx-border-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font>
-                </TextField>
-
-                <TextField fx:id="studentIDField" promptText="Student ID"
-                           maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0"
-                           style="-fx-background-radius: 50; -fx-border-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font>
-                </TextField>
-
-                <TextField fx:id="emailFieldStudent" promptText="Email"
-                           maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0"
-                           style="-fx-background-radius: 50; -fx-border-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font>
-                </TextField>
-
-                <TextField fx:id="passwordFieldStudent" promptText="Password"
-                           maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0"
-                           style="-fx-background-radius: 50; -fx-border-radius: 50;">
-                    <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font>
-                </TextField>
-
-                <Button onAction="#onSubmitClicked" text="Submit"
-                        prefHeight="29.0" prefWidth="117.0"
-                        style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: #A8DDDC;" textFill="WHITE">
-                    <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font>
-                </Button>
-
-                <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
+                <BorderPane style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 20;">
+                    <center>
+                        <VBox spacing="10.0" alignment="CENTER">
+                            <Label style="-fx-font-size: 18px;" text="Student Sign Up" />
+                            <TextField fx:id="nameFieldStudent" promptText="Name" />
+                            <TextField fx:id="ageFieldStudent" promptText="Age" />
+                            <TextField fx:id="studentIDField" promptText="Student ID" />
+                            <TextField fx:id="emailFieldStudent" promptText="Email" />
+                            <TextField fx:id="passwordFieldStudent" promptText="Password" />
+                            <Button onAction="#onSubmitClicked" text="Submit" />
+                            <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
+                        </VBox>
+                    </center>
+                </BorderPane>
             </VBox>
 
-
-            <VBox fx:id="teacherForm" managed="false" visible="false">
-                <Label style="-fx-font-size: 18px;" text="Teacher Sign Up" />
-                <TextField fx:id="nameFieldTeacher" promptText="Name" />
-                <TextField fx:id="ageFieldTeacher" promptText="Age" />
-                <TextField fx:id="teacherIDField" promptText="Teacher ID" />
-                <TextField fx:id="emailFieldTeacher" promptText="Email" />
-                <TextField fx:id="passwordFieldTeacher" promptText="Password" />
-                <Button onAction="#onSubmitClicked" text="Submit" />
-                <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
+            <!-- Teacher Form (Initially Hidden) -->
+            <VBox fx:id="teacherForm" managed="false" visible="false" spacing="10.0">
+                <BorderPane style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 20;">
+                    <center>
+                        <VBox spacing="10.0" alignment="CENTER">
+                            <Label style="-fx-font-size: 18px;" text="Teacher Sign Up" />
+                            <TextField fx:id="nameFieldTeacher" promptText="Name" />
+                            <TextField fx:id="ageFieldTeacher" promptText="Age" />
+                            <TextField fx:id="teacherIDField" promptText="Teacher ID" />
+                            <TextField fx:id="emailFieldTeacher" promptText="Email" />
+                            <TextField fx:id="passwordFieldTeacher" promptText="Password" />
+                            <Button onAction="#onSubmitClicked" text="Submit" />
+                            <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" />
+                        </VBox>
+                    </center>
+                </BorderPane>
             </VBox>
 
-            <VBox fx:id="parentForm" managed="false" visible="false">
-                <Label style="-fx-font-size: 18px;" text="Parent Sign Up" />
-                <TextField fx:id="nameFieldParent" promptText="Name" />
-                <TextField fx:id="childNameField" promptText="Child Name" />
-                <TextField fx:id="childIDField" promptText="Child Student ID" />
-                <TextField fx:id="emailFieldParent" promptText="Email" />
-                <TextField fx:id="passwordFieldParent" promptText="Password" />
-                <Button onAction="#onSubmitClicked" text="Submit" />
-                <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
+            <!-- Parent Form (Initially Hidden) -->
+            <VBox fx:id="parentForm" managed="false" visible="false" spacing="10.0">
+                <BorderPane style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 20;">
+                    <center>
+                        <VBox spacing="10.0" alignment="CENTER">
+                            <Label style="-fx-font-size: 18px;" text="Parent Sign Up" />
+                            <TextField fx:id="nameFieldParent" promptText="Name" />
+                            <TextField fx:id="childNameField" promptText="Child Name" />
+                            <TextField fx:id="childIDField" promptText="Child Student ID" />
+                            <TextField fx:id="emailFieldParent" promptText="Email" />
+                            <TextField fx:id="passwordFieldParent" promptText="Password" />
+                            <Button onAction="#onSubmitClicked" text="Submit" />
+                            <Label fx:id="successfulSignUpLabelParent" text="" visible="false" />
+                        </VBox>
+                    </center>
+                </BorderPane>
             </VBox>
 
-            <VBox fx:id="adminForm" managed="false" visible="false">
-                <Label style="-fx-font-size: 18px;" text="Admin Sign Up" />
-                <TextField fx:id="nameFieldAdmin" promptText="Name" />
-                <TextField fx:id="ageFieldAdmin" promptText="Age" />
-                <TextField fx:id="adminIDField" promptText="Admin ID" />
-                <TextField fx:id="emailFieldAdmin" promptText="Email" />
-                <TextField fx:id="passwordFieldAdmin" promptText="Password" />
-                <Button onAction="#onSubmitClicked" text="Submit" />
-                <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
+            <!-- Admin Form (Initially Hidden) -->
+            <VBox fx:id="adminForm" managed="false" visible="false" spacing="10.0">
+                <BorderPane style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 2; -fx-padding: 20;">
+                    <center>
+                        <VBox spacing="10.0" alignment="CENTER">
+                            <Label style="-fx-font-size: 18px;" text="Admin Sign Up" />
+                            <TextField fx:id="nameFieldAdmin" promptText="Name" />
+                            <TextField fx:id="ageFieldAdmin" promptText="Age" />
+                            <TextField fx:id="adminIDField" promptText="Admin ID" />
+                            <TextField fx:id="emailFieldAdmin" promptText="Email" />
+                            <TextField fx:id="passwordFieldAdmin" promptText="Password" />
+                            <Button onAction="#onSubmitClicked" text="Submit" />
+                            <Label fx:id="successfulSignUpLabelAdmin" text="" visible="false" />
+                        </VBox>
+                    </center>
+                </BorderPane>
             </VBox>
 
         </VBox>
     </center>
-
 </BorderPane>
