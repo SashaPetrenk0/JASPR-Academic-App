@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Classroom {
     private int classRoomNumber;
+    private int classRoomCapacity;
     private Teacher teacher;
     private List<Student> students;
 
-    public Classroom(int classRoomNumber, Teacher Teacher){
+    public Classroom(int classRoomNumber, int classRoomCapacity){
         this.classRoomNumber = classRoomNumber;
-        this.teacher = teacher;
+        this.classRoomCapacity = classRoomCapacity;
         this.students = new ArrayList<>();
     }
     // getters

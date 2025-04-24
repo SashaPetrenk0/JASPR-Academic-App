@@ -28,5 +28,14 @@ public class ClassroomCreationController {
         SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
     }
 
+    @FXML
+    private void createClassroom(){
+        int ClassroomNumber = Integer.parseInt(classroomNumber.getText().trim());
+        int ClassroomCapacity = Integer.parseInt(classroomCapacity.getText().trim());
+
+        Classroom classroom = new Classroom(ClassroomNumber, ClassroomCapacity);
+
+    }
+
 
 }
