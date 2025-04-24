@@ -19,5 +19,14 @@
     <Button fx:id="createClassroom" text="Create Classroom" onAction="#createClassroom" />
     <Button fx:id="returnToPrevious" text="Return" onAction="#returnToAdmin" />
 
+    <TableView fx:id = "classroomTable" prefWidth = "500">
+        <columns>
+            <TableColumn fx:id = "classroomNumberColumn" text = "Classroom Number"/>
+            <TableColumn fx:id = "classroomCapacityColumn" text = "Classroom Capacity"/>
+            <TableColumn fx:id = "numTeachersColumn" text = "Number of Assigned Teachers"/>
+            <TableColumn fx:id = "numStudentsColumn" text = "Number of Assigned Students"/>
+        </columns>
+    </TableView>
+
 </VBox>
 
