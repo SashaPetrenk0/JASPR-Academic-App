@@ -87,7 +87,8 @@ public class LoginController {
 
     @FXML
     private void onReturnClicked() {
-
+        Stage stage = (Stage) ReturnButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
     }
 
 }
