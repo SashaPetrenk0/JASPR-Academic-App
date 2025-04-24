@@ -86,6 +86,22 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
+    private void createClassroomTable(){
+        try{
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS classrooms ("
+                    + "classroom_number TEXT PRIMARY KEY, "
+                    + "capacity INTEGER NOT NULL, "
+                    + "teacher_id INTEGER, "
+                    + "FOREIGN KEY (teacher_id) REFERENCES teachers(teacherid)"
+                    + ")";
+            statement.execute((query));
+            System.out.println("Classroom table created successfully");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     @Override
     public void addStudent (Student student){
         try{
