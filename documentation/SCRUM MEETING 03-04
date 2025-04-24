@@ -1,0 +1,25 @@
+SCRUM MEETING WEEK 6 03/04 
+•	Everyone allocated 15 minutes to make some Lofi and medium fidelity user interfaces
+  o	Sketch as many pages as you can to later collate
+  o	Add them to the figma (in links)
+•	Move the to do from Trello to GitHub
+•	User stories -> everyone does 10, max 15
+  o	Add them to the text file in the documentation folder
+  o	Make sure they are all unique, that more important than the 20-50 range
+  o	Make sure they are all consistent in structure
+  o	With the final user stories (flag each one with “Must have”, “desirable” “would be nice”, “stretch”
+•	Acceptance criteria
+  o	At the end of the project we need a list of things that we’ve done (final criteria)
+•	Roman – finish week 6 prac to have the database thing, try integrate if possible
+•	Audrey – week 4 prac to get super in JavaFX
+•	Pragati – Authentication back end, and make auth, user, student, teacher, parent, admin classes
+•	Sasha – Make new Java FX repository and make quiz class, make all other classes, help Pragati with auth 
+•	Jamie – Help Audrey with JavaFX
+•	In emailing the checkpoint
+  o	Show who did what
+  o	Send absolutely everything
+    	Screenshots of git hub repo showing commits
+    	Scrum meeting minutes
+    	All the deliverables
+    	Before 9pm next Thursday (10th April)
+•	Week 9, starting programming in java fx, pages click to other pages and make sure you have the database
