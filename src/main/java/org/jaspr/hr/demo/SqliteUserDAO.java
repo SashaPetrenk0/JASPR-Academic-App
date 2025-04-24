@@ -102,6 +102,22 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
+    public boolean createClassroom(int classroomNumber, int capacity){
+
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO classrooms (classroom_number, capacity) VALUES (?, ?)");
+            statement.setInt(1, classroomNumber);
+            statement.setInt(2, capacity);
+            statement.executeUpdate();
+            return true;
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     @Override
     public void addStudent (Student student){
         try{
