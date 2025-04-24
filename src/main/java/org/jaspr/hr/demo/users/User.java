@@ -1,4 +1,4 @@
-package org.jaspr.hr.demo;
+package org.jaspr.hr.demo.users;
 
 public abstract class User {
    protected String name;

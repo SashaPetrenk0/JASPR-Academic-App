@@ -1,5 +1,10 @@
 package org.jaspr.hr.demo;
 
+import org.jaspr.hr.demo.users.Admin;
+import org.jaspr.hr.demo.users.Parent;
+import org.jaspr.hr.demo.users.Student;
+import org.jaspr.hr.demo.users.Teacher;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
