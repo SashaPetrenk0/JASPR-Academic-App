@@ -81,6 +81,17 @@ public class RegisterController {
     @FXML
     private Rectangle Rectangle2;
 
+    @FXML
+    private Button submitButtonStudent;
+
+    @FXML
+    private Button submitButtonTeacher;
+
+    @FXML
+    private Button submitButtonParent;
+
+    @FXML
+    private Button submitButtonAdmin;
 
 
 
@@ -152,7 +163,7 @@ public class RegisterController {
                 successfulSignUpLabelStudent.setText("You've been successfully registered as a Student! Welcome " + name + "!");
                 successfulSignUpLabelStudent.setVisible(true);
 
-
+                submitButtonStudent.setDisable(true);
 
             }
             case "Teacher" -> {
@@ -166,6 +177,12 @@ public class RegisterController {
                 userDAO.addTeacher(newTeacher);
                 successfulSignUpLabelTeacher.setText("You've been successfully registered as a Teacher! Welcome " + name + "!");
                 successfulSignUpLabelTeacher.setVisible(true);
+
+                submitButtonTeacher.setVisible(false);
+                submitButtonTeacher.setManaged(false);
+
+                successfulSignUpLabelTeacher.setVisible(true);
+                successfulSignUpLabelTeacher.setManaged(true);
 
 
             }
@@ -181,6 +198,7 @@ public class RegisterController {
                 successfulSignUpLabelParent.setText("You've been successfully registered as a Parent! Welcome " + name + "!");
                 successfulSignUpLabelParent.setVisible(true);
 
+                submitButtonParent.setDisable(true);
 
 
             }
@@ -195,6 +213,8 @@ public class RegisterController {
                 userDAO.addAdmin(newAdmin);
                 successfulSignUpLabelAdmin.setText("You've been successfully registered as an Admin! Welcome " + name + "!");
                 successfulSignUpLabelAdmin.setVisible(true);
+
+                submitButtonAdmin.setDisable(true);
 
                 // TODO: Error handling for incorrect user inputs
             }
