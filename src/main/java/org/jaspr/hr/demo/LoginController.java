@@ -77,8 +77,8 @@ public class LoginController {
             // Change scene to student dashboard
             System.out.println("Admin successfully logged in");
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with admin dashboard
-//            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view");
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
         }
 
     }
