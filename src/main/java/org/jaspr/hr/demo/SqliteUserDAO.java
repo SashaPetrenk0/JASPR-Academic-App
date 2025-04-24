@@ -1,5 +1,8 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
@@ -87,8 +90,8 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-    private void createClassroomTable(){
-        try{
+    private void createClassroomTable() {
+        try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS classrooms ("
                     + "classroom_number TEXT PRIMARY KEY, "
@@ -98,20 +101,20 @@ public class SqliteUserDAO implements IUserDAO {
                     + ")";
             statement.execute((query));
             System.out.println("Classroom table created successfully");
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean createClassroom(int classroomNumber, int capacity){
+    public boolean createClassroom(int classroomNumber, int capacity) {
 
-        try{
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO classrooms (classroom_number, capacity) VALUES (?, ?)");
             statement.setInt(1, classroomNumber);
             statement.setInt(2, capacity);
             statement.executeUpdate();
             return true;
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -119,8 +122,8 @@ public class SqliteUserDAO implements IUserDAO {
 
 
     @Override
-    public void addStudent (Student student){
-        try{
+    public void addStudent(Student student) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, student.getName());
@@ -133,9 +136,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addTeacher (Teacher teacher){
-        try{
+    public void addTeacher(Teacher teacher) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, teacher.getName());
@@ -148,9 +152,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addAdmin (Admin admin){
-        try{
+    public void addAdmin(Admin admin) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, admin.getName());
@@ -163,9 +168,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addParent (Parent parent){
-        try{
+    public void addParent(Parent parent) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, parent.getName());
@@ -289,7 +295,7 @@ public class SqliteUserDAO implements IUserDAO {
     public void changePassword(String email, String oldPassword, String newPassword, String role) {
         String tableName = "";
 
-        switch (role){
+        switch (role) {
             case "Student":
                 tableName = "students";
                 break;
@@ -329,7 +335,7 @@ public class SqliteUserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement("SELECT name FROM students");
             ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 studentNames.add(name);
             }
@@ -342,12 +348,12 @@ public class SqliteUserDAO implements IUserDAO {
 
     // For use when a teacher is viewing their class list and details
     @Override
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 int age = resultSet.getInt("age");
                 int studentID = resultSet.getInt("studentID");
@@ -393,6 +399,32 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    public ObservableList<Classroom> getAllClassrooms() {
+        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
 
+        try {
+            String query = "SELECT classrooms.classroom_name, classrooms.capacity, "
+                    + "SELECT COUNT(*) FROM classroom_students WHERE classroom_id = classrooms.classroom_id) AS num_students, "
+                    + "SELECT COUNT(*) FROM classroom_teachers WHERE classroom_id = classrooms.classroom_id) AS num_teachers "
+                    + "FROM classrooms";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int classroomName = resultSet.getInt("classroom_name");
+                int capacity = resultSet.getInt("capacity");
+                int numStudents = resultSet.getInt("num_students");
+                int numTeachers = resultSet.getInt("num_teachers");
+
+                classrooms.add(new Classroom(classroomName, capacity, numStudents, numTeachers));
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return classrooms;
+
+
+    }
 }
 
