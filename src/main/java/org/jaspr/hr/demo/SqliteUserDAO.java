@@ -27,6 +27,8 @@ public class SqliteUserDAO implements IUserDAO {
                     + "studentID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL"
+                    + "classroom_number INTEGER, "
+                    + "FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE SET NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
