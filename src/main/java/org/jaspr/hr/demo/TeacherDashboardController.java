@@ -31,26 +31,15 @@ public class TeacherDashboardController {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(teacher)));
-        }
-
-    }
-
-
-
-    public void setTeacher() {
-
-        // Personalized greeting
-        System.out.println("methid cAKKED");
-
-        if ("Teacher".equals(role) && user instanceof Teacher){
-            Teacher teacher = (Teacher) user;
             personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
-
             System.out.println(teacher.getName() + teacher.getTeacherID());
-
-
         }
+
     }
+
+
+
+
 
 
 
