@@ -51,8 +51,8 @@ public class ClassroomCreationController {
 
     @FXML
     private void initialize() {
-        classroomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("classroomNumber"));
-        classroomCapacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
+        classroomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomNumber"));
+        classroomCapacityColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomCapacity"));
         numStudentsColumn.setCellValueFactory(new PropertyValueFactory<>("numStudents"));
         numTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("numTeachers"));
 
@@ -76,8 +76,14 @@ public class ClassroomCreationController {
         // Creates new classroom object
         Classroom classroom = new Classroom(ClassroomNumber, ClassroomCapacity);
 
-        // Adds classroom to database
-        userDAO.createClassroom(ClassroomNumber, ClassroomCapacity);
+        if (userDAO.createClassroom(ClassroomNumber, ClassroomCapacity)) {
+            // Reload from DB
+            ObservableList<Classroom> updatedClassrooms = userDAO.getAllClassrooms();
+            classroomTable.setItems(updatedClassrooms);
+            classroomNumber.clear();
+            classroomCapacity.clear();
+        }
+
     }
 
 
@@ -85,8 +91,3 @@ public class ClassroomCreationController {
     }
 
 
-
-
-
-
-}

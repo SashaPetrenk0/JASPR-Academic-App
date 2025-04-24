@@ -18,6 +18,7 @@ public class SqliteUserDAO implements IUserDAO {
         createTeacherTable();
         createParentTable();
         createAdminTable();
+        createClassroomTable();
     }
 
     private void createStudentTable() {
@@ -403,28 +404,23 @@ public class SqliteUserDAO implements IUserDAO {
         ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
 
         try {
-            String query = "SELECT classrooms.classroom_name, classrooms.capacity, "
-                    + "SELECT COUNT(*) FROM classroom_students WHERE classroom_id = classrooms.classroom_id) AS num_students, "
-                    + "SELECT COUNT(*) FROM classroom_teachers WHERE classroom_id = classrooms.classroom_id) AS num_teachers "
-                    + "FROM classrooms";
+            String query = "SELECT classroom_number, capacity FROM classrooms";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                int classroomName = resultSet.getInt("classroom_name");
+                int classroomNumber = resultSet.getInt("classroom_number");
                 int capacity = resultSet.getInt("capacity");
-                int numStudents = resultSet.getInt("num_students");
-                int numTeachers = resultSet.getInt("num_teachers");
 
-                classrooms.add(new Classroom(classroomName, capacity, numStudents, numTeachers));
-
+                // Placeholder values for numStudents/numTeachers
+                classrooms.add(new Classroom(classroomNumber, capacity, 0, 0));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return classrooms;
-
-
     }
+
 }
 
