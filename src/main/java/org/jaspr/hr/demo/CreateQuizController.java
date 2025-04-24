@@ -77,7 +77,7 @@ public class CreateQuizController {
 
     @FXML private void returnToPage() throws IOException {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        SceneChanger.changeScene(stage, "temp-home-view.fxml");
+        SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
 
     }
 
