@@ -25,6 +25,8 @@ public class LoginController {
     private Label loginIncorrectError;
     @FXML
     private Button LoginButton;
+    @FXML
+    private Button ReturnButton;
 
     @FXML
     private void onLoginClicked(){
@@ -80,6 +82,11 @@ public class LoginController {
 //            Stage stage = (Stage) LoginButton.getScene().getWindow();
 //            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view");
         }
+
+    }
+
+    @FXML
+    private void onReturnClicked() {
 
     }
 
