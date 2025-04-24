@@ -22,7 +22,7 @@ public class AdminController {
     @FXML
     protected void onCreateClassroomClick() throws IOException {
         Stage stage = (Stage) ClassRoomCreation.getScene().getWindow();
-        SceneChanger.changeScene(stage, "create-a-classroom.fxml");
+        SceneChanger.changeScene(stage, "classroom-creation-view.fxml");
     }
 
     @FXML
