@@ -42,10 +42,12 @@ public class LoginController {
         // If "Student" role returned
         if ("Student".equals(role)){
             System.out.println("Student successfully logged in");
+            Student loggedInStudent = userDAO.getLoggedInStudent(email, password);
+            UserSession.getInstance().setCurrentUser(loggedInStudent, role);
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with student dasboard
-//            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.student-dashboard-view.fxml");
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
         }
 
         // If "Teacher" role returned
