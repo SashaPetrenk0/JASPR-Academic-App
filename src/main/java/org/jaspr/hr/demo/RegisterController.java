@@ -149,7 +149,7 @@ public class RegisterController {
 
                 Student newStudent = new Student(name, age, studentID, email, password);
                 userDAO.addStudent(newStudent);
-                successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
+                successfulSignUpLabelStudent.setText("You've been successfully registered as a Student! Welcome " + name + "!");
                 successfulSignUpLabelStudent.setVisible(true);
 
 
@@ -164,7 +164,7 @@ public class RegisterController {
 
                 Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
                 userDAO.addTeacher(newTeacher);
-                successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
+                successfulSignUpLabelTeacher.setText("You've been successfully registered as a Teacher! Welcome " + name + "!");
                 successfulSignUpLabelTeacher.setVisible(true);
 
 
@@ -178,7 +178,7 @@ public class RegisterController {
 
                 Parent newParent = new Parent(name, child, childID, email, password);
                 userDAO.addParent(newParent);
-                successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
+                successfulSignUpLabelParent.setText("You've been successfully registered as a Parent! Welcome " + name + "!");
                 successfulSignUpLabelParent.setVisible(true);
 
 
@@ -193,7 +193,7 @@ public class RegisterController {
 
                 Admin newAdmin = new Admin(name, age, adminID, email, password);
                 userDAO.addAdmin(newAdmin);
-                successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
+                successfulSignUpLabelAdmin.setText("You've been successfully registered as an Admin! Welcome " + name + "!");
                 successfulSignUpLabelAdmin.setVisible(true);
 
                 // TODO: Error handling for incorrect user inputs
