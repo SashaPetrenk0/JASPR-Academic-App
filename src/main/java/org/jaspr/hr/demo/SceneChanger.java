@@ -38,10 +38,10 @@ public class SceneChanger {
 
             //if (teacher != null) {
                // System.out.println("teacher not null");
-                if( controller instanceof TeacherDashboard){
+                if( controller instanceof TeacherDashboardController){
                     System.out.println("has controller");
                     // Check if the controller is of the correct type and pass the teacher
-                    ((TeacherDashboard) controller).setTeacher();
+                    ((TeacherDashboardController) controller).setTeacher();
                 }
 
 

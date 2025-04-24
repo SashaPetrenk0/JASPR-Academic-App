@@ -10,7 +10,7 @@ import javafx.collections.FXCollections;
 import java.io.IOException;
 
 
-public class TeacherDashboard {
+public class TeacherDashboardController {
     User user = UserSession.getInstance().getCurrentUser();
     String role = UserSession.getInstance().getRole();
 
