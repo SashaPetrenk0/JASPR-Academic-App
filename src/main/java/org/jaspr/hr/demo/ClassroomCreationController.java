@@ -14,13 +14,19 @@ import javafx.fxml.FXML;
 public class ClassroomCreationController {
 
     @FXML
-    private Label classroomCreate;
+    private TextField classroomNumber;
+
+    @FXML
+    private TextField classroomCapacity;
 
     @FXML
     private Button returnToPrevious;
 
+    @FXML
     private void returnToAdmin() throws IOException{
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
         SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
     }
+
+
 }
