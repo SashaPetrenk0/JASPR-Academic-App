@@ -19,6 +19,9 @@ public class LoginController {
     private Label loginIncorrectError;
     @FXML
     private Button LoginButton;
+    @FXML
+    private Button ReturnButton;
+
 
     @FXML
     private void onLoginClicked(){
@@ -84,5 +87,12 @@ public class LoginController {
         }
 
     }
+
+    @FXML
+    private void onReturnClicked() {
+        Stage stage = (Stage) ReturnButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
+    }
+
 
 }
