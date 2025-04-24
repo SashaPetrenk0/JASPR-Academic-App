@@ -12,6 +12,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 
 public class ClassroomCreationController {
+    private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     @FXML
     private TextField classroomNumber;
@@ -33,7 +34,12 @@ public class ClassroomCreationController {
         int ClassroomNumber = Integer.parseInt(classroomNumber.getText().trim());
         int ClassroomCapacity = Integer.parseInt(classroomCapacity.getText().trim());
 
+        // Creates new classroom object
         Classroom classroom = new Classroom(ClassroomNumber, ClassroomCapacity);
+
+        // Adds classroom to database
+        userDAO.createClassroom(ClassroomNumber, ClassroomCapacity);
+
 
     }
 
