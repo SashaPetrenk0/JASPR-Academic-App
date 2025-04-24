@@ -28,34 +28,15 @@ public class StudentDashboardController {
 
     @FXML
     public void initialize() {
+
+
         if ("Student".equals(role) && user instanceof Student){
             Student student = (Student) user;
+            personalisedGreeting.setText("Hi, " + student.getName() + "!");
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
         }
 
     }
-
-
-
-    public void setTeacher() {
-
-        // Personalized greeting
-        System.out.println("methid cAKKED");
-
-        if ("Teacher".equals(role) && user instanceof Teacher){
-            Teacher teacher = (Teacher) user;
-            personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
-
-            System.out.println(teacher.getName() + teacher.getTeacherID());
-
-
-        }
-    }
-
-
-
-
-
 
 
 
