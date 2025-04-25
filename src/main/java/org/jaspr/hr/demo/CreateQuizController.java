@@ -62,6 +62,9 @@ public class CreateQuizController {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
             author = teacher.getTeacherID();
+        }else if ("Student".equals(role) && user instanceof Student) {
+            Student student = (Student) user;
+            author = student.getStudentID();
         }
 
 //Quiz newQuiz = new Quiz(title, desc, topic, length, author, List.of(questions));
