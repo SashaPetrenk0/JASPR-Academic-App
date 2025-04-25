@@ -3,6 +3,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,19 +18,27 @@ import java.sql.SQLException;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.util.StringConverter;
 
 import javax.xml.transform.Result;
 
 public class AssignUsersToClassController {
 
     @FXML
+    private ComboBox<Classroom> classroomComboBox;
+
+    @FXML
     private VBox teacherRadioList;
 
     @FXML
     private VBox studentVBox;
+
+    @FXML
+    private Button assignUsers;
 
     @FXML
     private TableColumn<Classroom, Integer> classroomNumberColumn;
@@ -66,11 +75,40 @@ public class AssignUsersToClassController {
         ObservableList<Classroom> classrooms = userDAO.getAllClassrooms();
         classroomTable.setItems(classrooms);
 
+        // Set classrooms in ComboBox
+        classroomComboBox.setItems(classrooms);  // Use a StringConverter to control what is displayed in the ComboBox
+        classroomComboBox.setCellFactory(param -> new ListCell<Classroom>() {
+            @Override
+            protected void updateItem(Classroom item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item != null) {
+                    setText(item.getClassRoomNumber() + " - " + item.getClassRoomCapacity() + " seats");
+                } else {
+                    setText(null);
+                }
+            }
+        });
+
+        classroomComboBox.setConverter(new StringConverter<Classroom>() {
+            @Override
+            public String toString(Classroom classroom) {
+                if (classroom == null) {
+                    return null;
+                } else {
+                    return classroom.getClassRoomNumber() + " - " + classroom.getClassRoomCapacity() + " seats";
+                }
+            }
+
+            @Override
+            public Classroom fromString(String string) {
+                return null;  // Not needed for this case
+            }
+        });
         // Get all teachers
         ObservableList<Teacher> teachers = userDAO.getAllTeachers();
         System.out.println("Number of teachers loaded: " + teachers.size());
 
-        for (Teacher teacher : teachers){
+        for (Teacher teacher : teachers) {
             RadioButton rb = new RadioButton(teacher.getName());
             rb.setUserData(teacher);
             rb.setToggleGroup(teacherToggleGroup);
@@ -88,10 +126,45 @@ public class AssignUsersToClassController {
     }
 
     @FXML
-    private void returnToAdmin() throws IOException{
-        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
+    private void assignUsers() {
+        Classroom selectedClassroom = classroomComboBox.getValue();
+
+        RadioButton selectedTeacherRadioButton = (RadioButton) teacherToggleGroup.getSelectedToggle();
+        Teacher selectedTeacher = (Teacher) selectedTeacherRadioButton.getUserData();
+
+        // Get selected students
+        List<CheckBox> checkboxes = new ArrayList<>();
+        for (Node node : studentVBox.getChildren()) {
+            if (node instanceof CheckBox) {
+                checkboxes.add((CheckBox) node); // Add CheckBox to the list
+            }
+        }
+
+        // List to store selected students
+        List<Student> selectedStudents = new ArrayList<>();
+        for (CheckBox checkBox : checkboxes) {
+            if (checkBox.isSelected()) {
+                selectedStudents.add((Student) checkBox.getUserData()); // Get the student object associated with the CheckBox
+            }
+        }
+
+
+        // Call the DAO to assign the users (teacher and students) to the classroom
+        boolean assignmentSuccess = userDAO.assignUsers(selectedClassroom, selectedTeacher, selectedStudents);
+
+        // Display success message if assignment was successful
+        if (assignmentSuccess) {
+            // You could print to the console, or use an Alert box to notify the user
+            System.out.println("Teacher and students have been successfully assigned to classroom");
+        }
     }
 
+        @FXML
+        private void returnToAdmin () throws IOException {
+            Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
+        }
 
-}
+
+    }
+

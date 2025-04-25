@@ -20,7 +20,10 @@
 
 
     <HBox spacing="20.0">
-
+        <VBox>
+            <Label text="Select Classroom:" style="-fx-font-weight: bold;"/>
+            <ComboBox fx:id="classroomComboBox" />
+        </VBox>
         <VBox>
             <Label text="Select Teacher:" style="-fx-font-weight: bold;"/>
             <VBox fx:id="teacherRadioList" spacing="10.0"/>
@@ -30,6 +33,8 @@
             <VBox fx:id="studentVBox" spacing="10.0"/>
         </VBox>
     </HBox>
+
+    <Button fx:id="assignUsers" text="Assign" onAction="#assignUsers" />
 
 
 
