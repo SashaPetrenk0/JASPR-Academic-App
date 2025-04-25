@@ -28,9 +28,6 @@ public class AssignUsersToClassController {
     private VBox teacherRadioList;
 
     @FXML
-    private ToggleGroup teacherToggleGroup;
-
-    @FXML
     private TableColumn<Classroom, Integer> classroomNumberColumn;
 
     @FXML
@@ -50,10 +47,12 @@ public class AssignUsersToClassController {
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
+    private final ToggleGroup teacherToggleGroup = new ToggleGroup();
 
     @FXML
     private void initialize() {
 
+        System.out.println("AssignUsersToClassController initialized");
         classroomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomNumber"));
         classroomCapacityColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomCapacity"));
         numStudentsColumn.setCellValueFactory(new PropertyValueFactory<>("numStudents"));
@@ -65,6 +64,7 @@ public class AssignUsersToClassController {
 
         // Get all teachers
         ObservableList<Teacher> teachers = userDAO.getAllTeachers();
+        System.out.println("Number of teachers loaded: " + teachers.size());
 
         for (Teacher teacher : teachers){
             RadioButton rb = new RadioButton(teacher.getName());
