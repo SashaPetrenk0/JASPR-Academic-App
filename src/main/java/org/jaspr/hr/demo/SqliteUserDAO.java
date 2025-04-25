@@ -16,7 +16,8 @@ public class SqliteUserDAO implements IUserDAO {
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
 
-        // Alter the table to add missing column if necessary
+        //TODO: Consider removing these Alter queries as I only really need to call them once
+
         try {
             // Check if connection is not null
             if (connection != null) {
@@ -28,17 +29,26 @@ public class SqliteUserDAO implements IUserDAO {
                     if (!e.getMessage().contains("duplicate column name")) {
                         e.printStackTrace();
                     }
+                }// Alter the classrooms table to add teacherID column if necessary
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE classrooms ADD COLUMN teacherID INTEGER;");
+                } catch (SQLException e) {
+                    // SQLite will throw an error if the column already exists; ignore that error
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
                 }
+                // Now create tables (if they don't exist)
+                createStudentTable();
+                createTeacherTable();
+                createParentTable();
+                createAdminTable();
+                createClassroomTable();
+
+
             } else {
                 System.out.println("Database connection failed!");
             }
-
-            // Now create tables (if they don't exist)
-            createStudentTable();
-            createTeacherTable();
-            createParentTable();
-            createAdminTable();
-            createClassroomTable();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -328,7 +338,7 @@ public class SqliteUserDAO implements IUserDAO {
                 tableName = "teachers";
                 break;
             case "Admin":
-                tableName = "admin";
+                tableName = "admins";
                 break;
             case "Parent":
                 tableName = "parent";
@@ -478,13 +488,42 @@ public class SqliteUserDAO implements IUserDAO {
         return classrooms;
     }
 
+    public ObservableList<Classroom> getUpdatedClassrooms() {
+        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
+
+        String sql = "SELECT c.classroom_number, " +
+                "       c.capacity, " +
+                "       COALESCE((SELECT COUNT(*) FROM students s WHERE s.classroom_number = c.classroom_number), 0) AS num_students, " +
+                "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
+                "  FROM classrooms c";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int number = rs.getInt("classroom_number");
+                int capacity = rs.getInt("capacity");
+                int numStudents = rs.getInt("num_students");
+                int numTeachers = rs.getInt("num_teachers");
+
+                classrooms.add(new Classroom(number, capacity, numStudents, numTeachers));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classrooms;
+    }
+
+
+
     public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
         try {
             // Start a transaction
             connection.setAutoCommit(false);
 
             // Update teacher in the classroom
-            String teacherUpdateQuery = "UPDATE classrooms SET teacher_id = ? WHERE classroom_number = ?";
+            String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
             try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
                 teacherStatement.setInt(1, selectedTeacher.getTeacherID());
                 teacherStatement.setInt(2, selectedClassroom.getClassRoomNumber());

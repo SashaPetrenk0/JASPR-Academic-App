@@ -156,6 +156,9 @@ public class AssignUsersToClassController {
         if (assignmentSuccess) {
             // You could print to the console, or use an Alert box to notify the user
             System.out.println("Teacher and students have been successfully assigned to classroom");
+            // Update the table view to reflect the changes
+            ObservableList<Classroom> updatedClassrooms = userDAO.getUpdatedClassrooms();
+            classroomTable.setItems(updatedClassrooms); // Set updated classrooms to the table
         }
     }
 
