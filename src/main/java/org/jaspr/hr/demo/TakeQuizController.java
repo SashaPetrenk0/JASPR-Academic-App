@@ -6,6 +6,8 @@ import javafx.scene.control.*;
 
 public class TakeQuizController {
     @FXML
+    private Label quizTitle;
+    @FXML
     private Label questionLabel;
     @FXML
     private Button optionA;
