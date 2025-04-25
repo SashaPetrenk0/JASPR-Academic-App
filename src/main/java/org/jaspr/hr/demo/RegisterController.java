@@ -8,6 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
+
+
 
 import java.io.IOException;
 
@@ -92,6 +95,9 @@ public class RegisterController {
 
     @FXML
     private Button submitButtonAdmin;
+
+    @FXML
+    private ImageView successIcon;
 
 
 
@@ -183,6 +189,9 @@ public class RegisterController {
 
                 successfulSignUpLabelTeacher.setVisible(true);
                 successfulSignUpLabelTeacher.setManaged(true);
+
+                successIcon.setVisible(true);
+                successIcon.setManaged(true);
 
 
             }
