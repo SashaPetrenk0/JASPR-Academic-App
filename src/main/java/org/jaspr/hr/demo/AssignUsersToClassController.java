@@ -23,6 +23,13 @@ import javafx.fxml.FXML;
 import javax.xml.transform.Result;
 
 public class AssignUsersToClassController {
+
+    @FXML
+    private VBox teacherRadioList;
+
+    @FXML
+    private ToggleGroup teacherToggleGroup;
+
     @FXML
     private TableColumn<Classroom, Integer> classroomNumberColumn;
 
@@ -55,6 +62,16 @@ public class AssignUsersToClassController {
         // Loading classrooms from the DAO
         ObservableList<Classroom> classrooms = userDAO.getAllClassrooms();
         classroomTable.setItems(classrooms);
+
+        // Get all teachers
+        ObservableList<Teacher> teachers = userDAO.getAllTeachers();
+
+        for (Teacher teacher : teachers){
+            RadioButton rb = new RadioButton(teacher.getName());
+            rb.setUserData(teacher);
+            rb.setToggleGroup(teacherToggleGroup);
+            teacherRadioList.getChildren().add(rb);
+        }
     }
 
     @FXML
