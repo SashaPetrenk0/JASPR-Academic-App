@@ -12,13 +12,37 @@ import java.util.List;
 public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
 
+
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
-        createStudentTable();
-        createTeacherTable();
-        createParentTable();
-        createAdminTable();
-        createClassroomTable();
+
+        // Alter the table to add missing column if necessary
+        try {
+            // Check if connection is not null
+            if (connection != null) {
+                // Alter the table to add missing column if necessary
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE students ADD COLUMN classroom_number INTEGER;");
+                } catch (SQLException e) {
+                    // SQLite will throw an error if the column already exists; ignore that error
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                System.out.println("Database connection failed!");
+            }
+
+            // Now create tables (if they don't exist)
+            createStudentTable();
+            createTeacherTable();
+            createParentTable();
+            createAdminTable();
+            createClassroomTable();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createStudentTable() {
@@ -32,7 +56,7 @@ public class SqliteUserDAO implements IUserDAO {
                     + "email VARCHAR NOT NULL,"
                     + "password VARCHAR NOT NULL,"
                     + "classroom_number INTEGER, "
-                    + "FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE SET NULL"
+                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number) ON DELETE SET NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -95,10 +119,10 @@ public class SqliteUserDAO implements IUserDAO {
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS classrooms ("
-                    + "classroom_number TEXT PRIMARY KEY, "
+                    + "classroom_number INTEGER PRIMARY KEY, "
                     + "capacity INTEGER NOT NULL, "
-                    + "teacher_id INTEGER, "
-                    + "FOREIGN KEY (teacher_id) REFERENCES teachers(teacherid)"
+                    + "teacherID INTEGER, "
+                    + "FOREIGN KEY (teacherID) REFERENCES teachers(teacherID)"
                     + ")";
             statement.execute((query));
             System.out.println("Classroom table created successfully");
@@ -392,7 +416,6 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
 
-
     // For database checking
     public void printAllStudents() {
         try {
@@ -455,5 +478,41 @@ public class SqliteUserDAO implements IUserDAO {
         return classrooms;
     }
 
+    public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
+        try {
+            // Start a transaction
+            connection.setAutoCommit(false);
+
+            // Update teacher in the classroom
+            String teacherUpdateQuery = "UPDATE classrooms SET teacher_id = ? WHERE classroom_number = ?";
+            try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
+                teacherStatement.setInt(1, selectedTeacher.getTeacherID());
+                teacherStatement.setInt(2, selectedClassroom.getClassRoomNumber());
+                teacherStatement.executeUpdate();
+            }
+
+            // Update students in the classroom
+            for (Student student : selectedStudents) {
+                String studentUpdateQuery = "UPDATE students SET classroom_number = ? WHERE studentID = ?";
+                try (PreparedStatement studentStatement = connection.prepareStatement(studentUpdateQuery)) {
+                    studentStatement.setInt(1, selectedClassroom.getClassRoomNumber());
+                    studentStatement.setInt(2, student.getStudentID());
+                    studentStatement.executeUpdate();
+                }
+            }
+
+            // Commit the transaction
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
+
+
+
+
 
