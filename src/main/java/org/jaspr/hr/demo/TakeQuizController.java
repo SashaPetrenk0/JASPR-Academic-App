@@ -18,9 +18,11 @@ public class TakeQuizController {
     @FXML
     private Button optionD;
 
-    //TODO: fix the fact that it randomly skips over the second last question
+    private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
-    //Quiz quiz = instance.getCurrentQuiz
+    //TODO: fix the fact that it randomly skips over the second last question
+    private int selectedQuiz;
+    Quiz quiz = quizDAO.getQuiz(selectedQuiz);
     //Question[[ questions = quiz.getQuestions();
     //sample questions for testing purposes
     Question[] questions = {
@@ -44,6 +46,12 @@ public class TakeQuizController {
     @FXML
     public void loadTitle(String title){
         quizTitle.setText(title);
+
+    }
+
+    @FXML
+    public void setSelectedQuiz(int id){
+        this.selectedQuiz = id;
     }
 
     @FXML

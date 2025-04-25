@@ -25,7 +25,7 @@ public class StudentDashboardController {
     private Button createQuiz;
 
     @FXML
-    private ListView<String> quizLists;
+    private ListView<Quiz> quizLists;
 
     @FXML
     private Button takeQuiz;
@@ -38,12 +38,23 @@ public class StudentDashboardController {
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
+            quizLists.setCellFactory(listView -> new ListCell<>() {
+                @Override
+                protected void updateItem(Quiz quiz, boolean empty) {
+                    super.updateItem(quiz, empty);
+                    if (empty || quiz == null) {
+                        setText(null);
+                    } else {
+                        setText(quiz.getTitle());
+                    }
+                }
+            });
 
             quizLists.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2) { // double-click
-                    String selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
+                    Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
-                        openTakeQuiz(selectedQuiz);
+                        openTakeQuiz(selectedQuiz.getTitle(), selectedQuiz.getId());
                     }
                 }
             });
@@ -54,7 +65,7 @@ public class StudentDashboardController {
     }
 
     @FXML
-    private void openTakeQuiz(String title) {
+    private void openTakeQuiz(String title, int id) {
         try {
             Stage currentStage = (Stage) quizLists.getScene().getWindow();
             // Load new window
@@ -63,6 +74,7 @@ public class StudentDashboardController {
 
             // Pass data to next controller
             TakeQuizController controller = loader.getController();
+            controller.setSelectedQuiz(id);
             controller.loadTitle(title);
 
             Stage stage = new Stage();
