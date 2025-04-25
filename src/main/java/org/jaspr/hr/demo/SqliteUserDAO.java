@@ -1,5 +1,8 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,12 +12,47 @@ import java.util.List;
 public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
 
+
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
-        createStudentTable();
-        createTeacherTable();
-        createParentTable();
-        createAdminTable();
+
+        //TODO: Consider removing these Alter queries as I only really need to call them once
+
+        try {
+            // Check if connection is not null
+            if (connection != null) {
+                // Alter the table to add missing column if necessary
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE students ADD COLUMN classroom_number INTEGER;");
+                } catch (SQLException e) {
+                    // SQLite will throw an error if the column already exists; ignore that error
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }// Alter the classrooms table to add teacherID column if necessary
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE classrooms ADD COLUMN teacherID INTEGER;");
+                } catch (SQLException e) {
+                    // SQLite will throw an error if the column already exists; ignore that error
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+                // Now create tables (if they don't exist)
+                createStudentTable();
+                createTeacherTable();
+                createParentTable();
+                createAdminTable();
+                createClassroomTable();
+
+
+            } else {
+                System.out.println("Database connection failed!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createStudentTable() {
@@ -26,7 +64,9 @@ public class SqliteUserDAO implements IUserDAO {
                     + "age INTEGER NOT NULL,"
                     + "studentID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL"
+                    + "password VARCHAR NOT NULL,"
+                    + "classroom_number INTEGER, "
+                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number) ON DELETE SET NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -84,9 +124,41 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
+    private void createClassroomTable() {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS classrooms ("
+                    + "classroom_number INTEGER PRIMARY KEY, "
+                    + "capacity INTEGER NOT NULL, "
+                    + "teacherID INTEGER, "
+                    + "FOREIGN KEY (teacherID) REFERENCES teachers(teacherID)"
+                    + ")";
+            statement.execute((query));
+            System.out.println("Classroom table created successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean createClassroom(int classroomNumber, int capacity) {
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO classrooms (classroom_number, capacity) VALUES (?, ?)");
+            statement.setInt(1, classroomNumber);
+            statement.setInt(2, capacity);
+            statement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     @Override
-    public void addStudent (Student student){
-        try{
+    public void addStudent(Student student) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, student.getName());
@@ -99,9 +171,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addTeacher (Teacher teacher){
-        try{
+    public void addTeacher(Teacher teacher) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, teacher.getName());
@@ -114,9 +187,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addAdmin (Admin admin){
-        try{
+    public void addAdmin(Admin admin) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, admin.getName());
@@ -129,9 +203,10 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addParent (Parent parent){
-        try{
+    public void addParent(Parent parent) {
+        try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, password)" +
                     "VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, parent.getName());
@@ -304,7 +379,7 @@ public class SqliteUserDAO implements IUserDAO {
     public void changePassword(String email, String oldPassword, String newPassword, String role) {
         String tableName = "";
 
-        switch (role){
+        switch (role) {
             case "Student":
                 tableName = "students";
                 break;
@@ -312,7 +387,7 @@ public class SqliteUserDAO implements IUserDAO {
                 tableName = "teachers";
                 break;
             case "Admin":
-                tableName = "admin";
+                tableName = "admins";
                 break;
             case "Parent":
                 tableName = "parent";
@@ -344,7 +419,7 @@ public class SqliteUserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement("SELECT name FROM students");
             ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 studentNames.add(name);
             }
@@ -357,12 +432,12 @@ public class SqliteUserDAO implements IUserDAO {
 
     // For use when a teacher is viewing their class list and details
     @Override
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 int age = resultSet.getInt("age");
                 int studentID = resultSet.getInt("studentID");
@@ -378,6 +453,27 @@ public class SqliteUserDAO implements IUserDAO {
         }
         return students;
     }
+
+    public ObservableList<Teacher> getAllTeachers() {
+        ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+        String query = "SELECT * FROM teachers";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                teachers.add(new Teacher(
+                        rs.getString("name"),
+                        rs.getInt("age"),
+                        rs.getInt("teacherID"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teachers;
+    }
+
 
     // For database checking
     public void printAllStudents() {
@@ -408,6 +504,108 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    // For database checking
+    public void clearTeacherTable() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM teachers");
+            statement.executeUpdate();
+            System.out.println("All teacher records deleted.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<Classroom> getAllClassrooms() {
+        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
+
+        try {
+            String query = "SELECT classroom_number, capacity FROM classrooms";
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int classroomNumber = resultSet.getInt("classroom_number");
+                int capacity = resultSet.getInt("capacity");
+
+                // Placeholder values for numStudents/numTeachers
+                classrooms.add(new Classroom(classroomNumber, capacity, 0, 0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classrooms;
+    }
+
+    public ObservableList<Classroom> getUpdatedClassrooms() {
+        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
+
+        String sql = "SELECT c.classroom_number, " +
+                "       c.capacity, " +
+                "       COALESCE((SELECT COUNT(*) FROM students s WHERE s.classroom_number = c.classroom_number), 0) AS num_students, " +
+                "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
+                "  FROM classrooms c";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int number = rs.getInt("classroom_number");
+                int capacity = rs.getInt("capacity");
+                int numStudents = rs.getInt("num_students");
+                int numTeachers = rs.getInt("num_teachers");
+
+                classrooms.add(new Classroom(number, capacity, numStudents, numTeachers));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classrooms;
+    }
+
+
+
+    public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
+        try {
+            // Start a transaction
+            connection.setAutoCommit(false);
+
+            // Update teacher in the classroom (only if not null)
+            if (selectedTeacher != null) {
+                String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
+                try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
+                    teacherStatement.setInt(1, selectedTeacher.getTeacherID());
+                    teacherStatement.setInt(2, selectedClassroom.getClassRoomNumber());
+                    teacherStatement.executeUpdate();
+                }
+            }
+
+            // Update students in the classroom (only if list is not empty)
+            if (selectedStudents != null && !selectedStudents.isEmpty()) {
+                for (Student student : selectedStudents) {
+                    String studentUpdateQuery = "UPDATE students SET classroom_number = ? WHERE studentID = ?";
+                    try (PreparedStatement studentStatement = connection.prepareStatement(studentUpdateQuery)) {
+                        studentStatement.setInt(1, selectedClassroom.getClassRoomNumber());
+                        studentStatement.setInt(2, student.getStudentID());
+                        studentStatement.executeUpdate();
+                    }
+                }
+            }
+
+            // Commit the transaction
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
+
+
+
+
 
