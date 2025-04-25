@@ -55,6 +55,7 @@ public class SqliteQuizDAO implements IQuizDAO {
                         resultSet.getString("topic"),
                         resultSet.getInt("numOfQuestions"),
                         resultSet.getInt("author")
+
                 );
             }
         } catch (Exception e) {

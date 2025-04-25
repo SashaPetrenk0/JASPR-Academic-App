@@ -38,6 +38,7 @@ public class StudentDashboardController {
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
+            System.out.println(quizDAO.getAllQuizzes(student).getLast().getQuestions().toString());
             quizLists.setCellFactory(listView -> new ListCell<>() {
                 @Override
                 protected void updateItem(Quiz quiz, boolean empty) {
@@ -54,7 +55,7 @@ public class StudentDashboardController {
                 if (event.getClickCount() == 2) { // double-click
                     Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
-                        openTakeQuiz(selectedQuiz.getTitle(), selectedQuiz.getId());
+                        openTakeQuiz(selectedQuiz.getTitle(), selectedQuiz.getQuestions());
                     }
                 }
             });
@@ -65,7 +66,7 @@ public class StudentDashboardController {
     }
 
     @FXML
-    private void openTakeQuiz(String title, int id) {
+    private void openTakeQuiz(String title, Question[] questions) {
         try {
             Stage currentStage = (Stage) quizLists.getScene().getWindow();
             // Load new window
@@ -74,8 +75,9 @@ public class StudentDashboardController {
 
             // Pass data to next controller
             TakeQuizController controller = loader.getController();
-            controller.setSelectedQuiz(id);
+
             controller.loadTitle(title);
+            controller.setQuestions(questions);
 
             Stage stage = new Stage();
 

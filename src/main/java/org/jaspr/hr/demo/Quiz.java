@@ -9,7 +9,7 @@ public class Quiz {
     private String topic;
     private int numOfQuestions;
     private int author;
-    private List<Question> questions;
+    private Question[] questions;
 
 
 
@@ -21,13 +21,14 @@ public class Quiz {
         this.author = author;
 
 
+
     }
 
-    public List<Question> getQuestions() {
+    public Question[] getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(Question[] questions) {
         this.questions = questions;
     }
 
