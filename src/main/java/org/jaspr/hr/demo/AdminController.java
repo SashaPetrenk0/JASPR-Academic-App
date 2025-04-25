@@ -28,6 +28,6 @@ public class AdminController {
     @FXML
     protected void onAssignUsersClick() throws IOException{
         Stage stage = (Stage) AssignButton.getScene().getWindow();
-        SceneChanger.changeScene(stage, "assignToClassroom-view.fxml");
+        SceneChanger.changeScene(stage, "assign-users-to-classroom.fxml");
     }
 }
