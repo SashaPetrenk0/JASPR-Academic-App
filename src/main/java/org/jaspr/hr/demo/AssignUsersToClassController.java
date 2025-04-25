@@ -17,6 +17,7 @@ import java.sql.SQLException;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.util.List;
 
 import javafx.fxml.FXML;
 
@@ -26,6 +27,9 @@ public class AssignUsersToClassController {
 
     @FXML
     private VBox teacherRadioList;
+
+    @FXML
+    private VBox studentVBox;
 
     @FXML
     private TableColumn<Classroom, Integer> classroomNumberColumn;
@@ -71,6 +75,15 @@ public class AssignUsersToClassController {
             rb.setUserData(teacher);
             rb.setToggleGroup(teacherToggleGroup);
             teacherRadioList.getChildren().add(rb);
+        }
+
+        List<Student> students = userDAO.getAllStudents(); // userDAO = your SqliteUserDAO instance
+
+        for (Student student : students) {
+            CheckBox checkBox = new CheckBox(student.getName() + " (ID: " + student.getStudentID() + ")");
+            checkBox.setUserData(student); // store full student object if you need it later
+            studentVBox.getChildren().add(checkBox);
+            System.out.println(student.getName());
         }
     }
 
