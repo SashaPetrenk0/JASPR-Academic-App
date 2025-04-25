@@ -20,5 +20,8 @@
     <Label fx:id="loginEmptyError" text="" visible="false" />
     <Label fx:id="loginIncorrectError" text="" visible="false" />
 
+    <Button fx:id="ReturnButton" text="Return" onAction="#onReturnClicked" />
+
+
 </VBox>
 
