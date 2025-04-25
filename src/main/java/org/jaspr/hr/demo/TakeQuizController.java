@@ -16,6 +16,7 @@ public class TakeQuizController {
     @FXML
     private Button optionD;
 
+    //TODO: fix the fact that it randomly skips over the second last question
 
 
     //sample questions for testing purposes
@@ -48,9 +49,13 @@ public class TakeQuizController {
     }
 
     public void nextQuestion() {
-        if (questionIndex < questions.length - 1) {
+        if (questionIndex < questions.length) {
             questionIndex++;
-            loadQuestion();  // refresh display with new question
+            loadQuestion();// refresh display with new question
+            optionA.setDisable(false);
+            optionB.setDisable(false);
+            optionC.setDisable(false);
+            optionD.setDisable(false);
         } else {
             // Optional: Show results or end the quiz
             System.out.println("Quiz finished!");
