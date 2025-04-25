@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 
 public class TakeQuizController {
     @FXML
-    private Label question;
+    private Label questionLabel;
     @FXML
     private Button optionA;
     @FXML
@@ -39,7 +39,7 @@ public class TakeQuizController {
 
     @FXML
     public void loadQuestion(){
-        question.setText(questions[questionIndex].getQuestion());
+        questionLabel.setText(questions[questionIndex].getQuestion());
         String[] choices = questions[questionIndex].getChoices();
         optionA.setText(choices[0]);
         optionB.setText(choices[1]);
@@ -64,10 +64,10 @@ public class TakeQuizController {
     }
 
     @FXML
-    private boolean checkAnswer(String answer){
+    private boolean checkAnswer(int answer){
         int correctAnswer = questions[questionIndex].getCorrectAnswerIndex();
-        int answerInt = Integer.valueOf(answer);
-        if (answerInt == correctAnswer){
+
+        if (answer == correctAnswer){
             System.out.println("correct");
             return true;
 
@@ -80,7 +80,7 @@ public class TakeQuizController {
 
     @FXML
     public void optionAclicked() {
-        if (checkAnswer(optionA.getText())) {
+        if (checkAnswer(0)) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
@@ -91,7 +91,7 @@ public class TakeQuizController {
 
     @FXML
     public void optionBclicked() {
-        if (checkAnswer(optionB.getText())) {
+        if (checkAnswer(1)) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
@@ -100,7 +100,7 @@ public class TakeQuizController {
     }
     @FXML
     public void optionCclicked() {
-        if (checkAnswer(optionC.getText())) {
+        if (checkAnswer(2)) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
@@ -109,7 +109,7 @@ public class TakeQuizController {
     }
     @FXML
     public void optionDclicked() {
-        if (checkAnswer(optionD.getText())) {
+        if (checkAnswer(3)) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;

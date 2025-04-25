@@ -53,9 +53,9 @@ public class StudentDashboardController {
     }
 
     @FXML
-    protected void onTakeQuiz() throws IOException {
-        Stage stage = (Stage)takeQuiz.getScene().getWindow();
-        SceneChanger.changeScene(stage, "take-quiz-view.fxml");
+    private void onTakeQuiz() throws IOException {
+        Stage stage = (Stage) takeQuiz.getScene().getWindow();
+        SceneChanger.changeScene(stage,"take-quiz-view.fxml");
     }
 
 

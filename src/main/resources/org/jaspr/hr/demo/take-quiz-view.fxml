@@ -17,7 +17,7 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="question-label" text=""/>
+    <Label fx:id="questionLabel" text=""/>
 
     <Button fx:id="optionA" text ="" onAction="#optionAclicked"/>
     <Button fx:id="optionB" text ="" onAction="#optionBclicked"/>
