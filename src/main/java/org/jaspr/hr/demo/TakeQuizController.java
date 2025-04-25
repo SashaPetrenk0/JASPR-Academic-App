@@ -8,13 +8,13 @@ public class TakeQuizController {
     @FXML
     private Label question;
     @FXML
-    private Label optionA;
+    private Button optionA;
     @FXML
-    private Label optionB;
+    private Button optionB;
     @FXML
-    private Label optionC;
+    private Button optionC;
     @FXML
-    private Label optionD;
+    private Button optionD;
 
 
 
@@ -33,14 +33,30 @@ public class TakeQuizController {
 
     @FXML
     public void initialize(){
+        loadQuestion();
+
+    }
+
+    @FXML
+    public void loadQuestion(){
         question.setText(questions[questionIndex].getQuestion());
         String[] choices = questions[questionIndex].getChoices();
         optionA.setText(choices[0]);
         optionB.setText(choices[1]);
         optionC.setText(choices[2]);
         optionD.setText(choices[3]);
-
     }
+
+    public void nextQuestion() {
+        if (questionIndex < questions.length - 1) {
+            questionIndex++;
+            loadQuestion();  // refresh display with new question
+        } else {
+            // Optional: Show results or end the quiz
+            System.out.println("Quiz finished!");
+        }
+    }
+
     @FXML
     public void leaveQuiz() {
     }
@@ -58,6 +74,7 @@ public class TakeQuizController {
         } else{
             incorrectAnswerCount ++;
         }
+        questionIndex++;
 
 
 
@@ -66,17 +83,14 @@ public class TakeQuizController {
 
     @FXML
     public void optionBclicked() {
-
-
+        questionIndex++;
     }
     @FXML
     public void optionCclicked() {
-
-
+        questionIndex++;
     }
     @FXML
     public void optionDclicked() {
-
-
+        questionIndex++;
     }
 }
