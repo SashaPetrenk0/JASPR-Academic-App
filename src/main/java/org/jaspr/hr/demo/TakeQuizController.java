@@ -37,8 +37,13 @@ public class TakeQuizController {
 
     @FXML
     public void initialize(){
+
         loadQuestion();
 
+    }
+    @FXML
+    public void loadTitle(String title){
+        quizTitle.setText(title);
     }
 
     @FXML
