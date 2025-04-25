@@ -57,7 +57,7 @@ public class ClassroomCreationController {
         numTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("numTeachers"));
 
         // Loading classrooms from the DAO
-        ObservableList<Classroom> classrooms = userDAO.getAllClassrooms();
+        ObservableList<Classroom> classrooms = userDAO.getUpdatedClassrooms();
         classroomTable.setItems(classrooms);
     }
 
@@ -78,7 +78,7 @@ public class ClassroomCreationController {
 
         if (userDAO.createClassroom(ClassroomNumber, ClassroomCapacity)) {
             // Reload from DB
-            ObservableList<Classroom> updatedClassrooms = userDAO.getAllClassrooms();
+            ObservableList<Classroom> updatedClassrooms = userDAO.getUpdatedClassrooms();
             classroomTable.setItems(updatedClassrooms);
             classroomNumber.clear();
             classroomCapacity.clear();
