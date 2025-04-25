@@ -30,7 +30,7 @@ public class SqliteUserDAO implements IUserDAO {
                     + "age INTEGER NOT NULL,"
                     + "studentID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL"
+                    + "password VARCHAR NOT NULL,"
                     + "classroom_number INTEGER, "
                     + "FOREIGN KEY (classroom_id) REFERENCES classrooms(id) ON DELETE SET NULL"
                     + ")";
