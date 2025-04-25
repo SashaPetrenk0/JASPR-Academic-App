@@ -18,7 +18,8 @@ public class TakeQuizController {
 
     //TODO: fix the fact that it randomly skips over the second last question
 
-
+    //Quiz quiz = instance.getCurrentQuiz
+    //Question[[ questions = quiz.getQuestions();
     //sample questions for testing purposes
     Question[] questions = {
             new Question("What is the capital of France?", new String[]{"Berlin", "Madrid", "Paris", "Rome"}, 2),
