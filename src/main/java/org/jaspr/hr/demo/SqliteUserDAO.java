@@ -522,21 +522,25 @@ public class SqliteUserDAO implements IUserDAO {
             // Start a transaction
             connection.setAutoCommit(false);
 
-            // Update teacher in the classroom
-            String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
-            try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
-                teacherStatement.setInt(1, selectedTeacher.getTeacherID());
-                teacherStatement.setInt(2, selectedClassroom.getClassRoomNumber());
-                teacherStatement.executeUpdate();
+            // Update teacher in the classroom (only if not null)
+            if (selectedTeacher != null) {
+                String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
+                try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
+                    teacherStatement.setInt(1, selectedTeacher.getTeacherID());
+                    teacherStatement.setInt(2, selectedClassroom.getClassRoomNumber());
+                    teacherStatement.executeUpdate();
+                }
             }
 
-            // Update students in the classroom
-            for (Student student : selectedStudents) {
-                String studentUpdateQuery = "UPDATE students SET classroom_number = ? WHERE studentID = ?";
-                try (PreparedStatement studentStatement = connection.prepareStatement(studentUpdateQuery)) {
-                    studentStatement.setInt(1, selectedClassroom.getClassRoomNumber());
-                    studentStatement.setInt(2, student.getStudentID());
-                    studentStatement.executeUpdate();
+            // Update students in the classroom (only if list is not empty)
+            if (selectedStudents != null && !selectedStudents.isEmpty()) {
+                for (Student student : selectedStudents) {
+                    String studentUpdateQuery = "UPDATE students SET classroom_number = ? WHERE studentID = ?";
+                    try (PreparedStatement studentStatement = connection.prepareStatement(studentUpdateQuery)) {
+                        studentStatement.setInt(1, selectedClassroom.getClassRoomNumber());
+                        studentStatement.setInt(2, student.getStudentID());
+                        studentStatement.executeUpdate();
+                    }
                 }
             }
 
@@ -549,6 +553,7 @@ public class SqliteUserDAO implements IUserDAO {
             return false;
         }
     }
+
 }
 
 

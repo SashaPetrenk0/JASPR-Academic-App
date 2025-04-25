@@ -72,7 +72,7 @@ public class AssignUsersToClassController {
         numTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("numTeachers"));
 
         // Loading classrooms from the DAO
-        ObservableList<Classroom> classrooms = userDAO.getAllClassrooms();
+        ObservableList<Classroom> classrooms = userDAO.getUpdatedClassrooms();
         classroomTable.setItems(classrooms);
 
         // Set classrooms in ComboBox
@@ -130,8 +130,10 @@ public class AssignUsersToClassController {
         Classroom selectedClassroom = classroomComboBox.getValue();
 
         RadioButton selectedTeacherRadioButton = (RadioButton) teacherToggleGroup.getSelectedToggle();
-        Teacher selectedTeacher = (Teacher) selectedTeacherRadioButton.getUserData();
-
+        Teacher selectedTeacher = null;
+        if (selectedTeacherRadioButton != null) {
+            selectedTeacher = (Teacher) selectedTeacherRadioButton.getUserData();
+        }
         // Get selected students
         List<CheckBox> checkboxes = new ArrayList<>();
         for (Node node : studentVBox.getChildren()) {
@@ -140,14 +142,18 @@ public class AssignUsersToClassController {
             }
         }
 
-        // List to store selected students
         List<Student> selectedStudents = new ArrayList<>();
         for (CheckBox checkBox : checkboxes) {
             if (checkBox.isSelected()) {
-                selectedStudents.add((Student) checkBox.getUserData()); // Get the student object associated with the CheckBox
+                selectedStudents.add((Student) checkBox.getUserData());
             }
         }
 
+        // At least one of teacher or student must be selected
+        if (selectedTeacher == null && selectedStudents.isEmpty()) {
+            System.out.println("Invalid assignment, select at least one");
+            return;
+        }
 
         // Call the DAO to assign the users (teacher and students) to the classroom
         boolean assignmentSuccess = userDAO.assignUsers(selectedClassroom, selectedTeacher, selectedStudents);
@@ -159,6 +165,12 @@ public class AssignUsersToClassController {
             // Update the table view to reflect the changes
             ObservableList<Classroom> updatedClassrooms = userDAO.getUpdatedClassrooms();
             classroomTable.setItems(updatedClassrooms); // Set updated classrooms to the table
+        }
+
+        teacherToggleGroup.selectToggle(null);
+
+        for (CheckBox checkBox : checkboxes){
+            checkBox.setSelected(false);
         }
     }
 
