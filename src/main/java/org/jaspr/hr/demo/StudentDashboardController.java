@@ -25,6 +25,8 @@ public class StudentDashboardController {
     @FXML
     private ListView quizLists;
 
+    @FXML
+    private Button takeQuiz;
 
     @FXML
     public void initialize() {
@@ -49,6 +51,13 @@ public class StudentDashboardController {
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
     }
+
+    @FXML
+    protected void onTakeQuiz() throws IOException {
+        Stage stage = (Stage)takeQuiz.getScene().getWindow();
+        SceneChanger.changeScene(stage, "take-quiz-view.fxml");
+    }
+
 
 }
 
