@@ -54,6 +54,8 @@ public class TakeQuizController {
         } else {
             // Optional: Show results or end the quiz
             System.out.println("Quiz finished!");
+            System.out.println("correct" + correctAnswerCount);
+            System.out.println("incorrect" + incorrectAnswerCount);
         }
     }
 
@@ -63,8 +65,17 @@ public class TakeQuizController {
 
     @FXML
     private boolean checkAnswer(String answer){
+        int correctAnswer = questions[questionIndex].getCorrectAnswerIndex();
+        int answerInt = Integer.valueOf(answer);
+        if (answerInt == correctAnswer){
+            System.out.println("correct");
+            return true;
 
-        return false;
+        }else{
+            System.out.println("wrong");
+            return false;
+        }
+
     }
 
     @FXML
@@ -76,21 +87,33 @@ public class TakeQuizController {
         }
         questionIndex++;
 
-
-
-
     }
 
     @FXML
     public void optionBclicked() {
+        if (checkAnswer(optionB.getText())) {
+            correctAnswerCount ++;
+        } else{
+            incorrectAnswerCount ++;
+        }
         questionIndex++;
     }
     @FXML
     public void optionCclicked() {
+        if (checkAnswer(optionC.getText())) {
+            correctAnswerCount ++;
+        } else{
+            incorrectAnswerCount ++;
+        }
         questionIndex++;
     }
     @FXML
     public void optionDclicked() {
+        if (checkAnswer(optionD.getText())) {
+            correctAnswerCount ++;
+        } else{
+            incorrectAnswerCount ++;
+        }
         questionIndex++;
     }
 }
