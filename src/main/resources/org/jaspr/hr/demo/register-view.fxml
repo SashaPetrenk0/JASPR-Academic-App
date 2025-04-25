@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="470.0" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0" style="-fx-background-color: #FEFEFE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.RegisterController">
+<BorderPane maxHeight="480.0" maxWidth="760.0" prefHeight="480.0" prefWidth="760.0" style="-fx-background-color: #FEFEFE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.RegisterController">
     <center>
         <StackPane maxHeight="470.0" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
 
@@ -30,7 +30,7 @@
             </Pane>
 
                <!-- Foreground content -->
-            <VBox alignment="CENTER" maxHeight="470.0" maxWidth="760.0" spacing="20.0">
+            <VBox alignment="CENTER" maxHeight="470.0" maxWidth="760.0" prefWidth="760.0" spacing="20.0">
 
                    <!-- Select Role Section (centered vertically and horizontally) -->
                 <VBox alignment="CENTER" spacing="10.0">
@@ -91,7 +91,7 @@
 
                     <HBox alignment="CENTER">
                         <Button fx:id="submitButtonTeacher" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
-                        <Label fx:id="successfulSignUpLabelTeacher" visible="false" managed="false" style="-fx-font-family: 'Telugu Sangam MN'; -fx-text-fill: #10C69A; -fx-font-weight: bold; -fx-border-color: #A8DDDC; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6;" />
+                        <Label fx:id="successfulSignUpLabelTeacher" managed="false" style="-fx-font-family: 'Telugu Sangam MN Bold'; -fx-text-fill: #10C69A; -fx-font-weight: bold; -fx-border-color: #A8DDDC; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6;" visible="false" />
                     </HBox>
 
 
@@ -137,4 +137,7 @@
 
         </StackPane>
     </center>
+   <bottom>
+      <HBox prefHeight="18.0" prefWidth="760.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
