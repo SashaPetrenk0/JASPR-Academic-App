@@ -1,0 +1,21 @@
+SCRUM MEETING 27/03 – Week 5 
+
+Feedback from Tutor – Checkpoint 1 
+•	Add an admin role
+•	Parents role – view student analytics grades 
+•	To edit repository to show prac work separate from project code
+  o	Have a branch per person and use that for homework
+  o	Make other branches based off a task
+•	Make sure to have a very dense commit history (commit everything separately just in case)
+•	Start coding this week – esp the java FX
+•	For what they are looking for
+  o	Looking at the code and whether it uses good OOP 
+  o	Not actually running the code – the video we submit will cover that
+  o	Looking for good modularisation in terms of using patterns across classes (ties into OOP)
+
+Objectives for the next week 
+  Pragati: Make the classes relating to sign up (user, student, teacher, admin, parent) and begin creating sign up functionalit (only back end). Potentially begin authentication functionality with Sasha.
+  Sasha: Use the UML class diagram to create all the other classes and begin setting them up. Potentially begin authentication functionality with Pragati.
+  Jamie:
+  Audrey:
+  Roman: 

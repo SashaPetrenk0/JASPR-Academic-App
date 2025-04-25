@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jaspr.hr.demo.CreateQuizController"
+>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label text="Create a quiz (as a teacher for now)" />
+
+    <Label fx:id="successMessage" text="" visible="false" />
+
+    <Label text="How many questions do you want?"/>
+    <TextField fx:id="lengthField" promptText = "Name" />
+
+    <Label text = "What is the title of your quiz"/>
+    <TextField fx:id="titleField" promptText = "Name" />
+    <Label text = "What is the topic of your quiz"/>
+    <TextField fx:id="topicField" promptText = "Name" />
+    <Label text = "What is the description of your quiz"/>
+    <TextField fx:id="descriptionField" promptText = "Name" />
+
+    <Button fx:id="createQuiz" text = "Create" onAction="#onCreateQuiz" disable="false"/>
+    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToPage" />
+
+
+</VBox>
