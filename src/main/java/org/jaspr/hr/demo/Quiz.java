@@ -19,8 +19,16 @@ public class Quiz {
         this.topic = topic;
         this.numOfQuestions = numOfQuestions;
         this.author = author;
-      //  this.questions = questions;
 
+
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
     public void setAuthor(int author) {
@@ -34,6 +42,8 @@ public class Quiz {
     public int getId() {
         return id;
     }
+
+
     private void setID(int id){
         this.id = id;
     }
