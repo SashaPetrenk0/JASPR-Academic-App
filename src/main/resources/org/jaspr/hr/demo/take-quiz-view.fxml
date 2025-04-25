@@ -18,11 +18,16 @@
     </padding>
 
     <Label fx:id="questionLabel" text=""/>
+    <HBox>
+        <Button fx:id="optionA" text ="" onAction="#optionAclicked" disable="false"/>
+        <Button fx:id="optionB" text ="" onAction="#optionBclicked" disable="false"/>
+    </HBox>
 
-    <Button fx:id="optionA" text ="" onAction="#optionAclicked"/>
-    <Button fx:id="optionB" text ="" onAction="#optionBclicked"/>
-    <Button fx:id="optionC" text ="" onAction="#optionCclicked"/>
-    <Button fx:id="optionD" text ="" onAction="#optionDclicked"/>
+   <HBox>
+       <Button fx:id="optionC" text ="" onAction="#optionCclicked" disable="false"/>
+       <Button fx:id="optionD" text ="" onAction="#optionDclicked" disable="false"/>
+   </HBox>
+
 
     <Button fx:id="nextQuestion" text="Next" onAction="#nextQuestion" />
 

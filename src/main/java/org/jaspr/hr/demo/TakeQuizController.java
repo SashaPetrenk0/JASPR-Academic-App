@@ -80,6 +80,7 @@ public class TakeQuizController {
 
     @FXML
     public void optionAclicked() {
+        optionA.setDisable(true);
         if (checkAnswer(0)) {
             correctAnswerCount ++;
         } else{
@@ -91,6 +92,7 @@ public class TakeQuizController {
 
     @FXML
     public void optionBclicked() {
+        optionB.setDisable(true);
         if (checkAnswer(1)) {
             correctAnswerCount ++;
         } else{
@@ -100,6 +102,7 @@ public class TakeQuizController {
     }
     @FXML
     public void optionCclicked() {
+        optionC.setDisable(true);
         if (checkAnswer(2)) {
             correctAnswerCount ++;
         } else{
@@ -109,6 +112,7 @@ public class TakeQuizController {
     }
     @FXML
     public void optionDclicked() {
+        optionD.setDisable(true);
         if (checkAnswer(3)) {
             correctAnswerCount ++;
         } else{
