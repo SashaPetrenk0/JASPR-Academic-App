@@ -42,24 +42,24 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     // Pull all attributes of a specific student for Display Details functionality in profile
     @Override
-    public Quiz getQuiz(Quiz quiz) {
-//        try {
-//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE id = ?");
-//            statement.setInt(1, id);
-//            ResultSet resultSet = statement.executeQuery();
-//            if (resultSet.next()) {
-//                return new Quiz(
-//                        id,
-//                        resultSet.getString("title"),
-//                        resultSet.getInt("description"),
-//                        resultSet.getInt("topic"),
-//                        resultSet.getInt("numOfQuestions"),
-//                        resultSet.getInt("author")
-//                );
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public Quiz getQuiz(int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Quiz(
+
+                        resultSet.getString("title"),
+                        resultSet.getString("description"),
+                        resultSet.getString("topic"),
+                        resultSet.getInt("numOfQuestions"),
+                        resultSet.getInt("author")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

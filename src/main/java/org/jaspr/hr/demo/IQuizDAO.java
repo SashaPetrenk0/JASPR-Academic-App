@@ -12,7 +12,7 @@ public interface IQuizDAO {
      */
     public void addQuiz(Quiz quiz);
 
-    public Quiz getQuiz(Quiz quiz);
+    public Quiz getQuiz(int id);
 
     /**
      * Deletes a contact from the database.
