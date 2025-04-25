@@ -17,14 +17,16 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label text="Create a quiz (as a teacher for now)" />
+    <Label fx:id="question-label" text=""/>
 
-    <Label fx:id="successMessage" text="" visible="false" />
+    <Button fx:id="optionA" text ="" onAction="#optionAclicked"/>
+    <Button fx:id="optionB" text ="" onAction="#optionBclicked"/>
+    <Button fx:id="optionC" text ="" onAction="#optionCclicked"/>
+    <Button fx:id="optionD" text ="" onAction="#optionDclicked"/>
 
-    <Label text="How many questions do you want?"/>
+    <Button fx:id="nextQuestion" text="Next" onAction="#nextQuestion" />
 
-    <Button fx:id="createQuiz" text = "Create" onAction="#onCreateQuiz" disable="false"/>
-    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToPage" />
+    <Button fx:id="leaveQuiz" text="Return" onAction="#leaveQuiz" />
 
 
 </VBox>
