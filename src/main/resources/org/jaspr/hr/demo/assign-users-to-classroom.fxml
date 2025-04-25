@@ -20,14 +20,14 @@
 
 
     <HBox spacing="20.0">
-        <Label text="Select a Teacher to Assign:" style="-fx-font-size: 16px;"/>
 
-        <VBox fx:id="teacherRadioList" spacing="10.0"/>
-        <Label text="Select Students:" style="-fx-font-weight: bold;" />
-        <VBox fx:id="studentVBox" spacing="10.0">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
+        <VBox>
+            <Label text="Select Teacher:" style="-fx-font-weight: bold;"/>
+            <VBox fx:id="teacherRadioList" spacing="10.0"/>
+        </VBox>
+        <VBox>
+            <Label text="Select Students:" style="-fx-font-weight: bold;"/>
+            <VBox fx:id="studentVBox" spacing="10.0"/>
         </VBox>
     </HBox>
 
