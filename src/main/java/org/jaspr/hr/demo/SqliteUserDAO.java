@@ -371,6 +371,28 @@ public class SqliteUserDAO implements IUserDAO {
         return students;
     }
 
+    public ObservableList<Teacher> getAllTeachers() {
+        ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+        String query = "SELECT * FROM teachers";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                teachers.add(new Teacher(
+                        rs.getString("name"),
+                        rs.getInt("age"),
+                        rs.getInt("teacherID"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teachers;
+    }
+
+
+
     // For database checking
     public void printAllStudents() {
         try {
@@ -395,6 +417,17 @@ public class SqliteUserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM students");
             statement.executeUpdate();
             System.out.println("All student records deleted.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // For database checking
+    public void clearTeacherTable() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM teachers");
+            statement.executeUpdate();
+            System.out.println("All teacher records deleted.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
