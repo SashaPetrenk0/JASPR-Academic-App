@@ -15,7 +15,7 @@
     </padding>
 
     <Label fx:id="personalisedGreeting" text="Hi" style="-fx-font-size: 18px;"/>
-    <Label text="teacher view"/>
+    <Label text="student view"/>
 
     <Button fx:id="createQuiz" text="Create Quiz" maxWidth="Infinity" onAction="#onAdd"/>
 
