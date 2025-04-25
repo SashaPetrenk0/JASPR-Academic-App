@@ -87,12 +87,13 @@
                     <TextField fx:id="teacherIDField" promptText="Teacher ID" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <TextField fx:id="emailFieldTeacher" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
                     <TextField fx:id="passwordFieldTeacher" promptText="Password" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+
+
                     <HBox alignment="CENTER">
                         <Button fx:id="submitButtonTeacher" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                        <Label fx:id="successfulSignUpLabelTeacher" visible="false" managed="false" style="-fx-font-family: 'Telugu Sangam MN'; -fx-text-fill: #10C69A; -fx-font-weight: bold; -fx-border-color: #A8DDDC; -fx-border-width: 2; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 6;" />
                     </HBox>
-                    <HBox alignment="CENTER">
-                        <Label fx:id="successfulSignUpLabelTeacher" text="" visible="false" style="-fx-font-family: 'Telugu Sangam MN'; -fx-text-fill: #10C69A; -fx-font-weight: bold; -fx-border-color: #A8DDDC; -fx-border-width: 2; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10; -fx-margin-top: 10px;" />
-                    </HBox>
+
 
                 </VBox>
 
