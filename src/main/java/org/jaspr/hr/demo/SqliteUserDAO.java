@@ -44,6 +44,7 @@ public class SqliteUserDAO implements IUserDAO {
                 createParentTable();
                 createAdminTable();
                 createClassroomTable();
+                createStudentClassroom();
 
 
             } else {
@@ -510,7 +511,7 @@ public class SqliteUserDAO implements IUserDAO {
 
         String sql = "SELECT c.classroom_number, " +
                 "       c.capacity, " +
-                "       (SELECT COUNT(*) FROM student_classroom sc WHERE sc.classroom_number = c.classroom_number) AS num_students, " +
+                "       (SELECT COUNT(*) FROM studentClassroom sc WHERE sc.classroom_number = c.classroom_number) AS num_students, " +
                 "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
                 "  FROM classrooms c";
 
@@ -550,7 +551,7 @@ public class SqliteUserDAO implements IUserDAO {
 
             // Assign students (many-to-many, so insert into join table)
             if (selectedStudents != null && !selectedStudents.isEmpty()) {
-                String insertQuery = "INSERT OR IGNORE INTO student_classroom (studentID, classroom_number) VALUES (?, ?)";
+                String insertQuery = "INSERT OR IGNORE INTO studentClassroom (studentID, classroom_number) VALUES (?, ?)";
                 try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
                     for (Student student : selectedStudents) {
                         insertStmt.setInt(1, student.getStudentID());
