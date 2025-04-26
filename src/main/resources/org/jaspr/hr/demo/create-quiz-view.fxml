@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -29,22 +30,23 @@
       </children>
    </HBox>
 
-
-    <VBox fx:id="descriptionSection" managed="false" visible="false">
+      
+          <VBox fx:id="descriptionSection" managed="false" prefHeight="438.0" prefWidth="777.0" visible="false">
         <children>
-            <Label text="What is the description of your quiz?">
+            <Label prefHeight="17.0" prefWidth="212.0" text="What is the description of your quiz?">
                 <VBox.margin>
                     <Insets left="20.0" />
                 </VBox.margin>
             </Label>
-            <HBox prefHeight="56.0" prefWidth="777.0">
+         <Pane prefHeight="90.0" prefWidth="777.0" />
+            <HBox prefHeight="221.0" prefWidth="777.0">
                 <children>
-                    <TextField fx:id="descriptionField" prefHeight="35.0" prefWidth="740.0" promptText="Description" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                    <TextField fx:id="descriptionField" alignment="TOP_LEFT" maxHeight="337.0" prefHeight="179.0" prefWidth="740.0" promptText="Description" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                         <font>
                             <Font name="Telugu Sangam MN" size="13.0" />
                         </font>
                         <HBox.margin>
-                            <Insets left="20.0" />
+                            <Insets left="20.0" right="20.0" />
                         </HBox.margin>
                     </TextField>
                 </children>
@@ -65,7 +67,7 @@
     </HBox>
     <HBox alignment="CENTER_LEFT" maxWidth="797.0" prefHeight="90.0" prefWidth="777.0" spacing="70.0">
         <children>
-          <TextField fx:id="titleField" prefHeight="0.0" prefWidth="737.0" promptText="Name" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+          <TextField fx:id="titleField" prefHeight="82.0" prefWidth="737.0" promptText="Name" style="-fx-background-radius: 10; -fx-border-radius: 10;">
             <HBox.margin>
                <Insets left="20.0" />
             </HBox.margin>
@@ -96,9 +98,9 @@
                <Insets left="20.0" />
             </HBox.margin>
             </TextField>
-         <HBox prefHeight="78.0" prefWidth="473.0">
+         <HBox prefHeight="98.0" prefWidth="473.0">
             <children>
-                <TextField fx:id="topicField" maxHeight="16.0" prefHeight="16.0" prefWidth="473.0" promptText="Topic" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                <TextField fx:id="topicField" alignment="TOP_LEFT" maxHeight="16.0" prefHeight="16.0" prefWidth="473.0" promptText="Topic" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                   <font>
                      <Font name="Telugu Sangam MN" size="13.0" />
                   </font></TextField>
