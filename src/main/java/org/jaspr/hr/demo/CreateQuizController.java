@@ -1,9 +1,11 @@
 package org.jaspr.hr.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,6 +35,12 @@ public class CreateQuizController {
     private Button returnToPrevious;
 
     @FXML
+    private VBox descriptionSection;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
     private void onCreateQuiz() {
 
         String title = titleField.getText();
@@ -57,6 +65,22 @@ public class CreateQuizController {
 
 
     }
+
+    @FXML
+    private void onNextPressed(ActionEvent event) {
+        // Show the description section
+        descriptionSection.setVisible(true);
+        descriptionSection.setManaged(true);
+
+        // Hide "Next" button
+        nextButton.setVisible(false);
+        nextButton.setManaged(false);
+
+        // Show "Create Quiz" button
+        descriptionSection.setVisible(true);
+        descriptionSection.setManaged(true);
+    }
+
 
     @FXML private void returnToPage() throws IOException {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
