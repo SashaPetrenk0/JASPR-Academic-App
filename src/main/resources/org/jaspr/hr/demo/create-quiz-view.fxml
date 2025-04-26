@@ -67,7 +67,7 @@
     </HBox>
     <HBox alignment="CENTER_LEFT" maxWidth="797.0" prefHeight="90.0" prefWidth="777.0" spacing="70.0">
         <children>
-          <TextField fx:id="titleField" prefHeight="82.0" prefWidth="737.0" promptText="Name" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+          <TextField fx:id="titleField" prefHeight="16.0" prefWidth="737.0" promptText="Name" style="-fx-background-radius: 10; -fx-border-radius: 10;">
             <HBox.margin>
                <Insets left="20.0" />
             </HBox.margin>
