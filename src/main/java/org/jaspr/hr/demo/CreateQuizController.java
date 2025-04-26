@@ -34,11 +34,18 @@ public class CreateQuizController {
     @FXML
     private Button returnToPrevious;
 
+
+
     @FXML
     private VBox descriptionSection;
 
     @FXML
     private Button nextButton;
+
+    @FXML
+    private VBox initialQuizFields;
+
+
 
     @FXML
     private void onCreateQuiz() {
@@ -68,6 +75,10 @@ public class CreateQuizController {
 
     @FXML
     private void onNextPressed(ActionEvent event) {
+
+        initialQuizFields.setVisible(false);
+        initialQuizFields.setManaged(false);
+
         // Show the description section
         descriptionSection.setVisible(true);
         descriptionSection.setManaged(true);
