@@ -643,6 +643,29 @@ public class SqliteUserDAO implements IUserDAO {
         return classroomNumbers;
     }
 
+    public Integer getClassroomNumberForTeacher(int teacherID) {
+        Integer classroomNumber = null;
+
+        String query = "SELECT classroom_number FROM classrooms WHERE teacherID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, teacherID);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                classroomNumber = resultSet.getInt("classroom_number");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classroomNumber;
+    }
+
+
+
+
 }
 
 
