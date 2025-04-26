@@ -28,9 +28,11 @@
          </Label>
       </children>
    </HBox>
+
+    <VBox fx:id="initialFields" spacing="10.0">
+        <children>
     <HBox maxWidth="828.0" prefHeight="17.0" prefWidth="500.0">
         <children>
-      
                 <Label text="What is the title of your quiz" />
         </children>
       <VBox.margin>
@@ -83,7 +85,8 @@
          </HBox>
       </children>
    </HBox >
-
+        </children>
+    </VBox>
 
     <VBox fx:id="descriptionSection" visible="false" managed="false">
         <children>
