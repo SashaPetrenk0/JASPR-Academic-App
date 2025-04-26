@@ -13,13 +13,19 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-    <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
+    <HBox alignment="TOP_LEFT" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50; -fx-padding: 10px 20px;">
         <children>
-            <Button fx:id="returnToPrevious" onAction="#returnToPage" text="Return" />
-            <Label />
+            <Button fx:id="returnToPrevious" onAction="#returnToPage" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
+                <font>
+                    <Font name="Arial" size="14.0" />
+                </font>
+            <padding>
+               <Insets bottom="5.0" left="10.0" right="15.0" top="5.0" />
+            </padding>
+            </Button>
         </children>
     </HBox>
-   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="777.0">
+    <HBox alignment="CENTER" prefHeight="40.0" prefWidth="777.0">
       <children>
       
                       <Label text="Create a Multiple Choice Quiz">
@@ -85,7 +91,7 @@
                <Insets left="20.0" />
             </HBox.margin>
          </Label>
-          <Label prefHeight="17.0" prefWidth="832.0" text="Quiz Topic" />
+          <Label prefHeight="17.0" prefWidth="790.0" text="Quiz Topic" />
       </children>
    </HBox>
    <HBox prefHeight="103.0" prefWidth="777.0">
@@ -103,7 +109,10 @@
                 <TextField fx:id="topicField" alignment="TOP_LEFT" maxHeight="16.0" prefHeight="16.0" prefWidth="473.0" promptText="Topic" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                   <font>
                      <Font name="Telugu Sangam MN" size="13.0" />
-                  </font></TextField>
+                  </font>
+                        <HBox.margin>
+                           <Insets left="20.0" />
+                        </HBox.margin></TextField>
             </children>
             <HBox.margin>
                <Insets left="70.0" />
@@ -118,7 +127,7 @@
     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
         <children>
             <Label />
-            <Button fx:id="nextButton" onAction="#onNextPressed" prefHeight="35.0" prefWidth="445.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
+            <Button fx:id="nextButton" onAction="#onNextPressed" prefHeight="145.0" prefWidth="445.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
                 <font>
                     <Font name="Telugu Sangam MN Bold" size="13.0" />
                 </font>
