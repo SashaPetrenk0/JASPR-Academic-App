@@ -30,6 +30,8 @@ import javax.xml.transform.Result;
 
 public class ProfileController {
 
+    private final SqliteUserDAO userDAO = new SqliteUserDAO();
+
     @FXML
     private Label nameLabel;
 
@@ -80,7 +82,14 @@ public class ProfileController {
         emailLabel.setText("Email: " + student.getEmail());
         //TODO: Hash the password, press a button to unhash it
         passwordLabel.setText("Password: " + student.getPassword());
-        enrollmentLabel.setText("Classroom: " + student.getClass());
+
+        List<Integer> classroomNumbers = userDAO.getClassroomNumbersForStudent(student.getStudentID());
+
+        StringBuilder classroomText = new StringBuilder();
+        for (Integer number : classroomNumbers) {
+            classroomText.append("Classroom: ").append(number).append("\n");
+        }
+        enrollmentLabel.setText(classroomText.toString());
         enrollmentLabel.setVisible(true);
     }
 
