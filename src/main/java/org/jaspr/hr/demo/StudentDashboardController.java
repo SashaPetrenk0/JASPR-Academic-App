@@ -17,6 +17,9 @@ public class StudentDashboardController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
     @FXML
+    private Button profileButton;
+
+    @FXML
     private Label personalisedGreeting;
 
     @FXML
@@ -38,7 +41,11 @@ public class StudentDashboardController {
 
     }
 
-
+    @FXML
+    public void onProfileClick() throws IOException{
+        Stage stage = (Stage) profileButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "profile-view.fxml");
+    }
 
 
     /// go to create quiz page
