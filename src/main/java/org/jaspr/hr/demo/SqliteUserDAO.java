@@ -44,6 +44,7 @@ public class SqliteUserDAO implements IUserDAO {
                 createParentTable();
                 createAdminTable();
                 createClassroomTable();
+                createStudentClassroom();
 
 
             } else {
@@ -152,6 +153,23 @@ public class SqliteUserDAO implements IUserDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    private void createStudentClassroom() {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS studentClassroom ("
+                    + "studentID INTEGER, "
+                    + "classroom_number INTEGER, "
+                    + "PRIMARY KEY (studentID, classroom_number), "
+                    + "FOREIGN KEY (studentID) REFERENCES students(studentID),"
+                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number)"
+                    + ")";
+            statement.execute((query));
+            System.out.println("student classroom table is created");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -542,7 +560,7 @@ public class SqliteUserDAO implements IUserDAO {
 
         String sql = "SELECT c.classroom_number, " +
                 "       c.capacity, " +
-                "       COALESCE((SELECT COUNT(*) FROM students s WHERE s.classroom_number = c.classroom_number), 0) AS num_students, " +
+                "       (SELECT COUNT(*) FROM studentClassroom sc WHERE sc.classroom_number = c.classroom_number) AS num_students, " +
                 "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
                 "  FROM classrooms c";
 
@@ -571,7 +589,6 @@ public class SqliteUserDAO implements IUserDAO {
             // Start a transaction
             connection.setAutoCommit(false);
 
-            // Update teacher in the classroom (only if not null)
             if (selectedTeacher != null) {
                 String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
                 try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
@@ -581,17 +598,19 @@ public class SqliteUserDAO implements IUserDAO {
                 }
             }
 
-            // Update students in the classroom (only if list is not empty)
+            // Assign students (many-to-many, so insert into join table)
             if (selectedStudents != null && !selectedStudents.isEmpty()) {
-                for (Student student : selectedStudents) {
-                    String studentUpdateQuery = "UPDATE students SET classroom_number = ? WHERE studentID = ?";
-                    try (PreparedStatement studentStatement = connection.prepareStatement(studentUpdateQuery)) {
-                        studentStatement.setInt(1, selectedClassroom.getClassRoomNumber());
-                        studentStatement.setInt(2, student.getStudentID());
-                        studentStatement.executeUpdate();
+                String insertQuery = "INSERT OR IGNORE INTO studentClassroom (studentID, classroom_number) VALUES (?, ?)";
+                try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+                    for (Student student : selectedStudents) {
+                        insertStmt.setInt(1, student.getStudentID());
+                        insertStmt.setInt(2, selectedClassroom.getClassRoomNumber());
+                        insertStmt.addBatch();
                     }
+                    insertStmt.executeBatch(); // Execute all inserts at once
                 }
             }
+
 
             // Commit the transaction
             connection.commit();
