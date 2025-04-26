@@ -8,12 +8,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_LEFT" prefHeight="548.0" prefWidth="817.0" spacing="20.0" style="-fx-background-color: #FFFF;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.CreateQuizController">
+<VBox alignment="TOP_LEFT" prefHeight="548.0" prefWidth="817.0" spacing="20.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.CreateQuizController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-
-    <Label text="Create a quiz (as a teacher for now)" />
     <HBox alignment="CENTER_LEFT" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
         <children>
             <Button fx:id="returnToPrevious" onAction="#returnToPage" text="Return" />
@@ -21,41 +19,60 @@
         </children>
     </HBox>
 
-    <Label fx:id="successMessage" text="" visible="false" />
-    <VBox maxHeight="67.0" maxWidth="100.0" prefHeight="55.0" prefWidth="100.0" />
-    <VBox prefHeight="200.0" prefWidth="100.0" />
+                <Label text="Create a multiple choice quiz">
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin>
+   </Label>
     <HBox alignment="TOP_RIGHT" maxWidth="200.0" prefHeight="17.0" prefWidth="523.0" />
     <HBox maxWidth="828.0" prefHeight="17.0" prefWidth="500.0">
         <children>
-
-            <Label prefHeight="17.0" prefWidth="606.0" text="How many questions do you want?" />
-            <Label prefHeight="17.0" prefWidth="784.0" text="What is the title of your quiz?" />
+      
+                <Label text="What is the title of your quiz" />
         </children>
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin>
     </HBox>
     <HBox alignment="CENTER_LEFT" maxWidth="797.0" prefHeight="35.0" prefWidth="676.0" spacing="70.0">
         <children>
-            <TextField fx:id="lengthField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="230.0" promptText="Name" style="-fx-background-radius: 50;">
-                <font>
-                    <Font name="Telugu Sangam MN" size="13.0" />
-                </font>
-            </TextField>
-            <TextField fx:id="lengthField1" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="289.0" promptText="Name" style="-fx-background-radius: 50;">
-                <font>
-                    <Font name="Telugu Sangam MN" size="13.0" />
-                </font>
-                <HBox.margin>
-                    <Insets />
-                </HBox.margin>
-            </TextField>
+          <TextField fx:id="titleField" prefHeight="26.0" prefWidth="692.0" promptText="Name" style="-fx-background-radius: 50;">
+            <HBox.margin>
+               <Insets left="20.0" />
+            </HBox.margin>
+         </TextField>
         </children>
     </HBox>
 
-    <Label text="What is the title of your quiz" />
-    <TextField fx:id="titleField" promptText="Name" style="-fx-background-radius: 50;" />
-    <Label text="What is the topic of your quiz" />
-    <TextField fx:id="topicField" promptText="Name" />
-    <Label text="What is the description of your quiz" />
-    <TextField fx:id="descriptionField" promptText="Name" />
+      <Label prefHeight="17.0" prefWidth="606.0" text="How many questions do you want?">
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin>
+   </Label>
+      <TextField fx:id="lengthField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="670.0" promptText="Name" style="-fx-background-radius: 50;">
+          <font>
+              <Font name="Telugu Sangam MN" size="13.0" />
+          </font>
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin>
+      </TextField>
+    <Label text="What is the topic of your quiz">
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin></Label>
+    <TextField fx:id="topicField" promptText="Name">
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin></TextField>
+    <Label text="What is the description of your quiz">
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin></Label>
+    <TextField fx:id="descriptionField" promptText="Name">
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin></TextField>
     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
         <children>
             <Label />
