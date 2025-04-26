@@ -6,9 +6,23 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jaspr.hr.demo.ProfileController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-</AnchorPane>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ListView?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+    <Label text = "Profile" style ="-fx-font-size: 24px;"/>
+    <Label fx:id="nameLabel"/>
+    <Label fx:id="ageLabel"/>
+    <Label fx:id="idLabel"/>
+    <Label fx:id="emailLabel"/>
+    <Label fx:id="passwordLabel"/>
+
+    <!--Only visible for students and teachers-->
+    <Label fx:id="enrollmentLabel" visible = "false"/>
+</VBox>
