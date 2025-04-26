@@ -85,11 +85,16 @@ public class ProfileController {
 
         List<Integer> classroomNumbers = userDAO.getClassroomNumbersForStudent(student.getStudentID());
 
-        StringBuilder classroomText = new StringBuilder();
-        for (Integer number : classroomNumbers) {
-            classroomText.append("Classroom: ").append(number).append("\n");
+        if (classroomNumbers == null || classroomNumbers.isEmpty()){
+            enrollmentLabel.setText("No classroom assigned");
         }
-        enrollmentLabel.setText(classroomText.toString());
+        else {
+            StringBuilder classroomText = new StringBuilder();
+            for (Integer number : classroomNumbers) {
+                classroomText.append("Classroom: ").append(number).append("\n");
+            }
+            enrollmentLabel.setText(classroomText.toString());
+        }
         enrollmentLabel.setVisible(true);
     }
 
@@ -100,7 +105,13 @@ public class ProfileController {
         emailLabel.setText("Email: " + teacher.getEmail());
         //TODO: Hash the password, press a button to unhash it
         passwordLabel.setText("Password: " + teacher.getPassword());
-        enrollmentLabel.setText("Classroom: " + teacher.getClass());
+
+        Integer classroomNumber = userDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
+        if (classroomNumber != null) {
+            enrollmentLabel.setText("Classroom: " + classroomNumber);
+        } else {
+            enrollmentLabel.setText("No classroom assigned");
+        }
         enrollmentLabel.setVisible(true);
     }
 
