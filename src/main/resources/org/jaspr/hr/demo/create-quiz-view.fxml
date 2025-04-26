@@ -82,28 +82,42 @@
             </HBox.margin>
          </HBox>
       </children>
-   </HBox>
-    <Label text="What is the description of your quiz?">
-      <VBox.margin>
-         <Insets left="20.0" />
-      </VBox.margin></Label>
-   <HBox prefHeight="56.0" prefWidth="777.0">
-      <children>
-          <TextField fx:id="descriptionField" prefHeight="35.0" prefWidth="740.0" promptText="Description" style="-fx-background-radius: 10; -fx-border-radius: 10;">
-            <font>
-               <Font name="Telugu Sangam MN" size="13.0" />
-            </font>
-            <HBox.margin>
-               <Insets left="20.0" />
-            </HBox.margin>
-         </TextField>
-      </children>
-   </HBox>
+   </HBox >
+
+
+    <VBox fx:id="descriptionSection" visible="false" managed="false">
+        <children>
+            <Label text="What is the description of your quiz?">
+                <VBox.margin>
+                    <Insets left="20.0" />
+                </VBox.margin>
+            </Label>
+            <HBox prefHeight="56.0" prefWidth="777.0">
+                <children>
+                    <TextField fx:id="descriptionField" prefHeight="35.0" prefWidth="740.0" promptText="Description" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                        <font>
+                            <Font name="Telugu Sangam MN" size="13.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="20.0" />
+                        </HBox.margin>
+                    </TextField>
+                </children>
+            </HBox>
+        </children>
+    </VBox>
+
     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
         <children>
             <Label />
+            <Button fx:id="nextButton" onAction="#onNextPressed" prefHeight="35.0" prefWidth="445.0"
+                    style="-fx-background-radius: 50; -fx-background-color: #C1F3B9;" text="Next">
+                <font>
+                    <Font name="Telugu Sangam MN Bold" size="13.0" />
+                </font>
+            </Button>
 
-            <Button fx:id="createQuiz" disable="false" onAction="#onCreateQuiz" prefHeight="35.0" prefWidth="445.0" style="-fx-background-radius: 50; -fx-background-color: #C1F3B9;" text="Next">
+            <Button fx:id="createQuiz" visible="false" managed="false" disable="false" onAction="#onCreateQuiz" prefHeight="35.0" prefWidth="445.0" style="-fx-background-radius: 50; -fx-background-color: #C1F3B9;" text="Next">
                 <font>
                     <Font name="Telugu Sangam MN Bold" size="13.0" />
                 </font>
