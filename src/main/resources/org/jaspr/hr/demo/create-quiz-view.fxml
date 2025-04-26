@@ -21,7 +21,7 @@
    <HBox alignment="CENTER" prefHeight="40.0" prefWidth="777.0">
       <children>
       
-                      <Label text="Create a multiple choice quiz">
+                      <Label text="Create a Multiple Choice Quiz">
             <font>
                <Font name="Telugu Sangam MN Bold" size="18.0" />
             </font>
@@ -29,66 +29,8 @@
       </children>
    </HBox>
 
-    <VBox fx:id="initialFields" spacing="10.0">
-        <children>
-    <HBox maxWidth="828.0" prefHeight="17.0" prefWidth="500.0">
-        <children>
-                <Label text="What is the title of your quiz" />
-        </children>
-      <VBox.margin>
-         <Insets left="20.0" />
-      </VBox.margin>
-    </HBox>
-    <HBox alignment="CENTER_LEFT" maxWidth="797.0" prefHeight="35.0" prefWidth="676.0" spacing="70.0">
-        <children>
-          <TextField fx:id="titleField" prefHeight="26.0" prefWidth="737.0" promptText="Name" style="-fx-background-radius: 10; -fx-border-radius: 10;">
-            <HBox.margin>
-               <Insets left="20.0" />
-            </HBox.margin>
-            <font>
-               <Font name="Telugu Sangam MN" size="13.0" />
-            </font>
-         </TextField>
-        </children>
-    </HBox>
-   <HBox prefHeight="22.0" prefWidth="777.0">
-      <children>
-      
-            <Label prefHeight="17.0" prefWidth="606.0" text="Number of questions">
-            <HBox.margin>
-               <Insets left="20.0" />
-            </HBox.margin>
-         </Label>
-          <Label prefHeight="17.0" prefWidth="832.0" text="Quiz Topic" />
-      </children>
-   </HBox>
-   <HBox prefHeight="48.0" prefWidth="777.0">
-      <children>
-            <TextField fx:id="lengthField" maxHeight="16.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="16.0" prefWidth="196.0" promptText="Question Number" style="-fx-background-radius: 10; -fx-border-radius: 10;">
-                <font>
-                    <Font name="Telugu Sangam MN" size="13.0" />
-                </font>
-            <HBox.margin>
-               <Insets left="20.0" />
-            </HBox.margin>
-            </TextField>
-         <HBox prefHeight="78.0" prefWidth="473.0">
-            <children>
-                <TextField fx:id="topicField" maxHeight="16.0" prefHeight="16.0" prefWidth="473.0" promptText="Topic" style="-fx-background-radius: 10; -fx-border-radius: 10;">
-                  <font>
-                     <Font name="Telugu Sangam MN" size="13.0" />
-                  </font></TextField>
-            </children>
-            <HBox.margin>
-               <Insets left="70.0" />
-            </HBox.margin>
-         </HBox>
-      </children>
-   </HBox >
-        </children>
-    </VBox>
 
-    <VBox fx:id="descriptionSection" visible="false" managed="false">
+    <VBox fx:id="descriptionSection" managed="false" visible="false">
         <children>
             <Label text="What is the description of your quiz?">
                 <VBox.margin>
@@ -110,23 +52,86 @@
         </children>
     </VBox>
 
+
+    <VBox fx:id="initialQuizFields" spacing="10.0">
+        <children>
+    <HBox maxWidth="828.0" prefHeight="17.0" prefWidth="500.0">
+        <children>
+                <Label prefHeight="68.0" prefWidth="150.0" text="Title of Quiz" />
+        </children>
+      <VBox.margin>
+         <Insets left="20.0" />
+      </VBox.margin>
+    </HBox>
+    <HBox alignment="CENTER_LEFT" maxWidth="797.0" prefHeight="90.0" prefWidth="777.0" spacing="70.0">
+        <children>
+          <TextField fx:id="titleField" prefHeight="0.0" prefWidth="737.0" promptText="Name" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+            <HBox.margin>
+               <Insets left="20.0" />
+            </HBox.margin>
+            <font>
+               <Font name="Telugu Sangam MN" size="13.0" />
+            </font>
+         </TextField>
+        </children>
+    </HBox>
+   <HBox prefHeight="22.0" prefWidth="777.0">
+      <children>
+      
+            <Label prefHeight="17.0" prefWidth="606.0" text="Number of questions">
+            <HBox.margin>
+               <Insets left="20.0" />
+            </HBox.margin>
+         </Label>
+          <Label prefHeight="17.0" prefWidth="832.0" text="Quiz Topic" />
+      </children>
+   </HBox>
+   <HBox prefHeight="103.0" prefWidth="777.0">
+      <children>
+            <TextField fx:id="lengthField" maxHeight="16.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="16.0" prefWidth="196.0" promptText="Question Number" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                <font>
+                    <Font name="Telugu Sangam MN" size="13.0" />
+                </font>
+            <HBox.margin>
+               <Insets left="20.0" />
+            </HBox.margin>
+            </TextField>
+         <HBox prefHeight="78.0" prefWidth="473.0">
+            <children>
+                <TextField fx:id="topicField" maxHeight="16.0" prefHeight="16.0" prefWidth="473.0" promptText="Topic" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                  <font>
+                     <Font name="Telugu Sangam MN" size="13.0" />
+                  </font></TextField>
+            </children>
+            <HBox.margin>
+               <Insets left="70.0" />
+            </HBox.margin>
+         </HBox>
+      </children>
+   </HBox>
+        </children>
+    </VBox>
+   <HBox prefHeight="181.0" prefWidth="777.0" />
+
     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
         <children>
             <Label />
-            <Button fx:id="nextButton" onAction="#onNextPressed" prefHeight="35.0" prefWidth="445.0"
-                    style="-fx-background-radius: 50; -fx-background-color: #C1F3B9;" text="Next">
+            <Button fx:id="nextButton" onAction="#onNextPressed" prefHeight="35.0" prefWidth="445.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
                 <font>
                     <Font name="Telugu Sangam MN Bold" size="13.0" />
                 </font>
             </Button>
 
-            <Button fx:id="createQuiz" visible="false" managed="false" disable="false" onAction="#onCreateQuiz" prefHeight="35.0" prefWidth="445.0" style="-fx-background-radius: 50; -fx-background-color: #C1F3B9;" text="Next">
+            <Button fx:id="createQuiz" disable="false" managed="false" onAction="#onCreateQuiz" prefHeight="35.0" prefWidth="445.0" style="-fx-background-radius: 50; -fx-background-color: #C1F3B9;" text="Create" visible="false">
                 <font>
                     <Font name="Telugu Sangam MN Bold" size="13.0" />
                 </font>
             </Button>
         </children>
     </HBox>
+
+    <Label fx:id="successMessage" alignment="CENTER" style="-fx-text-fill: green; -fx-font-size: 14px;" text="" visible="false" />
+
     <HBox prefHeight="60.0" prefWidth="777.0" />
 
 
