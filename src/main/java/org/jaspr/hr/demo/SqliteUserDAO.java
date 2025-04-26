@@ -539,7 +539,6 @@ public class SqliteUserDAO implements IUserDAO {
             // Start a transaction
             connection.setAutoCommit(false);
 
-            // Update teacher in the classroom (only if not null)
             if (selectedTeacher != null) {
                 String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
                 try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
@@ -549,17 +548,19 @@ public class SqliteUserDAO implements IUserDAO {
                 }
             }
 
-            // Update students in the classroom (only if list is not empty)
+            // Assign students (many-to-many, so insert into join table)
             if (selectedStudents != null && !selectedStudents.isEmpty()) {
-                for (Student student : selectedStudents) {
-                    String studentUpdateQuery = "UPDATE students SET classroom_number = ? WHERE studentID = ?";
-                    try (PreparedStatement studentStatement = connection.prepareStatement(studentUpdateQuery)) {
-                        studentStatement.setInt(1, selectedClassroom.getClassRoomNumber());
-                        studentStatement.setInt(2, student.getStudentID());
-                        studentStatement.executeUpdate();
+                String insertQuery = "INSERT OR IGNORE INTO student_classroom (studentID, classroom_number) VALUES (?, ?)";
+                try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+                    for (Student student : selectedStudents) {
+                        insertStmt.setInt(1, student.getStudentID());
+                        insertStmt.setInt(2, selectedClassroom.getClassRoomNumber());
+                        insertStmt.addBatch();
                     }
+                    insertStmt.executeBatch(); // Execute all inserts at once
                 }
             }
+
 
             // Commit the transaction
             connection.commit();
