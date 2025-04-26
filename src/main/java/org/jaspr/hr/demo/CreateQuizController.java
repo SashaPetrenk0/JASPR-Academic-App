@@ -77,7 +77,7 @@ public class CreateQuizController {
     private void onNextPressed(ActionEvent event) {
 
         initialQuizFields.setVisible(false);
-        initialQuizFields.setManaged(false);
+//        initialQuizFields.setManaged(false);
 
         // Show the description section
         descriptionSection.setVisible(true);
@@ -88,8 +88,8 @@ public class CreateQuizController {
         nextButton.setManaged(false);
 
         // Show "Create Quiz" button
-        descriptionSection.setVisible(true);
-        descriptionSection.setManaged(true);
+        createQuiz.setVisible(true);
+        createQuiz.setManaged(true);
     }
 
 
