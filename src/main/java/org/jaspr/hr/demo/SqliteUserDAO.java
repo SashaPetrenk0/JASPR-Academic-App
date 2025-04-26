@@ -510,7 +510,7 @@ public class SqliteUserDAO implements IUserDAO {
 
         String sql = "SELECT c.classroom_number, " +
                 "       c.capacity, " +
-                "       COALESCE((SELECT COUNT(*) FROM students s WHERE s.classroom_number = c.classroom_number), 0) AS num_students, " +
+                "       (SELECT COUNT(*) FROM student_classroom sc WHERE sc.classroom_number = c.classroom_number) AS num_students, " +
                 "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
                 "  FROM classrooms c";
 
