@@ -1,7 +1,6 @@
 package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
-package org.jaspr.hr.demo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -66,12 +65,56 @@ public class ProfileController {
         }
         if (user instanceof Admin){
             Admin admin = (Admin) user;
-            loadTeacherProfile(admin);
+            loadAdminProfile(admin);
         }
         if (user instanceof Parent){
             Parent parent = (Parent) user;
-            loadTeacherProfile(parent);
+            loadParentProfile(parent);
         }
+    }
+
+    private void loadStudentProfile(Student student){
+        nameLabel.setText("Name: " + student.getName());
+        ageLabel.setText("Age: " + student.getAge());
+        idLabel.setText("ID: " + student.getStudentID());
+        emailLabel.setText("Email: " + student.getEmail());
+        //TODO: Hash the password, press a button to unhash it
+        passwordLabel.setText("Password: " + student.getPassword());
+        enrollmentLabel.setText("Classroom: " + student.getClass());
+        enrollmentLabel.setVisible(true);
+    }
+
+    private void loadTeacherProfile(Teacher teacher){
+        nameLabel.setText("Name: " + teacher.getName());
+        ageLabel.setText("Age: " + teacher.getAge());
+        idLabel.setText("ID: " + teacher.getTeacherID());
+        emailLabel.setText("Email: " + teacher.getEmail());
+        //TODO: Hash the password, press a button to unhash it
+        passwordLabel.setText("Password: " + teacher.getPassword());
+        enrollmentLabel.setText("Classroom: " + teacher.getClass());
+        enrollmentLabel.setVisible(true);
+    }
+
+    private void loadAdminProfile(Admin admin){
+        nameLabel.setText("Name: " + admin.getName());
+        ageLabel.setText("Age: " + admin.getAge());
+        idLabel.setText("ID: " + admin.getAdminID());
+        emailLabel.setText("Email: " + admin.getEmail());
+        //TODO: Hash the password, press a button to unhash it
+        passwordLabel.setText("Password: " + admin.getPassword());
+        enrollmentLabel.setText("Classroom: " + admin.getClass());
+        enrollmentLabel.setVisible(true);
+    }
+
+    private void loadParentProfile(Parent parent){
+        nameLabel.setText("Name: " + parent.getName());
+        ageLabel.setText("Child Name " + parent.getChildName());
+        idLabel.setText("ID: " + parent.getChildID());
+        emailLabel.setText("Email: " + parent.getEmail());
+        //TODO: Hash the password, press a button to unhash it
+        passwordLabel.setText("Password: " + parent.getPassword());
+        enrollmentLabel.setText("Classroom: " + parent.getClass());
+        enrollmentLabel.setVisible(true);
     }
 
 
