@@ -139,7 +139,7 @@ public class SqliteUserDAO implements IUserDAO {
         return rs.getInt(1) > 0;
     }
 
-    private boolean isAdminIDExists(int adminID) throws SQLException {
+    public boolean isAdminIDExists(int adminID) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM admins WHERE adminID = ?");
         stmt.setInt(1, adminID);
         ResultSet rs = stmt.executeQuery();
