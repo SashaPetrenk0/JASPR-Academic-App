@@ -333,8 +333,12 @@ public class RegisterController {
 
     private boolean validateStudentID(String idText) {
         try {
-            Integer.parseInt(idText);
-            studentIDErrorLabel.setVisible(false); // Hide the error if valid
+            int id = Integer.parseInt(idText);
+            if (idText.length() != 5) {
+                showError("Student ID must be exactly 5 digits.", studentIDErrorLabel);
+                return false;
+            }
+            studentIDErrorLabel.setVisible(false);
             return true;
         } catch (NumberFormatException e) {
             showError("Student ID must be a number.", studentIDErrorLabel);
@@ -344,33 +348,49 @@ public class RegisterController {
 
     private boolean validateTeacherID(String idText) {
         try {
-            Integer.parseInt(idText);
+            int id = Integer.parseInt(idText);
+            if (idText.length() != 5) {
+                showError("Teacher ID must be exactly 5 digits.", teacherIDErrorLabel);
+                return false;
+            }
+            teacherIDErrorLabel.setVisible(false);
             return true;
         } catch (NumberFormatException e) {
-            showError("Teacher ID must be a number.", generalErrorLabel);
-            return false;
-        }
-    }
-
-    private boolean validateAdminID(String idText) {
-        try {
-            Integer.parseInt(idText);
-            return true;
-        } catch (NumberFormatException e) {
-            showError("Admin ID must be a number.", generalErrorLabel);
+            showError("Teacher ID must be a number.", teacherIDErrorLabel);
             return false;
         }
     }
 
     private boolean validateChildID(String idText) {
         try {
-            Integer.parseInt(idText);
+            int id = Integer.parseInt(idText);
+            if (idText.length() != 5) {
+                showError("Child ID must be exactly 5 digits.", childIDErrorLabel);
+                return false;
+            }
+            childIDErrorLabel.setVisible(false);
             return true;
         } catch (NumberFormatException e) {
-            showError("Child ID must be a number.", generalErrorLabel);
+            showError("Child ID must be a number.", childIDErrorLabel);
             return false;
         }
     }
+
+    private boolean validateAdminID(String idText) {
+        try {
+            int id = Integer.parseInt(idText);
+            if (idText.length() != 5) {
+                showError("Admin ID must be exactly 5 digits.", adminIDErrorLabel);
+                return false;
+            }
+            adminIDErrorLabel.setVisible(false);
+            return true;
+        } catch (NumberFormatException e) {
+            showError("Admin ID must be a number.", adminIDErrorLabel);
+            return false;
+        }
+    }
+
 
 
     private boolean validateEmail(String email) {
