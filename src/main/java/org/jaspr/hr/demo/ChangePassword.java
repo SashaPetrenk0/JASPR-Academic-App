@@ -107,7 +107,7 @@ public class ChangePassword {
     private void onReturnClicked() throws IOException {
 
         String role = getRole();
-        if ("Student".equals(role)) {
+        if ("Student".equals(role) || "Teacher".equals(role)|| "Admin".equals(role)){
 
             // Load the profile-view.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/profile-view.fxml"));
@@ -122,6 +122,7 @@ public class ChangePassword {
             stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
             stage.show();
         }
+
 //TODO: add this for teacher and admin
     }
 }

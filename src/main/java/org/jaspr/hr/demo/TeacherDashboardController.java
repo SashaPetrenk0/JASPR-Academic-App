@@ -42,6 +42,14 @@ public class TeacherDashboardController {
         }
     }
 
+    private Object currentUser;
+
+    public void setCurrentUser(Object user){
+        this.currentUser = user;
+        if (user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+        }
+    }
     @FXML
     public void onProfileClick() throws IOException {
         Stage stage = (Stage) profileButton.getScene().getWindow();
@@ -52,8 +60,7 @@ public class TeacherDashboardController {
 
         // Get the ProfileController
         ProfileController profileController = loader.getController();
-
-        // Pass the current user to the controller
+        // Pass the current user (updated) to the ProfileController
         profileController.setCurrentUser(user);
 
         // Change the scene

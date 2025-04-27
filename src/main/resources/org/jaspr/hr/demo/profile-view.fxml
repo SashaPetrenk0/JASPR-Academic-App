@@ -24,7 +24,6 @@
     <Label fx:id="ageLabel"/>
     <Label fx:id="idLabel"/>
     <Label fx:id="emailLabel"/>
-    <Label fx:id="passwordLabel"/>
 
     <!--Only visible for students and teachers-->
     <Label fx:id="enrollmentLabel" visible = "false"/>
