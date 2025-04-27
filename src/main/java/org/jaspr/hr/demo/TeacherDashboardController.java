@@ -2,6 +2,7 @@ package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -15,6 +16,9 @@ public class TeacherDashboardController {
     String role = UserSession.getInstance().getRole();
 
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
+
+    @FXML
+    private Button profileButton;
 
     @FXML
     private Label personalisedGreeting;
@@ -35,6 +39,25 @@ public class TeacherDashboardController {
             System.out.println(teacher.getName() + teacher.getTeacherID());
         }
 
+    }
+
+    @FXML
+    public void onProfileClick() throws IOException {
+        Stage stage = (Stage) profileButton.getScene().getWindow();
+
+        // Load the profile-view.fxml
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/profile-view.fxml"));
+        Parent root = loader.load();  // This will return javafx.scene.Parent
+
+        // Get the ProfileController
+        ProfileController profileController = loader.getController();
+
+        // Pass the current user to the controller
+        profileController.setCurrentUser(user);
+
+        // Change the scene
+        stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
+        stage.show();
     }
 
 

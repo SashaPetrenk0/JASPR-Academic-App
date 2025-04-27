@@ -17,6 +17,8 @@
     <Label fx:id="personalisedGreeting" text="Hi" style="-fx-font-size: 18px;"/>
     <Label text="teacher view"/>
 
+    <Button fx:id="profileButton" text="View Profile" onAction="#onProfileClick"/>
+
     <Button fx:id="createQuiz" text="Create Quiz" maxWidth="Infinity" onAction="#onAdd"/>
 
     <VBox xmlns:fx="http://javafx.com/fxml" spacing="10" alignment="CENTER">
