@@ -106,12 +106,47 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     public boolean isStudentIDExists(int studentID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM students WHERE studentID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, studentID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, studentID exists
+                }
+            }
+        }
+        return false; // default: ID does not exist
+    }
+
+    public boolean isTeacherIDExists(int teacherID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM teachers WHERE teacherID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, teacherID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, teacherID exists
+                }
+            }
+        }
+        return false; // default: ID does not exist
+    }
+
+    private boolean isChildIDExists(int studentID) throws SQLException {
         PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM students WHERE studentID = ?");
         stmt.setInt(1, studentID);
         ResultSet rs = stmt.executeQuery();
         rs.next();
         return rs.getInt(1) > 0;
     }
+
+    private boolean isAdminIDExists(int adminID) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM admins WHERE adminID = ?");
+        stmt.setInt(1, adminID);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt(1) > 0;
+    }
+
 
     @Override
     public void addStudent(Student students) throws SQLException, IllegalArgumentException {
