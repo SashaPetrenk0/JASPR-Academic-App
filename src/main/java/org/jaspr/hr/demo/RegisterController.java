@@ -225,11 +225,17 @@ public class RegisterController {
                     try {
                         int childID = Integer.parseInt(childIDText);
 
+                        if (!userDAO.isStudentIDExists(childID)) {
+                            showError("No student with this ID exists. Please check the Child ID.", generalErrorLabel);
+                            return;
+                        }
+
                         Parent newParent = new Parent(name, child, childID, email, password);
                         userDAO.addParent(newParent);
 
                         successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                         successfulSignUpLabelParent.setVisible(true);
+
                     } catch (IllegalArgumentException e) {
                         showError(e.getMessage(), generalErrorLabel);
                     } catch (SQLException e) {
