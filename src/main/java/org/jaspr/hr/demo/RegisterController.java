@@ -263,19 +263,48 @@ public class RegisterController {
                 }
 
                 case "Admin" -> {
+                    resetErrorLabels();
+
                     name = nameFieldAdmin.getText();
                     email = emailFieldAdmin.getText();
                     password = passwordFieldAdmin.getText();
-                    age = Integer.parseInt(ageFieldAdmin.getText().trim());
-                    int adminID = Integer.parseInt(adminIDField.getText().trim());
+                    String ageText = ageFieldAdmin.getText().trim();
+                    String adminIDText = adminIDField.getText().trim();
 
-                    Admin newAdmin = new Admin(name, age, adminID, email, password);
-                    userDAO.addAdmin(newAdmin);
-                    successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
-                    successfulSignUpLabelAdmin.setVisible(true);
+                    if (name.isEmpty() ||
+                            email.isEmpty() ||
+                            password.isEmpty() ||
+                            ageText.isEmpty() ||
+                            adminIDText.isEmpty()) {
+                        showError("All fields must be filled out.", generalErrorLabel);
+                        return;
+                    }
 
-                    // TODO: Error handling for incorrect user inputs
+                    if (!validateName(name) ||
+                            !validateEmail(email) ||
+                            !validatePassword(password) ||
+                            !validateAge(ageText) ||
+                            !validateAdminID(adminIDText)) {
+                        return;
+                    }
+
+                    try {
+                        int age = Integer.parseInt(ageText);
+                        int adminID = Integer.parseInt(adminIDText);
+
+                        Admin newAdmin = new Admin(name, age, adminID, email, password);
+                        userDAO.addAdmin(newAdmin);
+
+                        successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
+                        successfulSignUpLabelAdmin.setVisible(true);
+                    } catch (IllegalArgumentException e) {
+                        showError(e.getMessage(), generalErrorLabel);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        showError("Database error, please try again.", generalErrorLabel);
+                    }
                 }
+
 
             }
 
