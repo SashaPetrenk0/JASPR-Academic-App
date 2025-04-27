@@ -115,73 +115,44 @@ public class RegisterController {
         private void onSubmitClicked(){
             String role = roleComboBox.getValue();
             String name, email, password;
-            int age = 0;
+            //int age = 0;
 
             switch (role){
                 case "Student" -> {
+                    resetErrorLabels();
+
                     name = nameFieldStudent.getText();
                     email = emailFieldStudent.getText();
                     password = passwordFieldStudent.getText();
-
-                    resetErrorLabels();
-
-                    // Validation for empty fields
-                    if (name.isEmpty()) {
-                        showError("Name cannot be empty.", nameErrorLabel);
-                        return;
-                    }
-                    if (email.isEmpty()) {
-                        showError("Email cannot be empty.", emailErrorLabel);
-                        return;
-                    }
-                    if (password.isEmpty()) {
-                        showError("Password cannot be empty.", passwordErrorLabel);
-                        return;
-                    }
-
-                    if (!validateName(name) ||
-                            !validateEmail(email) ||
-                            !validatePassword(password) ||
-                            !validateAge(ageFieldStudent.getText()) ||
-                            !validateStudentID(studentIDField.getText())) {
-                        return; // stop if any validation fails
-                    }
-
-                    // Handle age input with validation and error handling
                     String ageText = ageFieldStudent.getText().trim();
-                    if (ageText.isEmpty() || !ageText.matches("\\d+")) {  // Check if age is empty or contains non-numeric characters
-                        showError("Please enter a valid age.", ageErrorLabel);
+                    String studentIDText = studentIDField.getText().trim();
+
+                    if (name.isEmpty() || email.isEmpty() || password.isEmpty() || ageText.isEmpty() || studentIDText.isEmpty()) {
+                        showError("All fields must be filled out.", generalErrorLabel);
+                        return;
+                    }
+
+                    if (!validateName(name) || !validateEmail(email) || !validatePassword(password)
+                            || !validateAge(ageText) || !validateStudentID(studentIDText)) {
                         return;
                     }
 
                     try {
-                        age = Integer.parseInt(ageText);  // Try parsing the age input
-                    } catch (NumberFormatException e) {
-                        showError("Invalid age input, please enter a valid number.", ageErrorLabel);
-                        return;
-                    }
+                        int age = Integer.parseInt(ageText);
+                        int studentID = Integer.parseInt(studentIDText);
 
-                    try {
-                        int studentID = Integer.parseInt(studentIDField.getText().trim());
-
-                        // Create the new student object
                         Student newStudent = new Student(name, age, studentID, email, password);
-
-                        // Add the student to the database
                         userDAO.addStudent(newStudent);
 
-                        // Show success message
-                        //showSuccess("Registration successful!");
                         successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                         successfulSignUpLabelStudent.setVisible(true);
                     } catch (IllegalArgumentException e) {
                         showError(e.getMessage(), generalErrorLabel);
                     } catch (SQLException e) {
-                        e.printStackTrace();  // Add this line to see what actually failed
+                        e.printStackTrace();
                         showError("Database error, please try again.", generalErrorLabel);
                     }
                 }
-
 
                 case "Teacher" -> {
                     resetErrorLabels();
@@ -189,23 +160,22 @@ public class RegisterController {
                     name = nameFieldTeacher.getText();
                     email = emailFieldTeacher.getText();
                     password = passwordFieldTeacher.getText();
+                    String ageText = ageFieldTeacher.getText().trim();
+                    String teacherIDText = teacherIDField.getText().trim();
 
-                    if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    if (name.isEmpty() || email.isEmpty() || password.isEmpty() || ageText.isEmpty() || teacherIDText.isEmpty()) {
                         showError("All fields must be filled out.", generalErrorLabel);
                         return;
                     }
 
-                    if (!validateName(name) ||
-                            !validateEmail(email) ||
-                            !validatePassword(password) ||
-                            !validateAge(ageFieldTeacher.getText()) ||
-                            !validateTeacherID(teacherIDField.getText())) {
+                    if (!validateName(name) || !validateEmail(email) || !validatePassword(password)
+                            || !validateAge(ageText) || !validateTeacherID(teacherIDText)) {
                         return;
                     }
 
                     try {
-                        age = Integer.parseInt(ageFieldTeacher.getText().trim());
-                        int teacherID = Integer.parseInt(teacherIDField.getText().trim());
+                        int age = Integer.parseInt(ageText);
+                        int teacherID = Integer.parseInt(teacherIDText);
 
                         Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
                         userDAO.addTeacher(newTeacher);
@@ -219,6 +189,7 @@ public class RegisterController {
                         showError("Database error, please try again.", generalErrorLabel);
                     }
                 }
+
 
                 case "Parent" -> {
                     resetErrorLabels();
@@ -304,12 +275,7 @@ public class RegisterController {
                         showError("Database error, please try again.", generalErrorLabel);
                     }
                 }
-
-
             }
-
-
-
         }
 
     @FXML private void returnToHomePage() throws IOException {
