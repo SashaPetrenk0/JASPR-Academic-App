@@ -23,7 +23,7 @@ public interface IUserDAO {
      * Adds a new teacher to the database.
      * @param teacher The user to add.
      */
-    public void addTeacher(Teacher teacher);
+    public void addTeacher(Teacher teacher) throws SQLException;
     /**
      * Adds a new admin to the database.
      * @param admin The user to add.
@@ -33,7 +33,7 @@ public interface IUserDAO {
      * Adds a new parent to the database.
      * @param parent The user to add.
      */
-    public void addParent(Parent parent);
+    public void addParent(Parent parent) throws SQLException;
 
 
     public String Authenticate(String email, String password);
