@@ -1,32 +1,13 @@
 package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
-
-import javafx.fxml.FXML;
-import javafx.util.StringConverter;
-
-import javax.xml.transform.Result;
 
 public class ProfileController {
 
@@ -74,10 +55,6 @@ public class ProfileController {
         else if (user instanceof Admin){
             Admin admin = (Admin) user;
             loadAdminProfile(admin);
-        }
-        else if (user instanceof Parent){
-            Parent parent = (Parent) user;
-            loadParentProfile(parent);
         }
     }
 
@@ -130,22 +107,26 @@ public class ProfileController {
         passwordLabel.setText("Password: " + admin.getPassword());
     }
 
-    private void loadParentProfile(Parent parent){
-        nameLabel.setText("Name: " + parent.getName());
-        ageLabel.setText("Child Name " + parent.getChildName());
-        idLabel.setText("ID: " + parent.getChildID());
-        emailLabel.setText("Email: " + parent.getEmail());
-        //TODO: Hash the password, press a button to unhash it
-        passwordLabel.setText("Password: " + parent.getPassword());
-        enrollmentLabel.setText("Classroom: " + parent.getClass());
-        enrollmentLabel.setVisible(true);
-    }
-
-
+    @FXML
     private void onChangePwdClicked(){
-        Stage stage = (Stage) changePwd.getScene().getWindow();
-        SceneChanger.changeScene(stage, "change-password.fxml");
+        try {
+            Stage stage = (Stage) changePwd.getScene().getWindow(); // only once
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("change-password.fxml"));
+            Parent root = loader.load();
+            ChangePassword controller = loader.getController();
+            controller.setCurrentUser(currentUser); // pass the logged in user
+
+            // Set scene with specific width and height
+            Scene scene = new Scene(root, HelloApplication.WIDTH, HelloApplication.HEIGHT); // width = 600, height = 400 (example)
+            stage.setScene(scene); // just reuse the stage
+            stage.show();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
+
 
 
     @FXML
@@ -154,17 +135,14 @@ public class ProfileController {
         String role = UserSession.getInstance().getRole();
 
         if ("Student".equals(role)) {
-            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
-        } else if ("Teacher".equals(role)) {
-            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
-        } else if ("Admin".equals(role)) {
-            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
-////            } else if ("Parent".equals(role)) {
-//                SceneChanger.changeScene(stage, "parent-dashboard-view.fxml");
-        } else {
-            // Fallback if something weird happens
-            SceneChanger.changeScene(stage, "login-view.fxml");
-        }
-    }
+            // Reload the student data and show updated profile
+            Student student = (Student) currentUser;
+            student = userDAO.getStudent(student.getStudentID()); // Refresh student info
+            setCurrentUser(student); // Set updated student info
 
+            // Navigate to the student profile or dashboard
+            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
+        }
+        // Add similar logic for Teacher and Admin
+    }
 }

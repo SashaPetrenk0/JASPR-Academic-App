@@ -1,34 +1,21 @@
 package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.util.StringConverter;
-import org.w3c.dom.Text;
-
-import javax.xml.transform.Result;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.collections.FXCollections;
+import java.io.IOException;
+import javafx.scene.Parent;
 
 public class ChangePassword {
 
@@ -38,21 +25,25 @@ public class ChangePassword {
     private TextField emailField;
 
     @FXML
-    private PasswordField currentPasswordField;
+    private TextField currentPasswordField;
 
     @FXML
-    private PasswordField newPasswordField;
+    private TextField newPasswordField;
 
     @FXML
     private Label ChangePwdError;
+
+    @FXML
+    private Button ReturnButton;
 
     private Object currentUser;
 
     public void setCurrentUser(Object user) {
         this.currentUser = user;
+
     }
 
-    public String getRole(){
+    public String getRole() {
         if (currentUser instanceof Student) {
             return "Student";
         } else if (currentUser instanceof Teacher) {
@@ -72,21 +63,68 @@ public class ChangePassword {
         String newPwd = newPasswordField.getText();
         String role = getRole();
 
-        if (emailField == null || currentPwd == null || newPwd == null){
+        if (email == null || email.isEmpty() || currentPwd == null || currentPwd.isEmpty() || newPwd == null || newPwd.isEmpty()) {
             ChangePwdError.setText("Please fill all fields.");
-        }
-        else{
+            ChangePwdError.setVisible(true);
+        } else {
             boolean success = userDAO.changePassword(email, currentPwd, newPwd, role);
 
-            if (success){
+            if (success) {
+                // After successful password change, fetch the updated user data
+                refreshCurrentUser();
+
+                // Update currentUser immediately after password change
                 ChangePwdError.setText("Password Successfully Changed!");
-            }
-            else{
+                ChangePwdError.setVisible(true);
+            } else {
                 ChangePwdError.setText("Error changing password. Please confirm your details are correct.");
+                ChangePwdError.setVisible(true);
             }
         }
+    }
 
+    private void refreshCurrentUser() {
+        String role = getRole();
+        if ("Student".equals(role)) {
+            Student student = (Student) currentUser;
+            student = userDAO.getStudent(student.getStudentID()); // Fetch updated student info
+            setCurrentUser(student); // Set the updated student info
+        } else if ("Teacher".equals(role)) {
+            Teacher teacher = (Teacher) currentUser;
+            teacher = userDAO.getTeacher(teacher.getTeacherID()); // Fetch updated teacher info
+            setCurrentUser(teacher); // Set the updated teacher info
+        } else if ("Admin".equals(role)) {
+            Admin admin = (Admin) currentUser;
+            admin = userDAO.getAdmin(admin.getAdminID()); // Fetch updated admin info
+            setCurrentUser(admin); // Set the updated admin info
+        } else {
+            // Fallback, handle unknown role
+            ChangePwdError.setText("Unknown role.");
+            ChangePwdError.setVisible(true);
+        }
+    }
+    @FXML
+    private void onReturnClicked() throws IOException {
 
+        String role = getRole();
+        if ("Student".equals(role)) {
 
+            // Load the profile-view.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/profile-view.fxml"));
+            javafx.scene.Parent root = loader.load();  // This will return javafx.scene.Parent
+
+            // Get the ProfileController
+            ProfileController profileController = loader.getController();
+
+            // Pass the current user to the controller
+            profileController.setCurrentUser(currentUser);
+            Stage stage = (Stage) ReturnButton.getScene().getWindow();
+            stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
+            stage.show();
+        }
+//TODO: add this for teacher and admin
     }
 }
+
+
+
