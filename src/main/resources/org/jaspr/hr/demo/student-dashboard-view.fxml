@@ -16,7 +16,7 @@
 
     <HBox>
         <Label fx:id="personalisedGreeting" text="Hi" style="-fx-font-size: 18px;"/>
-        <Button fx:id="profileButton" text="Create Quiz" onAction="#onProfileClick"/>
+        <Button fx:id="profileButton" text="View Profile" onAction="#onProfileClick"/>
 
     </HBox>
 

@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import java.io.IOException;
+import javafx.scene.Parent;
 
 
 public class StudentDashboardController {
@@ -31,8 +32,6 @@ public class StudentDashboardController {
 
     @FXML
     public void initialize() {
-
-
         if ("Student".equals(role) && user instanceof Student){
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
@@ -42,9 +41,22 @@ public class StudentDashboardController {
     }
 
     @FXML
-    public void onProfileClick() throws IOException{
+    public void onProfileClick() throws IOException {
         Stage stage = (Stage) profileButton.getScene().getWindow();
-        SceneChanger.changeScene(stage, "profile-view.fxml");
+
+        // Load the profile-view.fxml
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/profile-view.fxml"));
+        Parent root = loader.load();  // This will return javafx.scene.Parent
+
+        // Get the ProfileController
+        ProfileController profileController = loader.getController();
+
+        // Pass the current user to the controller
+        profileController.setCurrentUser(user);
+
+        // Change the scene
+        stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
+        stage.show();
     }
 
 
