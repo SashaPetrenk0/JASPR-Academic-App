@@ -12,7 +12,7 @@ public class Admin extends User{
 
     @Override
     public String getRole() {
-        return "Parent";
+        return "Admin";
     }
 
     public int getAge() {
