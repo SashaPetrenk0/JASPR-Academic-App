@@ -167,23 +167,24 @@ public class SqliteUserDAO implements IUserDAO {
         stmt.executeUpdate();
     }
 
-
-
     @Override
-    public void addTeacher (Teacher teacher){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
-            statement.setString(1, teacher.getName());
-            statement.setInt(2, teacher.getAge());
-            statement.setInt(3, teacher.getTeacherID());
-            statement.setString(4, teacher.getEmail());
-            statement.setString(5, teacher.getPassword());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void addTeacher(Teacher teacher) throws SQLException, IllegalArgumentException {
+        if (isUserExists(teacher.getEmail())) {
+            throw new IllegalArgumentException("Email already in use.");
         }
+        if (isTeacherIDExists(teacher.getTeacherID())) {
+            throw new IllegalArgumentException("Teacher ID already exists.");
+        }
+
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password) VALUES (?, ?, ?, ?, ?)");
+        stmt.setString(1, teacher.getName());
+        stmt.setInt(2, teacher.getAge());
+        stmt.setInt(3, teacher.getTeacherID());
+        stmt.setString(4, teacher.getEmail());
+        stmt.setString(5, teacher.getPassword());
+        stmt.executeUpdate();
     }
+
     @Override
     public void addAdmin(Admin admin) throws SQLException, IllegalArgumentException {
         if (isUserExists(admin.getEmail())) {
