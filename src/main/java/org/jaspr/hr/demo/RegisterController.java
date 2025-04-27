@@ -218,7 +218,7 @@ public class RegisterController {
                             !validateName(child) ||
                             !validateEmail(email) ||
                             !validatePassword(password) ||
-                            !validateChildID(childIDText)) {
+                            !validateStudentID(childIDText)) {
                         return;
                     }
 
