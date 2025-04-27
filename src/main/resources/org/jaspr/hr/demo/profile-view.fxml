@@ -28,6 +28,8 @@
 
     <!--Only visible for students and teachers-->
     <Label fx:id="enrollmentLabel" visible = "false"/>
+    <Button fx:id="changePwd" text="Change Password" onAction="#onChangePwdClicked" />
+
 
     <Button fx:id="ReturnButton" text="Return" onAction="#onReturnClicked" />
 

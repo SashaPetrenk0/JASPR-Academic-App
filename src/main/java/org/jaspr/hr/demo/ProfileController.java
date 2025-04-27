@@ -52,6 +52,9 @@ public class ProfileController {
     private Label enrollmentLabel;
 
     @FXML
+    private Button changePwd;
+
+    @FXML
     private Button ReturnButton;
 
     // Either student, teacher, admin, parent
@@ -137,6 +140,9 @@ public class ProfileController {
         enrollmentLabel.setText("Classroom: " + parent.getClass());
         enrollmentLabel.setVisible(true);
     }
+
+    private void onChangePwdClicked
+
 
     @FXML
     private void onReturnClicked() {
