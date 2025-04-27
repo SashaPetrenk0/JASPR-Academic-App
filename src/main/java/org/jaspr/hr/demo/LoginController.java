@@ -80,6 +80,8 @@ public class LoginController {
 
         // If "Admin" role returned
         if ("Admin".equals(role)){
+            Admin loggedInAdmin = userDAO.getLoggedInAdmin(email, password);
+            UserSession.getInstance().setCurrentUser(loggedInAdmin, role);
             // Change scene to student dashboard
             System.out.println("Admin successfully logged in");
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with admin dashboard
