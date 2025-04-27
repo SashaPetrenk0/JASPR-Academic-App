@@ -297,6 +297,37 @@ public class RegisterController {
         }
     }
 
+    private boolean validateTeacherID(String idText) {
+        try {
+            Integer.parseInt(idText);
+            return true;
+        } catch (NumberFormatException e) {
+            showError("Teacher ID must be a number.", generalErrorLabel);
+            return false;
+        }
+    }
+
+    private boolean validateAdminID(String idText) {
+        try {
+            Integer.parseInt(idText);
+            return true;
+        } catch (NumberFormatException e) {
+            showError("Admin ID must be a number.", generalErrorLabel);
+            return false;
+        }
+    }
+
+    private boolean validateChildID(String idText) {
+        try {
+            Integer.parseInt(idText);
+            return true;
+        } catch (NumberFormatException e) {
+            showError("Child ID must be a number.", generalErrorLabel);
+            return false;
+        }
+    }
+
+
     private boolean validateEmail(String email) {
         if (email == null || !email.matches("^\\S+@\\S+\\.\\S+$")) {
             showError("Invalid email format.", emailErrorLabel);
