@@ -614,6 +614,24 @@ public class SqliteUserDAO implements IUserDAO {
             connection.setAutoCommit(false);
 
             if (selectedTeacher != null) {
+                // Check if the classroom already has a teacher assigned
+                String checkTeacherQuery = "SELECT teacherID FROM classrooms WHERE classroom_number = ?";
+                try (PreparedStatement checkTeacherStmt = connection.prepareStatement(checkTeacherQuery)) {
+                    checkTeacherStmt.setInt(1, selectedClassroom.getClassRoomNumber());
+                    try (ResultSet rs = checkTeacherStmt.executeQuery()) {
+                        if (rs.next()) {
+                            int currentTeacherID = rs.getInt("teacherID");
+                            // If the classroom already has a teacher assigned, don't update
+                            if (currentTeacherID != 0) {
+                                System.out.println("This classroom already has a teacher assigned.");
+                                connection.commit();
+                                return false; // Teacher assignment skipped
+                            }
+                        }
+                    }
+                }
+
+                // If no teacher is assigned, proceed with updating the teacher
                 String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
                 try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
                     teacherStatement.setInt(1, selectedTeacher.getTeacherID());
@@ -635,7 +653,6 @@ public class SqliteUserDAO implements IUserDAO {
                 }
             }
 
-
             // Commit the transaction
             connection.commit();
             return true;
@@ -645,6 +662,7 @@ public class SqliteUserDAO implements IUserDAO {
             return false;
         }
     }
+
 
     public List<Integer> getClassroomNumbersForStudent(int studentID) {
         List<Integer> classroomNumbers = new ArrayList<>();
