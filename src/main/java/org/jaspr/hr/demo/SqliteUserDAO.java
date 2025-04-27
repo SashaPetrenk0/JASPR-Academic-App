@@ -439,20 +439,40 @@ public class SqliteUserDAO implements IUserDAO {
                 return false;
         }
 
-
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE " + tableName + " SET password = ?, WHERE email = ? AND password = ?");
-            statement.setString(1, newPassword);
-            statement.setString(2, email);
-            statement.setString(3, oldPassword);
-            //TODO: Error Handling
-            statement.executeUpdate();
-            return true;
+            // First check if the old password matches the one in the database
+            String checkPasswordQuery = "SELECT password FROM " + tableName + " WHERE email = ?";
+            PreparedStatement checkStatement = connection.prepareStatement(checkPasswordQuery);
+            checkStatement.setString(1, email);
+
+            ResultSet rs = checkStatement.executeQuery();
+
+            if (rs.next()) {
+                String currentPasswordInDb = rs.getString("password");
+
+                if (currentPasswordInDb.equals(oldPassword)) {
+                    // Password matches, now update it
+                    String updateQuery = "UPDATE " + tableName + " SET password = ? WHERE email = ?";
+                    PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+                    updateStatement.setString(1, newPassword);
+                    updateStatement.setString(2, email);
+
+                    int rowsUpdated = updateStatement.executeUpdate();
+                    return rowsUpdated > 0;  // Ensure at least one row is updated
+                } else {
+                    System.out.println("Old password does not match.");
+                    return false;
+                }
+            } else {
+                System.out.println("Email not found.");
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
 
 
     // For use when viewing student names in lists of quiz results etc.
