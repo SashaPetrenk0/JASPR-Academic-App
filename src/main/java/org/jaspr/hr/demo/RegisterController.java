@@ -310,6 +310,14 @@ public class RegisterController {
     // Reset all error labels
     private void resetErrorLabels() {
         generalErrorLabel.setVisible(false);
+        nameErrorLabel.setVisible(false);
+        ageErrorLabel.setVisible(false);
+        studentIDErrorLabel.setVisible(false);
+        teacherIDErrorLabel.setVisible(false);
+        childIDErrorLabel.setVisible(false);
+        adminIDErrorLabel.setVisible(false);
+        emailErrorLabel.setVisible(false);
+        passwordErrorLabel.setVisible(false);
     }
 
     private boolean validateName(String name) {
