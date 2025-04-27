@@ -28,7 +28,7 @@ public interface IUserDAO {
      * Adds a new admin to the database.
      * @param admin The user to add.
      */
-    public void addAdmin(Admin admin);
+    public void addAdmin(Admin admin) throws SQLException;
     /**
      * Adds a new parent to the database.
      * @param parent The user to add.
