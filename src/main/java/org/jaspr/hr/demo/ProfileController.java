@@ -141,7 +141,11 @@ public class ProfileController {
         enrollmentLabel.setVisible(true);
     }
 
-    private void onChangePwdClicked
+
+    private void onChangePwdClicked(){
+        Stage stage = (Stage) changePwd.getScene().getWindow();
+        SceneChanger.changeScene(stage, "change-password.fxml");
+    }
 
 
     @FXML
