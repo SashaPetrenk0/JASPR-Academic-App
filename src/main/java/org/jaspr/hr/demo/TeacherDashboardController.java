@@ -29,6 +29,8 @@ public class TeacherDashboardController {
     @FXML
     private ListView quizLists;
 
+    @FXML
+    private Button logoutButton;
 
     @FXML
     public void initialize() {
@@ -38,7 +40,6 @@ public class TeacherDashboardController {
             personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
             System.out.println(teacher.getName() + teacher.getTeacherID());
         }
-
     }
 
     @FXML
@@ -60,18 +61,7 @@ public class TeacherDashboardController {
         stage.show();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    //TODO: Use scene changer here:
     /// go to create quiz page
     @FXML
     protected void onAdd() throws IOException {
@@ -79,6 +69,15 @@ public class TeacherDashboardController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-quiz-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
+    }
+
+    @FXML
+    private void onLogoutClicked(){
+        UserSession.getInstance().clearSession();
+        System.out.println("User logged out successfully");
+
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
     }
 
 }
