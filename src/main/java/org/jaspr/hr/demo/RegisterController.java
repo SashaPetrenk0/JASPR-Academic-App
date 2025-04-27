@@ -36,6 +36,11 @@ public class RegisterController {
     @FXML
     private Label nameErrorLabel, ageErrorLabel, studentIDErrorLabel, emailErrorLabel, passwordErrorLabel, generalErrorLabel;;
 
+    @FXML private Label teacherIDErrorLabel;
+    @FXML private Label childIDErrorLabel;
+    @FXML private Label adminIDErrorLabel;
+
+
     @FXML
     private Label successfulSignUpLabelStudent, successfulSignUpLabelTeacher, successfulSignUpLabelParent, successfulSignUpLabelAdmin;
     @FXML
