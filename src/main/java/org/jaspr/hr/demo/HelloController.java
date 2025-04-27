@@ -16,7 +16,16 @@ public class HelloController {
     @FXML
     private Button loginButton;
 
-    // ... other methods
+    private final IUserDAO userDAO = new SqliteUserDAO();
+
+    @FXML
+    public void initialize() {
+        if (!userDAO.hasAnyRegisteredUsers()) {
+            loginButton.setDisable(true);   // Keep it disabled
+        } else {
+            loginButton.setDisable(false);  // Enable login
+        }
+    }
 
     @FXML
     protected void onLoginButtonClick() throws IOException {

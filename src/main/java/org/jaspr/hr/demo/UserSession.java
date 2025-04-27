@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import org.jaspr.hr.demo.users.User;
+
 public class UserSession {
         // Static instance for Singleton
         private static UserSession instance;

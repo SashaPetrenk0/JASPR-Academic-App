@@ -1,6 +1,6 @@
-package org.jaspr.hr.demo;
+package org.jaspr.hr.demo.users;
 
-public class Parent extends User{
+public class Parent extends User {
     private String childName;
     private int childID;
 

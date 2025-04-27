@@ -1,6 +1,10 @@
 package org.jaspr.hr.demo;
 
-import javax.xml.transform.Result;
+import org.jaspr.hr.demo.users.Admin;
+import org.jaspr.hr.demo.users.Parent;
+import org.jaspr.hr.demo.users.Student;
+import org.jaspr.hr.demo.users.Teacher;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,65 +88,141 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addStudent (Student student){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
-            statement.setString(1, student.getName());
-            statement.setInt(2, student.getAge());
-            statement.setInt(3, student.getStudentID());
-            statement.setString(4, student.getEmail());
-            statement.setString(5, student.getPassword());
-            statement.executeUpdate();
-        } catch (Exception e) {
+    public boolean isUserExists(String email) {
+        try {
+            // SQL query to check if a user with the provided email exists
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students WHERE email = ?");
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            // If the result set has any rows, the user already exists
+            return rs.next();  // Returns true if there's a match, false otherwise
+        } catch (SQLException e) {
             e.printStackTrace();
+            return false;  // In case of error, assume user does not exist
         }
     }
-    @Override
-    public void addTeacher (Teacher teacher){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
-            statement.setString(1, teacher.getName());
-            statement.setInt(2, teacher.getAge());
-            statement.setInt(3, teacher.getTeacherID());
-            statement.setString(4, teacher.getEmail());
-            statement.setString(5, teacher.getPassword());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+    public boolean isStudentIDExists(int studentID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM students WHERE studentID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, studentID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, studentID exists
+                }
+            }
         }
+        return false; // default: ID does not exist
     }
-    @Override
-    public void addAdmin (Admin admin){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
-            statement.setString(1, admin.getName());
-            statement.setInt(2, admin.getAge());
-            statement.setInt(3, admin.getAdminID());
-            statement.setString(4, admin.getEmail());
-            statement.setString(5, admin.getPassword());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+
+    public boolean isTeacherIDExists(int teacherID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM teachers WHERE teacherID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, teacherID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, teacherID exists
+                }
+            }
         }
+        return false; // default: ID does not exist
     }
+
+    private boolean isChildIDExists(int studentID) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM students WHERE studentID = ?");
+        stmt.setInt(1, studentID);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt(1) > 0;
+    }
+
+    private boolean isAdminIDExists(int adminID) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM admins WHERE adminID = ?");
+        stmt.setInt(1, adminID);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt(1) > 0;
+    }
+
+
     @Override
-    public void addParent (Parent parent){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
-            statement.setString(1, parent.getName());
-            statement.setInt(2, parent.getChildID());
-            statement.setString(3, parent.getChildName());
-            statement.setString(4, parent.getEmail());
-            statement.setString(5, parent.getPassword());
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void addStudent(Student students) throws SQLException, IllegalArgumentException {
+        if (isUserExists(students.getEmail())) {
+            throw new IllegalArgumentException("Email already in use.");
         }
+        if (isStudentIDExists(students.getStudentID())) {
+            throw new IllegalArgumentException("Student ID already exists.");
+        }
+
+        // Insert new student into the database
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password) VALUES (?, ?, ?, ?, ?)");
+        stmt.setString(1, students.getName());
+        stmt.setInt(2, students.getAge());
+        stmt.setInt(3, students.getStudentID());
+        stmt.setString(4, students.getEmail());
+        stmt.setString(5, students.getPassword());
+        stmt.executeUpdate();
+    }
+
+    @Override
+    public void addTeacher(Teacher teacher) throws SQLException, IllegalArgumentException {
+        if (isUserExists(teacher.getEmail())) {
+            throw new IllegalArgumentException("Email already in use.");
+        }
+        if (isTeacherIDExists(teacher.getTeacherID())) {
+            throw new IllegalArgumentException("Teacher ID already exists.");
+        }
+
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password) VALUES (?, ?, ?, ?, ?)");
+        stmt.setString(1, teacher.getName());
+        stmt.setInt(2, teacher.getAge());
+        stmt.setInt(3, teacher.getTeacherID());
+        stmt.setString(4, teacher.getEmail());
+        stmt.setString(5, teacher.getPassword());
+        stmt.executeUpdate();
+    }
+
+    @Override
+    public void addAdmin(Admin admin) throws SQLException, IllegalArgumentException {
+        if (isUserExists(admin.getEmail())) {
+            throw new IllegalArgumentException("Email already in use.");
+        }
+        if (isAdminIDExists(admin.getAdminID())) {
+            throw new IllegalArgumentException("Admin ID already exists.");
+        }
+
+        PreparedStatement stmt = connection.prepareStatement(
+                "INSERT INTO admins (name, age, adminID, email, password) VALUES (?, ?, ?, ?, ?)"
+        );
+        stmt.setString(1, admin.getName());
+        stmt.setInt(2, admin.getAge());
+        stmt.setInt(3, admin.getAdminID());
+        stmt.setString(4, admin.getEmail());
+        stmt.setString(5, admin.getPassword());
+        stmt.executeUpdate();
+    }
+
+    @Override
+    public void addParent(Parent parent) throws SQLException, IllegalArgumentException {
+        if (isUserExists(parent.getEmail())) {
+            throw new IllegalArgumentException("Email already in use.");
+        }
+        if (isStudentIDExists(parent.getChildID())) {  // Assuming child's ID must be unique among students
+            throw new IllegalArgumentException("Child ID already linked to another account.");
+        }
+
+        PreparedStatement stmt = connection.prepareStatement(
+                "INSERT INTO parents (name, childName, childID, email, password) VALUES (?, ?, ?, ?, ?)"
+        );
+        stmt.setString(1, parent.getName());
+        stmt.setString(2, parent.getChildName());
+        stmt.setInt(3, parent.getChildID());
+        stmt.setString(4, parent.getEmail());
+        stmt.setString(5, parent.getPassword());
+        stmt.executeUpdate();
     }
 
     public void close() {
@@ -349,7 +429,7 @@ public class SqliteUserDAO implements IUserDAO {
             }
             //TODO: Error Handling
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to retrieve students", e);
         }
         return students;
     }
@@ -382,6 +462,63 @@ public class SqliteUserDAO implements IUserDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public boolean hasAnyStudents() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyTeachers() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM teachers LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyParents() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM parents LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyAdmins() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM admins LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyRegisteredUsers() {
+        return hasAnyStudents()
+                || hasAnyTeachers()
+                || hasAnyParents()
+                || hasAnyAdmins();
+    }
+
 
 
 }

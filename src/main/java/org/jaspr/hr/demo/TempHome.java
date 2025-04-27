@@ -1,6 +1,5 @@
 package org.jaspr.hr.demo;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
+import org.jaspr.hr.demo.users.Teacher;
+import org.jaspr.hr.demo.users.User;
+
 import java.io.IOException;
 
 
