@@ -195,8 +195,11 @@ public class RegisterController {
                         return;
                     }
 
-                    if (!validateName(name) || !validateEmail(email) || !validatePassword(password)
-                            || !validateAge(ageFieldTeacher.getText()) || !validateTeacherID(teacherIDField.getText())) {
+                    if (!validateName(name) ||
+                            !validateEmail(email) ||
+                            !validatePassword(password) ||
+                            !validateAge(ageFieldTeacher.getText()) ||
+                            !validateTeacherID(teacherIDField.getText())) {
                         return;
                     }
 
@@ -218,20 +221,47 @@ public class RegisterController {
                 }
 
                 case "Parent" -> {
+                    resetErrorLabels();
+
                     name = nameFieldParent.getText();
                     String child = childNameField.getText();
-                    int childID = Integer.parseInt(childIDField.getText().trim());
+                    String childIDText = childIDField.getText().trim();
                     email = emailFieldParent.getText();
                     password = passwordFieldParent.getText();
 
-                    Parent newParent = new Parent(name, child, childID, email, password);
-                    userDAO.addParent(newParent);
-                    successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
-                    successfulSignUpLabelParent.setVisible(true);
+                    if (name.isEmpty() ||
+                            child.isEmpty() ||
+                            childIDText.isEmpty() ||
+                            email.isEmpty() ||
+                            password.isEmpty()) {
+                        showError("All fields must be filled out.", generalErrorLabel);
+                        return;
+                    }
 
+                    if (!validateName(name) ||
+                            !validateName(child) ||
+                            !validateEmail(email) ||
+                            !validatePassword(password) ||
+                            !validateChildID(childIDText)) {
+                        return;
+                    }
 
+                    try {
+                        int childID = Integer.parseInt(childIDText);
 
+                        Parent newParent = new Parent(name, child, childID, email, password);
+                        userDAO.addParent(newParent);
+
+                        successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
+                        successfulSignUpLabelParent.setVisible(true);
+                    } catch (IllegalArgumentException e) {
+                        showError(e.getMessage(), generalErrorLabel);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        showError("Database error, please try again.", generalErrorLabel);
+                    }
                 }
+
                 case "Admin" -> {
                     name = nameFieldAdmin.getText();
                     email = emailFieldAdmin.getText();
