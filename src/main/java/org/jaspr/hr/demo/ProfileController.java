@@ -65,11 +65,11 @@ public class ProfileController {
             Teacher teacher = (Teacher) user;
             loadTeacherProfile(teacher);
         }
-        if (user instanceof Admin){
+        else if (user instanceof Admin){
             Admin admin = (Admin) user;
             loadAdminProfile(admin);
         }
-        if (user instanceof Parent){
+        else if (user instanceof Parent){
             Parent parent = (Parent) user;
             loadParentProfile(parent);
         }
@@ -122,8 +122,6 @@ public class ProfileController {
         emailLabel.setText("Email: " + admin.getEmail());
         //TODO: Hash the password, press a button to unhash it
         passwordLabel.setText("Password: " + admin.getPassword());
-        enrollmentLabel.setText("Classroom: " + admin.getClass());
-        enrollmentLabel.setVisible(true);
     }
 
     private void loadParentProfile(Parent parent){

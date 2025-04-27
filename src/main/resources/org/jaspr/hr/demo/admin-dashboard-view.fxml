@@ -14,6 +14,7 @@
     </padding>
 
     <Label text="Welcome to the admin dashboard!" style="-fx-font-size: 18px;"/>
+    <Button fx:id="profileButton" text="View Profile" onAction="#onProfileClick"/>
     <Button fx:id="ClassRoomCreation" text = "Create a Classroom" onAction="#onCreateClassroomClick" />
     <Button fx:id="AssignButton" text = "Assign" onAction="#onAssignUsersClick" />
 
