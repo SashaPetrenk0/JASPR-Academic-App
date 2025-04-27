@@ -418,7 +418,7 @@ public class SqliteUserDAO implements IUserDAO {
 
 
     @Override
-    public void changePassword(String email, String oldPassword, String newPassword, String role) {
+    public boolean changePassword(String email, String oldPassword, String newPassword, String role) {
         String tableName = "";
 
         switch (role) {
@@ -436,7 +436,7 @@ public class SqliteUserDAO implements IUserDAO {
                 break;
             default:
                 System.out.println("Invalid role provided.");
-                return;
+                return false;
         }
 
 
@@ -447,8 +447,10 @@ public class SqliteUserDAO implements IUserDAO {
             statement.setString(3, oldPassword);
             //TODO: Error Handling
             statement.executeUpdate();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
 

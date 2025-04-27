@@ -57,7 +57,7 @@ public interface IUserDAO {
      * @param oldPassword Password that confirms identity.
      * @param newPassword New Password to be changed to.
      */
-    public void changePassword(String email, String oldPassword, String newPassword, String role);
+    public boolean changePassword(String email, String oldPassword, String newPassword, String role);
 
     /**
      * Retrieves all contacts from the database.
