@@ -51,6 +51,9 @@ public class ProfileController {
     @FXML
     private Label enrollmentLabel;
 
+    @FXML
+    private Button ReturnButton;
+
     // Either student, teacher, admin, parent
     private Object currentUser;
 
@@ -135,9 +138,23 @@ public class ProfileController {
         enrollmentLabel.setVisible(true);
     }
 
+    @FXML
+    private void onReturnClicked() {
+        Stage stage = (Stage) ReturnButton.getScene().getWindow();
+        String role = UserSession.getInstance().getRole();
 
-
-
-
+        if ("Student".equals(role)) {
+            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
+        } else if ("Teacher".equals(role)) {
+            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
+        } else if ("Admin".equals(role)) {
+            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
+////            } else if ("Parent".equals(role)) {
+//                SceneChanger.changeScene(stage, "parent-dashboard-view.fxml");
+        } else {
+            // Fallback if something weird happens
+            SceneChanger.changeScene(stage, "login-view.fxml");
+        }
+    }
 
 }
