@@ -29,6 +29,9 @@ public class StudentDashboardController {
     @FXML
     private ListView quizLists;
 
+    @FXML
+    private Button logoutButton;
+
 
     @FXML
     public void initialize() {
@@ -68,6 +71,17 @@ public class StudentDashboardController {
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
     }
+
+    @FXML
+    private void onLogoutClicked(){
+        UserSession.getInstance().clearSession();
+        System.out.println("User logged out successfully");
+
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
+    }
+
+
 
 }
 
