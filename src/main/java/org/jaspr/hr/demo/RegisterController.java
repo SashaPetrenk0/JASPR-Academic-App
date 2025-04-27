@@ -184,19 +184,39 @@ public class RegisterController {
 
 
                 case "Teacher" -> {
+                    resetErrorLabels();
+
                     name = nameFieldTeacher.getText();
                     email = emailFieldTeacher.getText();
                     password = passwordFieldTeacher.getText();
-                    age = Integer.parseInt(ageFieldTeacher.getText().trim());
-                    int teacherID = Integer.parseInt(teacherIDField.getText().trim());
 
-                    Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
-                    userDAO.addTeacher(newTeacher);
-                    successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
-                    successfulSignUpLabelTeacher.setVisible(true);
+                    if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                        showError("All fields must be filled out.", generalErrorLabel);
+                        return;
+                    }
 
+                    if (!validateName(name) || !validateEmail(email) || !validatePassword(password)
+                            || !validateAge(ageFieldTeacher.getText()) || !validateTeacherID(teacherIDField.getText())) {
+                        return;
+                    }
 
+                    try {
+                        age = Integer.parseInt(ageFieldTeacher.getText().trim());
+                        int teacherID = Integer.parseInt(teacherIDField.getText().trim());
+
+                        Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
+                        userDAO.addTeacher(newTeacher);
+
+                        successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
+                        successfulSignUpLabelTeacher.setVisible(true);
+                    } catch (IllegalArgumentException e) {
+                        showError(e.getMessage(), generalErrorLabel);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        showError("Database error, please try again.", generalErrorLabel);
+                    }
                 }
+
                 case "Parent" -> {
                     name = nameFieldParent.getText();
                     String child = childNameField.getText();
