@@ -37,7 +37,7 @@ public interface IQuizDAO {
      * @return A list of all quizzes created by a specific student.
      * @param student student who owns the quizzes.
      */
-    public List<Quiz> getAllQuizzes(Student student);
+    public List<String> getAllQuizzes(Student student);
 
     /**
      * Retrieves all quizzes assigned by a teacher to a student from the database.

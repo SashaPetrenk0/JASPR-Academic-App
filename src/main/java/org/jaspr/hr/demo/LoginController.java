@@ -45,10 +45,12 @@ public class LoginController {
         // If "Student" role returned
         if ("Student".equals(role)){
             System.out.println("Student successfully logged in");
+            Student loggedInStudent = userDAO.getLoggedInStudent(email, password);
+            UserSession.getInstance().setCurrentUser(loggedInStudent, role);
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with student dasboard
-//            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.student-dashboard-view.fxml");
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
         }
 
         // If "Teacher" role returned
@@ -59,7 +61,7 @@ public class LoginController {
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
             Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.passSceneData(stage, "temp-home-view.fxml");
+            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
 
 
 
@@ -79,11 +81,13 @@ public class LoginController {
 
         // If "Admin" role returned
         if ("Admin".equals(role)){
+            Admin loggedInAdmin = userDAO.getLoggedInAdmin(email, password);
+            UserSession.getInstance().setCurrentUser(loggedInAdmin, role);
             // Change scene to student dashboard
             System.out.println("Admin successfully logged in");
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with admin dashboard
-//            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view.fxml");
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
         }
 
     }

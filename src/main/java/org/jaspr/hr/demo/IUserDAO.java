@@ -41,7 +41,8 @@ public interface IUserDAO {
 
 
     public Teacher getLoggedInTeacher (String email, String password);
-
+    public Student getLoggedInStudent (String email, String password);
+    public Admin getLoggedInAdmin (String email, String password);
     /**
      * Updates an existing contact in the database.
      * @param studentID The contact to update.

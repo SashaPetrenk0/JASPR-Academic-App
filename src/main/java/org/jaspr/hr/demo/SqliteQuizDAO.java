@@ -144,8 +144,23 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
     @Override
-    public List<Quiz> getAllQuizzes(Student student) {
-        return List.of();
+    public List<String> getAllQuizzes(Student student) {
+        List<String> quizzes = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE author = ?");
+            statement.setInt(1, student.getStudentID());
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                String title = resultSet.getString("title");
+
+                quizzes.add(title);
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return quizzes;
     }
 
     @Override
