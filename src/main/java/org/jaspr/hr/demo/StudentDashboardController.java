@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import java.io.IOException;
 import javafx.scene.Parent;
+import org.jaspr.hr.demo.users.Student;
+import org.jaspr.hr.demo.users.User;
 
 
 public class StudentDashboardController {

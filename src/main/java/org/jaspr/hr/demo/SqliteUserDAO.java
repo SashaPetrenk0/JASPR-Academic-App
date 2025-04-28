@@ -1,5 +1,6 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.ObservableList;
 import org.jaspr.hr.demo.users.Admin;
 import org.jaspr.hr.demo.users.Parent;
 import org.jaspr.hr.demo.users.Student;
@@ -324,6 +325,16 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     @Override
+    public Student getLoggedInStudent(String email, String password) {
+        return null;
+    }
+
+    @Override
+    public Admin getLoggedInAdmin(String email, String password) {
+        return null;
+    }
+
+    @Override
     public String Authenticate(String email, String password) {
         // Check authentication information against all four user tables
         String[] tables = {"students", "teachers", "parents", "admins"};
@@ -520,6 +531,28 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
 
+    public ObservableList<Classroom> getUpdatedClassrooms() {
+        return null;
+    }
 
+    public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
+        return false;
+    }
+
+    public ObservableList<Teacher> getAllTeachers() {
+        return null;
+    }
+
+    public boolean createClassroom(int classroomNumber, int classroomCapacity) {
+        return false;
+    }
+
+    public List<Integer> getClassroomNumbersForStudent(int studentID) {
+        return List.of();
+    }
+
+    public Integer getClassroomNumberForTeacher(int teacherID) {
+        return 0;
+    }
 }
 

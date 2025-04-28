@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.jaspr.hr.demo.users.Student;
 import org.jaspr.hr.demo.users.Teacher;
 import org.jaspr.hr.demo.users.User;
 

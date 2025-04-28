@@ -11,6 +11,7 @@ public class UserRegistrationTests {
     private static Connection connection;
     private static SqliteUserDAO userDAO;
 
+
     @BeforeAll
     public static void setup() throws SQLException {
         // Set up a connection to your test database

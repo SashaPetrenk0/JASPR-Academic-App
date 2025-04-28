@@ -25,6 +25,10 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.util.StringConverter;
+import org.jaspr.hr.demo.users.Student;
+import org.jaspr.hr.demo.users.Teacher;
+import org.jaspr.hr.demo.users.Admin;
+import org.jaspr.hr.demo.users.Parent;
 
 import javax.xml.transform.Result;
 
