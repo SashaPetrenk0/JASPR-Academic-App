@@ -135,13 +135,13 @@ public class RegisterController {
                     age = Integer.parseInt(ageFieldStudent.getText().trim());
                     int studentID = Integer.parseInt(studentIDField.getText().trim());
 
-                    Student newStudent = new Student(name, age, studentID, email, password);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Student newStudent = new Student(name, age, studentID, email, hashedPassword, salt);
                     userDAO.addStudent(newStudent);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
-
-
-
                 }
                 case "Teacher" -> {
                     name = nameFieldTeacher.getText();
@@ -150,7 +150,10 @@ public class RegisterController {
                     age = Integer.parseInt(ageFieldTeacher.getText().trim());
                     int teacherID = Integer.parseInt(teacherIDField.getText().trim());
 
-                    Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Teacher newTeacher = new Teacher(name, age, teacherID, email, hashedPassword, salt);
                     userDAO.addTeacher(newTeacher);
                     successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
                     successfulSignUpLabelTeacher.setVisible(true);
@@ -164,7 +167,10 @@ public class RegisterController {
                     email = emailFieldParent.getText();
                     password = passwordFieldParent.getText();
 
-                    Parent newParent = new Parent(name, child, childID, email, password);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Parent newParent = new Parent(name, child, childID, email, hashedPassword, salt);
                     userDAO.addParent(newParent);
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                     successfulSignUpLabelParent.setVisible(true);
@@ -179,7 +185,10 @@ public class RegisterController {
                     age = Integer.parseInt(ageFieldAdmin.getText().trim());
                     int adminID = Integer.parseInt(adminIDField.getText().trim());
 
-                    Admin newAdmin = new Admin(name, age, adminID, email, password);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Admin newAdmin = new Admin(name, age, adminID, email, hashedPassword, salt);
                     userDAO.addAdmin(newAdmin);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
                     successfulSignUpLabelAdmin.setVisible(true);
