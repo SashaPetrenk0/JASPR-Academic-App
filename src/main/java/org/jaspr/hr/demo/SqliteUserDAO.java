@@ -1,5 +1,8 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -433,6 +436,33 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    @Override
+    public ObservableList<Classroom> getUpdatedClassrooms() {
+        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
+
+        String sql = "SELECT c.classroom_number, " +
+                "       c.capacity, " +
+                "       (SELECT COUNT(*) FROM studentClassroom sc WHERE sc.classroom_number = c.classroom_number) AS num_students, " +
+                "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
+                "  FROM classrooms c";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int number = rs.getInt("classroom_number");
+                int capacity = rs.getInt("capacity");
+                int numStudents = rs.getInt("num_students");
+                int numTeachers = rs.getInt("num_teachers");
+
+                classrooms.add(new Classroom(number, capacity, numStudents, numTeachers));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classrooms;
+    }
 
     // For use when viewing student names in lists of quiz results etc.
     @Override

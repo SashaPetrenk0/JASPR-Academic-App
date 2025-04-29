@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.ObservableList;
+
 import java.sql.SQLException;
 import java.util.List;
 /**
@@ -34,7 +36,7 @@ public interface IUserDAO {
     public String Authenticate(String email, String password);
 
 
-
+    public ObservableList<Classroom> getUpdatedClassrooms();
     public Teacher getLoggedInTeacher (String email, String password);
     public Student getLoggedInStudent (String email, String password);
     public Admin getLoggedInAdmin (String email, String password);
