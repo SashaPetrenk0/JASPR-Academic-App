@@ -525,6 +525,28 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    @Override
+    public ObservableList<Teacher> getAllTeachers() {
+        ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+        String query = "SELECT * FROM teachers";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                teachers.add(new Teacher(
+                        rs.getString("name"),
+                        rs.getInt("age"),
+                        rs.getInt("teacherID"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teachers;
+    }
+
+
     // For database checking
     public void clearStudentsTable() {
         try {
