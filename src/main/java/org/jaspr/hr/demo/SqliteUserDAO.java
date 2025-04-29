@@ -13,10 +13,45 @@ public class SqliteUserDAO implements IUserDAO {
 
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
-        createStudentTable();
-        createTeacherTable();
-        createParentTable();
-        createAdminTable();
+
+        //TODO: Consider removing these Alter queries as I only really need to call them once
+
+        try {
+            // Check if connection is not null
+            if (connection != null) {
+                // Alter the table to add missing column if necessary
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE students ADD COLUMN classroom_number INTEGER;");
+                } catch (SQLException e) {
+                    // SQLite will throw an error if the column already exists; ignore that error
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }// Alter the classrooms table to add teacherID column if necessary
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE classrooms ADD COLUMN teacherID INTEGER;");
+                } catch (SQLException e) {
+                    // SQLite will throw an error if the column already exists; ignore that error
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+                // Now create tables (if they don't exist)
+                createStudentTable();
+                createTeacherTable();
+                createParentTable();
+                createAdminTable();
+                createClassroomTable();
+                createStudentClassroom();
+
+
+            } else {
+                System.out.println("Database connection failed!");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createStudentTable() {
