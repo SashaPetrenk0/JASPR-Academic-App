@@ -4,7 +4,6 @@ package org.jaspr.hr.demo;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.jaspr.hr.demo.users.Teacher;
 
 public class LoginController {
 

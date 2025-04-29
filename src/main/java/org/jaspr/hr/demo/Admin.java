@@ -1,4 +1,4 @@
-package org.jaspr.hr.demo.users;
+package org.jaspr.hr.demo;
 
 public class Admin extends User {
     private int age;

@@ -1,8 +1,5 @@
 package org.jaspr.hr.demo;
 
-import org.jaspr.hr.demo.users.Student;
-import org.jaspr.hr.demo.users.Teacher;
-
 import java.util.List;
 /**
  * Interface for the Quiz Data Access Object that handles

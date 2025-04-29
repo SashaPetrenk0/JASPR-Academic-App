@@ -1,8 +1,8 @@
 import org.jaspr.hr.demo.SqliteUserDAO;
-import org.jaspr.hr.demo.users.Admin;
-import org.jaspr.hr.demo.users.Parent;
-import org.jaspr.hr.demo.users.Student;
-import org.jaspr.hr.demo.users.Teacher;
+import org.jaspr.hr.demo.Admin;
+import org.jaspr.hr.demo.Parent;
+import org.jaspr.hr.demo.Student;
+import org.jaspr.hr.demo.Teacher;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.sql.*;

@@ -1,10 +1,6 @@
 package org.jaspr.hr.demo;
 
 import javafx.collections.ObservableList;
-import org.jaspr.hr.demo.users.Admin;
-import org.jaspr.hr.demo.users.Parent;
-import org.jaspr.hr.demo.users.Student;
-import org.jaspr.hr.demo.users.Teacher;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -40,10 +36,13 @@ public interface IUserDAO {
     public String Authenticate(String email, String password);
 
 
-
+    public ObservableList<Classroom> getUpdatedClassrooms();
     public Teacher getLoggedInTeacher (String email, String password);
     public Student getLoggedInStudent (String email, String password);
     public Admin getLoggedInAdmin (String email, String password);
+
+
+    public ObservableList<Teacher> getAllTeachers();
     /**
      * Updates an existing contact in the database.
      * @param studentID The contact to update.
@@ -75,9 +74,6 @@ public interface IUserDAO {
     public List<String> getAllStudentNames();
 
     public List<Student> getAllStudents();
-
-
-    public ObservableList<Classroom> getUpdatedClassrooms();
 
     public boolean hasAnyStudents();
     public boolean hasAnyTeachers();
