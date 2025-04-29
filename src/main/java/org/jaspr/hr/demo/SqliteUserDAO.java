@@ -507,6 +507,103 @@ public class SqliteUserDAO implements IUserDAO {
         return students;
     }
 
+    public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
+        try {
+            // Start a transaction
+            connection.setAutoCommit(false);
+
+            if (selectedTeacher != null) {
+                // Check if the classroom already has a teacher assigned
+                String checkTeacherQuery = "SELECT teacherID FROM classrooms WHERE classroom_number = ?";
+                try (PreparedStatement checkTeacherStmt = connection.prepareStatement(checkTeacherQuery)) {
+                    checkTeacherStmt.setInt(1, selectedClassroom.getClassRoomNumber());
+                    try (ResultSet rs = checkTeacherStmt.executeQuery()) {
+                        if (rs.next()) {
+                            int currentTeacherID = rs.getInt("teacherID");
+                            // If the classroom already has a teacher assigned, don't update
+                            if (currentTeacherID != 0) {
+                                System.out.println("This classroom already has a teacher assigned.");
+                                connection.commit();
+                                return false; // Teacher assignment skipped
+                            }
+                        }
+                    }
+                }
+
+                // If no teacher is assigned, proceed with updating the teacher
+                String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
+                try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
+                    teacherStatement.setInt(1, selectedTeacher.getTeacherID());
+                    teacherStatement.setInt(2, selectedClassroom.getClassRoomNumber());
+                    teacherStatement.executeUpdate();
+                }
+            }
+
+            // Assign students (many-to-many, so insert into join table)
+            if (selectedStudents != null && !selectedStudents.isEmpty()) {
+                String insertQuery = "INSERT OR IGNORE INTO studentClassroom (studentID, classroom_number) VALUES (?, ?)";
+                try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
+                    for (Student student : selectedStudents) {
+                        insertStmt.setInt(1, student.getStudentID());
+                        insertStmt.setInt(2, selectedClassroom.getClassRoomNumber());
+                        insertStmt.addBatch();
+                    }
+                    insertStmt.executeBatch(); // Execute all inserts at once
+                }
+            }
+
+            // Commit the transaction
+            connection.commit();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public List<Integer> getClassroomNumbersForStudent(int studentID) {
+        List<Integer> classroomNumbers = new ArrayList<>();
+
+        String query = "SELECT classroom_number FROM studentClassroom WHERE studentID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, studentID);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int classroomNumber = resultSet.getInt("classroom_number");
+                classroomNumbers.add(classroomNumber);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classroomNumbers;
+    }
+
+    public Integer getClassroomNumberForTeacher(int teacherID) {
+        Integer classroomNumber = null;
+
+        String query = "SELECT classroom_number FROM classrooms WHERE teacherID = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, teacherID);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                classroomNumber = resultSet.getInt("classroom_number");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classroomNumber;
+    }
+
     // For database checking
     public void printAllStudents() {
         try {
