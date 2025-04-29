@@ -37,4 +37,7 @@ public class PasswordUtility {
             throw new RuntimeException("Error while hashing password: " + e.getMessage(), e);
         }
     }
+
+
+    //
 }

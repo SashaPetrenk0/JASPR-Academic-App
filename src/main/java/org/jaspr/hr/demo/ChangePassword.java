@@ -58,16 +58,22 @@ public class ChangePassword {
 
 
     public void onChangePasswordClicked() {
+        String role = getRole();
         String email = emailField.getText();
         String currentPwd = currentPasswordField.getText();
+        String user_salt = userDAO.getSalt(email);
+
+        String hashedCurredPwd = PasswordUtility.hashPassword(currentPwd, user_salt);
         String newPwd = newPasswordField.getText();
-        String role = getRole();
+        String hashedNewPwd = PasswordUtility.hashPassword(newPwd, user_salt);
+
 
         if (email == null || email.isEmpty() || currentPwd == null || currentPwd.isEmpty() || newPwd == null || newPwd.isEmpty()) {
             ChangePwdError.setText("Please fill all fields.");
             ChangePwdError.setVisible(true);
         } else {
-            boolean success = userDAO.changePassword(email, currentPwd, newPwd, role);
+
+            boolean success = userDAO.changePassword(email, hashedCurredPwd, hashedNewPwd, role);
 
             if (success) {
                 // After successful password change, fetch the updated user data

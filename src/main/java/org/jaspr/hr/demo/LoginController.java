@@ -24,16 +24,25 @@ public class LoginController {
 
     @FXML
     private void onLoginClicked(){
+
         String email = loginEmailField.getText().trim();
         String password = loginPasswordField.getText().trim();
+        String user_salt = userDAO.getSalt(email);
+        if (user_salt == null) {
+            System.out.println("No salt found for this user. Please check the email.");
+            return;
+        }
+        String hashedCurredPwd = PasswordUtility.hashPassword(password, user_salt);
 
         if (email.isEmpty() || password.isEmpty()){
             loginEmptyError.setText("Please enter both an email and a password");
             loginEmptyError.setVisible(true);
             return;
         }
+
+
         // Calls authentication method
-        String role = userDAO.Authenticate(email, password);
+        String role = userDAO.Authenticate(email, hashedCurredPwd);
 
         // If no matches
         if (role == null){

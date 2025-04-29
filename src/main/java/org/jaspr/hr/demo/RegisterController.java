@@ -138,8 +138,8 @@ public class RegisterController {
                     String salt = PasswordUtility.generateSalt();
                     String hashedPassword = PasswordUtility.hashPassword(password, salt);
 
-                    Student newStudent = new Student(name, age, studentID, email, hashedPassword, salt);
-                    userDAO.addStudent(newStudent);
+                    Student newStudent = new Student(name, age, studentID, email);
+                    userDAO.addStudent(newStudent, hashedPassword, salt);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
                 }
@@ -153,8 +153,8 @@ public class RegisterController {
                     String salt = PasswordUtility.generateSalt();
                     String hashedPassword = PasswordUtility.hashPassword(password, salt);
 
-                    Teacher newTeacher = new Teacher(name, age, teacherID, email, hashedPassword, salt);
-                    userDAO.addTeacher(newTeacher);
+                    Teacher newTeacher = new Teacher(name, age, teacherID, email);
+                    userDAO.addTeacher(newTeacher, hashedPassword, salt);
                     successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
                     successfulSignUpLabelTeacher.setVisible(true);
 
@@ -170,8 +170,8 @@ public class RegisterController {
                     String salt = PasswordUtility.generateSalt();
                     String hashedPassword = PasswordUtility.hashPassword(password, salt);
 
-                    Parent newParent = new Parent(name, child, childID, email, hashedPassword, salt);
-                    userDAO.addParent(newParent);
+                    Parent newParent = new Parent(name, child, childID, email);
+                    userDAO.addParent(newParent, hashedPassword, salt);
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                     successfulSignUpLabelParent.setVisible(true);
 
@@ -188,8 +188,8 @@ public class RegisterController {
                     String salt = PasswordUtility.generateSalt();
                     String hashedPassword = PasswordUtility.hashPassword(password, salt);
 
-                    Admin newAdmin = new Admin(name, age, adminID, email, hashedPassword, salt);
-                    userDAO.addAdmin(newAdmin);
+                    Admin newAdmin = new Admin(name, age, adminID, email);
+                    userDAO.addAdmin(newAdmin, hashedPassword, salt);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
                     successfulSignUpLabelAdmin.setVisible(true);
 
