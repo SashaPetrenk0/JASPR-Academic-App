@@ -122,6 +122,53 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    private void createClassroomTable() {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS classrooms ("
+                    + "classroom_number INTEGER PRIMARY KEY, "
+                    + "capacity INTEGER NOT NULL, "
+                    + "teacherID INTEGER, "
+                    + "FOREIGN KEY (teacherID) REFERENCES teachers(teacherID)"
+                    + ")";
+            statement.execute((query));
+            System.out.println("Classroom table created successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean createClassroom(int classroomNumber, int capacity) {
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO classrooms (classroom_number, capacity) VALUES (?, ?)");
+            statement.setInt(1, classroomNumber);
+            statement.setInt(2, capacity);
+            statement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void createStudentClassroom() {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS studentClassroom ("
+                    + "studentID INTEGER, "
+                    + "classroom_number INTEGER, "
+                    + "PRIMARY KEY (studentID, classroom_number), "
+                    + "FOREIGN KEY (studentID) REFERENCES students(studentID),"
+                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number)"
+                    + ")";
+            statement.execute((query));
+            System.out.println("student classroom table is created");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public boolean isUserExists(String email) {
         try {
