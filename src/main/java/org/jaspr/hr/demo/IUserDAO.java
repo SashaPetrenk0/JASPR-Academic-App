@@ -1,5 +1,6 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.ObservableList;
 import org.jaspr.hr.demo.users.Admin;
 import org.jaspr.hr.demo.users.Parent;
 import org.jaspr.hr.demo.users.Student;
@@ -74,6 +75,9 @@ public interface IUserDAO {
     public List<String> getAllStudentNames();
 
     public List<Student> getAllStudents();
+
+
+    public ObservableList<Classroom> getUpdatedClassrooms();
 
     public boolean hasAnyStudents();
     public boolean hasAnyTeachers();

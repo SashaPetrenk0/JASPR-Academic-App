@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.jaspr.hr.demo.users.Admin;
 import org.jaspr.hr.demo.users.Parent;
 import org.jaspr.hr.demo.users.Student;
@@ -432,6 +434,33 @@ public class SqliteUserDAO implements IUserDAO {
             throw new RuntimeException("Failed to retrieve students", e);
         }
         return students;
+    }
+
+    public ObservableList<Classroom> getUpdatedClassrooms() {
+        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
+
+        String sql = "SELECT c.classroom_number, " +
+                "       c.capacity, " +
+                "       (SELECT COUNT(*) FROM studentClassroom sc WHERE sc.classroom_number = c.classroom_number) AS num_students, " +
+                "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
+                "  FROM classrooms c";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                int number = rs.getInt("classroom_number");
+                int capacity = rs.getInt("capacity");
+                int numStudents = rs.getInt("num_students");
+                int numTeachers = rs.getInt("num_teachers");
+
+                classrooms.add(new Classroom(number, capacity, numStudents, numTeachers));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return classrooms;
     }
 
     // For database checking
