@@ -5,10 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.jaspr.hr.demo.users.Admin;
-import org.jaspr.hr.demo.users.Parent;
-import org.jaspr.hr.demo.users.Student;
-import org.jaspr.hr.demo.users.Teacher;
 
 import java.io.IOException;
 import java.sql.SQLException;

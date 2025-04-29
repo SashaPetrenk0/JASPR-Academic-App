@@ -1,10 +1,5 @@
 package org.jaspr.hr.demo;
 
-import org.jaspr.hr.demo.users.Admin;
-import org.jaspr.hr.demo.users.Parent;
-import org.jaspr.hr.demo.users.Student;
-import org.jaspr.hr.demo.users.Teacher;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -312,6 +307,54 @@ public class SqliteUserDAO implements IUserDAO {
                         resultSet.getString("name"),
                         resultSet.getInt("age"),
                         resultSet.getInt("teacherID"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Student getLoggedInStudent(String email, String password){
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students WHERE email = ? AND password = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Student(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        resultSet.getInt("studentID"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password")
+                );
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Admin getLoggedInAdmin(String email, String password){
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM admins WHERE email = ? AND password = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Admin(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        resultSet.getInt("adminID"),
                         resultSet.getString("email"),
                         resultSet.getString("password")
                 );
