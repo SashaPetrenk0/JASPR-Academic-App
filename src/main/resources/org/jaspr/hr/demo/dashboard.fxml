@@ -225,7 +225,7 @@
                <children>
                   <Label prefHeight="40.0" prefWidth="267.0" stylesheets="@styles.css" text="YOUR CLASSES">
                      <font>
-                        <Font name="System Bold" size="28.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -317,7 +317,7 @@
                      <children>
                         <Label prefHeight="40.0" prefWidth="285.0" stylesheets="@styles.css" text="STUDENT PROGRESS">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
@@ -337,7 +337,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="CLASSES">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
@@ -381,7 +381,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="CLASS COMPLETION">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
@@ -402,7 +402,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="QUIZZES COMPLETION">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
@@ -423,7 +423,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="AVERAGE SCORE">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="20.0" right="20.0" top="20.0" />
