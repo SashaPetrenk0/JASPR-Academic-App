@@ -17,10 +17,16 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="47.0" prefWidth="279.0" text="Teach Dashboard">
+            <Label prefHeight="47.0" prefWidth="279.0" text="Your Dashboard">
                <font>
                   <Font name="Avenir Heavy" size="32.0" />
                </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </Label>
             <Pane maxHeight="-Infinity" prefHeight="1.0" prefWidth="200.0" styleClass="decorative-line" stylesheets="@styles.css" HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
@@ -68,7 +74,7 @@
                   </VBox>
                </children>
                <opaqueInsets>
-                  <Insets bottom="20.0" />
+                  <Insets />
                </opaqueInsets>
             </HBox>
             <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1.0" prefWidth="250.0" styleClass="decorative-line" stylesheets="@styles.css">
@@ -91,7 +97,7 @@
                         </ImageView>
                         <Label prefHeight="58.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Dashboard">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold Italic" size="30.0" />
+                              <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -108,7 +114,7 @@
                         </ImageView>
                         <Label prefHeight="46.0" prefWidth="196.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Create Quiz" textFill="#0000007e">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold Italic" size="30.0" />
+                              <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -125,7 +131,7 @@
                         </ImageView>
                         <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Quizzes" textFill="#0000007e">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold Italic" size="30.0" />
+                              <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -142,7 +148,7 @@
                         </ImageView>
                         <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Tracking" textFill="#0000007e">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold Italic" size="30.0" />
+                              <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -159,7 +165,7 @@
                         </ImageView>
                         <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Classes" textFill="#0000007e">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold Italic" size="30.0" />
+                              <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -176,7 +182,7 @@
                         </ImageView>
                         <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Profile" textFill="#0000007e">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold Italic" size="30.0" />
+                              <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -193,7 +199,7 @@
                         </ImageView>
                         <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Logout" textFill="#0000007e">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold Italic" size="30.0" />
+                              <Font size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -216,10 +222,10 @@
                <children>
                   <Label prefHeight="48.0" prefWidth="196.0" stylesheets="@styles.css" text="QUICK NAV">
                      <font>
-                        <Font name="Avenir Next Condensed Demi Bold" size="28.0" />
+                        <Font name="System Bold" size="28.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
                   </Label>
                   <HBox alignment="CENTER" prefHeight="175.0" prefWidth="944.0" spacing="20.0" stylesheets="@styles.css">
@@ -296,6 +302,9 @@
                            </children>
                         </VBox>
                      </children>
+                     <padding>
+                        <Insets bottom="30.0" />
+                     </padding>
                   </HBox>
                </children>
             </VBox>
@@ -305,7 +314,7 @@
                      <children>
                         <Label prefHeight="40.0" prefWidth="285.0" stylesheets="@styles.css" text="STUDENT PROGRESS">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold" size="28.0" />
+                              <Font name="System Bold" size="28.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
@@ -325,7 +334,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="CLASSES">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold" size="28.0" />
+                              <Font name="System Bold" size="28.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
@@ -369,7 +378,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="CLASS COMPLETION">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold" size="28.0" />
+                              <Font name="System Bold" size="28.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
@@ -390,7 +399,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="QUIZZES COMPLETION">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold" size="28.0" />
+                              <Font name="System Bold" size="28.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
@@ -411,7 +420,7 @@
                      <children>
                         <Label prefHeight="48.0" prefWidth="259.0" stylesheets="@styles.css" text="AVERAGE SCORE">
                            <font>
-                              <Font name="Avenir Next Condensed Demi Bold" size="28.0" />
+                              <Font name="System Bold" size="28.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="10.0" right="10.0" top="10.0" />
