@@ -25,12 +25,12 @@
             <Circle fill="#FFD54F80" radius="80.0" translateX="0.0" translateY="230.0" />
             <Circle fill="#BA68C880" radius="124.0" translateX="150.0" translateY="150.0" />
             <Circle fill="#d7909040" radius="44.0" translateX="-90.0" translateY="-50.0" />
-         <ImageView fitHeight="126.0" fitWidth="117.0" opacity="0.84" pickOnBounds="true" preserveRatio="true" translateY="5.0">
-            <image>
-               <Image url="@../../../../images_2/eco.png" />
-            </image>
-         </ImageView>
-         <Circle fill="#a5d6a740" radius="70.0" translateY="10.0" />
+            <ImageView fitHeight="126.0" fitWidth="117.0" opacity="0.84" pickOnBounds="true" preserveRatio="true" translateY="5.0">
+                <image>
+                    <Image url="@../../../../images_2/eco.png" />
+                </image>
+            </ImageView>
+            <Circle fill="#a5d6a740" radius="70.0" translateY="10.0" />
         </StackPane>
     </left>
 
@@ -44,43 +44,43 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                 </padding>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="291.0">
-               <children>
-                  <Text fill="#63aba8" strokeType="OUTSIDE" strokeWidth="0.0" text="AcademIQ" wrappingWidth="150.076416015625">
-                     <font>
-                        <Font name="Impact" size="36.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#00000098" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning Hub" wrappingWidth="107.109375">
-                     <font>
-                        <Font name="Arial Italic" size="16.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please Log In">
-               <font>
-                  <Font name="Telugu Sangam MN" size="14.0" />
-               </font>
-            </Text>
+                <VBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="291.0">
+                    <children>
+                        <Text fill="#63aba8" strokeType="OUTSIDE" strokeWidth="0.0" text="AcademIQ" wrappingWidth="150.076416015625">
+                            <font>
+                                <Font name="Impact" size="36.0" />
+                            </font>
+                        </Text>
+                        <Text fill="#00000098" strokeType="OUTSIDE" strokeWidth="0.0" text="Learning Hub" wrappingWidth="107.109375">
+                            <font>
+                                <Font name="Arial Italic" size="16.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </VBox>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please Log In">
+                    <font>
+                        <Font name="Telugu Sangam MN" size="14.0" />
+                    </font>
+                </Text>
                 <TextField fx:id="loginEmailField" maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0" promptText="Email" style="-fx-background-radius: 50; -fx-border-radius: 50;">
-               <font>
-                  <Font name="Telugu Sangam MN Bold" size="13.0" />
-               </font></TextField>
+                    <font>
+                        <Font name="Telugu Sangam MN Bold" size="13.0" />
+                    </font></TextField>
                 <TextField fx:id="loginPasswordField" maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0" promptText="Password" style="-fx-border-radius: 50; -fx-background-radius: 50;">
-               <font>
-                  <Font name="Telugu Sangam MN Bold" size="13.0" />
-               </font></TextField>
+                    <font>
+                        <Font name="Telugu Sangam MN Bold" size="13.0" />
+                    </font></TextField>
                 <Button fx:id="LoginButton" onAction="#onLoginClicked" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: #A8DDDC;" text="Submit" textFill="WHITE">
-               <font>
-                  <Font name="Telugu Sangam MN Bold" size="13.0" />
-               </font></Button>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0">
-               <children>
-                  <Label alignment="BOTTOM_RIGHT" prefHeight="9.0" prefWidth="106.0" text="Forgot Password?" textFill="#1f70bc" />
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0" />
+                    <font>
+                        <Font name="Telugu Sangam MN Bold" size="13.0" />
+                    </font></Button>
+                <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0">
+                    <children>
+                        <Label alignment="BOTTOM_RIGHT" prefHeight="9.0" prefWidth="106.0" text="Forgot Password?" textFill="#1f70bc" />
+                    </children>
+                </HBox>
+                <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0" />
                 <Label fx:id="loginEmptyError" text="" visible="false" />
                 <Label fx:id="loginIncorrectError" text="" visible="false" />
             </VBox>
