@@ -33,12 +33,10 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS students ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "studentID INTEGER NOT NULL,"
+                    + "studentID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
-                    + "salt TEXT NOT NULL,"
-                    + "classroom_number INTEGER, "
-                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number) ON DELETE SET NULL"
+                    + "salt TEXT NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -53,7 +51,7 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS teachers ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "teacherID INTEGER NOT NULL,"
+                    + "teacherID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
                     + "salt TEXT NOT NULL"
@@ -89,7 +87,7 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS admins ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "adminID INTEGER NOT NULL,"
+                    + "adminID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
                     + "salt TEXT NOT NULL"
