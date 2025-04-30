@@ -1,7 +1,4 @@
-import org.jaspr.hr.demo.Classroom;
-import org.jaspr.hr.demo.SqliteUserDAO;
-import org.jaspr.hr.demo.Student;
-import org.jaspr.hr.demo.Teacher;
+import org.jaspr.hr.demo.*;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.sql.*;
@@ -11,6 +8,8 @@ public class ClassroomTDD{
     private static Classroom classroom;
     private static Student student;
     private static Teacher teacher;
+    private static Admin admin;
+    private static Parent parent;
 
 
 
@@ -20,7 +19,8 @@ public class ClassroomTDD{
         classroom = new Classroom(101, 30);
         student = new Student("John", 16, 12345, "john@gmail.com");
         teacher = new Teacher("Steve", 35, 14321, "steve@gmail.com");
-
+        admin = new Admin("Alice", 40, 1001, "alice@gmail.com");
+        parent = new Parent("Sarah", "John", 12345, "sarah@gmail.com");
     }
 
     @Test
@@ -68,7 +68,60 @@ public class ClassroomTDD{
         assertEquals(1, classroom.getStudents().size());
         assertEquals("John", classroom.getStudents().getFirst().getName());
         assertEquals("Steve", classroom.getTeacher().getName());
+    }
 
+    @Test
+    public void testAdminConstructorAndGetters(){
+        assertEquals("Alice", admin.getName());
+        assertEquals(40, admin.getAge());
+        assertEquals(1001, admin.getAdminID());
+        assertEquals("alice@gmail.com", admin.getEmail());
+    }
+
+    @Test
+    public void testAdminGetRole(){
+        assertEquals("Admin", admin.getRole());
+    }
+
+
+    @Test
+    public void testStudentConstructorAndGetters(){
+        assertEquals("John", student.getName());
+        assertEquals(16, student.getAge());
+        assertEquals(12345, student.getStudentID());
+        assertEquals("john@gmail.com", student.getEmail());
+    }
+
+    @Test
+    public void testStudentGetRole(){
+        assertEquals("Student", student.getRole());
+    }
+
+    @Test
+    public void testTeacherConstructorAndGetters(){
+        assertEquals("Steve", teacher.getName());
+        assertEquals(35, teacher.getAge());
+        assertEquals(14321, teacher.getTeacherID());
+        assertEquals("steve@gmail.com", teacher.getEmail());
+    }
+
+    @Test
+    public void testTeacherGetRole(){
+        assertEquals("Teacher", teacher.getRole());
+    }
+
+
+    @Test
+    public void testParentConstructorAndGetters(){
+        assertEquals("Sarah", parent.getName());
+        assertEquals("John", parent.getChildName());
+        assertEquals(12345, parent.getChildID());
+        assertEquals("sarah@gmail.com", parent.getEmail());
+    }
+
+    @Test
+    public void testParentGetRole(){
+        assertEquals("Parent", parent.getRole());
     }
 
 }
