@@ -59,7 +59,6 @@ public class Classroom {
         students.remove(student);
     }
 
-
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }

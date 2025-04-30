@@ -28,7 +28,5 @@ public class Teacher extends User{
         return teacherID;
     }
 
-    //unit testing
-
 
 }
