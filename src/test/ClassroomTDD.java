@@ -16,7 +16,7 @@ public class ClassroomTDD{
 
 
     @BeforeEach
-    public static void setup() throws SQLException {
+    public void setup() {
         classroom = new Classroom(101, 30);
         student = new Student("John", 16, 12345, "john@gmail.com");
         teacher = new Teacher("Steve", 35, 14321, "steve@gmail.com");
@@ -70,4 +70,5 @@ public class ClassroomTDD{
         assertEquals("Steve", classroom.getTeacher().getName());
 
     }
+
 }
