@@ -798,6 +798,29 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
 
+    // only used for unit test
+    public Classroom getClassroomByNumber(int roomNumber) {
+        String query = "SELECT * FROM classrooms WHERE classroom_number = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, roomNumber);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int classRoomNumber = resultSet.getInt("classroom_number");
+                int capacity = resultSet.getInt("capacity");
+                int teacherId = resultSet.getInt("teacherID");
+                return new Classroom(classRoomNumber, classRoomNumber, capacity, teacherId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null; // If not found
+    }
+
+
+
 
 
 }
