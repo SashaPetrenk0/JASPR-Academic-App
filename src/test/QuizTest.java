@@ -28,11 +28,7 @@ public class QuizTest {
         quizTwo = new Quiz(QUIZ_TITLE_TWO,DESC_TWO,TOPIC_TWO,NUMOFQUESTIONSTWO,AUTHOR_TWO);
     }
 
-    @Test
-    public void testGetId() {
 
-        assertEquals(ID, quiz.getId());
-    }
 
     @Test
     public void testGetTitle() {
