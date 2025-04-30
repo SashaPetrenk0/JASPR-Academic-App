@@ -60,6 +60,16 @@ public class Classroom {
     }
 
 
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+
+
 
 
 

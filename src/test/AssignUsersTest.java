@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AssignUsersTest {
     private static Connection connection;
@@ -25,6 +26,11 @@ public class AssignUsersTest {
     @BeforeEach
     public void beginTransaction() throws SQLException {
         // Start a new transaction before each test
+        Statement stmt = connection.createStatement();
+        stmt.execute("DELETE FROM studentClassroom");
+        stmt.execute("DELETE FROM students");
+        stmt.execute("DELETE FROM teachers");
+        stmt.execute("DELETE FROM classrooms");
         connection.setAutoCommit(false);  // Begin transaction
     }
 
@@ -46,6 +52,28 @@ public class AssignUsersTest {
         // Step 3: Assign teacher to classroom (no students)
         assertDoesNotThrow(() -> userDAO.assignUsers(classroom, testTeacher, new ArrayList<>()));
     }
+    @Test
+    public void testAssignStudentToClassroom() throws SQLException {
+        // Create a sample classroom and student
+        Classroom classroom = new Classroom(100, 30); // classroom_number = 100, capacity = 30
+        userDAO.createClassroom(100, 30);
+
+        Student student = new Student("Test Student",  12, 12345,"test@student.com");
+        userDAO.addStudent(student, "testPwd", "testSalt");
+
+        // Assign student to classroom
+        List<Student> students = new ArrayList<>();
+        students.add(student);
+        userDAO.assignUsers(classroom, null, students); // Only student, no teacher
+
+        // Fetch the updated classroom and check if student was added
+        Classroom result = userDAO.getClassroomByNumberForStudents(100);
+        assertNotNull(result);
+        List<Student> assignedStudents = result.getStudents();  // Ensure this is loaded in DAO
+        assertEquals(1, assignedStudents.size());
+        assertEquals(student.getName(), assignedStudents.get(0).getName());
+    }
+
 
 
     @AfterAll

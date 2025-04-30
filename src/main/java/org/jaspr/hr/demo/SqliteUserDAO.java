@@ -819,6 +819,53 @@ public class SqliteUserDAO implements IUserDAO {
         return null; // If not found
     }
 
+    public Classroom getClassroomByNumberForStudents(int classroomNumber) {
+        try {
+            // Step 1: Get classroom
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM classrooms WHERE classroom_number = ?");
+            stmt.setInt(1, classroomNumber);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int capacity = rs.getInt("capacity");
+                int teacherID = rs.getInt("teacherID");
+
+                Classroom classroom = new Classroom(classroomNumber, capacity);
+
+                // Step 2: Get teacher (optional)
+                if (teacherID > 0) {
+                    Teacher teacher = getTeacher(teacherID); // Implement this method
+                    classroom.setTeacher(teacher);
+                }
+
+                // Step 3: Get students for this classroom
+                PreparedStatement studentStmt = connection.prepareStatement(
+                        "SELECT s.* FROM students s JOIN studentClassroom sc ON s.studentID = sc.studentID WHERE sc.classroom_number = ?"
+                );
+                studentStmt.setInt(1, classroomNumber);
+                ResultSet studentRS = studentStmt.executeQuery();
+
+                List<Student> students = new ArrayList<>();
+                while (studentRS.next()) {
+                    Student student = new Student(
+                            studentRS.getString("name"),
+                            studentRS.getInt("age"),
+                            studentRS.getInt("studentID"),
+                            studentRS.getString("email")
+                    );
+                    students.add(student);
+                }
+
+                classroom.setStudents(students);
+                return classroom;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 
 
