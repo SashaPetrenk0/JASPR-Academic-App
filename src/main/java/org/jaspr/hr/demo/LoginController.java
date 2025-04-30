@@ -23,12 +23,23 @@ public class LoginController {
     private Button ReturnButton;
 
     @FXML
+    private void initialize() {
+        loginEmailField.setFocusTraversable(false);
+        loginPasswordField.setFocusTraversable(false);
+
+        loginEmptyError.setStyle("-fx-font-family: 'Telugu Sangam MN'; -fx-font-size: 12px; -fx-text-fill: #d9534f;");
+
+
+    }
+
+
+    @FXML
     private void onLoginClicked(){
         String email = loginEmailField.getText().trim();
         String password = loginPasswordField.getText().trim();
 
         if (email.isEmpty() || password.isEmpty()){
-            loginEmptyError.setText("Please enter both an email and a password");
+            loginEmptyError.setText("Please enter both a valid Email and a Password");
             loginEmptyError.setVisible(true);
             return;
         }
