@@ -16,50 +16,6 @@ public class SqliteUserDAO implements IUserDAO {
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
 
-        try {
-            if (connection != null) {
-                // Add 'salt' column to each table if it doesn't exist
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE students ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE teachers ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE admins ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE parents ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
-                // Add teacherID to classrooms if needed
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE classrooms ADD COLUMN teacherID INTEGER;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
                 // Create all necessary tables
                 createStudentTable();
                 createTeacherTable();
@@ -67,12 +23,6 @@ public class SqliteUserDAO implements IUserDAO {
                 createAdminTable();
                 createClassroomTable();
                 createStudentClassroom();
-            } else {
-                System.out.println("Database connection failed!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 
