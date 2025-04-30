@@ -84,4 +84,10 @@ public interface IUserDAO {
     public List<String> getAllStudentNames();
 
     public List<Student> getAllStudents();
+
+    public boolean hasAnyStudents();
+    public boolean hasAnyTeachers();
+    public boolean hasAnyParents();
+    public boolean hasAnyAdmins();
+    public boolean hasAnyRegisteredUsers();
 }
