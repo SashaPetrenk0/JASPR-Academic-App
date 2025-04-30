@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class RegisterController {
 
@@ -151,7 +152,7 @@ public class RegisterController {
 
 
     @FXML
-    private void onSubmitClicked(){
+    private void onSubmitClicked() throws SQLException {
         String role = roleComboBox.getValue();
         String name, email, password;
         int age = 0;
