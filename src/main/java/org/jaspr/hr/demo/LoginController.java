@@ -51,6 +51,7 @@ public class LoginController {
             return;
         }
         // If "Student" role returned
+
         if ("Student".equals(role)){
             System.out.println("Student successfully logged in");
             // Change scene to student dashboard
@@ -68,12 +69,6 @@ public class LoginController {
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
             Stage stage = (Stage) LoginButton.getScene().getWindow();
             SceneChanger.passSceneData(stage, "temp-home-view.fxml");
-
-
-
-
-
-
         }
 
         // If "Parent" role returned
