@@ -1,39 +1,48 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.ObservableList;
+
+import java.sql.SQLException;
 import java.util.List;
 /**
  * Interface for the Contact Data Access Object that handles
  * the CRUD operations for the Contact class with the database.
  */
 public interface IUserDAO {
+    boolean isUserExists(String email);
+
     /**
      * Adds a new student to the database.
      * @param student The user to add.
      */
-    public void addStudent(Student student);
+    public void addStudent(Student student) throws SQLException;
     /**
      * Adds a new teacher to the database.
      * @param teacher The user to add.
      */
-    public void addTeacher(Teacher teacher);
+    public void addTeacher(Teacher teacher) throws SQLException;
     /**
      * Adds a new admin to the database.
      * @param admin The user to add.
      */
-    public void addAdmin(Admin admin);
+    public void addAdmin(Admin admin) throws SQLException;
     /**
      * Adds a new parent to the database.
      * @param parent The user to add.
      */
-    public void addParent(Parent parent);
+    public void addParent(Parent parent) throws SQLException;
 
 
     public String Authenticate(String email, String password);
 
 
-
+    public ObservableList<Classroom> getUpdatedClassrooms();
     public Teacher getLoggedInTeacher (String email, String password);
+    public Student getLoggedInStudent (String email, String password);
+    public Admin getLoggedInAdmin (String email, String password);
 
+
+    public ObservableList<Teacher> getAllTeachers();
     /**
      * Updates an existing contact in the database.
      * @param studentID The contact to update.
@@ -65,4 +74,10 @@ public interface IUserDAO {
     public List<String> getAllStudentNames();
 
     public List<Student> getAllStudents();
+
+    public boolean hasAnyStudents();
+    public boolean hasAnyTeachers();
+    public boolean hasAnyParents();
+    public boolean hasAnyAdmins();
+    public boolean hasAnyRegisteredUsers();
 }

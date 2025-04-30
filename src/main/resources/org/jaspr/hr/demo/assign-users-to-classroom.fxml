@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jaspr.hr.demo.AssignUsersToClassController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label text="Assign Teachers and Students to a Classroom" style="-fx-font-size: 30px;"/>
+
+    <!-- Show registered teachers -->
+
+
+
+    <HBox spacing="20.0">
+        <VBox>
+            <Label text="Select Classroom:" style="-fx-font-weight: bold;"/>
+            <ComboBox fx:id="classroomComboBox" />
+        </VBox>
+        <VBox>
+            <Label text="Select Teacher:" style="-fx-font-weight: bold;"/>
+            <VBox fx:id="teacherRadioList" spacing="10.0"/>
+        </VBox>
+        <VBox>
+            <Label text="Select Students:" style="-fx-font-weight: bold;"/>
+            <VBox fx:id="studentVBox" spacing="10.0"/>
+        </VBox>
+    </HBox>
+
+    <Button fx:id="assignUsers" text="Assign" onAction="#assignUsers" />
+
+
+
+    <TableView fx:id = "classroomTable" prefWidth = "500">
+        <columns>
+            <TableColumn fx:id = "classroomNumberColumn" text = "Classroom Number"/>
+            <TableColumn fx:id = "classroomCapacityColumn" text = "Classroom Capacity"/>
+            <TableColumn fx:id = "numTeachersColumn" text = "Number of Assigned Teachers"/>
+            <TableColumn fx:id = "numStudentsColumn" text = "Number of Assigned Students"/>
+        </columns>
+    </TableView>
+
+    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToAdmin" />
+
+</VBox>
+

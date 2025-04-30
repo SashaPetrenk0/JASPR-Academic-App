@@ -29,14 +29,26 @@
 
     <VBox fx:id="studentForm" visible="false" managed="false">
         <Label text="Student Sign Up" style="-fx-font-size: 18px;" />
-        <TextField fx:id="nameFieldStudent" promptText = "Name" />
-        <TextField fx:id="ageFieldStudent" promptText = "Age" />
-        <TextField fx:id="studentIDField" promptText = "Student ID" />
-        <TextField fx:id="emailFieldStudent" promptText = "Email" />
-        <TextField fx:id="passwordFieldStudent" promptText = "Password" />
-        <Button text = "Submit" onAction="#onSubmitClicked" />
+        <TextField fx:id="nameFieldStudent" promptText="Name" />
+        <Label fx:id="nameErrorLabel" text="" textFill="red" visible="false" />
+
+        <TextField fx:id="ageFieldStudent" promptText="Age" />
+        <Label fx:id="ageErrorLabel" text="" textFill="red" visible="false" />
+
+        <TextField fx:id="studentIDField" promptText="Student ID" />
+        <Label fx:id="studentIDErrorLabel" text="" textFill="red" visible="false" />
+
+        <TextField fx:id="emailFieldStudent" promptText="Email" />
+        <Label fx:id="emailErrorLabel" text="" textFill="red" visible="false" />
+
+        <TextField fx:id="passwordFieldStudent" promptText="Password" />
+        <Label fx:id="passwordErrorLabel" text="" textFill="red" visible="false" />
+
+        <Button text="Submit" onAction="#onSubmitClicked" />
         <Label fx:id="successfulSignUpLabelStudent" text="" visible="false" />
+        <Label fx:id="generalErrorLabel" text="" textFill="red" visible="false" />
     </VBox>
+
 
     <VBox fx:id="teacherForm" visible="false" managed="false">
         <Label text="Teacher Sign Up" style="-fx-font-size: 18px;" />

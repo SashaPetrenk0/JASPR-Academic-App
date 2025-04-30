@@ -1,6 +1,6 @@
 package org.jaspr.hr.demo;
 
-public class Admin extends User{
+public class Admin extends User {
     private int age;
     private int adminID;
 
@@ -12,7 +12,7 @@ public class Admin extends User{
 
     @Override
     public String getRole() {
-        return "Parent";
+        return "Admin";
     }
 
     public int getAge() {

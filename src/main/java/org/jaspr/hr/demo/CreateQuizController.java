@@ -7,11 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-
-
-
 import java.io.IOException;
-import java.util.List;
 
 public class CreateQuizController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
@@ -62,9 +58,13 @@ public class CreateQuizController {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
             author = teacher.getTeacherID();
+        }else if ("Student".equals(role) && user instanceof Student) {
+            Student student = (Student) user;
+            author = student.getStudentID();
         }
 
-        Quiz newQuiz = new Quiz(title, desc, topic, length, author, List.of(questions));
+//Quiz newQuiz = new Quiz(title, desc, topic, length, author, List.of(questions));
+        Quiz newQuiz = new Quiz(title, desc, topic, length, author);
         quizDAO.addQuiz(newQuiz);
         successMessage.setText("Quiz " + title + " created successfully! Yay :)");
         successMessage.setVisible(true);
@@ -77,7 +77,16 @@ public class CreateQuizController {
 
     @FXML private void returnToPage() throws IOException {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        SceneChanger.changeScene(stage, "temp-home-view.fxml");
+        if ("Teacher".equals(role) && user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
+
+        }else if ("Student".equals(role) && user instanceof Student) {
+            Student student = (Student) user;
+            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
+        }
+
+
 
     }
 

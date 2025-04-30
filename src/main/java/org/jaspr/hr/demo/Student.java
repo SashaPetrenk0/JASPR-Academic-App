@@ -1,6 +1,6 @@
 package org.jaspr.hr.demo;
 
-public class Student extends User{
+public class Student extends User {
     private int age;
     private int studentID;
 
