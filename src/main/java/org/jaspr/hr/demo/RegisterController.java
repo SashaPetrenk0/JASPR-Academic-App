@@ -7,13 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.image.ImageView;
-
-
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class RegisterController {
 
@@ -80,27 +75,6 @@ public class RegisterController {
     @FXML
     private Button returnToPrevious;
 
-    @FXML
-    private Rectangle Rectangle1;
-    @FXML
-    private Rectangle Rectangle2;
-
-    @FXML
-    private Button submitButtonStudent;
-
-    @FXML
-    private Button submitButtonTeacher;
-
-    @FXML
-    private Button submitButtonParent;
-
-    @FXML
-    private Button submitButtonAdmin;
-
-    @FXML
-    private ImageView successIcon;
-
-
 
     private Student newStudent;
     private Teacher newTeacher;
@@ -113,10 +87,6 @@ public class RegisterController {
 
     @FXML
     private void onRoleSelected() {
-        // Hide decorative rectangles
-        Rectangle1.setVisible(false);
-        Rectangle2.setVisible(false);
-
         // First hide everything
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
@@ -152,88 +122,85 @@ public class RegisterController {
 
 
     @FXML
-    private void onSubmitClicked() throws SQLException {
-        String role = roleComboBox.getValue();
-        String name, email, password;
-        int age = 0;
+        private void onSubmitClicked(){
+            String role = roleComboBox.getValue();
+            String name, email, password;
+            int age = 0;
 
-        switch (role){
-            case "Student" -> {
-                name = nameFieldStudent.getText();
-                email = emailFieldStudent.getText();
-                password = passwordFieldStudent.getText();
-                age = Integer.parseInt(ageFieldStudent.getText().trim());
-                int studentID = Integer.parseInt(studentIDField.getText().trim());
+            switch (role){
+                case "Student" -> {
+                    name = nameFieldStudent.getText();
+                    email = emailFieldStudent.getText();
+                    password = passwordFieldStudent.getText();
+                    age = Integer.parseInt(ageFieldStudent.getText().trim());
+                    int studentID = Integer.parseInt(studentIDField.getText().trim());
 
-                Student newStudent = new Student(name, age, studentID, email, password);
-                userDAO.addStudent(newStudent);
-                successfulSignUpLabelStudent.setText("You've been successfully registered as a Student! Welcome " + name + "!");
-                successfulSignUpLabelStudent.setVisible(true);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
 
-                submitButtonStudent.setDisable(true);
+                    Student newStudent = new Student(name, age, studentID, email);
+                    userDAO.addStudent(newStudent, hashedPassword, salt);
+                    successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
+                    successfulSignUpLabelStudent.setVisible(true);
+                }
+                case "Teacher" -> {
+                    name = nameFieldTeacher.getText();
+                    email = emailFieldTeacher.getText();
+                    password = passwordFieldTeacher.getText();
+                    age = Integer.parseInt(ageFieldTeacher.getText().trim());
+                    int teacherID = Integer.parseInt(teacherIDField.getText().trim());
+
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Teacher newTeacher = new Teacher(name, age, teacherID, email);
+                    userDAO.addTeacher(newTeacher, hashedPassword, salt);
+                    successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
+                    successfulSignUpLabelTeacher.setVisible(true);
+
+
+                }
+                case "Parent" -> {
+                    name = nameFieldParent.getText();
+                    String child = childNameField.getText();
+                    int childID = Integer.parseInt(childIDField.getText().trim());
+                    email = emailFieldParent.getText();
+                    password = passwordFieldParent.getText();
+
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Parent newParent = new Parent(name, child, childID, email);
+                    userDAO.addParent(newParent, hashedPassword, salt);
+                    successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
+                    successfulSignUpLabelParent.setVisible(true);
+
+
+
+                }
+                case "Admin" -> {
+                    name = nameFieldAdmin.getText();
+                    email = emailFieldAdmin.getText();
+                    password = passwordFieldAdmin.getText();
+                    age = Integer.parseInt(ageFieldAdmin.getText().trim());
+                    int adminID = Integer.parseInt(adminIDField.getText().trim());
+
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Admin newAdmin = new Admin(name, age, adminID, email);
+                    userDAO.addAdmin(newAdmin, hashedPassword, salt);
+                    successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
+                    successfulSignUpLabelAdmin.setVisible(true);
+
+                    // TODO: Error handling for incorrect user inputs
+                }
 
             }
-            case "Teacher" -> {
-                name = nameFieldTeacher.getText();
-                email = emailFieldTeacher.getText();
-                password = passwordFieldTeacher.getText();
-                age = Integer.parseInt(ageFieldTeacher.getText().trim());
-                int teacherID = Integer.parseInt(teacherIDField.getText().trim());
-
-                Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
-                userDAO.addTeacher(newTeacher);
-                successfulSignUpLabelTeacher.setText("You've been successfully registered as a Teacher! Welcome " + name + "!");
-                successfulSignUpLabelTeacher.setVisible(true);
-
-                submitButtonTeacher.setVisible(false);
-                submitButtonTeacher.setManaged(false);
-
-                successfulSignUpLabelTeacher.setVisible(true);
-                successfulSignUpLabelTeacher.setManaged(true);
-
-                successIcon.setVisible(true);
-                successIcon.setManaged(true);
 
 
-            }
-            case "Parent" -> {
-                name = nameFieldParent.getText();
-                String child = childNameField.getText();
-                int childID = Integer.parseInt(childIDField.getText().trim());
-                email = emailFieldParent.getText();
-                password = passwordFieldParent.getText();
-
-                Parent newParent = new Parent(name, child, childID, email, password);
-                userDAO.addParent(newParent);
-                successfulSignUpLabelParent.setText("You've been successfully registered as a Parent! Welcome " + name + "!");
-                successfulSignUpLabelParent.setVisible(true);
-
-                submitButtonParent.setDisable(true);
-
-
-            }
-            case "Admin" -> {
-                name = nameFieldAdmin.getText();
-                email = emailFieldAdmin.getText();
-                password = passwordFieldAdmin.getText();
-                age = Integer.parseInt(ageFieldAdmin.getText().trim());
-                int adminID = Integer.parseInt(adminIDField.getText().trim());
-
-                Admin newAdmin = new Admin(name, age, adminID, email, password);
-                userDAO.addAdmin(newAdmin);
-                successfulSignUpLabelAdmin.setText("You've been successfully registered as an Admin! Welcome " + name + "!");
-                successfulSignUpLabelAdmin.setVisible(true);
-
-                submitButtonAdmin.setDisable(true);
-
-                // TODO: Error handling for incorrect user inputs
-            }
 
         }
-
-
-
-    }
 
     @FXML private void returnToHomePage() throws IOException {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();

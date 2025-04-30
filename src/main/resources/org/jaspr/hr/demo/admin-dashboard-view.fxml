@@ -18,5 +18,7 @@
     <Button fx:id="ClassRoomCreation" text = "Create a Classroom" onAction="#onCreateClassroomClick" />
     <Button fx:id="AssignButton" text = "Assign" onAction="#onAssignUsersClick" />
 
+    <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked"/>
+
 </VBox>
 

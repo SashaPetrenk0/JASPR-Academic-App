@@ -29,4 +29,5 @@
         <ListView fx:id="quizLists"/>
 
     </VBox>
+    <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked"/>
 </VBox>

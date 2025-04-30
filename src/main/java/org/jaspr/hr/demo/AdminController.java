@@ -23,7 +23,19 @@ public class AdminController {
     @FXML
     private Button AssignButton;
 
+    @FXML
+    private Button logoutButton;
+
     User user = UserSession.getInstance().getCurrentUser();
+
+    private Object currentUser;
+
+    public void setCurrentUser(Object user){
+        this.currentUser = user;
+        if (user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+        }
+    }
 
     @FXML
     protected void onCreateClassroomClick() throws IOException {
@@ -54,5 +66,14 @@ public class AdminController {
         // Change the scene
         stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
         stage.show();
+    }
+
+    @FXML
+    private void onLogoutClicked(){
+        UserSession.getInstance().clearSession();
+        System.out.println("User logged out successfully");
+
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
     }
 }
