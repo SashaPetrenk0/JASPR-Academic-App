@@ -95,7 +95,7 @@ public class SqliteQuizDAO implements IQuizDAO {
             if (resultSet.next()) {
                 Question[] questions = new Question[] {
                         new Question(
-                                resultSet.getString("text"),
+                                resultSet.getString("question"),
                                 resultSet.getString("optionA"),
                                 resultSet.getString("optionB"),
                                 resultSet.getString("optionC"),
@@ -116,7 +116,7 @@ public class SqliteQuizDAO implements IQuizDAO {
     @Override
     public void addQuestion(Question question, Quiz quiz) {
         try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (id, text, optionA, optionB, optionC, optionD, answer)" +
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (id, question, optionA, optionB, optionC, optionD, answer)" +
                     "VALUES (?,?, ?, ?, ?, ?,?)");
             statement.setInt(1, quiz.getId());
             statement.setString(2, question.getQuestion());
