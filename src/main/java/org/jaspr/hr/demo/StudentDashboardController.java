@@ -29,6 +29,13 @@ public class StudentDashboardController {
 
     @FXML
     private Button takeQuiz;
+    private Question[] questions = new Question[] {
+            new Question("text",
+                    new String[] { "a", "b", "c", "d" }, 2),
+            new Question("Which planet is known as the Red Planet?",
+                    new String[] { "Earth", "Mars", "Jupiter", "Saturn" }, 1),
+
+    };
 
     @FXML
     public void initialize() {
@@ -38,7 +45,7 @@ public class StudentDashboardController {
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
-            System.out.println(quizDAO.getAllQuizzes(student).getLast().getQuestions().toString());
+            //System.out.println(quizDAO.getAllQuizzes(student).getLast().getQuestions().toString());
             quizLists.setCellFactory(listView -> new ListCell<>() {
                 @Override
                 protected void updateItem(Quiz quiz, boolean empty) {
@@ -55,7 +62,8 @@ public class StudentDashboardController {
                 if (event.getClickCount() == 2) { // double-click
                     Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
-                        openTakeQuiz(selectedQuiz.getTitle(), selectedQuiz.getQuestions());
+                       // openTakeQuiz(selectedQuiz.getTitle(), selectedQuiz.getQuestions());
+                        openTakeQuiz(selectedQuiz.getTitle(), questions);
                     }
                 }
             });
