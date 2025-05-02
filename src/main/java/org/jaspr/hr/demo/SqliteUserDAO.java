@@ -16,6 +16,78 @@ public class SqliteUserDAO implements IUserDAO {
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
 
+        try {
+            if (connection != null) {
+                // Add 'salt' column to each table if it doesn't exist
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE students ADD COLUMN passwordHash TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE teachers ADD COLUMN passwordHash TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE admins ADD COLUMN passwordHash TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE parents ADD COLUMN passwordHash TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE students ADD COLUMN salt TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE teachers ADD COLUMN salt TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE admins ADD COLUMN salt TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE parents ADD COLUMN salt TEXT;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+
+                // Add teacherID to classrooms if needed
+                try (Statement stmt = connection.createStatement()) {
+                    stmt.execute("ALTER TABLE classrooms ADD COLUMN teacherID INTEGER;");
+                } catch (SQLException e) {
+                    if (!e.getMessage().contains("duplicate column name")) {
+                        e.printStackTrace();
+                    }
+                }
+
                 // Create all necessary tables
                 createStudentTable();
                 createTeacherTable();
@@ -23,6 +95,12 @@ public class SqliteUserDAO implements IUserDAO {
                 createAdminTable();
                 createClassroomTable();
                 createStudentClassroom();
+            } else {
+                System.out.println("Database connection failed!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -33,10 +111,12 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS students ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "studentID INTEGER PRIMARY KEY NOT NULL,"
+                    + "studentID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
-                    + "salt TEXT NOT NULL"
+                    + "salt TEXT NOT NULL,"
+                    + "classroom_number INTEGER, "
+                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number) ON DELETE SET NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -51,7 +131,7 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS teachers ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "teacherID INTEGER PRIMARY KEY NOT NULL,"
+                    + "teacherID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
                     + "salt TEXT NOT NULL"
@@ -87,7 +167,7 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS admins ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "adminID INTEGER PRIMARY KEY NOT NULL,"
+                    + "adminID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
                     + "salt TEXT NOT NULL"
@@ -790,63 +870,6 @@ public class SqliteUserDAO implements IUserDAO {
         }
 
         return classroomNumber;
-    }
-
-
-    @Override
-    public boolean hasAnyStudents() {
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students LIMIT 1");
-            ResultSet rs = stmt.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyTeachers() {
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM teachers LIMIT 1");
-            ResultSet rs = stmt.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyParents() {
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM parents LIMIT 1");
-            ResultSet rs = stmt.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyAdmins() {
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM admins LIMIT 1");
-            ResultSet rs = stmt.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyRegisteredUsers() {
-        return hasAnyStudents()
-                || hasAnyTeachers()
-                || hasAnyParents()
-                || hasAnyAdmins();
     }
 
 
