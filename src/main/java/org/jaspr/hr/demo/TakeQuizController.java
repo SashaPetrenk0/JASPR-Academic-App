@@ -67,11 +67,10 @@ public class TakeQuizController {
             return;
         }
         questionLabel.setText(questions[questionIndex].getQuestion());
-        String[] choices = questions[questionIndex].getChoices();
-        optionA.setText(choices[0]);
-        optionB.setText(choices[1]);
-        optionC.setText(choices[2]);
-        optionD.setText(choices[3]);
+        optionA.setText(questions[questionIndex].getOptionA());
+        optionB.setText(questions[questionIndex].getOptionB());
+        optionC.setText(questions[questionIndex].getOptionC());
+        optionD.setText(questions[questionIndex].getOptionD());
     }
 
     public void nextQuestion() {
@@ -95,8 +94,8 @@ public class TakeQuizController {
     }
 
     @FXML
-    private boolean checkAnswer(int answer){
-        int correctAnswer = questions[questionIndex].getCorrectAnswerIndex();
+    private boolean checkAnswer(String answer){
+        String correctAnswer = questions[questionIndex].getCorrectAnswer();
 
         if (answer == correctAnswer){
             System.out.println("correct");
@@ -112,7 +111,7 @@ public class TakeQuizController {
     @FXML
     public void optionAclicked() {
         optionA.setDisable(true);
-        if (checkAnswer(0)) {
+        if (checkAnswer("a")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
@@ -124,7 +123,7 @@ public class TakeQuizController {
     @FXML
     public void optionBclicked() {
         optionB.setDisable(true);
-        if (checkAnswer(1)) {
+        if (checkAnswer("b")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
@@ -134,7 +133,7 @@ public class TakeQuizController {
     @FXML
     public void optionCclicked() {
         optionC.setDisable(true);
-        if (checkAnswer(2)) {
+        if (checkAnswer("c")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
@@ -144,7 +143,7 @@ public class TakeQuizController {
     @FXML
     public void optionDclicked() {
         optionD.setDisable(true);
-        if (checkAnswer(3)) {
+        if (checkAnswer("d")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
