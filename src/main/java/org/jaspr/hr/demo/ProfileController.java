@@ -1,32 +1,15 @@
 package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
-
-import javafx.fxml.FXML;
-import javafx.util.StringConverter;
-
-import javax.xml.transform.Result;
 
 public class ProfileController {
 
@@ -45,11 +28,12 @@ public class ProfileController {
     private Label emailLabel;
 
 
-    @FXML
-    private Label passwordLabel;
 
     @FXML
     private Label enrollmentLabel;
+
+    @FXML
+    private Button changePwd;
 
     @FXML
     private Button ReturnButton;
@@ -57,41 +41,45 @@ public class ProfileController {
     // Either student, teacher, admin, parent
     private Object currentUser;
 
-    public void setCurrentUser(Object user){
+    public void setCurrentUser(Object user) {
         this.currentUser = user;
 
-        if (user instanceof Student){
+        if (user instanceof Student) {
             Student student = (Student) user;
             loadStudentProfile(student);
-        }
-        else if (user instanceof Teacher){
+        } else if (user instanceof Teacher) {
             Teacher teacher = (Teacher) user;
             loadTeacherProfile(teacher);
-        }
-        else if (user instanceof Admin){
+        } else if (user instanceof Admin) {
             Admin admin = (Admin) user;
             loadAdminProfile(admin);
         }
-        else if (user instanceof Parent){
-            Parent parent = (Parent) user;
-            loadParentProfile(parent);
-        }
     }
 
-    private void loadStudentProfile(Student student){
+    public String getRole() {
+        if (currentUser instanceof Student) {
+            return "Student";
+        } else if (currentUser instanceof Teacher) {
+            return "Teacher";
+        } else if (currentUser instanceof Admin) {
+            return "Admin";
+        } else if (currentUser instanceof Parent) {
+            return "Parent";
+        }
+        return null;
+    }
+
+    private void loadStudentProfile(Student student) {
         nameLabel.setText("Name: " + student.getName());
         ageLabel.setText("Age: " + student.getAge());
         idLabel.setText("ID: " + student.getStudentID());
         emailLabel.setText("Email: " + student.getEmail());
-        //TODO: Hash the password, press a button to unhash it
-        passwordLabel.setText("Password: " + student.getPassword());
 
         List<Integer> classroomNumbers = userDAO.getClassroomNumbersForStudent(student.getStudentID());
 
-        if (classroomNumbers == null || classroomNumbers.isEmpty()){
+        if (classroomNumbers == null || classroomNumbers.isEmpty()) {
             enrollmentLabel.setText("No classroom assigned");
-        }
-        else {
+        } else {
             StringBuilder classroomText = new StringBuilder();
             for (Integer number : classroomNumbers) {
                 classroomText.append("Classroom: ").append(number).append("\n");
@@ -101,13 +89,11 @@ public class ProfileController {
         enrollmentLabel.setVisible(true);
     }
 
-    private void loadTeacherProfile(Teacher teacher){
+    private void loadTeacherProfile(Teacher teacher) {
         nameLabel.setText("Name: " + teacher.getName());
         ageLabel.setText("Age: " + teacher.getAge());
         idLabel.setText("ID: " + teacher.getTeacherID());
         emailLabel.setText("Email: " + teacher.getEmail());
-        //TODO: Hash the password, press a button to unhash it
-        passwordLabel.setText("Password: " + teacher.getPassword());
 
         Integer classroomNumber = userDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
         if (classroomNumber != null) {
@@ -118,43 +104,69 @@ public class ProfileController {
         enrollmentLabel.setVisible(true);
     }
 
-    private void loadAdminProfile(Admin admin){
+    private void loadAdminProfile(Admin admin) {
         nameLabel.setText("Name: " + admin.getName());
         ageLabel.setText("Age: " + admin.getAge());
         idLabel.setText("ID: " + admin.getAdminID());
         emailLabel.setText("Email: " + admin.getEmail());
-        //TODO: Hash the password, press a button to unhash it
-        passwordLabel.setText("Password: " + admin.getPassword());
-    }
-
-    private void loadParentProfile(Parent parent){
-        nameLabel.setText("Name: " + parent.getName());
-        ageLabel.setText("Child Name " + parent.getChildName());
-        idLabel.setText("ID: " + parent.getChildID());
-        emailLabel.setText("Email: " + parent.getEmail());
-        //TODO: Hash the password, press a button to unhash it
-        passwordLabel.setText("Password: " + parent.getPassword());
-        enrollmentLabel.setText("Classroom: " + parent.getClass());
-        enrollmentLabel.setVisible(true);
     }
 
     @FXML
-    private void onReturnClicked() {
-        Stage stage = (Stage) ReturnButton.getScene().getWindow();
-        String role = UserSession.getInstance().getRole();
+    private void onChangePwdClicked() {
+        try {
+            Stage stage = (Stage) changePwd.getScene().getWindow(); // only once
 
-        if ("Student".equals(role)) {
-            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
-        } else if ("Teacher".equals(role)) {
-            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
-        } else if ("Admin".equals(role)) {
-            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
-////            } else if ("Parent".equals(role)) {
-//                SceneChanger.changeScene(stage, "parent-dashboard-view.fxml");
-        } else {
-            // Fallback if something weird happens
-            SceneChanger.changeScene(stage, "login-view.fxml");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("change-password.fxml"));
+            Parent root = loader.load();
+            ChangePassword controller = loader.getController();
+            controller.setCurrentUser(currentUser); // pass the logged in user
+
+            // Set scene with specific width and height
+            Scene scene = new Scene(root, HelloApplication.WIDTH, HelloApplication.HEIGHT); // width = 600, height = 400 (example)
+            stage.setScene(scene); // just reuse the stage
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+    @FXML
+    private void onReturnClicked() throws IOException {
+        // Ensure currentUser is updated before navigating to the dashboard
+        if (currentUser instanceof Student) {
+            currentUser = userDAO.getStudent(((Student) currentUser).getStudentID());  // Reload student data
+        } else if (currentUser instanceof Teacher) {
+            currentUser = userDAO.getTeacher(((Teacher) currentUser).getTeacherID());  // Reload teacher data
+        } else if (currentUser instanceof Admin) {
+            currentUser = userDAO.getAdmin(((Admin) currentUser).getAdminID());  // Reload admin data
+        }
+        // Get the user's role and navigate accordingly
+        String role = getRole();
+        FXMLLoader loader = null;
+        Parent root = null;
+
+        if ("Student".equals(role)) {
+            loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/student-dashboard-view.fxml"));
+            root = loader.load();
+            StudentDashboardController controller = loader.getController();
+            controller.setCurrentUser(currentUser);
+        } else if ("Teacher".equals(role)) {
+            loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/teacher-dashboard-view.fxml"));
+            root = loader.load();
+            TeacherDashboardController controller = loader.getController();
+            controller.setCurrentUser(currentUser);
+        } else if ("Admin".equals(role)) {
+            loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/admin-dashboard-view.fxml"));
+            root = loader.load();
+            AdminController controller = loader.getController();
+            controller.setCurrentUser(currentUser);
+        }
+
+        // Set the scene to the updated dashboard
+        Stage stage = (Stage) ReturnButton.getScene().getWindow();
+        stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
+        stage.show();
+    }
+
 }
+
