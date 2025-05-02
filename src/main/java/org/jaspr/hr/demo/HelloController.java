@@ -20,11 +20,11 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        if (!userDAO.hasAnyRegisteredUsers()) {
-            loginButton.setDisable(true);   // Keep it disabled
-        } else {
-            loginButton.setDisable(false);  // Enable login
-        }
+//        if (!userDAO.hasAnyRegisteredUsers()) {
+//            loginButton.setDisable(true);   // Keep it disabled
+//        } else {
+//            loginButton.setDisable(false);  // Enable login
+//        }
     }
 
     @FXML
