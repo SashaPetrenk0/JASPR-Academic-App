@@ -29,13 +29,13 @@ public class StudentDashboardController {
 
     @FXML
     private Button takeQuiz;
-    private Question[] questions = new Question[] {
-            new Question("text",
-                    new String[] { "a", "b", "c", "d" }, 2),
-            new Question("Which planet is known as the Red Planet?",
-                    new String[] { "Earth", "Mars", "Jupiter", "Saturn" }, 1),
-
-    };
+//    private Question[] questions = new Question[] {
+//            new Question("text",
+//                    new String[] { "a", "b", "c", "d" }, 2),
+//            new Question("Which planet is known as the Red Planet?",
+//                    new String[] { "Earth", "Mars", "Jupiter", "Saturn" }, 1),
+//
+//    };
 
     @FXML
     public void initialize() {
@@ -63,7 +63,7 @@ public class StudentDashboardController {
                     Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
                        // openTakeQuiz(selectedQuiz.getTitle(), selectedQuiz.getQuestions());
-                        openTakeQuiz(selectedQuiz.getTitle(), questions);
+                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()));
                     }
                 }
             });
