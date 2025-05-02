@@ -30,7 +30,26 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
     }
-
+    private void createQuestionTable() {
+        // Create table if not exists
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS questions (" +
+                    "quiz_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "question TEXT NOT NULL," +
+                    "optionA TEXT NOT NULL," +
+                    "optionB TEXT NOT NULL," +
+                    "optionC TEXT NOT NULL," +
+                    "optionD TEXT NOT NULL," +
+                    "answer TEXT NOT NULL," +
+                    "answer TEXT NOT NULL," +
+                    "FOREIGN KEY (id) REFERENCES quizzes(id)"+
+                    ");";
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void close() {
         try {
