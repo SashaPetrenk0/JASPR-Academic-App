@@ -44,7 +44,7 @@ public class Quiz {
         return id;
     }
 
-    private void setID(int id){
+    public void setID(int id){
         this.id = id;
     }
 

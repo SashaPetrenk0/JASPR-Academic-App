@@ -147,7 +147,17 @@ public class SqliteQuizDAO implements IQuizDAO {
             statement.setInt(5, quiz.getAuthor());
 
 
+
+
             statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int generatedId = generatedKeys.getInt(1);
+
+                    quiz.setID(generatedId);  // 🔧 Assign the auto-generated ID
+                    System.out.println("Inserted quiz with ID: " + generatedId);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
