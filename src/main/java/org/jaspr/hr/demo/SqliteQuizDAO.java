@@ -114,16 +114,17 @@ public class SqliteQuizDAO implements IQuizDAO {
         return null;
     }
     @Override
-    public void addQuestion(Question question) {
+    public void addQuestion(Question question, Quiz quiz) {
         try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (text, optionA, optionB, optionC, optionD, answer)" +
-                    "VALUES (?, ?, ?, ?, ?,?)");
-            statement.setString(1, question.getQuestion());
-            statement.setString(2, question.getOptionA());
-            statement.setString(3, question.getOptionB());
-            statement.setString(4, question.getOptionC());
-            statement.setString(5, question.getOptionD());
-            statement.setString(6, question.getCorrectAnswer());
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (id, text, optionA, optionB, optionC, optionD, answer)" +
+                    "VALUES (?,?, ?, ?, ?, ?,?)");
+            statement.setInt(1, quiz.getId());
+            statement.setString(2, question.getQuestion());
+            statement.setString(3, question.getOptionA());
+            statement.setString(4, question.getOptionB());
+            statement.setString(5, question.getOptionC());
+            statement.setString(6, question.getOptionD());
+            statement.setString(7, question.getCorrectAnswer());
 
             statement.executeUpdate();
         } catch (Exception e) {

@@ -71,8 +71,8 @@ public class CreateQuizController {
         Quiz newQuiz = new Quiz(title, desc, topic, length, author);
         newQuiz.setQuestions(questions);
         quizDAO.addQuiz(newQuiz);
-        quizDAO.addQuestion(questions[0]);
-        quizDAO.addQuestion(questions[1]);
+        quizDAO.addQuestion(questions[0],newQuiz);
+        quizDAO.addQuestion(questions[1], newQuiz);
 
         successMessage.setText("Quiz " + title + " created successfully! Yay :)");
         successMessage.setVisible(true);
