@@ -137,6 +137,7 @@ public class RegisterController {
 
                     String salt = PasswordUtility.generateSalt();
                     String hashedPassword = PasswordUtility.hashPassword(password, salt);
+                    System.out.println(hashedPassword);
 
                     Student newStudent = new Student(name, age, studentID, email);
                     userDAO.addStudent(newStudent, hashedPassword, salt);
