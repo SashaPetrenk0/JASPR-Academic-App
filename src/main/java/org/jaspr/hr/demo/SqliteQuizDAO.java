@@ -36,13 +36,13 @@ public class SqliteQuizDAO implements IQuizDAO {
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS questions (" +
-                    "quiz_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "question_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "id INTEGER NOT NULL,"+
                     "question TEXT NOT NULL," +
                     "optionA TEXT NOT NULL," +
                     "optionB TEXT NOT NULL," +
                     "optionC TEXT NOT NULL," +
                     "optionD TEXT NOT NULL," +
-                    "answer TEXT NOT NULL," +
                     "answer TEXT NOT NULL," +
                     "FOREIGN KEY (id) REFERENCES quizzes(id)"+
                     ");";
