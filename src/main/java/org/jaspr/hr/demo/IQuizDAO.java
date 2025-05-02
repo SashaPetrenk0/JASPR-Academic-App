@@ -15,6 +15,7 @@ public interface IQuizDAO {
     public Quiz getQuiz(int id);
     public Question[] getQuestions(int id);
 
+    public void addQuestion (Question question);
     /**
      * Deletes a contact from the database.
      * @param email Email that confirms identity.

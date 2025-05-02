@@ -84,6 +84,55 @@ public class SqliteQuizDAO implements IQuizDAO {
         return null;
     }
 
+    //TODO: separate the question stuff into a separate interface?
+    @Override
+    public Question[] getQuestions(int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM questions WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                Question[] questions = new Question[] {
+                        new Question(
+                                resultSet.getString("text"),
+                                resultSet.getString("optionA"),
+                                resultSet.getString("optionB"),
+                                resultSet.getString("optionC"),
+                                resultSet.getString("optionD"),
+                                resultSet.getString("answer")
+                        )
+                };
+                return questions;
+            }
+            else {
+                return new Question[0]; // return empty array if no result
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @Override
+    public void addQuestion(Question question) {
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (text, optionA, optionB, optionC, optionD, answer)" +
+                    "VALUES (?, ?, ?, ?, ?,?)");
+            statement.setString(1, question.getQuestion());
+            statement.setString(2, question.getOptionA());
+            statement.setString(3, question.getOptionB());
+            statement.setString(4, question.getOptionC());
+            statement.setString(5, question.getOptionD());
+            statement.setString(6, question.getCorrectAnswer());
+
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
     @Override
     public void addQuiz(Quiz quiz) {
