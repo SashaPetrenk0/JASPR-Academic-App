@@ -50,10 +50,10 @@ public class CreateQuizController {
         AIGenQuestions.genQuestions("Write 2 short response questions about chemical reactions");
         //TODO: Need to extract the data from the ollama response and add it to the questions?
         Question[] questions = new Question[] {
-                new Question("text",
-                        new String[] { "a", "b", "c", "d" }, 2),
+                new Question("text","a","b","c","d","a"),
+
                 new Question("Which planet is known as the Red Planet?",
-                        new String[] { "Earth", "Mars", "Jupiter", "Saturn" }, 1),
+                         "Earth", "Mars", "Jupiter", "Saturn", "a"),
 
         };
 
@@ -71,6 +71,8 @@ public class CreateQuizController {
         Quiz newQuiz = new Quiz(title, desc, topic, length, author);
         newQuiz.setQuestions(questions);
         quizDAO.addQuiz(newQuiz);
+        quizDAO.addQuestion(questions[0]);
+        quizDAO.addQuestion(questions[1]);
 
         successMessage.setText("Quiz " + title + " created successfully! Yay :)");
         successMessage.setVisible(true);
