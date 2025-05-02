@@ -2,35 +2,66 @@ package org.jaspr.hr.demo;
 
 public class Question {
     private  String question;
-    private  String[] choices;
-    private  int correctAnswerIndex;
+    private  String optionA;
+    private  String optionB;
+    private  String optionC;
+    private  String optionD;
+    private  String correctAnswer;
 
-    public Question(String question, String[] choices, int correctAnswerIndex) {
+    public Question(String question, String optionA, String optionB, String optionC, String optionD, String correctAnswer) {
         this.question = question;
-        this.choices = choices;
-        this.correctAnswerIndex = correctAnswerIndex;
+        this.optionA =  optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.correctAnswer = correctAnswer;
     }
 
     // Getters for question text, options, and correct answer index
     public String getQuestion() {
         return question;
     }
-    public String[] getChoices() {
-        return choices;
-    }
-    public int getCorrectAnswerIndex() {
-        return correctAnswerIndex;
+
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setCorrectAnswerIndex(int index){
-        correctAnswerIndex = index;
+    public String getOptionA() {
+        return optionA;
+    }
+
+    public String getOptionB() {
+        return optionB;
+    }
+
+    public String getOptionC() {
+        return optionC;
+    }
+
+    public String getOptionD() {
+        return optionD;
+    }
+
+    public void setCorrectAnswer(String answer){
+        correctAnswer = answer;
     }
 
     public void setQuestion(String question) {
         this.question = question;
     }
 
-    public void setChoices(String[] choices) {
-        this.choices = choices;
+    public void setOptionA(String optionA) {
+        this.optionA = optionA;
+    }
+    public void setOptionB(String optionB) {
+        this.optionB = optionB;
+    }
+
+    public void setOptionC(String optionC) {
+        this.optionC = optionC;
+    }
+
+    public void setOptionD(String optionD) {
+        this.optionD = optionD;
     }
 }
