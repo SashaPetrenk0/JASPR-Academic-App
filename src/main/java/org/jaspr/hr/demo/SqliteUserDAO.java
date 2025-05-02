@@ -19,65 +19,65 @@ public class SqliteUserDAO implements IUserDAO {
         try {
             if (connection != null) {
                 // Add 'salt' column to each table if it doesn't exist
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE students ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE teachers ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE admins ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE parents ADD COLUMN passwordHash TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE students ADD COLUMN salt TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE teachers ADD COLUMN salt TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE admins ADD COLUMN salt TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE parents ADD COLUMN salt TEXT;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE students ADD COLUMN passwordHash VARCHAR ;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE teachers ADD COLUMN passwordHash TEXT;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE admins ADD COLUMN passwordHash TEXT;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE parents ADD COLUMN passwordHash TEXT;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE students ADD COLUMN salt TEXT;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE teachers ADD COLUMN salt TEXT;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE admins ADD COLUMN salt TEXT;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                try (Statement stmt = connection.createStatement()) {
+//                    stmt.execute("ALTER TABLE parents ADD COLUMN salt TEXT;");
+//                } catch (SQLException e) {
+//                    if (!e.getMessage().contains("duplicate column name")) {
+//                        e.printStackTrace();
+//                    }
+//                }
 
                 // Add teacherID to classrooms if needed
                 try (Statement stmt = connection.createStatement()) {
@@ -89,6 +89,7 @@ public class SqliteUserDAO implements IUserDAO {
                 }
 
                 // Create all necessary tables
+                //dropTables();
                 createStudentTable();
                 createTeacherTable();
                 createParentTable();
@@ -101,6 +102,17 @@ public class SqliteUserDAO implements IUserDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void dropTables(){
+        try {
+            Statement statement = connection.createStatement();
+            String query = "DROP TABLE IF EXISTS parents";
+
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -662,6 +674,30 @@ public class SqliteUserDAO implements IUserDAO {
         return students;
     }
 
+    @Override
+    public boolean hasAnyStudents() {
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyTeachers() {
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyParents() {
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyAdmins() {
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyRegisteredUsers() {
+        return false;
+    }
 
 
     public ObservableList<Teacher> getAllTeachers() {
