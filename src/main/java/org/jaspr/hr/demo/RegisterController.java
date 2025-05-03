@@ -207,7 +207,15 @@ public class RegisterController {
                 successfulSignUpLabelParent.setText("You've been successfully registered as a Parent! Welcome " + name + "!");
                 successfulSignUpLabelParent.setVisible(true);
 
-                submitButtonParent.setDisable(true);
+                submitButtonParent.setVisible(false);
+                submitButtonParent.setManaged(false);
+
+                successfulSignUpLabelParent.setVisible(true);
+                successfulSignUpLabelParent.setManaged(true);
+
+                successIcon.setVisible(true);
+                successIcon.setManaged(true);
+
 
 
             }
