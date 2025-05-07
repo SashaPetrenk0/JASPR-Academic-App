@@ -22,6 +22,7 @@ public class LoginController {
     @FXML
     private Button ReturnButton;
 
+
     @FXML
     private void initialize() {
         loginEmailField.setFocusTraversable(false);
@@ -116,5 +117,6 @@ public class LoginController {
         Stage stage = (Stage) ReturnButton.getScene().getWindow();
         SceneChanger.changeScene(stage, "hello-view.fxml");
     }
+
 
 }
