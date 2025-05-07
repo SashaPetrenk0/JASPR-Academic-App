@@ -1,8 +1,7 @@
 import org.jaspr.hr.demo.*;
 import org.junit.jupiter.api.*;
+
 import static org.junit.jupiter.api.Assertions.*;
-import java.sql.*;
-import java.util.List;
 
 
 public class QuestionTests {
@@ -26,5 +25,15 @@ public class QuestionTests {
         assertEquals(questionText, question.getQuestion());
         assertArrayEquals(choices, question.getChoices());
         assertEquals(correctAnswerIndex, question.getCorrectAnswerIndex());
+    }
+
+    @Test
+    public void testGetChoices() {
+        String[] choices = {"Red", "Green", "Blue"};
+        Question question = new Question("What colour is the sky?", choices, 2);
+
+        assertEquals("Red", question.getChoices()[0]);
+        assertEquals("Green", question.getChoices()[1]);
+        assertEquals("Blue", question.getChoices()[2]);
     }
 }
