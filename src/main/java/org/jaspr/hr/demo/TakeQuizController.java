@@ -98,7 +98,7 @@ public class TakeQuizController {
     private boolean checkAnswer(String answer){
         String correctAnswer = questions[questionIndex].getCorrectAnswer();
 
-        if (answer == correctAnswer){
+        if (answer.equals(correctAnswer)){
             System.out.println("correct");
             return true;
 
