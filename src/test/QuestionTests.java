@@ -5,15 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class QuestionTests {
-    @BeforeEach
-    public void setup() {
-        String questionText  = "What is the capital of France?";
-        String[] choices = {"Berlin", "Paris", "Rome", "Madrid"};
-        int correctAnswerIndex = 2;
-
-        Question question = new Question(questionText, choices, correctAnswerIndex);
-    }
-
     @Test
     public void testConstructor() {
         String questionText  = "What is the capital of France?";
