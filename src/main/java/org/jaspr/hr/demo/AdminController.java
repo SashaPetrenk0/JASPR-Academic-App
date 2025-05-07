@@ -21,6 +21,9 @@ public class AdminController {
     private Button ClassRoomCreation;
 
     @FXML
+    private Button classRoomButton;
+
+    @FXML
     private Button AssignButton;
 
     @FXML
@@ -38,16 +41,12 @@ public class AdminController {
     }
 
     @FXML
-    protected void onCreateClassroomClick() throws IOException {
-        Stage stage = (Stage) ClassRoomCreation.getScene().getWindow();
-        SceneChanger.changeScene(stage, "classroom-creation-view.fxml");
+    protected void onClassroomClick() throws IOException {
+        Stage stage = (Stage) classRoomButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
     }
 
-    @FXML
-    protected void onAssignUsersClick() throws IOException{
-        Stage stage = (Stage) AssignButton.getScene().getWindow();
-        SceneChanger.changeScene(stage, "assign-users-to-classroom.fxml");
-    }
+
 
     @FXML
     public void onProfileClick() throws IOException {
