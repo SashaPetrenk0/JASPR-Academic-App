@@ -91,23 +91,24 @@ public class SqliteQuizDAO implements IQuizDAO {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM questions WHERE id = ?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+            List<Question> questionList = new ArrayList<>();
 
             if (resultSet.next()) {
-                Question[] questions = new Question[] {
-                        new Question(
+                Question question = new Question (
+
                                 resultSet.getString("question"),
                                 resultSet.getString("optionA"),
                                 resultSet.getString("optionB"),
                                 resultSet.getString("optionC"),
                                 resultSet.getString("optionD"),
                                 resultSet.getString("answer")
-                        )
-                };
-                return questions;
+                        );
+                    questionList.add(question);
             }
-            else {
-                return new Question[0]; // return empty array if no result
-            }
+            Question[] questions = questionList.toArray(new Question[0]);
+            System.out.println("Loaded questions: " + questions.length); // Debug
+            return questions;
+
         } catch (Exception e) {
             e.printStackTrace();
         }

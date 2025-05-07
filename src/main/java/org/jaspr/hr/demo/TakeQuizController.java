@@ -53,6 +53,7 @@ public class TakeQuizController {
     @FXML
     public void setQuestions(Question[] questions){
         this.questions = questions;
+        System.out.println(questions.length);
         loadQuestion();
 
     }
