@@ -15,7 +15,6 @@ public class AIGenQuestions {
             System.out.print("Ollama says: ");
             String input = response.getResponse();
             //TODO: create thread so that this stuff can be accessed
-
             Pattern fullQuestionPattern = Pattern.compile(
                     "Question \\d+:\\s*(.*?)\\s*" +           // Question text
                             "A\\)\\s*(.*?)\\s*" +                     // Option A

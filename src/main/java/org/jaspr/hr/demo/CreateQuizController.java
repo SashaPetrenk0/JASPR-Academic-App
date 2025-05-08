@@ -11,7 +11,10 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CreateQuizController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
@@ -58,7 +61,8 @@ public class CreateQuizController {
 //
 //        };
 
-        Question[] questions = AIGenQuestions.genQuestions(prompt);
+        //Question[] questions = AIGenQuestions.genQuestions(prompt);
+
 
 
 
@@ -72,10 +76,62 @@ public class CreateQuizController {
 
 //Quiz newQuiz = new Quiz(title, desc, topic, length, author, List.of(questions));
         Quiz newQuiz = new Quiz(title, desc, topic, length, author);
-        newQuiz.setQuestions(questions);
+
+        class MyResponseListener implements ResponseListener {
+            @Override
+            public void onResponseReceived(OllamaResponse response) {
+                String input = response.getResponse();
+                System.out.print("Ollama says: ");
+                //TODO: create thread so that this stuff can be accessed
+                Pattern fullQuestionPattern = Pattern.compile(
+                        "Question \\d+:\\s*(.*?)\\s*" +           // Question text
+                                "A\\)\\s*(.*?)\\s*" +                     // Option A
+                                "B\\)\\s*(.*?)\\s*" +                     // Option B
+                                "C\\)\\s*(.*?)\\s*" +                     // Option C
+                                "D\\)\\s*(.*?)\\s*" +                     // Option D
+                                "Answer:\\s*([A-D])\\)",                  // Correct answer
+                        Pattern.DOTALL
+                );
+
+                Matcher matcher = fullQuestionPattern.matcher(input);
+                List<Question> questionList = new ArrayList<>();
+
+                while (matcher.find()) {
+                    String qText = matcher.group(1).trim();
+                    String a = matcher.group(2).trim();
+                    String b = matcher.group(3).trim();
+                    String c = matcher.group(4).trim();
+                    String d = matcher.group(5).trim();
+                    String correct = matcher.group(6).trim();
+
+                    questionList.add(new Question(qText, a, b, c, d, correct));
+                }
+
+                for (Question q : questionList) {
+                    System.out.println("Q: " + q.getQuestion());
+                    System.out.println("a: " + q.getOptionA());
+                    System.out.println("b: " + q.getOptionB());
+                    System.out.println("c: " + q.getOptionC());
+                    System.out.println("d: " + q.getOptionD());
+                    System.out.println("ans: " + q.getCorrectAnswer());
+                    System.out.println("----");
+                }
+                System.out.println("----");
+                Question[] questions = questionList.toArray(new Question[0]);
+
+                newQuiz.setQuestions(questions);
+
+                quizDAO.addQuestion(questions[0],newQuiz);
+                quizDAO.addQuestion(questions[1], newQuiz);
+            }
+        }
+
+        String apiURL = "http://127.0.0.1:11434/api/generate";
+        String model = "llama3.2"; //replace with the model YOU are using
+        OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
+        fetcher.fetchAsynchronousOllamaResponse(model, prompt, new MyResponseListener());
+
         quizDAO.addQuiz(newQuiz);
-        quizDAO.addQuestion(questions[0],newQuiz);
-        quizDAO.addQuestion(questions[1], newQuiz);
 
         successMessage.setText("Quiz " + title + " created successfully! Yay :)");
         successMessage.setVisible(true);
