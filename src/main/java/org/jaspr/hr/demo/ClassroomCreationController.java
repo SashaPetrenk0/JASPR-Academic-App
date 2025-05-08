@@ -34,38 +34,18 @@ public class ClassroomCreationController {
     @FXML
     private Button returnToPrevious;
 
-    @FXML
-    private TableColumn<Classroom, Integer> classroomNumberColumn;
-
-    @FXML
-    private TableColumn<Classroom, Integer> classroomCapacityColumn;
-
-    @FXML
-    private TableColumn<Classroom, Integer> numTeachersColumn;
-
-    @FXML
-    private TableColumn<Classroom, Integer> numStudentsColumn;
-
-    @FXML
-    private TableView<Classroom> classroomTable;
 
     @FXML
     private void initialize() {
-        classroomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomNumber"));
-        classroomCapacityColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomCapacity"));
-        numStudentsColumn.setCellValueFactory(new PropertyValueFactory<>("numStudents"));
-        numTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("numTeachers"));
-
         // Loading classrooms from the DAO
         ObservableList<Classroom> classrooms = userDAO.getUpdatedClassrooms();
-        classroomTable.setItems(classrooms);
     }
 
 
     @FXML
-    private void returnToAdmin() throws IOException{
+    private void returnToClassrooms() throws IOException{
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
+        SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
     }
 
     @FXML
@@ -75,14 +55,10 @@ public class ClassroomCreationController {
 
         // Creates new classroom object
         Classroom classroom = new Classroom(ClassroomNumber, ClassroomCapacity);
+        userDAO.createClassroom(ClassroomNumber, ClassroomCapacity);
 
-        if (userDAO.createClassroom(ClassroomNumber, ClassroomCapacity)) {
-            // Reload from DB
-            ObservableList<Classroom> updatedClassrooms = userDAO.getUpdatedClassrooms();
-            classroomTable.setItems(updatedClassrooms);
-            classroomNumber.clear();
-            classroomCapacity.clear();
-        }
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
 
     }
 
