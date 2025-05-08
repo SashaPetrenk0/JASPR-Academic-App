@@ -67,6 +67,7 @@ public class TakeQuizController {
             System.out.println("Questions not yet set — skipping load.");
             return;
         }
+        System.out.println(questionIndex);
         questionLabel.setText(questions[questionIndex].getQuestion());
         optionA.setText(questions[questionIndex].getOptionA());
         optionB.setText(questions[questionIndex].getOptionB());
@@ -75,15 +76,14 @@ public class TakeQuizController {
     }
 
     public void nextQuestion() {
-        if (questionIndex <= questions.length) {
-            questionIndex++;
+        questionIndex++;
+        if (questionIndex < questions.length) {
             loadQuestion();// refresh display with new question
             optionA.setDisable(false);
             optionB.setDisable(false);
             optionC.setDisable(false);
             optionD.setDisable(false);
         } else {
-            // Optional: Show results or end the quiz
             System.out.println("Quiz finished!");
             System.out.println("correct" + correctAnswerCount);
             System.out.println("incorrect" + incorrectAnswerCount);
@@ -112,43 +112,43 @@ public class TakeQuizController {
     @FXML
     public void optionAclicked() {
         optionA.setDisable(true);
-        if (checkAnswer("a")) {
+        if (checkAnswer("A")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
         }
-        questionIndex++;
+
 
     }
 
     @FXML
     public void optionBclicked() {
         optionB.setDisable(true);
-        if (checkAnswer("b")) {
+        if (checkAnswer("B")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
         }
-        questionIndex++;
+
     }
     @FXML
     public void optionCclicked() {
         optionC.setDisable(true);
-        if (checkAnswer("c")) {
+        if (checkAnswer("C")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
         }
-        questionIndex++;
+
     }
     @FXML
     public void optionDclicked() {
         optionD.setDisable(true);
-        if (checkAnswer("d")) {
+        if (checkAnswer("D")) {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
         }
-        questionIndex++;
+
     }
 }
