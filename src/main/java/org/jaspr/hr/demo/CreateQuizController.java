@@ -51,20 +51,6 @@ public class CreateQuizController {
         int length = Integer.parseInt(lengthField.getText().trim());
         int author = 0;
         String prompt = "Write " + length + " multiple choice questions about "+desc+".";
-       // AIGenQuestions.genQuestions(prompt);
-        //TODO: Need to extract the data from the ollama response and add it to the questions?
-//        Question[] questions = new Question[] {
-//                new Question("text","a","b","c","d","a"),
-//
-//                new Question("Which planet is known as the Red Planet?",
-//                         "Earth", "Mars", "Jupiter", "Saturn", "a"),
-//
-//        };
-
-        //Question[] questions = AIGenQuestions.genQuestions(prompt);
-
-
-
 
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
@@ -83,7 +69,6 @@ public class CreateQuizController {
                 String input = response.getResponse();
                 System.out.print("Ollama says: ");
                 System.out.print(input);
-                //TODO: create thread so that this stuff can be accessed
                 Pattern fullQuestionPattern = Pattern.compile(
                         "\\*\\*Question \\d+\\*\\*\\s*" +           // Match **Question N**
                                 "(.*?)\\s*" +                              // Question text
@@ -108,25 +93,12 @@ public class CreateQuizController {
                     questionList.add(new Question(qText, a, b, c, d, correct));
                 }
 
-                for (Question q : questionList) {
-                    System.out.println("Q: " + q.getQuestion());
-                    System.out.println("a: " + q.getOptionA());
-                    System.out.println("b: " + q.getOptionB());
-                    System.out.println("c: " + q.getOptionC());
-                    System.out.println("d: " + q.getOptionD());
-                    System.out.println("ans: " + q.getCorrectAnswer());
-                    System.out.println("----");
-                }
-                System.out.println("----");
                 Question[] questions = questionList.toArray(new Question[0]);
 
                 newQuiz.setQuestions(questions);
                 for (int i = 0; i < questions.length; i++) {
                     quizDAO.addQuestion(questions[i],newQuiz);
                 }
-
-
-
             }
         }
 
@@ -136,7 +108,6 @@ public class CreateQuizController {
         fetcher.fetchAsynchronousOllamaResponse(model, prompt, new MyResponseListener());
 
         quizDAO.addQuiz(newQuiz);
-
         successMessage.setText("Quiz " + title + " created successfully! Yay :)");
         successMessage.setVisible(true);
         createQuiz.setDisable(true);

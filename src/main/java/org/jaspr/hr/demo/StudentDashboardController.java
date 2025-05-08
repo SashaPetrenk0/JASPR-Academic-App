@@ -56,9 +56,9 @@ public class StudentDashboardController {
                 if (event.getClickCount() == 2) { // double-click
                     Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
-                       // openTakeQuiz(selectedQuiz.getTitle(), selectedQuiz.getQuestions());
-                        // openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()));
-                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(24));
+
+                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()));
+                        //openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(24));
                     }
                 }
             });

@@ -1,7 +1,5 @@
 package org.jaspr.hr.demo;
 
-import java.util.List;
-
 public class Quiz {
     private int id;
     private String title;
@@ -44,7 +42,7 @@ public class Quiz {
         return id;
     }
 
-    public void setID(int id){
+    public void setId(int id){
         this.id = id;
     }
 

@@ -140,22 +140,20 @@ public class SqliteQuizDAO implements IQuizDAO {
     public void addQuiz(Quiz quiz) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO quizzes (title, description, topic, numOfQuestions, author)" +
-                    "VALUES (?, ?, ?, ?, ?)");
+                    "VALUES (?, ?, ?, ?, ?)",
+            Statement.RETURN_GENERATED_KEYS);
+
             statement.setString(1, quiz.getTitle());
             statement.setString(2, quiz.getDescription());
             statement.setString(3, quiz.getTopic());
             statement.setInt(4, quiz.getNumOfQuestions());
             statement.setInt(5, quiz.getAuthor());
-
-
-
-
             statement.executeUpdate();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int generatedId = generatedKeys.getInt(1);
 
-                    quiz.setID(generatedId);  // 🔧 Assign the auto-generated ID
+                    quiz.setId(generatedId);
                     System.out.println("Inserted quiz with ID: " + generatedId);
                 }
             }
