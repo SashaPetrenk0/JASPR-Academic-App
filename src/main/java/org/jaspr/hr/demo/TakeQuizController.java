@@ -75,7 +75,7 @@ public class TakeQuizController {
     }
 
     public void nextQuestion() {
-        if (questionIndex < questions.length) {
+        if (questionIndex <= questions.length) {
             questionIndex++;
             loadQuestion();// refresh display with new question
             optionA.setDisable(false);

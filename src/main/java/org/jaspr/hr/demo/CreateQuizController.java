@@ -47,15 +47,18 @@ public class CreateQuizController {
         String topic = topicField.getText();
         int length = Integer.parseInt(lengthField.getText().trim());
         int author = 0;
-        AIGenQuestions.genQuestions("Write 2 short response questions about chemical reactions");
+        String prompt = "Write " + length + " multiple choice questions about "+desc+".";
+       // AIGenQuestions.genQuestions(prompt);
         //TODO: Need to extract the data from the ollama response and add it to the questions?
-        Question[] questions = new Question[] {
-                new Question("text","a","b","c","d","a"),
+//        Question[] questions = new Question[] {
+//                new Question("text","a","b","c","d","a"),
+//
+//                new Question("Which planet is known as the Red Planet?",
+//                         "Earth", "Mars", "Jupiter", "Saturn", "a"),
+//
+//        };
 
-                new Question("Which planet is known as the Red Planet?",
-                         "Earth", "Mars", "Jupiter", "Saturn", "a"),
-
-        };
+        Question[] questions = AIGenQuestions.genQuestions(prompt);
 
 
 
