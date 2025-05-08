@@ -82,15 +82,16 @@ public class CreateQuizController {
             public void onResponseReceived(OllamaResponse response) {
                 String input = response.getResponse();
                 System.out.print("Ollama says: ");
+                System.out.print(input);
                 //TODO: create thread so that this stuff can be accessed
                 Pattern fullQuestionPattern = Pattern.compile(
-                        "Question \\d+:\\s*(.*?)\\s*" +           // Question text
-                                "A\\)\\s*(.*?)\\s*" +                     // Option A
-                                "B\\)\\s*(.*?)\\s*" +                     // Option B
-                                "C\\)\\s*(.*?)\\s*" +                     // Option C
-                                "D\\)\\s*(.*?)\\s*" +                     // Option D
-                                "Answer:\\s*([A-D])\\)",                  // Correct answer
-                        Pattern.DOTALL
+                        "\\*\\*Question \\d+\\*\\*\\s*" +           // Match **Question N**
+                                "(.*?)\\s*" +                              // Question text
+                                "A\\)\\s*(.*?)\\s*" +                      // Option A
+                                "B\\)\\s*(.*?)\\s*" +                      // Option B
+                                "C\\)\\s*(.*?)\\s*" +                      // Option C
+                                "D\\)\\s*(.*?)\\s*" +                      // Option D
+                                "\\*\\*Answer:\\s*([A-D])\\)"              // Answer (just the letter, e.g., C)
                 );
 
                 Matcher matcher = fullQuestionPattern.matcher(input);
@@ -120,9 +121,12 @@ public class CreateQuizController {
                 Question[] questions = questionList.toArray(new Question[0]);
 
                 newQuiz.setQuestions(questions);
+                for (int i = 0; i < questions.length; i++) {
+                    quizDAO.addQuestion(questions[i],newQuiz);
+                }
 
-                quizDAO.addQuestion(questions[0],newQuiz);
-                quizDAO.addQuestion(questions[1], newQuiz);
+
+
             }
         }
 
