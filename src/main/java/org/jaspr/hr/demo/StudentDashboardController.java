@@ -19,6 +19,9 @@ public class StudentDashboardController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
     @FXML
+    private Button profileButton;
+
+    @FXML
     private Label personalisedGreeting;
 
     @FXML
@@ -29,6 +32,9 @@ public class StudentDashboardController {
 
     @FXML
     private Button takeQuiz;
+
+    @FXML
+    private Button logoutButton;
 
 
     @FXML
@@ -103,7 +109,6 @@ public class StudentDashboardController {
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
     }
-
     @FXML
     private void onTakeQuiz() throws IOException {
         Stage stage = (Stage) takeQuiz.getScene().getWindow();
@@ -112,5 +117,48 @@ public class StudentDashboardController {
 
 
 }
+
+@FXML
+private void onLogoutClicked(){
+    UserSession.getInstance().clearSession();
+    System.out.println("User logged out successfully");
+
+    Stage stage = (Stage) logoutButton.getScene().getWindow();
+    SceneChanger.changeScene(stage, "hello-view.fxml");
+}
+
+
+
+private Object currentUser;
+
+public void setCurrentUser(Object user){
+    this.currentUser = user;
+    if (user instanceof Teacher){
+        Teacher teacher = (Teacher) user;
+    }
+}
+
+@FXML
+public void onProfileClick() throws IOException {
+    Stage stage = (Stage) profileButton.getScene().getWindow();
+
+    // Load the profile-view.fxml
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/profile-view.fxml"));
+    Parent root = loader.load();  // This will return javafx.scene.Parent
+
+    // Get the ProfileController
+    ProfileController profileController = loader.getController();
+
+    // Pass the current user to the controller
+    profileController.setCurrentUser(user);
+
+    // Change the scene
+    stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
+    stage.show();
+}
+
+
+
+
 
 

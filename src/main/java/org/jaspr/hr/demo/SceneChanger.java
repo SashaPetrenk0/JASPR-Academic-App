@@ -11,8 +11,8 @@ public class SceneChanger {
 
     //TODO: Change these to our final styled dimensions
 
-    private static final double WIDTH = 800;
-    private static final double HEIGHT = 600;
+    public static final double WIDTH = 800;
+    public static final double HEIGHT = 600;
 
     public static void changeScene(Stage stage, String fxmlFileName){
         try{

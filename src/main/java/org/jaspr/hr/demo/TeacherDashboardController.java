@@ -2,11 +2,13 @@ package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
+
 import java.io.IOException;
 
 
@@ -17,6 +19,9 @@ public class TeacherDashboardController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
     @FXML
+    private Button profileButton;
+
+    @FXML
     private Label personalisedGreeting;
 
     @FXML
@@ -25,6 +30,8 @@ public class TeacherDashboardController {
     @FXML
     private ListView quizLists;
 
+    @FXML
+    private Button logoutButton;
 
     @FXML
     public void initialize() {
@@ -34,21 +41,35 @@ public class TeacherDashboardController {
             personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
             System.out.println(teacher.getName() + teacher.getTeacherID());
         }
-
     }
 
+    private Object currentUser;
 
+    public void setCurrentUser(Object user){
+        this.currentUser = user;
+        if (user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+        }
+    }
+    @FXML
+    public void onProfileClick() throws IOException {
+        Stage stage = (Stage) profileButton.getScene().getWindow();
 
+        // Load the profile-view.fxml
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/profile-view.fxml"));
+        Parent root = loader.load();  // This will return javafx.scene.Parent
 
+        // Get the ProfileController
+        ProfileController profileController = loader.getController();
+        // Pass the current user (updated) to the ProfileController
+        profileController.setCurrentUser(user);
 
+        // Change the scene
+        stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
+        stage.show();
+    }
 
-
-
-
-
-
-
-
+    //TODO: Use scene changer here:
     /// go to create quiz page
     @FXML
     protected void onAdd() throws IOException {
@@ -56,6 +77,15 @@ public class TeacherDashboardController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-quiz-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
+    }
+
+    @FXML
+    private void onLogoutClicked(){
+        UserSession.getInstance().clearSession();
+        System.out.println("User logged out successfully");
+
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
     }
 
 }

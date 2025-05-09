@@ -22,18 +22,39 @@ public class LoginController {
     @FXML
     private Button ReturnButton;
 
+
+    @FXML
+    private void initialize() {
+        loginEmailField.setFocusTraversable(false);
+        loginPasswordField.setFocusTraversable(false);
+
+        loginEmptyError.setStyle("-fx-font-family: 'Telugu Sangam MN'; -fx-font-size: 12px; -fx-text-fill: #d9534f;");
+
+
+    }
+
+
     @FXML
     private void onLoginClicked(){
+
         String email = loginEmailField.getText().trim();
         String password = loginPasswordField.getText().trim();
+        String user_salt = userDAO.getSalt(email);
+        if (user_salt == null) {
+            System.out.println("No salt found for this user. Please check the email.");
+            return;
+        }
+        String hashedPwd = PasswordUtility.hashPassword(password, user_salt);
 
         if (email.isEmpty() || password.isEmpty()){
-            loginEmptyError.setText("Please enter both an email and a password");
+            loginEmptyError.setText("Please enter both a valid Email and a Password");
             loginEmptyError.setVisible(true);
             return;
         }
+
+
         // Calls authentication method
-        String role = userDAO.Authenticate(email, password);
+        String role = userDAO.Authenticate(email, hashedPwd);
 
         // If no matches
         if (role == null){
@@ -44,7 +65,7 @@ public class LoginController {
         // If "Student" role returned
         if ("Student".equals(role)){
             System.out.println("Student successfully logged in");
-            Student loggedInStudent = userDAO.getLoggedInStudent(email, password);
+            Student loggedInStudent = userDAO.getLoggedInStudent(email, hashedPwd);
             UserSession.getInstance().setCurrentUser(loggedInStudent, role);
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with student dasboard
@@ -55,7 +76,7 @@ public class LoginController {
         // If "Teacher" role returned
         if ("Teacher".equals(role)){
             System.out.println("Teacher successfully logged in");
-            Teacher loggedInTeacher = userDAO.getLoggedInTeacher(email, password);
+            Teacher loggedInTeacher = userDAO.getLoggedInTeacher(email, hashedPwd);
             UserSession.getInstance().setCurrentUser(loggedInTeacher, role);
             // Change scene to student dashboard
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
@@ -80,11 +101,13 @@ public class LoginController {
 
         // If "Admin" role returned
         if ("Admin".equals(role)){
+            Admin loggedInAdmin = userDAO.getLoggedInAdmin(email, hashedPwd);
+            UserSession.getInstance().setCurrentUser(loggedInAdmin, role);
             // Change scene to student dashboard
             System.out.println("Admin successfully logged in");
             // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with admin dashboard
-//            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.admin-dashboard-view.fxml");
+            Stage stage = (Stage) LoginButton.getScene().getWindow();
+            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
         }
 
     }
@@ -94,5 +117,6 @@ public class LoginController {
         Stage stage = (Stage) ReturnButton.getScene().getWindow();
         SceneChanger.changeScene(stage, "hello-view.fxml");
     }
+
 
 }

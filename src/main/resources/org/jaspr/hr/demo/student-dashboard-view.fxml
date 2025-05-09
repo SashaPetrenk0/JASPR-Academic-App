@@ -14,7 +14,12 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="personalisedGreeting" text="Hi" style="-fx-font-size: 18px;"/>
+    <HBox>
+        <Label fx:id="personalisedGreeting" text="Hi" style="-fx-font-size: 18px;"/>
+        <Button fx:id="profileButton" text="View Profile" onAction="#onProfileClick"/>
+
+    </HBox>
+
     <Label text="student view"/>
 
     <Button fx:id="createQuiz" text="Create Quiz" maxWidth="Infinity" onAction="#onAdd"/>
@@ -25,7 +30,5 @@
         <ListView fx:id="quizLists"/>
 
     </VBox>
-
-
-
+    <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked"/>
 </VBox>
