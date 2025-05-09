@@ -152,8 +152,10 @@ public class SqliteQuizDAO implements IQuizDAO {
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int generatedId = generatedKeys.getInt(1);
+                    System.out.println("Before insert: quiz id = " + quiz.getId());
 
                     quiz.setId(generatedId);
+                    System.out.println("after insert: quiz id = " + quiz.getId());
                     System.out.println("Inserted quiz with ID: " + generatedId);
                 }
             }
@@ -235,7 +237,7 @@ public class SqliteQuizDAO implements IQuizDAO {
                 int numOfQuestions = resultSet.getInt("numOfQuestions");
                 int author = resultSet.getInt("author");
                 Quiz quiz = new Quiz(title,desc,topic,numOfQuestions,author);
-
+                quiz.setId(resultSet.getInt("id"));
                 quizzes.add(quiz);
             }
             //TODO: Error Handling
