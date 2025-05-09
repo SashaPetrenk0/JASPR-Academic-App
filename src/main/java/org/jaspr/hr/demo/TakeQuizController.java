@@ -19,7 +19,7 @@ public class TakeQuizController {
     private Button optionD;
 
 
-    //TODO: fix the fact that it randomly skips over the second last question
+
     private Question[] questions;
 
 
