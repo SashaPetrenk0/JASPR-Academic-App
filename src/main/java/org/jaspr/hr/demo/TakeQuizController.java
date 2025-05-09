@@ -18,7 +18,6 @@ public class TakeQuizController {
     @FXML
     private Button optionD;
 
-    private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
     //TODO: fix the fact that it randomly skips over the second last question
     private Question[] questions;
