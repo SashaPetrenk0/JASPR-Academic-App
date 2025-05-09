@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
@@ -12,8 +13,8 @@ import javafx.scene.Parent;
 
 
 public class StudentDashboardController {
-    User user = UserSession.getInstance().getCurrentUser();
-    String role = UserSession.getInstance().getRole();
+    private final User user = UserSession.getInstance().getCurrentUser();
+    private final String role = UserSession.getInstance().getRole();
 
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
@@ -27,7 +28,10 @@ public class StudentDashboardController {
     private Button createQuiz;
 
     @FXML
-    private ListView quizLists;
+    private ListView<Quiz> quizLists;
+
+    @FXML
+    private Button takeQuiz;
 
     @FXML
     private Button logoutButton;
@@ -35,19 +39,93 @@ public class StudentDashboardController {
 
     @FXML
     public void initialize() {
-        if ("Student".equals(role) && user instanceof Student){
+        if ("Student".equals(role) && user instanceof Student) {
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
+            quizLists.setCellFactory(listView -> new ListCell<>() {
+                @Override
+                protected void updateItem(Quiz quiz, boolean empty) {
+                    super.updateItem(quiz, empty);
+                    if (empty || quiz == null) {
+                        setText(null);
+                    } else {
+                        setText(quiz.getTitle());
+                    }
+                }
+            });
+
+            quizLists.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) { // double-click
+                    Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
+                    if (selectedQuiz != null) {
+
+                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()));
+
+                    }
+                }
+            });
+
+
+        }
+    }
+
+        @FXML
+        private void openTakeQuiz (String title, Question[]questions){
+            try {
+                Stage currentStage = (Stage) quizLists.getScene().getWindow();
+                // Load new window
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view.fxml"));
+                Parent root = loader.load();
+
+                // Pass data to next controller
+                TakeQuizController controller = loader.getController();
+
+                controller.loadTitle(title);
+                controller.setQuestions(questions);
+
+                Stage stage = new Stage();
+
+                stage.setWidth(currentStage.getWidth());
+                stage.setHeight(currentStage.getHeight());
+
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
 
+        /// go to create quiz page
+        @FXML
+        protected void onAdd () throws IOException {
+            Stage stage = (Stage) createQuiz.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-quiz-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+            stage.setScene(scene);
+        }
+        @FXML
+        private void onTakeQuiz () throws IOException {
+            Stage stage = (Stage) takeQuiz.getScene().getWindow();
+            SceneChanger.changeScene(stage, "take-quiz-view.fxml");
+        }
+
+    @FXML
+    private void onLogoutClicked() {
+        UserSession.getInstance().clearSession();
+        System.out.println("User logged out successfully");
+
+        Stage stage = (Stage) logoutButton.getScene().getWindow();
+        SceneChanger.changeScene(stage, "hello-view.fxml");
     }
+
 
     private Object currentUser;
 
-    public void setCurrentUser(Object user){
+    public void setCurrentUser(Object user) {
         this.currentUser = user;
-        if (user instanceof Teacher){
+        if (user instanceof Teacher) {
             Teacher teacher = (Teacher) user;
         }
     }
@@ -70,28 +148,9 @@ public class StudentDashboardController {
         stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
         stage.show();
     }
-
-
-    /// go to create quiz page
-    @FXML
-    protected void onAdd() throws IOException {
-        Stage stage = (Stage) createQuiz.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-quiz-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        stage.setScene(scene);
-    }
-
-    @FXML
-    private void onLogoutClicked(){
-        UserSession.getInstance().clearSession();
-        System.out.println("User logged out successfully");
-
-        Stage stage = (Stage) logoutButton.getScene().getWindow();
-        SceneChanger.changeScene(stage, "hello-view.fxml");
-    }
-
-
-
 }
+
+
+
 
 
