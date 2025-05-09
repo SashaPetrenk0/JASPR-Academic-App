@@ -50,7 +50,7 @@ public class CreateQuizController {
         String topic = topicField.getText();
         int length = Integer.parseInt(lengthField.getText().trim());
         int author = 0;
-        String prompt = "Write " + length + " multiple choice questions about "+desc+".";
+        String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D";
 
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
@@ -70,13 +70,13 @@ public class CreateQuizController {
                 System.out.print("Ollama says: ");
                 System.out.print(input);
                 Pattern fullQuestionPattern = Pattern.compile(
-                        "\\*\\*Question \\d+\\*\\*\\s*" +           // Match **Question N**
-                                "(.*?)\\s*" +                              // Question text
-                                "A\\)\\s*(.*?)\\s*" +                      // Option A
-                                "B\\)\\s*(.*?)\\s*" +                      // Option B
-                                "C\\)\\s*(.*?)\\s*" +                      // Option C
-                                "D\\)\\s*(.*?)\\s*" +                      // Option D
-                                "\\*\\*Answer:\\s*([A-D])\\)"              // Answer (just the letter, e.g., C)
+                        "(?:\\*\\*Question \\d+\\*\\*|Question \\d+:)\\s*" +   // Match "**Question N**" or "Question N:"
+                                "(.*?)\\s*" +                                         // Question text
+                                "A\\)\\s*(.*?)\\s*" +                                 // Option A
+                                "B\\)\\s*(.*?)\\s*" +                                 // Option B
+                                "C\\)\\s*(.*?)\\s*" +                                 // Option C
+                                "D\\)\\s*(.*?)\\s*" +                                 // Option D
+                                "(?:\\*\\*Answer:|Answer:)\\s*([A-D])\\)"             // Match "**Answer: C)" or "Answer: C)"
                 );
 
                 Matcher matcher = fullQuestionPattern.matcher(input);
@@ -93,7 +93,10 @@ public class CreateQuizController {
                     questionList.add(new Question(qText, a, b, c, d, correct));
                 }
 
+
+
                 Question[] questions = questionList.toArray(new Question[0]);
+                System.out.print(questions.length);
 
                 newQuiz.setQuestions(questions);
                 for (int i = 0; i < questions.length; i++) {
