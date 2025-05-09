@@ -22,16 +22,7 @@ public class TakeQuizController {
 
     //TODO: fix the fact that it randomly skips over the second last question
     private Question[] questions;
-    // Quiz quiz = quizDAO.getQuiz(selectedQuiz);
-   // Question[] questions = quiz.getQuestions();
-    //sample questions for testing purposes
-//    Question[] questions = {
-//            new Question("What is the capital of France?", new String[]{"Berlin", "Madrid", "Paris", "Rome"}, 2),
-//            new Question("Which planet is known as the Red Planet?", new String[]{"Earth", "Mars", "Jupiter", "Saturn"}, 1),
-//            new Question("Who wrote 'Hamlet'?", new String[]{"Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"}, 1),
-//            new Question("What is the largest ocean on Earth?", new String[]{"Atlantic", "Indian", "Pacific", "Arctic"}, 2),
-//            new Question("Which element has the chemical symbol 'O'?", new String[]{"Oxygen", "Gold", "Iron", "Hydrogen"}, 0)
-//    };
+
 
     int correctAnswerCount = 0;
     int incorrectAnswerCount = 0;
@@ -39,7 +30,7 @@ public class TakeQuizController {
 
     @FXML
     public void initialize(){
-       // loadQuestion();
+
 
 
 
