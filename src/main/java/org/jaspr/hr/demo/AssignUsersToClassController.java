@@ -149,6 +149,9 @@ public class AssignUsersToClassController {
         for (CheckBox checkBox : checkboxes){
             checkBox.setSelected(false);
         }
+
+        Stage stage = (Stage) assignUsers.getScene().getWindow();
+        SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
     }
 
         @FXML
