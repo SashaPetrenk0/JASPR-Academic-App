@@ -29,13 +29,6 @@ public class TakeQuizController {
     int questionIndex = 0;
 
     @FXML
-    public void initialize(){
-
-
-
-
-    }
-    @FXML
     public void loadTitle(String title){
         quizTitle.setText(title);
 
