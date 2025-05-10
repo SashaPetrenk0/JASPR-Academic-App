@@ -16,16 +16,16 @@ public class ProfileController {
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     @FXML
-    private Label nameLabel;
+    private TextField nameLabel;
 
     @FXML
-    private Label ageLabel;
+    private TextField ageLabel;
 
     @FXML
-    private Label idLabel;
+    private TextField idLabel;
 
     @FXML
-    private Label emailLabel;
+    private TextField emailLabel;
 
 
 
@@ -90,10 +90,10 @@ public class ProfileController {
     }
 
     private void loadTeacherProfile(Teacher teacher) {
-        nameLabel.setText("Name: " + teacher.getName());
-        ageLabel.setText("Age: " + teacher.getAge());
-        idLabel.setText("ID: " + teacher.getTeacherID());
-        emailLabel.setText("Email: " + teacher.getEmail());
+        nameLabel.setText("" + teacher.getName());
+        ageLabel.setText("" + teacher.getAge());
+        idLabel.setText("" + teacher.getTeacherID());
+        emailLabel.setText("" + teacher.getEmail());
 
         Integer classroomNumber = userDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
         if (classroomNumber != null) {
