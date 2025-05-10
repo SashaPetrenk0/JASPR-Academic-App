@@ -12,8 +12,10 @@ public interface IQuizDAO {
      */
     public void addQuiz(Quiz quiz);
 
-    public Quiz getQuiz(Quiz quiz);
+    public Quiz getQuiz(int id);
+    public Question[] getQuestions(int id);
 
+    public void addQuestion (Question question, Quiz quiz);
     /**
      * Deletes a contact from the database.
      * @param email Email that confirms identity.
@@ -34,7 +36,7 @@ public interface IQuizDAO {
      * @return A list of all quizzes created by a specific student.
      * @param student student who owns the quizzes.
      */
-    public List<String> getAllQuizzes(Student student);
+    public List<Quiz> getAllQuizzes(Student student);
 
     /**
      * Retrieves all quizzes assigned by a teacher to a student from the database.
