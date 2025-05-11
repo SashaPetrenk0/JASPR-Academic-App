@@ -23,6 +23,7 @@
     <Label text="student view"/>
 
     <Button fx:id="createQuiz" text="Create Quiz" maxWidth="Infinity" onAction="#onAdd"/>
+    <Button fx:id="takeQuiz" text="Take Quiz" maxWidth="Infinity" onAction="#onTakeQuiz"/>
 
     <VBox xmlns:fx="http://javafx.com/fxml" spacing="10" alignment="CENTER">
 

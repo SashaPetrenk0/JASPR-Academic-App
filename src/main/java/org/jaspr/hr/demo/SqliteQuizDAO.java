@@ -11,8 +11,9 @@ public class SqliteQuizDAO implements IQuizDAO {
     public SqliteQuizDAO() {
         connection = SqliteConnection.getInstance();
         createQuizTable();
-
+        createQuestionTable();
     }
+
     private void createQuizTable() {
         // Create table if not exists
         try {
@@ -30,7 +31,26 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
     }
-
+    private void createQuestionTable() {
+        // Create table if not exists
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS questions (" +
+                    "question_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "id INTEGER NOT NULL,"+
+                    "question TEXT NOT NULL," +
+                    "optionA TEXT NOT NULL," +
+                    "optionB TEXT NOT NULL," +
+                    "optionC TEXT NOT NULL," +
+                    "optionD TEXT NOT NULL," +
+                    "answer TEXT NOT NULL," +
+                    "FOREIGN KEY (id) REFERENCES quizzes(id)"+
+                    ");";
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void close() {
         try {
@@ -42,41 +62,103 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     // Pull all attributes of a specific student for Display Details functionality in profile
     @Override
-    public Quiz getQuiz(Quiz quiz) {
-//        try {
-//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE id = ?");
-//            statement.setInt(1, id);
-//            ResultSet resultSet = statement.executeQuery();
-//            if (resultSet.next()) {
-//                return new Quiz(
-//                        id,
-//                        resultSet.getString("title"),
-//                        resultSet.getInt("description"),
-//                        resultSet.getInt("topic"),
-//                        resultSet.getInt("numOfQuestions"),
-//                        resultSet.getInt("author")
-//                );
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public Quiz getQuiz(int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Quiz(
+
+                        resultSet.getString("title"),
+                        resultSet.getString("description"),
+                        resultSet.getString("topic"),
+                        resultSet.getInt("numOfQuestions"),
+                        resultSet.getInt("author")
+
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
+
+    //TODO: separate the question stuff into a separate interface?
+    @Override
+    public Question[] getQuestions(int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM questions WHERE id = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            List<Question> questionList = new ArrayList<>();
+
+
+
+            while (resultSet.next()) {
+                questionList.add(new Question(
+                        resultSet.getString("question"),
+                        resultSet.getString("optionA"),
+                        resultSet.getString("optionB"),
+                        resultSet.getString("optionC"),
+                        resultSet.getString("optionD"),
+                        resultSet.getString("answer")
+                ));
+            }
+
+            System.out.println("Questions loaded: " + questionList.size()); // Debug
+            return questionList.toArray(new Question[0]);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    @Override
+    public void addQuestion(Question question, Quiz quiz) {
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (id, question, optionA, optionB, optionC, optionD, answer)" +
+                    "VALUES (?,?, ?, ?, ?, ?,?)");
+            statement.setInt(1, quiz.getId());
+            statement.setString(2, question.getQuestion());
+            statement.setString(3, question.getOptionA());
+            statement.setString(4, question.getOptionB());
+            statement.setString(5, question.getOptionC());
+            statement.setString(6, question.getOptionD());
+            statement.setString(7, question.getCorrectAnswer());
+
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
 
     @Override
     public void addQuiz(Quiz quiz) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO quizzes (title, description, topic, numOfQuestions, author)" +
-                    "VALUES (?, ?, ?, ?, ?)");
+                    "VALUES (?, ?, ?, ?, ?)",
+            Statement.RETURN_GENERATED_KEYS);
+
             statement.setString(1, quiz.getTitle());
             statement.setString(2, quiz.getDescription());
             statement.setString(3, quiz.getTopic());
             statement.setInt(4, quiz.getNumOfQuestions());
             statement.setInt(5, quiz.getAuthor());
-
-
             statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int generatedId = generatedKeys.getInt(1);
+                    System.out.println("Before insert: quiz id = " + quiz.getId());
+
+                    quiz.setId(generatedId);
+                    System.out.println("after insert: quiz id = " + quiz.getId());
+                    System.out.println("Inserted quiz with ID: " + generatedId);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -141,8 +223,8 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
     @Override
-    public List<String> getAllQuizzes(Student student) {
-        List<String> quizzes = new ArrayList<>();
+    public List<Quiz> getAllQuizzes(Student student) {
+        List<Quiz> quizzes = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE author = ?");
             statement.setInt(1, student.getStudentID());
@@ -150,8 +232,13 @@ public class SqliteQuizDAO implements IQuizDAO {
 
             while(resultSet.next()){
                 String title = resultSet.getString("title");
-
-                quizzes.add(title);
+                String desc  = resultSet.getString("description");
+                String topic = resultSet.getString("topic");
+                int numOfQuestions = resultSet.getInt("numOfQuestions");
+                int author = resultSet.getInt("author");
+                Quiz quiz = new Quiz(title,desc,topic,numOfQuestions,author);
+                quiz.setId(resultSet.getInt("id"));
+                quizzes.add(quiz);
             }
             //TODO: Error Handling
         } catch (Exception e) {

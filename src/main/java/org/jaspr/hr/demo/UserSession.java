@@ -4,7 +4,7 @@ public class UserSession {
         // Static instance for Singleton
         private static UserSession instance;
 
-        // Example: store the currently logged-in teacher
+
         private User currentUser;
         private String role;
 
