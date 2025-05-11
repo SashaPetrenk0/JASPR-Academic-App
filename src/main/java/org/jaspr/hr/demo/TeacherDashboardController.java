@@ -93,9 +93,6 @@ public class TeacherDashboardController {
 
     @FXML
     private void onAssignQuizzesClicked(){
-        UserSession.getInstance().clearSession();
-        System.out.println("User logged out successfully");
-
         Stage stage = (Stage) assignQuizzes.getScene().getWindow();
         SceneChanger.changeScene(stage, "quiz-assignment-view.fxml");
     }
