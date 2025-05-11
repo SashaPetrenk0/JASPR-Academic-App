@@ -34,6 +34,9 @@ public class TeacherDashboardController {
     private Button logoutButton;
 
     @FXML
+    private Button assignQuizzes;
+
+    @FXML
     public void initialize() {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
@@ -86,6 +89,15 @@ public class TeacherDashboardController {
 
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         SceneChanger.changeScene(stage, "hello-view.fxml");
+    }
+
+    @FXML
+    private void onAssignQuizzesClicked(){
+        UserSession.getInstance().clearSession();
+        System.out.println("User logged out successfully");
+
+        Stage stage = (Stage) assignQuizzes.getScene().getWindow();
+        SceneChanger.changeScene(stage, "quiz-assignment-view.fxml");
     }
 
 }
