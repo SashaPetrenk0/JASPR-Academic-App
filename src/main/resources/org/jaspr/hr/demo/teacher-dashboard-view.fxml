@@ -27,7 +27,7 @@
 
     </VBox>
 
-    <Button fx:id="assignQuizzes" text="Logout" onAction="#onAssignQuizzesClicked"/>
+    <Button fx:id="assignQuizzes" text="Assign Quizzes" onAction="#onAssignQuizzesClicked"/>
 
     <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked"/>
 
