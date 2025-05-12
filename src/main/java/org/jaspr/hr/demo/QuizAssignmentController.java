@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 import javafx.scene.Parent;
@@ -20,14 +20,14 @@ public class QuizAssignmentController {
     // Store retrieved quizzes
     private List<Quiz> quizzes;
 
-//    private Teacher currentTeacher;
+    private Teacher teacher;
 
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
     public void setTeacher(Teacher teacher){
         quizzes = quizDAO.getAllQuizzes(teacher);
         quizListView.getItems().setAll(quizzes);
-//        this.currentTeacher = teacher;
+        this.teacher = teacher;
     }
 
     @FXML
@@ -45,7 +45,7 @@ public class QuizAssignmentController {
         Parent root = loader.load();
 
         QuizAssignmentDetailsController controller = loader.getController();
-        controller.setQuizID(quiz); // <--- Pass quiz object
+        controller.setQuiz(quiz, teacher); // <--- Pass quiz object
 
         Stage stage = (Stage) quizListView.getScene().getWindow();
         stage.setScene(new Scene(root));

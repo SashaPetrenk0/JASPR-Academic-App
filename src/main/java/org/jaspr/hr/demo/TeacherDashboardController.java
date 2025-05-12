@@ -92,9 +92,17 @@ public class TeacherDashboardController {
     }
 
     @FXML
-    private void onAssignQuizzesClicked(){
+    private void onAssignQuizzesClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/quiz-assignment-view.fxml"));
+        Parent root = loader.load();
+
+        QuizAssignmentController controller = loader.getController();
+        if (user instanceof Teacher) {
+            controller.setTeacher((Teacher) user);
+        }
+
         Stage stage = (Stage) assignQuizzes.getScene().getWindow();
-        SceneChanger.changeScene(stage, "quiz-assignment-view.fxml");
+        stage.setScene(new Scene(root));
     }
 
 }

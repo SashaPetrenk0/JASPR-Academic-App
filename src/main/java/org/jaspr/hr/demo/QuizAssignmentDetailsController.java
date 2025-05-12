@@ -58,33 +58,18 @@ public class QuizAssignmentDetailsController {
             cb.setUserData(number);
             classroomListView.getItems().add(cb);
         }
-
-        classroomListView.setCellFactory(CheckBoxListCell.forListView(classroom -> selectedClassrooms.get(classroom)));
     }
 
 
+
     @FXML
-    private void handleAssignClicked(){
-        List<Integer> selected = selectedClassrooms.entrySet().stream()
-                .filter(entry -> entry.getValue().get())
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-
-        if (selected.isEmpty()) {
-            System.out.println("Warning Please select at least one classroom.");
-            return;
-        }
-
-        boolean allSuccessful = true;
-        for (int classroom : selected) {
-            boolean success = quizDAO.assignQuizToClassroom(quiz_id, classroom);
-            if (!success) allSuccessful = false;
-        }
-
-        if (allSuccessful) {
-            System.out.println("Success Quiz assigned to selected classrooms.");
-        } else {
-            System.out.println("Partial Success Some assignments may have failed.");
+    private void handleAssignClicked() {
+        for (CheckBox cb : classroomListView.getItems()) {
+            if (cb.isSelected()) {
+                int classroomNumber = (int) cb.getUserData();
+                int id = quiz.getId();
+                quizDAO.assignQuizToClassroom(id, classroomNumber);
+            }
         }
     }
 }

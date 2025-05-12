@@ -37,9 +37,10 @@ public class SqliteQuizDAO implements IQuizDAO {
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS quizAssignments (" +
-                    "quiz_id INTEGER" +
-                    "classroom_number INTEGER" +
-                    "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number)" +
+                    "quiz_id INTEGER, " +
+                    "classroom_number INTEGER, " +
+                    "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number), " +
+                    "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)" +
                     ");";
             statement.execute(query);
         } catch (Exception e) {
