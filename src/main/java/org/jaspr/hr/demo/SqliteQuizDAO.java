@@ -220,6 +220,36 @@ public class SqliteQuizDAO implements IQuizDAO {
         return List.of();
     }
 
+    public List<Quiz> getQuizzesForStudent(int studentID){
+        List<Quiz> quizzes = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT q.*" +
+                    "        FROM quizzes q" +
+                    "        JOIN quizAssignments qa ON q.id = qa.quiz_id" +
+                    "        JOIN studentClassroom sc ON qa.classroom_number = sc.classroom_number" +
+                    "        WHERE sc.studentID = ?");
+            statement.setInt(1, studentID);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+               Quiz quiz = new Quiz(
+                       resultSet.getInt("id"),
+                       resultSet.getString("title"),
+                       resultSet.getString("description"),
+                       resultSet.getString("topic"),
+                       resultSet.getInt("numOfQuestions"),
+                       resultSet.getInt("author")
+               );
+               quizzes.add(quiz);
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return quizzes;
+    }
+
+
 
 
 
