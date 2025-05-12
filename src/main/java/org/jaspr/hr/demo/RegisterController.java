@@ -97,9 +97,14 @@ public class RegisterController {
     private Button submitButtonAdmin;
 
     @FXML
-    private ImageView successIcon;
+    private ImageView successIcon2;
+    @FXML
+    private ImageView successIcon1;
+    @FXML
+    private ImageView successIcon3;
 
-
+    @FXML
+    private ImageView successIcon4;
 
     private Student newStudent;
     private Teacher newTeacher;
@@ -169,7 +174,14 @@ public class RegisterController {
                 successfulSignUpLabelStudent.setText("You've been successfully registered as a Student! Welcome " + name + "!");
                 successfulSignUpLabelStudent.setVisible(true);
 
-                submitButtonStudent.setDisable(true);
+                submitButtonStudent.setVisible(false);
+                submitButtonStudent.setManaged(false);
+
+                successfulSignUpLabelStudent.setVisible(true);
+                successfulSignUpLabelStudent.setManaged(true);
+
+                successIcon1.setVisible(true);
+                successIcon1.setManaged(true);
 
             }
             case "Teacher" -> {
@@ -190,8 +202,8 @@ public class RegisterController {
                 successfulSignUpLabelTeacher.setVisible(true);
                 successfulSignUpLabelTeacher.setManaged(true);
 
-                successIcon.setVisible(true);
-                successIcon.setManaged(true);
+                successIcon2.setVisible(true);
+                successIcon2.setManaged(true);
 
 
             }
@@ -213,9 +225,8 @@ public class RegisterController {
                 successfulSignUpLabelParent.setVisible(true);
                 successfulSignUpLabelParent.setManaged(true);
 
-                successIcon.setVisible(true);
-                successIcon.setManaged(true);
-
+                successIcon3.setVisible(true);
+                successIcon3.setManaged(true);
 
 
             }
@@ -231,7 +242,20 @@ public class RegisterController {
                 successfulSignUpLabelAdmin.setText("You've been successfully registered as an Admin! Welcome " + name + "!");
                 successfulSignUpLabelAdmin.setVisible(true);
 
-                submitButtonAdmin.setDisable(true);
+//                submitButtonAdmin.setDisable(true);
+
+                submitButtonAdmin.setVisible(false);
+                submitButtonAdmin.setManaged(false);
+
+                successfulSignUpLabelAdmin.setVisible(true);
+                successfulSignUpLabelAdmin.setManaged(true);
+
+                successIcon4.setVisible(true);
+                successIcon4.setManaged(true);
+
+
+
+
 
                 // TODO: Error handling for incorrect user inputs
             }
