@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import javafx.beans.property.StringProperty;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +9,7 @@ import java.util.List;
 
 public class SqliteQuizDAO implements IQuizDAO {
     private Connection connection;
+
 
     public SqliteQuizDAO() {
         connection = SqliteConnection.getInstance();
