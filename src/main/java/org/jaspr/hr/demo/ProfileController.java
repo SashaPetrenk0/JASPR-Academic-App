@@ -70,10 +70,10 @@ public class ProfileController {
     }
 
     private void loadStudentProfile(Student student) {
-        nameLabel.setText("Name: " + student.getName());
-        ageLabel.setText("Age: " + student.getAge());
-        idLabel.setText("ID: " + student.getStudentID());
-        emailLabel.setText("Email: " + student.getEmail());
+        nameLabel.setText("" + student.getName());
+        ageLabel.setText("" + student.getAge());
+        idLabel.setText("" + student.getStudentID());
+        emailLabel.setText("" + student.getEmail());
 
         List<Integer> classroomNumbers = userDAO.getClassroomNumbersForStudent(student.getStudentID());
 
