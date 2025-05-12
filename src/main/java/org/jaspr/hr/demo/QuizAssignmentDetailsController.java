@@ -64,17 +64,17 @@ public class QuizAssignmentDetailsController {
 
     @FXML
     private void handleAssignClicked() {
-        boolean assigned = false;
+        boolean atLeastOneAssigned = false;
         for (CheckBox cb : classroomListView.getItems()) {
             if (cb.isSelected()) {
                 int classroomNumber = (int) cb.getUserData();
                 int id = quiz.getId();
                 quizDAO.assignQuizToClassroom(id, classroomNumber);
-                assigned = true;
+                atLeastOneAssigned = true;
             }
         }
-        if (assigned){
-            System.out.println("Quiz successfully assigned to classroom");
+        if (!atLeastOneAssigned){
+            System.out.println("No classroms selected");
         }
     }
 }

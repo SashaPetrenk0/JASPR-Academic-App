@@ -40,11 +40,16 @@ public class SqliteQuizDAO implements IQuizDAO {
                     "quiz_id INTEGER, " +
                     "classroom_number INTEGER, " +
                     "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number), " +
-                    "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)" +
+                    "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
+                    "UNIQUE (quiz_id, classroom_number)" +
                     ");";
             statement.execute(query);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            if (e.getMessage().contains("unique_quiz_classroom")) {
+                System.out.println("This classroom has already been assigned to the quiz.");
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -235,24 +240,43 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
-    public void assignQuizToClassroom(int quiz_id, int classroom_number){
+    public void assignQuizToClassroom(int quiz_id, int classroom_number) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO quizAssignments(quiz_id, classroom_number) VALUES (?, ?)");
-            statement.setInt(1, quiz_id);
-            statement.setInt(2, classroom_number);
-            int rowsAffected = statement.executeUpdate();
-            if (rowsAffected > 0){
-                System.out.println("Quiz successfully assigned to classroom " + classroom_number);
+            // First, check if the assignment already exists
+            PreparedStatement checkStatement = connection.prepareStatement(
+                    "SELECT * FROM quizAssignments WHERE quiz_id = ? AND classroom_number = ?"
+            );
+            checkStatement.setInt(1, quiz_id);
+            checkStatement.setInt(2, classroom_number);
+            ResultSet resultSet = checkStatement.executeQuery();
+
+            // If the result set is not empty, it means the quiz is already assigned to the classroom
+            if (resultSet.next()) {
+                System.out.println("Quiz already assigned to classroom " + classroom_number);
+                return; // Exit the method if the quiz is already assigned to this classroom
             }
-        } catch (Exception e) {
+
+            // If the quiz is not assigned, proceed to insert
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO quizAssignments(quiz_id, classroom_number) VALUES (?, ?)"
+            );
+            insertStatement.setInt(1, quiz_id);
+            insertStatement.setInt(2, classroom_number);
+            insertStatement.executeUpdate();
+
+            System.out.println("Quiz successfully assigned to classroom " + classroom_number);
+
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error assigning quiz to classroom");
+            System.out.println("Error assigning quiz to classroom " + classroom_number);
         }
     }
-
-
-
-
-
 }
+
+
+
+
+
+
+
 
