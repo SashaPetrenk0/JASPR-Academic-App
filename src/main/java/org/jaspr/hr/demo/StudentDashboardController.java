@@ -30,7 +30,7 @@ public class StudentDashboardController {
     private Button createQuiz;
 
     @FXML
-    private ListView<Quiz> quizLists;
+    private ListView<Quiz> createdQuizzesLists;
 
     @FXML
     private Button takeQuiz;
@@ -47,7 +47,20 @@ public class StudentDashboardController {
         if ("Student".equals(role) && user instanceof Student) {
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
-            quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
+            createdQuizzesLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
+
+            createdQuizzesLists.setCellFactory(listView -> new ListCell<>() {
+                @Override
+                protected void updateItem(Quiz quiz, boolean empty) {
+                    super.updateItem(quiz, empty);
+                    if (empty || quiz == null) {
+                        setText(null);
+                    } else {
+                        setText(quiz.getTitle());
+                    }
+                }
+            });
+
             assignedQuizzesList.setItems(FXCollections.observableArrayList(quizDAO.getQuizzesForStudent(student.getStudentID())));
 
             assignedQuizzesList.setCellFactory(param -> new ListCell<Quiz>() {
@@ -61,23 +74,12 @@ public class StudentDashboardController {
                     }
                 }
             });
-            quizLists.setCellFactory(listView -> new ListCell<>() {
-                @Override
-                protected void updateItem(Quiz quiz, boolean empty) {
-                    super.updateItem(quiz, empty);
-                    if (empty || quiz == null) {
-                        setText(null);
-                    } else {
-                        setText(quiz.getTitle());
-                    }
-                }
-            });
 
+            //TODO: Set the on mouse clicked method on the teacher assigned quizzes as well as the student created ones
 
-
-            quizLists.setOnMouseClicked(event -> {
+            createdQuizzesLists.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2) { // double-click
-                    Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
+                    Quiz selectedQuiz = createdQuizzesLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
 
                         openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()));
@@ -93,7 +95,7 @@ public class StudentDashboardController {
         @FXML
         private void openTakeQuiz (String title, Question[]questions){
             try {
-                Stage currentStage = (Stage) quizLists.getScene().getWindow();
+                Stage currentStage = (Stage) createdQuizzesLists.getScene().getWindow();
                 // Load new window
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view.fxml"));
                 Parent root = loader.load();
