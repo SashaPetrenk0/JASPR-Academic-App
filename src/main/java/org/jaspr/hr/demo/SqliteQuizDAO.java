@@ -243,7 +243,7 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
-    public void assignQuizToClassroom(int quiz_id, int classroom_number) {
+    public String assignQuizToClassroom(int quiz_id, int classroom_number) {
         try {
             // First, check if the assignment already exists
             PreparedStatement checkStatement = connection.prepareStatement(
@@ -255,8 +255,8 @@ public class SqliteQuizDAO implements IQuizDAO {
 
             // If the result set is not empty, it means the quiz is already assigned to the classroom
             if (resultSet.next()) {
-                System.out.println("Quiz already assigned to classroom " + classroom_number);
-                return; // Exit the method if the quiz is already assigned to this classroom
+                return "Quiz already assigned to classroom " + classroom_number;
+
             }
 
             // If the quiz is not assigned, proceed to insert
@@ -267,11 +267,11 @@ public class SqliteQuizDAO implements IQuizDAO {
             insertStatement.setInt(2, classroom_number);
             insertStatement.executeUpdate();
 
-            System.out.println("Quiz successfully assigned to classroom " + classroom_number);
+            return "Quiz successfully assigned to classroom " + classroom_number;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error assigning quiz to classroom " + classroom_number);
+            return "Error assigning quiz to classroom " + classroom_number;
         }
     }
 }

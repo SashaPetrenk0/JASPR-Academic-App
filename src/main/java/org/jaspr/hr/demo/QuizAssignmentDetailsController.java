@@ -81,16 +81,23 @@ public class QuizAssignmentDetailsController {
     @FXML
     private void handleAssignClicked() {
         boolean atLeastOneAssigned = false;
+        StringBuilder statusMessages = new StringBuilder();
+
         for (CheckBox cb : classroomListView.getItems()) {
             if (cb.isSelected()) {
                 int classroomNumber = (int) cb.getUserData();
                 int id = quiz.getId();
-                quizDAO.assignQuizToClassroom(id, classroomNumber);
+                String resultMessage = quizDAO.assignQuizToClassroom(id, classroomNumber);
+                statusMessages.append(resultMessage).append("\n");
                 atLeastOneAssigned = true;
             }
         }
-        if (!atLeastOneAssigned){
-            System.out.println("No classroms selected");
+        if (!atLeastOneAssigned) {
+            StatusMessage.setText("No classrooms selected.");
+            StatusMessage.setVisible(true);
+        } else {
+            StatusMessage.setText(statusMessages.toString());
+            StatusMessage.setVisible(true);
         }
     }
 
