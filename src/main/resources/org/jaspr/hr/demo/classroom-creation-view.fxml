@@ -17,7 +17,10 @@
     <TextField fx:id="classroomNumber" promptText = "Classroom Number" />
     <TextField fx:id="classroomCapacity" promptText = "Number of Students in the Class" />
     <Button fx:id="createClassroom" text="Create Classroom" onAction="#createClassroom" />
+    <Label fx:id="statusLabel" text="" wrapText="true" style="-fx-text-fill: red;" />
+
     <Button fx:id="returnToPrevious" text="Return" onAction="#returnToClassrooms" />
+
 
 
 </VBox>

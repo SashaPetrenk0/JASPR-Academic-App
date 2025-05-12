@@ -693,6 +693,18 @@ public class SqliteUserDAO implements IUserDAO {
         return classrooms;
     }
 
+    public boolean classroomNumberExists(int classroomNumber) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT 1 FROM classrooms WHERE classroom_number = ?");
+            statement.setInt(1, classroomNumber);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next(); // returns true if a record exists
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
     public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
