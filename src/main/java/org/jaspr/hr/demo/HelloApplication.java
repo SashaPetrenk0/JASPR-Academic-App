@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
 
-    public static final String TITLE = "APP NAME";
+    public static final String TITLE = "AcademIQ";
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     @Override
