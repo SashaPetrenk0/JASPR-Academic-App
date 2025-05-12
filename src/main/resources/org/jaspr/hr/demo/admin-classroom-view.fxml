@@ -25,6 +25,8 @@
             <TableColumn fx:id = "numStudentsColumn" text = "Number of Assigned Students"/>
         </columns>
     </TableView>
+    <Button fx:id="returnToDashboard" text = "Return" onAction="#returnToDashboard" />
+
 
 </VBox>
 

@@ -33,6 +33,9 @@ public class AdminClassroomController {
     @FXML
     private TableView<Classroom> classroomTable;
 
+    @FXML
+    private Button returnToDashboard;
+
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     @FXML
@@ -57,5 +60,11 @@ public class AdminClassroomController {
     protected void onAssignUsersClick() throws IOException{
         Stage stage = (Stage) AssignButton.getScene().getWindow();
         SceneChanger.changeScene(stage, "assign-users-to-classroom.fxml");
+    }
+
+    @FXML
+    private void returnToDashboard() throws IOException{
+        Stage stage = (Stage) returnToDashboard.getScene().getWindow();
+        SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
     }
 }
