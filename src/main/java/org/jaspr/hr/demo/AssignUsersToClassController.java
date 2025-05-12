@@ -47,6 +47,7 @@ public class AssignUsersToClassController {
     private Label statusLabel;
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
+    private final SqliteClassroomDAO classroomDAO = new SqliteClassroomDAO();
 
     private final ToggleGroup teacherToggleGroup = new ToggleGroup();
 
@@ -54,7 +55,7 @@ public class AssignUsersToClassController {
     private void initialize() {
 
         // Loading classrooms from the DAO
-        ObservableList<Classroom> classrooms = userDAO.getUpdatedClassrooms();
+        ObservableList<Classroom> classrooms = classroomDAO.getUpdatedClassrooms();
 
 
         // Set classrooms in ComboBox
@@ -113,6 +114,7 @@ public class AssignUsersToClassController {
 
         if (selectedClassroom == null) {
             statusLabel.setText("Please select a classroom");
+            return;
         }
 
         RadioButton selectedTeacherRadioButton = (RadioButton) teacherToggleGroup.getSelectedToggle();
@@ -142,7 +144,7 @@ public class AssignUsersToClassController {
         }
 
         if (selectedTeacher != null) {
-            Integer existingTeacherID = userDAO.getAssignedTeacherId(selectedClassroom.getClassRoomNumber());
+            Integer existingTeacherID = classroomDAO.getAssignedTeacherId(selectedClassroom.getClassRoomNumber());
             if (existingTeacherID != null && existingTeacherID != 0) {
                 statusLabel.setText("This classroom already has a teacher assigned.");
                 return;
@@ -150,7 +152,7 @@ public class AssignUsersToClassController {
         }
 
         // Call the DAO to assign the users (teacher and students) to the classroom
-        boolean assignmentSuccess = userDAO.assignUsers(selectedClassroom, selectedTeacher, selectedStudents);
+        boolean assignmentSuccess = classroomDAO.assignUsers(selectedClassroom, selectedTeacher, selectedStudents);
 
         // Display success message if assignment was successful
         if (assignmentSuccess) {

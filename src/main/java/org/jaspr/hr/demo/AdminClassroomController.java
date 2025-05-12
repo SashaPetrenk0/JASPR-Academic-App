@@ -34,6 +34,7 @@ public class AdminClassroomController {
     private TableView<Classroom> classroomTable;
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
+    private final SqliteClassroomDAO classroomDAO = new SqliteClassroomDAO();
 
     @FXML
     private void initialize() {
@@ -43,7 +44,7 @@ public class AdminClassroomController {
         numTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("numTeachers"));
 
         // Loading classrooms from the DAO
-        ObservableList<Classroom> classrooms = userDAO.getUpdatedClassrooms();
+        ObservableList<Classroom> classrooms = classroomDAO.getUpdatedClassrooms();
         classroomTable.setItems(classrooms);
     }
 

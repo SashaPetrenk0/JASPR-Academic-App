@@ -24,6 +24,7 @@ import javax.xml.transform.Result;
 
 public class ClassroomCreationController {
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
+    private final SqliteClassroomDAO classroomDAO = new SqliteClassroomDAO();
 
     @FXML
     private TextField classroomNumber;
@@ -41,7 +42,7 @@ public class ClassroomCreationController {
     @FXML
     private void initialize() {
         // Loading classrooms from the DAO
-        ObservableList<Classroom> classrooms = userDAO.getUpdatedClassrooms();
+        ObservableList<Classroom> classrooms = classroomDAO.getUpdatedClassrooms();
     }
 
 
@@ -79,12 +80,12 @@ public class ClassroomCreationController {
             return;
         }
 
-        if (userDAO.classroomNumberExists(ClassroomNumber)) {
+        if (classroomDAO.classroomNumberExists(ClassroomNumber)) {
             statusLabel.setText("A classroom with this number already exists.");
             return;
         }
 
-        boolean created = userDAO.createClassroom(ClassroomNumber, ClassroomCapacity);
+        boolean created = classroomDAO.createClassroom(ClassroomNumber, ClassroomCapacity);
         // Creates new classroom object
         Classroom classroom = new Classroom(ClassroomNumber, ClassroomCapacity);
         if(created){
