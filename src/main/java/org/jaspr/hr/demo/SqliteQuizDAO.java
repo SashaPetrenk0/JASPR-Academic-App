@@ -240,9 +240,13 @@ public class SqliteQuizDAO implements IQuizDAO {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO quizAssignments(quiz_id, classroom_number) VALUES (?, ?)");
             statement.setInt(1, quiz_id);
             statement.setInt(2, classroom_number);
-            ResultSet resultSet = statement.executeQuery();
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0){
+                System.out.println("Quiz successfully assigned to classroom " + classroom_number);
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error assigning quiz to classroom");
         }
     }
 
