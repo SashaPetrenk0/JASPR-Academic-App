@@ -50,6 +50,8 @@ public class QuizAssignmentDetailsController {
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
+    private final SqliteClassroomDAO classroomDAO = new SqliteClassroomDAO();
+
 
 
 
@@ -67,7 +69,7 @@ public class QuizAssignmentDetailsController {
     }
 
     private void loadClassrooms(){
-        List<Integer> classroomNumbers = userDAO.getClassroomNumberForTeacher(currentTeacher.getTeacherID());
+        List<Integer> classroomNumbers = classroomDAO.getClassroomNumberForTeacher(currentTeacher.getTeacherID());
 
         for(Integer number : classroomNumbers){
             CheckBox cb = new CheckBox("Classroom" + number);
