@@ -3,6 +3,7 @@ package org.jaspr.hr.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -17,6 +18,9 @@ public class QuizAssignmentController {
 
     @FXML
     private ListView<Quiz> quizListView;
+
+    @FXML
+    private Button returnToDashboard;
 
     // Store retrieved quizzes
     private List<Quiz> quizzes;
@@ -68,4 +72,13 @@ public class QuizAssignmentController {
         stage.setScene(new Scene(root));
 
     }
+
+    @FXML
+    private void returnToDashboard() throws IOException {
+        Stage stage = (Stage) returnToDashboard.getScene().getWindow();
+        SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
+    }
+
+
+
 }
