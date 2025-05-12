@@ -39,16 +39,39 @@ public class CreateQuizController {
     private TextField lengthField;
     @FXML
     private Button returnToPrevious;
+    @FXML
+    private Label errorLabel;
 
 
 
     @FXML
     private void onCreateQuiz() {
 
-        String title = titleField.getText();
-        String desc = descriptionField.getText();
-        String topic = topicField.getText();
-        int length = Integer.parseInt(lengthField.getText().trim());
+        String title = titleField.getText().trim();
+        String desc = descriptionField.getText().trim();
+        String topic = topicField.getText().trim();
+        String duration = lengthField.getText().trim();
+
+        if(title.isEmpty() || topic.isEmpty() || desc.isEmpty() || duration.isEmpty()){
+            errorLabel.setText("Please fill out all fields.");
+            return;
+        }
+
+        // Check if length is a number
+        int length;
+        try{
+            length = Integer.parseInt(duration);
+        } catch (NumberFormatException e){
+            errorLabel.setText("Number of Questions must be a number.");
+            return;
+        }
+
+        //TODO: decide on maximum number of questions
+        if(length > 20){
+            errorLabel.setText("Number of Questions must not exceed 20.");
+            return;
+        }
+
         int author = 0;
         String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D";
 
