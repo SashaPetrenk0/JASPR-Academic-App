@@ -43,6 +43,9 @@ public class AssignUsersToClassController {
     @FXML
     private Button returnToPrevious;
 
+    @FXML
+    private Label statusLabel;
+
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     private final ToggleGroup teacherToggleGroup = new ToggleGroup();
@@ -108,6 +111,10 @@ public class AssignUsersToClassController {
     private void assignUsers() {
         Classroom selectedClassroom = classroomComboBox.getValue();
 
+        if (selectedClassroom == null) {
+            statusLabel.setText("Please select a classroom");
+        }
+
         RadioButton selectedTeacherRadioButton = (RadioButton) teacherToggleGroup.getSelectedToggle();
         Teacher selectedTeacher = null;
         if (selectedTeacherRadioButton != null) {
@@ -130,8 +137,16 @@ public class AssignUsersToClassController {
 
         // At least one of teacher or student must be selected
         if (selectedTeacher == null && selectedStudents.isEmpty()) {
-            System.out.println("Invalid assignment, select at least one");
+            statusLabel.setText("Please select at least one teacher or student to assign");
             return;
+        }
+
+        if (selectedTeacher != null) {
+            Integer existingTeacherID = userDAO.getAssignedTeacherId(selectedClassroom.getClassRoomNumber());
+            if (existingTeacherID != null && existingTeacherID != 0) {
+                statusLabel.setText("This classroom already has a teacher assigned.");
+                return;
+            }
         }
 
         // Call the DAO to assign the users (teacher and students) to the classroom
@@ -139,21 +154,22 @@ public class AssignUsersToClassController {
 
         // Display success message if assignment was successful
         if (assignmentSuccess) {
-            // You could print to the console, or use an Alert box to notify the user
-            System.out.println("Teacher and students have been successfully assigned to classroom");
-            // Update the table view to reflect the changes
+            statusLabel.setStyle("-fx-text-fill: green;");
+            statusLabel.setText("Users successfully assigned to classroom.");
+
+            teacherToggleGroup.selectToggle(null);
+
+            for (CheckBox checkBox : checkboxes) {
+                checkBox.setSelected(false);
+            }
+            Stage stage = (Stage) assignUsers.getScene().getWindow();
+            SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
+
+        } else {
+            statusLabel.setStyle("-fx-text-fill: red;");
+            statusLabel.setText("An error occurred while assigning users.");
         }
-
-        teacherToggleGroup.selectToggle(null);
-
-        for (CheckBox checkBox : checkboxes){
-            checkBox.setSelected(false);
-        }
-
-        Stage stage = (Stage) assignUsers.getScene().getWindow();
-        SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
     }
-
         @FXML
         private void returnToClassroom() throws IOException {
             Stage stage = (Stage) returnToPrevious.getScene().getWindow();

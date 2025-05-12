@@ -24,7 +24,7 @@
 
     <Button text="Assign" onAction="#handleAssignClicked"/>
 
-    <Label fx:id="StatusMessage" VBox.vgrow="ALWAYS" visible="false"/>
+    <Label fx:id="StatusMessage" VBox.vgrow="ALWAYS" visible="false" style="-fx-text-fill: red;"/>
 
     <Button fx:id="returnToAssignment" text="Return" onAction="#returnToAssignment"/>
 

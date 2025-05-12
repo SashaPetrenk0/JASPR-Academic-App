@@ -71,7 +71,13 @@ public class ChangePassword {
         if (email == null || email.isEmpty() || currentPwd == null || currentPwd.isEmpty() || newPwd == null || newPwd.isEmpty()) {
             ChangePwdError.setText("Please fill all fields.");
             ChangePwdError.setVisible(true);
-        } else {
+        }
+        if (user_salt == null) {
+            ChangePwdError.setText("Email is incorrect or does not exist.");
+            ChangePwdError.setVisible(true);
+            return;
+        }
+        else {
 
             boolean success = userDAO.changePassword(email, hashedCurredPwd, hashedNewPwd, role);
 

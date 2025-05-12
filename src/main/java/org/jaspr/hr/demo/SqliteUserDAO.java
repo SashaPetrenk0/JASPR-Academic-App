@@ -693,6 +693,18 @@ public class SqliteUserDAO implements IUserDAO {
         return classrooms;
     }
 
+    public boolean classroomNumberExists(int classroomNumber) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT 1 FROM classrooms WHERE classroom_number = ?");
+            statement.setInt(1, classroomNumber);
+            ResultSet resultSet = statement.executeQuery();
+            return resultSet.next(); // returns true if a record exists
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
     public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
@@ -749,6 +761,21 @@ public class SqliteUserDAO implements IUserDAO {
             return false;
         }
     }
+
+    public Integer getAssignedTeacherId(int classroomNumber) {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT teacherID FROM classrooms WHERE classroom_number = ?");
+            stmt.setInt(1, classroomNumber);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("teacherID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
     public List<Integer> getClassroomNumbersForStudent(int studentID) {

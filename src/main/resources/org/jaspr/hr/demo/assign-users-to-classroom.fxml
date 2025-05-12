@@ -36,6 +36,8 @@
 
     <Button fx:id="assignUsers" text="Assign" onAction="#assignUsers" />
 
+    <Label fx:id="statusLabel" text="" wrapText="true" style="-fx-text-fill: red;"/>
+
 
 
 

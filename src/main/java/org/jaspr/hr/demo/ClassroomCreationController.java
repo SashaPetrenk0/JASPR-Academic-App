@@ -34,6 +34,9 @@ public class ClassroomCreationController {
     @FXML
     private Button returnToPrevious;
 
+    @FXML
+    private Label statusLabel;
+
 
     @FXML
     private void initialize() {
@@ -50,15 +53,52 @@ public class ClassroomCreationController {
 
     @FXML
     private void createClassroom(){
-        int ClassroomNumber = Integer.parseInt(classroomNumber.getText().trim());
-        int ClassroomCapacity = Integer.parseInt(classroomCapacity.getText().trim());
 
+        String numberText = classroomNumber.getText().trim();
+        String capacityText = classroomCapacity.getText().trim();
+        // If either text field is empty
+        if (numberText.isEmpty() || capacityText.isEmpty()) {
+            statusLabel.setText("Please fill in both the classroom number and capacity.");
+            return;
+        }
+
+        int ClassroomNumber;
+        int ClassroomCapacity;
+
+        // If inputted values are not integers
+        try{
+            ClassroomNumber = Integer.parseInt(numberText);
+            ClassroomCapacity = Integer.parseInt(capacityText);
+        } catch (NumberFormatException e){
+            statusLabel.setText("Please enter valid numbers for both fields");
+            return;
+        }
+        // If inputted classroom capacity exceeds 40 students
+        if(ClassroomCapacity > 40){
+            statusLabel.setText("Classroom capacity cannot exceed 40 students");
+            return;
+        }
+
+        if (userDAO.classroomNumberExists(ClassroomNumber)) {
+            statusLabel.setText("A classroom with this number already exists.");
+            return;
+        }
+
+        boolean created = userDAO.createClassroom(ClassroomNumber, ClassroomCapacity);
         // Creates new classroom object
         Classroom classroom = new Classroom(ClassroomNumber, ClassroomCapacity);
-        userDAO.createClassroom(ClassroomNumber, ClassroomCapacity);
+        if(created){
+            statusLabel.setStyle("-fx-text-fill: green;");
+            statusLabel.setText("Classroom created successfully!");
 
-        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
+            Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+            SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
+        }
+        else{
+            statusLabel.setText("Failed to create classroom. Please try again.");
+        }
+
+
 
     }
 
