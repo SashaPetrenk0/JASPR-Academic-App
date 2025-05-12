@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import java.io.IOException;
+import java.util.List;
+
 import javafx.scene.Parent;
 
 
@@ -27,7 +29,10 @@ public class StudentDashboardController {
     private Button createQuiz;
 
     @FXML
-    private ListView quizLists;
+    private ListView createdQuizzesLists;
+
+    @FXML
+    private ListView<Quiz> assignedQuizzesList;
 
     @FXML
     private Button logoutButton;
@@ -38,9 +43,23 @@ public class StudentDashboardController {
         if ("Student".equals(role) && user instanceof Student){
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
-            quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
-        }
+            createdQuizzesLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
 
+            assignedQuizzesList.setItems(FXCollections.observableArrayList(quizDAO.getQuizzesForStudent(student.getStudentID())));
+
+            assignedQuizzesList.setCellFactory(param -> new ListCell<Quiz>() {
+                @Override
+                protected void updateItem(Quiz quiz, boolean empty) {
+                    super.updateItem(quiz, empty);
+                    if (empty || quiz == null) {
+                        setText(null);
+                    } else {
+                        setText(quiz.getTitle());
+                    }
+                }
+            });
+
+        }
     }
 
     private Object currentUser;
@@ -51,6 +70,8 @@ public class StudentDashboardController {
             Teacher teacher = (Teacher) user;
         }
     }
+
+
 
     @FXML
     public void onProfileClick() throws IOException {
