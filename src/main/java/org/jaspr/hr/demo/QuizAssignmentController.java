@@ -3,6 +3,7 @@ package org.jaspr.hr.demo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
@@ -25,9 +26,25 @@ public class QuizAssignmentController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
     public void setTeacher(Teacher teacher){
-        quizzes = quizDAO.getAllQuizzes(teacher);
+        quizzes = quizDAO.getAllQuizObjects(teacher);
         quizListView.getItems().setAll(quizzes);
         this.teacher = teacher;
+
+        quizListView.setCellFactory(lv -> new ListCell<Quiz>() {
+            @Override
+            protected void updateItem(Quiz quiz, boolean empty) {
+                super.updateItem(quiz, empty);
+                if (empty || quiz == null) {
+                    setText(null);
+                } else {
+                    setText(quiz.getTitle()); // or quiz.getName(), depending on your field
+                }
+            }
+        });
+
+
+
+
     }
 
     @FXML
