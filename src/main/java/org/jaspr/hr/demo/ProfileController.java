@@ -95,7 +95,7 @@ public class ProfileController {
         idLabel.setText("ID: " + teacher.getTeacherID());
         emailLabel.setText("Email: " + teacher.getEmail());
 
-        Integer classroomNumber = userDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
+        List<Integer> classroomNumber = userDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
         if (classroomNumber != null) {
             enrollmentLabel.setText("Classroom: " + classroomNumber);
         } else {

@@ -41,21 +41,6 @@ public class AssignUsersToClassController {
     private Button assignUsers;
 
     @FXML
-    private TableColumn<Classroom, Integer> classroomNumberColumn;
-
-    @FXML
-    private TableColumn<Classroom, Integer> classroomCapacityColumn;
-
-    @FXML
-    private TableColumn<Classroom, Integer> numTeachersColumn;
-
-    @FXML
-    private TableColumn<Classroom, Integer> numStudentsColumn;
-
-    @FXML
-    private TableView<Classroom> classroomTable;
-
-    @FXML
     private Button returnToPrevious;
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
@@ -65,15 +50,9 @@ public class AssignUsersToClassController {
     @FXML
     private void initialize() {
 
-        System.out.println("AssignUsersToClassController initialized");
-        classroomNumberColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomNumber"));
-        classroomCapacityColumn.setCellValueFactory(new PropertyValueFactory<>("classRoomCapacity"));
-        numStudentsColumn.setCellValueFactory(new PropertyValueFactory<>("numStudents"));
-        numTeachersColumn.setCellValueFactory(new PropertyValueFactory<>("numTeachers"));
-
         // Loading classrooms from the DAO
         ObservableList<Classroom> classrooms = userDAO.getUpdatedClassrooms();
-        classroomTable.setItems(classrooms);
+
 
         // Set classrooms in ComboBox
         classroomComboBox.setItems(classrooms);  // Use a StringConverter to control what is displayed in the ComboBox
@@ -163,8 +142,6 @@ public class AssignUsersToClassController {
             // You could print to the console, or use an Alert box to notify the user
             System.out.println("Teacher and students have been successfully assigned to classroom");
             // Update the table view to reflect the changes
-            ObservableList<Classroom> updatedClassrooms = userDAO.getUpdatedClassrooms();
-            classroomTable.setItems(updatedClassrooms); // Set updated classrooms to the table
         }
 
         teacherToggleGroup.selectToggle(null);
@@ -172,12 +149,15 @@ public class AssignUsersToClassController {
         for (CheckBox checkBox : checkboxes){
             checkBox.setSelected(false);
         }
+
+        Stage stage = (Stage) assignUsers.getScene().getWindow();
+        SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
     }
 
         @FXML
-        private void returnToAdmin () throws IOException {
+        private void returnToClassroom() throws IOException {
             Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
+            SceneChanger.changeScene(stage, "admin-classroom-view.fxml");
         }
 
 

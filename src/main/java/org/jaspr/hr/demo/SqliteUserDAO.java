@@ -772,8 +772,8 @@ public class SqliteUserDAO implements IUserDAO {
         return classroomNumbers;
     }
 
-    public Integer getClassroomNumberForTeacher(int teacherID) {
-        Integer classroomNumber = null;
+    public List<Integer> getClassroomNumberForTeacher(int teacherID) {
+        List<Integer> classroomNumbers = new ArrayList<>();
 
         String query = "SELECT classroom_number FROM classrooms WHERE teacherID = ?";
 
@@ -781,15 +781,15 @@ public class SqliteUserDAO implements IUserDAO {
             statement.setInt(1, teacherID);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                classroomNumber = resultSet.getInt("classroom_number");
+            while (resultSet.next()) {
+                classroomNumbers.add(resultSet.getInt("classroom_number"));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return classroomNumber;
+        return classroomNumbers;
     }
 
 

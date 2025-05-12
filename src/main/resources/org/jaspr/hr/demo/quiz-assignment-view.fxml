@@ -8,16 +8,18 @@
 <?import javafx.geometry.Insets?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jaspr.hr.demo.AdminController">
+      fx:controller="org.jaspr.hr.demo.QuizAssignmentController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label text="Welcome to the admin dashboard!" style="-fx-font-size: 18px;"/>
-    <Button fx:id="profileButton" text="View Profile" onAction="#onProfileClick"/>
-    <Button fx:id="classRoomButton" text="Classrooms" onAction="#onClassroomClick"/>
+    <Label text="Assign Quizzes" style="-fx-font-size: 18px;"/>
+    <Label text="Select a Quiz to Assign" style="-fx-font-size: 18px;"/>
 
-    <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked"/>
+    <ListView fx:id="quizListView" onMouseClicked="#handleQuizClicked"/>
+
+    <Button fx:id="returnToDashboard" text = "Return" onAction="#returnToDashboard" />
+
 
 </VBox>
 

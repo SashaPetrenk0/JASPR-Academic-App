@@ -12,8 +12,9 @@ public class SqliteQuizDAO implements IQuizDAO {
         connection = SqliteConnection.getInstance();
         createQuizTable();
         createQuestionTable();
-    }
+        createQuizAssignmentsTable();
 
+    }
     private void createQuizTable() {
         // Create table if not exists
         try {
@@ -51,6 +52,28 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
     }
+
+    private void createQuizAssignmentsTable() {
+        // Create table if not exists
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS quizAssignments (" +
+                    "quiz_id INTEGER, " +
+                    "classroom_number INTEGER, " +
+                    "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number), " +
+                    "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
+                    "UNIQUE (quiz_id, classroom_number)" +
+                    ");";
+            statement.execute(query);
+        } catch (SQLException e) {
+            if (e.getMessage().contains("unique_quiz_classroom")) {
+                System.out.println("This classroom has already been assigned to the quiz.");
+            } else {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     public void close() {
         try {
@@ -222,6 +245,34 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     }
 
+
+    @Override
+    public List<Quiz> getAllQuizObjects(Teacher teacher) {
+
+        List<Quiz> quizzes = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE author = ?");
+            statement.setInt(1, teacher.getTeacherID());
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String description = resultSet.getString("description");
+                String topic = resultSet.getString("topic");
+                int numOfQuestions = resultSet.getInt("numOfQuestions");
+                int author = resultSet.getInt("author");
+
+                quizzes.add(new Quiz(id, title, description, topic, numOfQuestions, author));
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return quizzes;
+
+    }
+
     @Override
     public List<Quiz> getAllQuizzes(Student student) {
         List<Quiz> quizzes = new ArrayList<>();
@@ -276,8 +327,41 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
+    public void assignQuizToClassroom(int quiz_id, int classroom_number) {
+        try {
+            // First, check if the assignment already exists
+            PreparedStatement checkStatement = connection.prepareStatement(
+                    "SELECT * FROM quizAssignments WHERE quiz_id = ? AND classroom_number = ?"
+            );
+            checkStatement.setInt(1, quiz_id);
+            checkStatement.setInt(2, classroom_number);
+            ResultSet resultSet = checkStatement.executeQuery();
 
+            // If the result set is not empty, it means the quiz is already assigned to the classroom
+            if (resultSet.next()) {
+                System.out.println("Quiz already assigned to classroom " + classroom_number);
+                return; // Exit the method if the quiz is already assigned to this classroom
+            }
 
+            // If the quiz is not assigned, proceed to insert
+            PreparedStatement insertStatement = connection.prepareStatement(
+                    "INSERT INTO quizAssignments(quiz_id, classroom_number) VALUES (?, ?)"
+            );
+            insertStatement.setInt(1, quiz_id);
+            insertStatement.setInt(2, classroom_number);
+            insertStatement.executeUpdate();
 
+            System.out.println("Quiz successfully assigned to classroom " + classroom_number);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error assigning quiz to classroom " + classroom_number);
+        }
+    }
 }
+
+
+
+
+
 
