@@ -75,6 +75,11 @@ public class RegisterController {
     @FXML
     private Button returnToPrevious;
 
+    @FXML
+    private Button submitButtonTeacher;
+
+
+
 
     private Student newStudent;
     private Teacher newTeacher;
@@ -157,6 +162,14 @@ public class RegisterController {
                     userDAO.addTeacher(newTeacher, hashedPassword, salt);
                     successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
                     successfulSignUpLabelTeacher.setVisible(true);
+                    submitButtonTeacher.setVisible(false);
+                    submitButtonTeacher.setManaged(false);
+
+                    successfulSignUpLabelTeacher.setVisible(true);
+                    successfulSignUpLabelTeacher.setManaged(true);
+
+                    successIcon.setVisible(true);
+                    successIcon.setManaged(true);
 
 
                 }
