@@ -27,6 +27,9 @@ public class ProfileController {
     @FXML
     private TextField emailLabel;
 
+    @FXML
+    private Label nameLabel1;
+
 
 
     @FXML
@@ -70,10 +73,14 @@ public class ProfileController {
     }
 
     private void loadStudentProfile(Student student) {
-        nameLabel.setText("" + student.getName());
-        ageLabel.setText("" + student.getAge());
-        idLabel.setText("" + student.getStudentID());
-        emailLabel.setText("" + student.getEmail());
+        nameLabel.setText(student.getName());
+        int age = student.getAge();
+        ageLabel.setText(Integer.toString(age));
+        int identification = student.getStudentID();
+        idLabel.setText(Integer.toString(identification));
+        emailLabel.setText(student.getEmail());
+
+        nameLabel1.setText(student.getName());
 
         List<Integer> classroomNumbers = userDAO.getClassroomNumbersForStudent(student.getStudentID());
 
@@ -90,10 +97,14 @@ public class ProfileController {
     }
 
     private void loadTeacherProfile(Teacher teacher) {
-        nameLabel.setText("" + teacher.getName());
-        ageLabel.setText("" + teacher.getAge());
-        idLabel.setText("" + teacher.getTeacherID());
-        emailLabel.setText("" + teacher.getEmail());
+        nameLabel.setText(teacher.getName());
+        int age = teacher.getAge();
+        ageLabel.setText(Integer.toString(age));
+        int identification = teacher.getTeacherID();
+        idLabel.setText(Integer.toString(identification));
+        emailLabel.setText(teacher.getEmail());
+
+        nameLabel1.setText(teacher.getName());
 
         Integer classroomNumber = userDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
         if (classroomNumber != null) {
@@ -105,10 +116,14 @@ public class ProfileController {
     }
 
     private void loadAdminProfile(Admin admin) {
-        nameLabel.setText("Name: " + admin.getName());
-        ageLabel.setText("Age: " + admin.getAge());
-        idLabel.setText("ID: " + admin.getAdminID());
-        emailLabel.setText("Email: " + admin.getEmail());
+        nameLabel.setText(admin.getName());
+        int age = admin.getAge();
+        ageLabel.setText(Integer.toString(age));
+        int identification = admin.getAdminID();
+        idLabel.setText(Integer.toString(identification));
+        emailLabel.setText(admin.getEmail());
+
+        nameLabel1.setText(admin.getName());
     }
 
     @FXML
