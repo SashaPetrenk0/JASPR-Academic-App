@@ -113,6 +113,10 @@ public class RegisterController {
 
     @FXML
     private void onRoleSelected() {
+        // Hide decorative rectangles
+        Rectangle1.setVisible(false);
+        Rectangle2.setVisible(false);
+        
         // First hide everything
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
