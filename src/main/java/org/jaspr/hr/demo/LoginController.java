@@ -41,6 +41,8 @@ public class LoginController {
         String user_salt = userDAO.getSalt(email);
         if (user_salt == null) {
             System.out.println("No salt found for this user. Please check the email.");
+            loginIncorrectError.setText("Login information incorrect. Please try again.");
+            loginIncorrectError.setVisible(true);
             return;
         }
         String hashedPwd = PasswordUtility.hashPassword(password, user_salt);
