@@ -127,7 +127,7 @@
                         <Image url="@../../../../images_2/user.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="nameLabel1" contentDisplay="CENTER" text="Full Name: John Smith" textFill="WHITE" />
+                  <Label fx:id="nameLabel1" contentDisplay="CENTER" textFill="WHITE" />
                   <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" style="-fx-background-radius: 30; -fx-background-color: #A8DDDC;" text="Edit Profile" textFill="#5b5656" />
                </children>
             </VBox>
