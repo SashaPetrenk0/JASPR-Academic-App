@@ -24,7 +24,7 @@
            <!-- Title Header -->
            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="660.0">
                <children>
-                   <Label prefHeight="37.0" prefWidth="603.0" style="-fx-font-size: 30px;" text="Assign Teachers/Students to Classroom">
+                   <Label prefHeight="37.0" prefWidth="603.0" style="-fx-font-size: 30px;" text="Assign Classrooms">
                        <HBox.margin>
                            <Insets left="20.0" right="30.0" />
                        </HBox.margin>
