@@ -26,9 +26,16 @@
     <Button fx:id="takeQuiz" text="Take Quiz" maxWidth="Infinity" onAction="#onTakeQuiz"/>
 
     <VBox xmlns:fx="http://javafx.com/fxml" spacing="10" alignment="CENTER">
-
-        <ListView fx:id="quizLists"/>
+        <Label text="My Quizzes"/>
+        <ListView fx:id="createdQuizzesLists"/>
 
     </VBox>
+
+    <VBox xmlns:fx="http://javafx.com/fxml" spacing="10" alignment="CENTER">
+        <Label text="Assigned Quizzes"/>
+        <ListView fx:id="assignedQuizzesList"/>
+
+    </VBox>
+
     <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked"/>
 </VBox>

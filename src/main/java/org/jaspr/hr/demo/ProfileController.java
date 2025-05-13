@@ -14,6 +14,7 @@ import java.util.List;
 public class ProfileController {
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
+    private final SqliteClassroomDAO classroomDAO = new SqliteClassroomDAO();
 
     @FXML
     private Label nameLabel;
@@ -75,7 +76,7 @@ public class ProfileController {
         idLabel.setText("ID: " + student.getStudentID());
         emailLabel.setText("Email: " + student.getEmail());
 
-        List<Integer> classroomNumbers = userDAO.getClassroomNumbersForStudent(student.getStudentID());
+        List<Integer> classroomNumbers = classroomDAO.getClassroomNumbersForStudent(student.getStudentID());
 
         if (classroomNumbers == null || classroomNumbers.isEmpty()) {
             enrollmentLabel.setText("No classroom assigned");
@@ -95,7 +96,7 @@ public class ProfileController {
         idLabel.setText("ID: " + teacher.getTeacherID());
         emailLabel.setText("Email: " + teacher.getEmail());
 
-        Integer classroomNumber = userDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
+        List<Integer> classroomNumber = classroomDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
         if (classroomNumber != null) {
             enrollmentLabel.setText("Classroom: " + classroomNumber);
         } else {

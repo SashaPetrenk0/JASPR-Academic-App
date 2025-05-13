@@ -34,5 +34,7 @@
     <Button fx:id="createQuiz" text = "Create" onAction="#onCreateQuiz" disable="false"/>
     <Button fx:id="returnToPrevious" text="Return" onAction="#returnToPage" />
 
+    <Label fx:id="errorLabel" text=""  style="-fx-text-fill: red;"/>
+
 
 </VBox>

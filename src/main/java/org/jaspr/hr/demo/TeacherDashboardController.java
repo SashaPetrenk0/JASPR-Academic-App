@@ -34,6 +34,9 @@ public class TeacherDashboardController {
     private Button logoutButton;
 
     @FXML
+    private Button assignQuizzes;
+
+    @FXML
     public void initialize() {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
@@ -86,6 +89,20 @@ public class TeacherDashboardController {
 
         Stage stage = (Stage) logoutButton.getScene().getWindow();
         SceneChanger.changeScene(stage, "hello-view.fxml");
+    }
+
+    @FXML
+    private void onAssignQuizzesClicked() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/quiz-assignment-view.fxml"));
+        Parent root = loader.load();
+
+        QuizAssignmentController controller = loader.getController();
+        if (user instanceof Teacher) {
+            controller.setTeacher((Teacher) user);
+        }
+
+        Stage stage = (Stage) assignQuizzes.getScene().getWindow();
+        stage.setScene(new Scene(root));
     }
 
 }
