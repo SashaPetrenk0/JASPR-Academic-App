@@ -110,6 +110,9 @@ public class AssignUsersToClassController {
 
         for (Teacher teacher : teachers) {
             RadioButton rb = new RadioButton(teacher.getName());
+            rb.setStyle("-fx-font-size: 14px; -fx-font-family: 'Telugu Sangam MN Bold';");
+
+
             rb.setUserData(teacher);
             rb.setToggleGroup(teacherToggleGroup);
             teacherRadioList.getChildren().add(rb);
@@ -119,6 +122,8 @@ public class AssignUsersToClassController {
 
         for (Student student : students) {
             CheckBox checkBox = new CheckBox(student.getName() + " (ID: " + student.getStudentID() + ")");
+            checkBox.setStyle("-fx-font-size: 13px; -fx-font-family: 'Telugu Sangam MN';");
+
             checkBox.setUserData(student); // store full student object if you need it later
             studentVBox.getChildren().add(checkBox);
             System.out.println(student.getName());
