@@ -214,6 +214,14 @@ public class RegisterController {
                     userDAO.addParent(newParent, hashedPassword, salt);
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                     successfulSignUpLabelParent.setVisible(true);
+                    submitButtonParent.setVisible(false);
+                    submitButtonParent.setManaged(false);
+
+                    successfulSignUpLabelParent.setVisible(true);
+                    successfulSignUpLabelParent.setManaged(true);
+
+                    successIcon3.setVisible(true);
+                    successIcon3.setManaged(true);
 
 
 
