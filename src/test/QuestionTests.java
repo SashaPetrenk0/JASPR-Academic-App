@@ -89,7 +89,7 @@ public class QuestionTests {
     @Test
     public void testDuplicateStudentID() throws SQLException {
         Student newStudent1 = new Student("John Doe", 20, 12345, "john@example.com");
-        userDAO.addStudent(newStudent1);
+        userDAO.addStudent(newStudent1, "password123","239874387");
 
         Student newStudent2 = new Student("Jane Doe", 21, 12345, "jane@example.com");
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> userDAO.addStudent(newStudent2, "password123","239874387"));
@@ -179,7 +179,7 @@ public class QuestionTests {
     @Test
     public void testDuplicateAdminID() throws SQLException {
         Admin newAdmin1 = new Admin("Eve Lee", 35, 12345, "eve@example.com");
-        userDAO.addAdmin(newAdmin1);
+        userDAO.addAdmin(newAdmin1, "password123","239874387");
 
         Admin newAdmin2 = new Admin("James Green", 40, 12345, "james@example.com");
         IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> userDAO.addAdmin(newAdmin2, "password123","239874387"));
