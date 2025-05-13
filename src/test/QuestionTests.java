@@ -53,27 +53,30 @@ public class QuestionTests {
         connection.rollback();
     }
 
-    @Test
-    public void testConstructor() {
-        String questionText  = "What is the capital of France?";
-        String[] choices = {"Berlin", "Paris", "Rome", "Madrid"};
-        int correctAnswerIndex = 2;
-
-        Question question = new Question(questionText, choices, correctAnswerIndex);
-
-        assertEquals(questionText, question.getQuestion());
-        assertArrayEquals(choices, question.getChoices());
-        assertEquals(correctAnswerIndex, question.getCorrectAnswerIndex());
-    }
+//    @Test
+//    public void testConstructor() {
+//        String questionText  = "What is the capital of France?";
+//        String[] choices = {"Berlin", "Paris", "Rome", "Madrid"};
+//        int correctAnswerIndex = 2;
+//
+//        Question question = new Question("What is the capital of France?", "Berlin", "Paris", "Rome", "Madrid", "Paris");
+//
+//        assertEquals(questionText, question.getQuestion());
+//        assertArrayEquals(choices, question.getChoices());
+//        assertEquals(correctAnswerIndex, question.getCorrectAnswerIndex());
+//    }
 
     @Test
     public void testGetChoices() {
         String[] choices = {"Red", "Green", "Blue"};
-        Question question = new Question("What colour is the sky?", choices, 2);
+        Question question = new Question("What colour is the sky?", "Red", "Green", "Blue", "Purple", "Blue");
 
-        assertEquals("Red", question.getChoices()[0]);
-        assertEquals("Green", question.getChoices()[1]);
-        assertEquals("Blue", question.getChoices()[2]);
+        assertEquals("What colour is the sky?", question.getQuestion());
+        assertEquals("Red", question.getOptionA());
+        assertEquals("Green", question.getOptionB());
+        assertEquals("Blue", question.getOptionC());
+        assertEquals("Purple", question.getOptionD());
+        assertEquals("Blue", question.getCorrectAnswer());
     }
 
 
