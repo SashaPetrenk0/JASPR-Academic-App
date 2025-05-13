@@ -96,7 +96,14 @@ public class RegisterController {
     private Button submitButtonAdmin;
 
     @FXML
-    private ImageView successIcon;
+    private ImageView successIcon2;
+    @FXML
+    private ImageView successIcon1;
+    @FXML
+    private ImageView successIcon3;
+
+    @FXML
+    private ImageView successIcon4;
 
 
 
@@ -173,6 +180,12 @@ public class RegisterController {
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
                     submitButtonStudent.setDisable(true);
+
+                    successfulSignUpLabelTeacher.setVisible(true);
+                    successfulSignUpLabelTeacher.setManaged(true);
+
+                    successIcon1.setVisible(true);
+                    successIcon1.setManaged(true);
                     
                 }
                 case "Teacher" -> {
@@ -195,8 +208,8 @@ public class RegisterController {
                     successfulSignUpLabelTeacher.setVisible(true);
                     successfulSignUpLabelTeacher.setManaged(true);
 
-                    successIcon.setVisible(true);
-                    successIcon.setManaged(true);
+                    successIcon2.setVisible(true);
+                    successIcon2.setManaged(true);
 
 
                 }
@@ -240,6 +253,7 @@ public class RegisterController {
                     userDAO.addAdmin(newAdmin, hashedPassword, salt);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
                     successfulSignUpLabelAdmin.setVisible(true);
+
                     submitButtonAdmin.setVisible(false);
                     submitButtonAdmin.setManaged(false);
 
