@@ -172,6 +172,8 @@ public class RegisterController {
                     userDAO.addStudent(newStudent, hashedPassword, salt);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
+                    submitButtonStudent.setDisable(true);
+                    
                 }
                 case "Teacher" -> {
                     name = nameFieldTeacher.getText();
