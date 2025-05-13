@@ -240,6 +240,14 @@ public class RegisterController {
                     userDAO.addAdmin(newAdmin, hashedPassword, salt);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
                     successfulSignUpLabelAdmin.setVisible(true);
+                    submitButtonAdmin.setVisible(false);
+                    submitButtonAdmin.setManaged(false);
+
+                    successfulSignUpLabelAdmin.setVisible(true);
+                    successfulSignUpLabelAdmin.setManaged(true);
+
+                    successIcon4.setVisible(true);
+                    successIcon4.setManaged(true);
 
                     // TODO: Error handling for incorrect user inputs
                 }
