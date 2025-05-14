@@ -27,6 +27,9 @@ import java.util.stream.Collectors;
 public class QuizAssignmentDetailsController {
 
     @FXML
+    public Button assignButton;
+
+    @FXML
     private ListView<CheckBox> classroomListView;
 
     @FXML
@@ -103,6 +106,7 @@ public class QuizAssignmentDetailsController {
         }
     }
 
+
     @FXML
     private void returnToAssignment() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/quiz-assignment-view.fxml"));
@@ -115,3 +119,4 @@ public class QuizAssignmentDetailsController {
         stage.setScene(new Scene(root));
     }
 }
+
