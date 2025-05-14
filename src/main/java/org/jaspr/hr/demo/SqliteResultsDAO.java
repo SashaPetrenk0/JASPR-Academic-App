@@ -9,6 +9,7 @@ public class SqliteResultsDAO implements IResultsDAO {
     public SqliteResultsDAO() {
         connection = SqliteConnection.getInstance();
         createQuestionResultsTable();
+        createQuizResultsTable();
     }
     private void createQuestionResultsTable() {
         // Create table if not exists
@@ -18,7 +19,8 @@ public class SqliteResultsDAO implements IResultsDAO {
                     "result_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "quiz_id INTEGER NOT NULL,"+
                     "question_id INTEGER NOT NULL,"+
-                    "student_id INTEGER NOT NULL"+
+                    "student_id INTEGER NOT NULL,"+
+                    "grade INTEGER NOT NULL,"+
                     "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
                     "FOREIGN KEY (question_id) REFERENCES questions(question_id)," +
                     "FOREIGN KEY (student_id) REFERENCES questions(question_id)," +
@@ -29,9 +31,31 @@ public class SqliteResultsDAO implements IResultsDAO {
         }
     }
 
+    private void createQuizResultsTable() {
+        // Create table if not exists
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS quizResults (" +
+                    "quiz_result_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "quiz_id INTEGER NOT NULL,"+
+                    "student_id INTEGER NOT NULL"+
+                    "grade INTEGER NOT NULL,"+
+                    "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
+                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)," +
+                    ");";
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
-    public void addResult(int studentID, int id, int questionId, int correct) {
+    public void addQuestionResult(int studentID, int quizID, int questionID, int grade) {
+
+    }
+    @Override
+    public void addQuizResult(int studentID, int quizID, int questionID, int grade) {
 
     }
 
