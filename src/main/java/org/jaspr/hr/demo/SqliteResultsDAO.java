@@ -1,6 +1,35 @@
 package org.jaspr.hr.demo;
 
+import java.sql.Connection;
+import java.sql.Statement;
+
 public class SqliteResultsDAO implements IResultsDAO {
+    private Connection connection;
+
+    public SqliteResultsDAO() {
+        connection = SqliteConnection.getInstance();
+        createQuestionResultsTable();
+    }
+    private void createQuestionResultsTable() {
+        // Create table if not exists
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS questionResults (" +
+                    "result_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "quiz_id INTEGER NOT NULL,"+
+                    "question_id INTEGER NOT NULL,"+
+                    "student_id INTEGER NOT NULL"+
+                    "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
+                    "FOREIGN KEY (question_id) REFERENCES questions(question_id)," +
+                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)," +
+                    ");";
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public void addResult(int studentID, int id, int questionId, int correct) {
 
