@@ -1,27 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jaspr.hr.demo.ClassroomCreationController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<BorderPane prefHeight="480.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.ClassroomCreationController">
 
-    <Label text="Create a classroom" style="-fx-font-size: 30px;"/>
-    <TextField fx:id="classroomNumber" promptText = "Classroom Number" />
-    <TextField fx:id="classroomCapacity" promptText = "Number of Students in the Class" />
-    <Button fx:id="createClassroom" text="Create Classroom" onAction="#createClassroom" />
-    <Label fx:id="statusLabel" text="" wrapText="true" style="-fx-text-fill: red;" />
+    <center>
+        <VBox alignment="CENTER" prefHeight="447.0" prefWidth="760.0" spacing="20.0" style="-fx-background-color: #FFFFFF;">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+         <HBox prefHeight="25.0" prefWidth="700.0" spacing="20.0">
+            <children>
+                  <Button fx:id="returnToPrevious" onAction="#returnToClassrooms" prefHeight="33.0" prefWidth="77.0" style="-fx-background-radius: 10; -fx-background-color: #C1F3B9; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-color: #B0B0B0;" text="← Return">
+                  <font>
+                     <Font name="System Bold" size="13.0" />
+                  </font></Button>
+            </children>
+            <VBox.margin>
+               <Insets left="20.0" top="20.0" />
+            </VBox.margin>
+         </HBox>
+         <VBox alignment="TOP_CENTER" prefHeight="73.0" prefWidth="720.0">
+            <children>
+      
+                        <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-font-size: 30px;, -fx-font-family: 'Arial';" text="Create a Classroom">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+                  <font>
+                     <Font name="Arial" size="26.0" />
+                  </font>
+               </Label>
+            </children>
+         </VBox>
+         <HBox prefHeight="0.0" prefWidth="720.0">
+            <children>
+               <Label text="Classroom Number">
+                  <HBox.margin>
+                     <Insets left="25.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font name="Telugu Sangam MN Bold" size="13.0" />
+                  </font>
+               </Label>
+               <Label text="Number of Students in the Class">
+                  <HBox.margin>
+                     <Insets left="225.0" />
+                  </HBox.margin>
+                  <font>
+                     <Font name="Telugu Sangam MN Bold" size="13.0" />
+                  </font>
+               </Label>
+            </children>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+         </HBox>
+         <HBox prefHeight="66.0" prefWidth="680.0">
+            <children>
+                  <TextField fx:id="classroomNumber" prefHeight="51.0" prefWidth="345.0" promptText="Classroom Number" style="-fx-background-radius: 20; -fx-border-radius: ;">
+                  <HBox.margin>
+                     <Insets right="20.0" />
+                  </HBox.margin>
+               </TextField>
+                  <TextField fx:id="classroomCapacity" prefHeight="54.0" prefWidth="364.0" promptText="Student Number" style="-fx-background-radius: 20; -fx-border-radius: ;" />
+            </children>
+            <VBox.margin>
+               <Insets left="20.0" right="20.0" />
+            </VBox.margin>
+         </HBox>
+         <HBox prefHeight="86.0" prefWidth="720.0" />
+            <Button fx:id="createClassroom" onAction="#createClassroom" prefHeight="71.0" prefWidth="543.0" style="-fx-background-radius: 10; -fx-background-color: #C1F3B9; -fx-border-radius: 10;" text="Create Classroom">
+            <font>
+               <Font name="Telugu Sangam MN Bold" size="13.0" />
+            </font></Button>
+            <Label fx:id="statusLabel" style="-fx-text-fill: red;" text="" wrapText="true" />
+        </VBox>
+    </center>
 
-    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToClassrooms" />
-
-
-
-</VBox>
-
+</BorderPane>
