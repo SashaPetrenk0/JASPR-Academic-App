@@ -9,6 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.scene.control.ScrollPane;
+
 
 import java.io.IOException;
 
@@ -105,6 +107,9 @@ public class RegisterController {
     @FXML
     private ImageView successIcon4;
 
+    @FXML
+    private ScrollPane content_Scroll;
+
 
 
 
@@ -116,7 +121,12 @@ public class RegisterController {
 
     public void initialize(){
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
+        content_Scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        content_Scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        content_Scroll.setPannable(true);
+
     }
+
 
     @FXML
     private void onRoleSelected() {
