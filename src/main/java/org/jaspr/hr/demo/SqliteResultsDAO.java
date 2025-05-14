@@ -39,7 +39,7 @@ public class SqliteResultsDAO implements IResultsDAO {
             String query = "CREATE TABLE IF NOT EXISTS quizResults (" +
                     "quiz_result_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "quiz_id INTEGER NOT NULL,"+
-                    "student_id INTEGER NOT NULL"+
+                    "student_id INTEGER NOT NULL,"+
                     "grade INTEGER NOT NULL,"+
                     "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
                     "FOREIGN KEY (student_id) REFERENCES questions(question_id)" +
