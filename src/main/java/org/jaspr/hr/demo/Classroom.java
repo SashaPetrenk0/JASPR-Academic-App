@@ -47,6 +47,10 @@ public class Classroom {
         return teacher;
     }
 
+    public void setTeacher(Teacher teacher){
+        this.teacher=teacher;
+    }
+
     public List<Student> getStudents(){
         return students;
     }

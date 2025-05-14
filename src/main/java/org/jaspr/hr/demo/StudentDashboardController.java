@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import java.io.IOException;
+import java.util.List;
+
 import javafx.scene.Parent;
 
 
@@ -28,10 +30,13 @@ public class StudentDashboardController {
     private Button createQuiz;
 
     @FXML
-    private ListView<Quiz> quizLists;
+    private ListView<Quiz> createdQuizzesLists;
 
     @FXML
     private Button takeQuiz;
+
+    @FXML
+    private ListView<Quiz> assignedQuizzesList;
 
     @FXML
     private Button logoutButton;
@@ -42,8 +47,9 @@ public class StudentDashboardController {
         if ("Student".equals(role) && user instanceof Student) {
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
-            quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
-            quizLists.setCellFactory(listView -> new ListCell<>() {
+            createdQuizzesLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
+
+            createdQuizzesLists.setCellFactory(listView -> new ListCell<>() {
                 @Override
                 protected void updateItem(Quiz quiz, boolean empty) {
                     super.updateItem(quiz, empty);
@@ -55,9 +61,25 @@ public class StudentDashboardController {
                 }
             });
 
-            quizLists.setOnMouseClicked(event -> {
+            assignedQuizzesList.setItems(FXCollections.observableArrayList(quizDAO.getQuizzesForStudent(student.getStudentID())));
+
+            assignedQuizzesList.setCellFactory(param -> new ListCell<Quiz>() {
+                @Override
+                protected void updateItem(Quiz quiz, boolean empty) {
+                    super.updateItem(quiz, empty);
+                    if (empty || quiz == null) {
+                        setText(null);
+                    } else {
+                        setText(quiz.getTitle());
+                    }
+                }
+            });
+
+            //TODO: Set the on mouse clicked method on the teacher assigned quizzes as well as the student created ones
+
+            createdQuizzesLists.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2) { // double-click
-                    Quiz selectedQuiz = quizLists.getSelectionModel().getSelectedItem();
+                    Quiz selectedQuiz = createdQuizzesLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
 
                         openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()));
@@ -73,7 +95,7 @@ public class StudentDashboardController {
         @FXML
         private void openTakeQuiz (String title, Question[]questions){
             try {
-                Stage currentStage = (Stage) quizLists.getScene().getWindow();
+                Stage currentStage = (Stage) createdQuizzesLists.getScene().getWindow();
                 // Load new window
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view.fxml"));
                 Parent root = loader.load();
@@ -120,12 +142,11 @@ public class StudentDashboardController {
         SceneChanger.changeScene(stage, "hello-view.fxml");
     }
 
-
     private Object currentUser;
 
-    public void setCurrentUser(Object user) {
+    public void setCurrentUser(Object user){
         this.currentUser = user;
-        if (user instanceof Teacher) {
+        if (user instanceof Teacher){
             Teacher teacher = (Teacher) user;
         }
     }
@@ -149,6 +170,7 @@ public class StudentDashboardController {
         stage.show();
     }
 }
+
 
 
 

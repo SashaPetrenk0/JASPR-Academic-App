@@ -36,18 +36,12 @@
 
     <Button fx:id="assignUsers" text="Assign" onAction="#assignUsers" />
 
+    <Label fx:id="statusLabel" text="" wrapText="true" style="-fx-text-fill: red;"/>
 
 
-    <TableView fx:id = "classroomTable" prefWidth = "500">
-        <columns>
-            <TableColumn fx:id = "classroomNumberColumn" text = "Classroom Number"/>
-            <TableColumn fx:id = "classroomCapacityColumn" text = "Classroom Capacity"/>
-            <TableColumn fx:id = "numTeachersColumn" text = "Number of Assigned Teachers"/>
-            <TableColumn fx:id = "numStudentsColumn" text = "Number of Assigned Students"/>
-        </columns>
-    </TableView>
 
-    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToAdmin" />
+
+    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToClassroom" />
 
 </VBox>
 

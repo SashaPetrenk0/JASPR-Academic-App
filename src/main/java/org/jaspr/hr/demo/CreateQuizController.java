@@ -1,9 +1,11 @@
 package org.jaspr.hr.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -39,16 +41,52 @@ public class CreateQuizController {
     private TextField lengthField;
     @FXML
     private Button returnToPrevious;
+    @FXML
+    private Label errorLabel;
+
+
+
+
+
+    @FXML
+    private VBox descriptionSection;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
+    private VBox initialQuizFields;
 
 
 
     @FXML
     private void onCreateQuiz() {
 
-        String title = titleField.getText();
-        String desc = descriptionField.getText();
-        String topic = topicField.getText();
-        int length = Integer.parseInt(lengthField.getText().trim());
+        String title = titleField.getText().trim();
+        String desc = descriptionField.getText().trim();
+        String topic = topicField.getText().trim();
+        String duration = lengthField.getText().trim();
+
+        if(title.isEmpty() || topic.isEmpty() || desc.isEmpty() || duration.isEmpty()){
+            errorLabel.setText("Please fill out all fields.");
+            return;
+        }
+
+        // Check if length is a number
+        int length;
+        try{
+            length = Integer.parseInt(duration);
+        } catch (NumberFormatException e){
+            errorLabel.setText("Number of Questions must be a number.");
+            return;
+        }
+
+        //TODO: decide on maximum number of questions
+        if(length > 20){
+            errorLabel.setText("Number of Questions must not exceed 20.");
+            return;
+        }
+
         int author = 0;
         String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D";
 
@@ -119,6 +157,26 @@ public class CreateQuizController {
 
 
     }
+
+    @FXML
+    private void onNextPressed(ActionEvent event) {
+
+        initialQuizFields.setVisible(false);
+//        initialQuizFields.setManaged(false);
+
+        // Show the description section
+        descriptionSection.setVisible(true);
+        descriptionSection.setManaged(true);
+
+        // Hide "Next" button
+        nextButton.setVisible(false);
+        nextButton.setManaged(false);
+
+        // Show "Create Quiz" button
+        createQuiz.setVisible(true);
+        createQuiz.setManaged(true);
+    }
+
 
     @FXML private void returnToPage() throws IOException {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();

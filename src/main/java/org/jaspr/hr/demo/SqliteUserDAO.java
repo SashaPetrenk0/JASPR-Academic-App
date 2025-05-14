@@ -16,102 +16,11 @@ public class SqliteUserDAO implements IUserDAO {
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
 
-        try {
-            if (connection != null) {
-                // Add 'salt' column to each table if it doesn't exist
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE students ADD COLUMN passwordHash VARCHAR ;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE teachers ADD COLUMN passwordHash TEXT;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE admins ADD COLUMN passwordHash TEXT;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE parents ADD COLUMN passwordHash TEXT;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE students ADD COLUMN salt TEXT;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE teachers ADD COLUMN salt TEXT;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE admins ADD COLUMN salt TEXT;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                try (Statement stmt = connection.createStatement()) {
-//                    stmt.execute("ALTER TABLE parents ADD COLUMN salt TEXT;");
-//                } catch (SQLException e) {
-//                    if (!e.getMessage().contains("duplicate column name")) {
-//                        e.printStackTrace();
-//                    }
-//                }
-
-                // Add teacherID to classrooms if needed
-                try (Statement stmt = connection.createStatement()) {
-                    stmt.execute("ALTER TABLE classrooms ADD COLUMN teacherID INTEGER;");
-                } catch (SQLException e) {
-                    if (!e.getMessage().contains("duplicate column name")) {
-                        e.printStackTrace();
-                    }
-                }
-
                 // Create all necessary tables
-                //dropTables();
                 createStudentTable();
                 createTeacherTable();
                 createParentTable();
                 createAdminTable();
-                createClassroomTable();
-                createStudentClassroom();
-            } else {
-                System.out.println("Database connection failed!");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    private void dropTables(){
-        try {
-            Statement statement = connection.createStatement();
-            String query = "DROP TABLE IF EXISTS parents";
-
-            statement.execute(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -123,12 +32,10 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS students ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "studentID INTEGER NOT NULL,"
+                    + "studentID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
-                    + "salt TEXT NOT NULL,"
-                    + "classroom_number INTEGER, "
-                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number) ON DELETE SET NULL"
+                    + "salt TEXT NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -143,7 +50,7 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS teachers ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "teacherID INTEGER NOT NULL,"
+                    + "teacherID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
                     + "salt TEXT NOT NULL"
@@ -179,7 +86,7 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS admins ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "adminID INTEGER NOT NULL,"
+                    + "adminID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
                     + "passwordHash VARCHAR NOT NULL,"
                     + "salt TEXT NOT NULL"
@@ -190,52 +97,7 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-    private void createClassroomTable() {
-        try {
-            Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS classrooms ("
-                    + "classroom_number INTEGER PRIMARY KEY, "
-                    + "capacity INTEGER NOT NULL, "
-                    + "teacherID INTEGER, "
-                    + "FOREIGN KEY (teacherID) REFERENCES teachers(teacherID)"
-                    + ")";
-            statement.execute((query));
-            System.out.println("Classroom table created successfully");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    public boolean createClassroom(int classroomNumber, int capacity) {
-
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO classrooms (classroom_number, capacity) VALUES (?, ?)");
-            statement.setInt(1, classroomNumber);
-            statement.setInt(2, capacity);
-            statement.executeUpdate();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    private void createStudentClassroom() {
-        try {
-            Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS studentClassroom ("
-                    + "studentID INTEGER, "
-                    + "classroom_number INTEGER, "
-                    + "PRIMARY KEY (studentID, classroom_number), "
-                    + "FOREIGN KEY (studentID) REFERENCES students(studentID),"
-                    + "FOREIGN KEY (classroom_number) REFERENCES classrooms(classroom_number)"
-                    + ")";
-            statement.execute((query));
-            System.out.println("student classroom table is created");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @Override
@@ -507,70 +369,39 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
+    public boolean isStudentIDExists(int studentID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM students WHERE studentID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, studentID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, studentID exists
+                }
+            }
+        }
+        return false; // default: ID does not exist
+    }
 
-//
-//    @Override
-//    public String getSalt(String email, String role) {
-//        String tableName = "";
-//        String salt = null;
-//
-//        switch (role) {
-//            case "Student":
-//                tableName = "students";
-//                break;
-//            case "Teacher":
-//                tableName = "teachers";
-//                break;
-//            case "Admin":
-//                tableName = "admins";
-//                break;
-//            case "Parent":
-//                tableName = "parent";
-//                break;
-//            default:
-//                System.out.println("Invalid role provided.");
-//        }
-//
-//        try {
-//            PreparedStatement statement = connection.prepareStatement("SELECT salt FROM " + tableName + " WHERE email = ?");
-//            statement.setString(1, email);
-//
-//            ResultSet resultSet = statement.executeQuery();
-//            if (resultSet.next()) {
-//                salt = resultSet.getString("salt");
-//            }
-//            return salt;
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//
-//        }
-//    }
-//
-//
-//    public String getTable(String email) {
-//        String[] tables = {"students", "teachers", "parents", "admins"};
-//        for (String table : tables) {
-//            try {
-//                PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE email = ?");
-//                statement.setString(1, email);
-//                ResultSet resultSet = statement.executeQuery();
-//                if (resultSet.next()) {
-//                    return table;
-//                }
-//                //TODO: Error Handling
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return null;
-//    }
+    public boolean isTeacherIDExists(int teacherID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM teachers WHERE teacherID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, teacherID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, teacherID exists
+                }
+            }
+        }
+        return false; // default: ID does not exist
+    }
 
-
-
-
+    public boolean isAdminIDExists(int adminID) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM admins WHERE adminID = ?");
+        stmt.setInt(1, adminID);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt(1) > 0;
+    }
 
 
     @Override
@@ -674,30 +505,6 @@ public class SqliteUserDAO implements IUserDAO {
         return students;
     }
 
-    @Override
-    public boolean hasAnyStudents() {
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyTeachers() {
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyParents() {
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyAdmins() {
-        return false;
-    }
-
-    @Override
-    public boolean hasAnyRegisteredUsers() {
-        return false;
-    }
 
 
     public ObservableList<Teacher> getAllTeachers() {
@@ -720,192 +527,62 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
 
-    // For database checking
-    public void printAllStudents() {
+
+
+    @Override
+    public boolean hasAnyStudents() {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
-            ResultSet resultSet = statement.executeQuery();
-
-            System.out.println("---- All Students ----");
-            while (resultSet.next()) {
-                System.out.println("Name: " + resultSet.getString("name") +
-                        ", Age: " + resultSet.getInt("age") +
-                        ", ID: " + resultSet.getInt("studentID") +
-                        ", Email: " + resultSet.getString("email"));
-            }
-        } catch (Exception e) {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
-    // For database checking
-    public void clearStudentsTable() {
+    @Override
+    public boolean hasAnyTeachers() {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM students");
-            statement.executeUpdate();
-            System.out.println("All student records deleted.");
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM teachers LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
-    // For database checking
-    public void clearTeacherTable() {
+    @Override
+    public boolean hasAnyParents() {
         try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM teachers");
-            statement.executeUpdate();
-            System.out.println("All teacher records deleted.");
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM parents LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
-    public ObservableList<Classroom> getAllClassrooms() {
-        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
-
+    @Override
+    public boolean hasAnyAdmins() {
         try {
-            String query = "SELECT classroom_number, capacity FROM classrooms";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int classroomNumber = resultSet.getInt("classroom_number");
-                int capacity = resultSet.getInt("capacity");
-
-                // Placeholder values for numStudents/numTeachers
-                classrooms.add(new Classroom(classroomNumber, capacity, 0, 0));
-            }
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM admins LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return classrooms;
+        return false;
     }
 
-    public ObservableList<Classroom> getUpdatedClassrooms() {
-        ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
-
-        String sql = "SELECT c.classroom_number, " +
-                "       c.capacity, " +
-                "       (SELECT COUNT(*) FROM studentClassroom sc WHERE sc.classroom_number = c.classroom_number) AS num_students, " +
-                "       CASE WHEN c.teacherID IS NOT NULL THEN 1 ELSE 0 END AS num_teachers " +
-                "  FROM classrooms c";
-
-        try (PreparedStatement ps = connection.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                int number = rs.getInt("classroom_number");
-                int capacity = rs.getInt("capacity");
-                int numStudents = rs.getInt("num_students");
-                int numTeachers = rs.getInt("num_teachers");
-
-                classrooms.add(new Classroom(number, capacity, numStudents, numTeachers));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return classrooms;
-    }
-
-
-
-    public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
-        try {
-            // Start a transaction
-            connection.setAutoCommit(false);
-
-            if (selectedTeacher != null) {
-                // Check if the classroom already has a teacher assigned
-                String checkTeacherQuery = "SELECT teacherID FROM classrooms WHERE classroom_number = ?";
-                try (PreparedStatement checkTeacherStmt = connection.prepareStatement(checkTeacherQuery)) {
-                    checkTeacherStmt.setInt(1, selectedClassroom.getClassRoomNumber());
-                    try (ResultSet rs = checkTeacherStmt.executeQuery()) {
-                        if (rs.next()) {
-                            int currentTeacherID = rs.getInt("teacherID");
-                            // If the classroom already has a teacher assigned, don't update
-                            if (currentTeacherID != 0) {
-                                System.out.println("This classroom already has a teacher assigned.");
-                                connection.commit();
-                                return false; // Teacher assignment skipped
-                            }
-                        }
-                    }
-                }
-
-                // If no teacher is assigned, proceed with updating the teacher
-                String teacherUpdateQuery = "UPDATE classrooms SET teacherID = ? WHERE classroom_number = ?";
-                try (PreparedStatement teacherStatement = connection.prepareStatement(teacherUpdateQuery)) {
-                    teacherStatement.setInt(1, selectedTeacher.getTeacherID());
-                    teacherStatement.setInt(2, selectedClassroom.getClassRoomNumber());
-                    teacherStatement.executeUpdate();
-                }
-            }
-
-            // Assign students (many-to-many, so insert into join table)
-            if (selectedStudents != null && !selectedStudents.isEmpty()) {
-                String insertQuery = "INSERT OR IGNORE INTO studentClassroom (studentID, classroom_number) VALUES (?, ?)";
-                try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
-                    for (Student student : selectedStudents) {
-                        insertStmt.setInt(1, student.getStudentID());
-                        insertStmt.setInt(2, selectedClassroom.getClassRoomNumber());
-                        insertStmt.addBatch();
-                    }
-                    insertStmt.executeBatch(); // Execute all inserts at once
-                }
-            }
-
-            // Commit the transaction
-            connection.commit();
-            return true;
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-
-    public List<Integer> getClassroomNumbersForStudent(int studentID) {
-        List<Integer> classroomNumbers = new ArrayList<>();
-
-        String query = "SELECT classroom_number FROM studentClassroom WHERE studentID = ?";
-
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, studentID);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int classroomNumber = resultSet.getInt("classroom_number");
-                classroomNumbers.add(classroomNumber);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return classroomNumbers;
-    }
-
-    public Integer getClassroomNumberForTeacher(int teacherID) {
-        Integer classroomNumber = null;
-
-        String query = "SELECT classroom_number FROM classrooms WHERE teacherID = ?";
-
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, teacherID);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                classroomNumber = resultSet.getInt("classroom_number");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return classroomNumber;
+    @Override
+    public boolean hasAnyRegisteredUsers() {
+        return hasAnyStudents()
+                || hasAnyTeachers()
+                || hasAnyParents()
+                || hasAnyAdmins();
     }
 
 
