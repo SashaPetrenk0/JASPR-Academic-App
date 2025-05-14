@@ -134,17 +134,19 @@ public class CreateQuizController {
 
 
                 Question[] questions = questionList.toArray(new Question[0]);
-                System.out.print(questions.length);
+                System.out.print("question length" + questions.length);
 
                 newQuiz.setQuestions(questions);
+                System.out.print((newQuiz.getQuestions()));
                 for (int i = 0; i < questions.length; i++) {
                     quizDAO.addQuestion(questions[i],newQuiz);
+
                 }
             }
         }
 
         String apiURL = "http://127.0.0.1:11434/api/generate";
-        String model = "llama3.2"; //replace with the model YOU are using
+        String model = "llama3.2";
         OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
         fetcher.fetchAsynchronousOllamaResponse(model, prompt, new MyResponseListener());
 
