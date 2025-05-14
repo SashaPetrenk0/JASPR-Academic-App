@@ -138,6 +138,15 @@ public class RegisterController {
             case "Parent" -> showOnlyForm(parentForm);
             case "Admin" -> showOnlyForm(adminForm);
         }
+
+        Stage stage = (Stage) roleComboBox.getScene().getWindow();
+
+        // Wait for the layout to update before resizing
+        stage.getScene().getRoot().applyCss();
+        stage.getScene().getRoot().layout();
+
+        // Resize the window to fit the content
+        stage.sizeToScene();
     }
 
     private void showOnlyForm(VBox formToShow) {
