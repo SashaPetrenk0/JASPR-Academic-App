@@ -13,4 +13,6 @@ public class DashboardController {
         // Set background color to light blue
         vBox.setStyle("-fx-background-color: lightblue;");
     }
+
+
 }

@@ -15,7 +15,6 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0">
@@ -69,7 +68,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="115.0" prefWidth="290.0" spacing="10.0">
                      <children>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="profile-section" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#onProfileClick" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../images/profile.png" />
                            </image>
@@ -131,7 +130,7 @@
                                     <Image url="@../../../../images/pen.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="46.0" prefWidth="196.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Create Quiz" textFill="#0000007e">
+                              <Label id="create-quiz" onMouseClicked="#onAdd" prefHeight="46.0" prefWidth="196.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Create Quiz" textFill="#0000007e">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -148,7 +147,7 @@
                                     <Image url="@../../../../images/ideas.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Quizzes" textFill="#0000007e">
+                              <Label id="assign-quizzes" onMouseClicked="#onAssignedQuizzesClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Quizzes" textFill="#0000007e">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -216,7 +215,7 @@
                                     <Image url="@../../../../images/logout.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Logout" textFill="#0000007e">
+                              <Label id="logout" onMouseClicked="#onLogoutClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Logout" textFill="#0000007e">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
