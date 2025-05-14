@@ -140,11 +140,11 @@ public class SqliteQuizDAO implements IQuizDAO {
     @Override
     public void addQuestion(Question question, Quiz quiz) {
         try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (question, optionA, optionB, optionC, optionD, answer)" +
-                    "VALUES (?, ?, ?, ?, ?,?)",
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (id,question, optionA, optionB, optionC, optionD, answer)" +
+                    "VALUES (?,?, ?, ?, ?, ?,?)",
                     Statement.RETURN_GENERATED_KEYS);
 
-            //statement.setInt(1, quiz.getId());
+            statement.setInt(1, quiz.getId());
             statement.setString(2, question.getQuestion());
             statement.setString(3, question.getOptionA());
             statement.setString(4, question.getOptionB());
@@ -160,7 +160,7 @@ public class SqliteQuizDAO implements IQuizDAO {
                     question.setId(generatedId);
                 }
             }
-            System.out.print(question);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
