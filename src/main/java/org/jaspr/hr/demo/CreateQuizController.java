@@ -88,7 +88,7 @@ public class CreateQuizController {
         }
 
         int author = 0;
-        String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D";
+        String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D in the format; 'Question:' 'Question text' '?' - new line - 'Question letter' ')' repeated for A, B, C, D - new line - 'Answer:' 'Question letter'')'. Do not under any circumstances deviate from this format in any way and do not forget to write the answer";
 
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
@@ -105,16 +105,17 @@ public class CreateQuizController {
             @Override
             public void onResponseReceived(OllamaResponse response) {
                 String input = response.getResponse();
-                System.out.print("Ollama says: ");
                 System.out.print(input);
                 Pattern fullQuestionPattern = Pattern.compile(
-                        "(?:\\*\\*Question \\d+\\*\\*|Question \\d+:)\\s*" +   // Match "**Question N**" or "Question N:"
+                        "Question\\s*(?::|\\d+:|\\*\\*\\d+\\*\\*)\\s*" +       // Match "Question:", "Question N:", or "**Question N**"
                                 "(.*?)\\s*" +                                         // Question text
                                 "A\\)\\s*(.*?)\\s*" +                                 // Option A
                                 "B\\)\\s*(.*?)\\s*" +                                 // Option B
                                 "C\\)\\s*(.*?)\\s*" +                                 // Option C
                                 "D\\)\\s*(.*?)\\s*" +                                 // Option D
-                                "(?:\\*\\*Answer:|Answer:)\\s*([A-D])\\)"             // Match "**Answer: C)" or "Answer: C)"
+
+                                "(?:\\*\\*?\\s*Answer\\s*:?|Answer\\s*:?)+\\s*([A-D])\\)?" // Match "**Answer: C)", "Answer: C)", or "Answer : C)"
+
                 );
 
                 Matcher matcher = fullQuestionPattern.matcher(input);
@@ -134,17 +135,19 @@ public class CreateQuizController {
 
 
                 Question[] questions = questionList.toArray(new Question[0]);
-                System.out.print(questions.length);
+                System.out.print("question length" + questions.length);
 
                 newQuiz.setQuestions(questions);
-                for (int i = 0; i < questions.length; i++) {
-                    quizDAO.addQuestion(questions[i],newQuiz);
+
+                for (Question question : questions) {
+                    quizDAO.addQuestion(question, newQuiz);
+
                 }
             }
         }
 
         String apiURL = "http://127.0.0.1:11434/api/generate";
-        String model = "llama3.2"; //replace with the model YOU are using
+        String model = "llama3.2";
         OllamaResponseFetcher fetcher = new OllamaResponseFetcher(apiURL);
         fetcher.fetchAsynchronousOllamaResponse(model, prompt, new MyResponseListener());
 

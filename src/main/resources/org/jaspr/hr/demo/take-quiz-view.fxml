@@ -17,17 +17,17 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="quizTitle" text=""/>
+    <Label fx:id="quizTitle" text="Quiz Title"/>
 
-    <Label fx:id="questionLabel" text=""/>
+    <Label fx:id="questionLabel" text="Question"/>
     <HBox>
-        <Button fx:id="optionA" text ="" onAction="#optionAclicked" disable="false"/>
-        <Button fx:id="optionB" text ="" onAction="#optionBclicked" disable="false"/>
+        <Button fx:id="optionA" text ="1" onAction="#optionAclicked" disable="false"/>
+        <Button fx:id="optionB" text ="2" onAction="#optionBclicked" disable="false"/>
     </HBox>
 
    <HBox>
-       <Button fx:id="optionC" text ="" onAction="#optionCclicked" disable="false"/>
-       <Button fx:id="optionD" text ="" onAction="#optionDclicked" disable="false"/>
+       <Button fx:id="optionC" text ="3" onAction="#optionCclicked" disable="false"/>
+       <Button fx:id="optionD" text ="4" onAction="#optionDclicked" disable="false"/>
    </HBox>
 
 

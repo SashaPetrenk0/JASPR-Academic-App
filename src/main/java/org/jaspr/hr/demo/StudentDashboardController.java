@@ -82,7 +82,7 @@ public class StudentDashboardController {
                     Quiz selectedQuiz = createdQuizzesLists.getSelectionModel().getSelectedItem();
                     if (selectedQuiz != null) {
 
-                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()));
+                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()),selectedQuiz.getId(), student.getStudentID());
 
                     }
                 }
@@ -93,7 +93,7 @@ public class StudentDashboardController {
     }
 
         @FXML
-        private void openTakeQuiz (String title, Question[]questions){
+        private void openTakeQuiz (String title, Question[]questions, int quizID, int studentID ){
             try {
                 Stage currentStage = (Stage) createdQuizzesLists.getScene().getWindow();
                 // Load new window
@@ -105,6 +105,7 @@ public class StudentDashboardController {
 
                 controller.loadTitle(title);
                 controller.setQuestions(questions);
+                controller.getInfo(studentID,quizID);
 
                 Stage stage = new Stage();
 

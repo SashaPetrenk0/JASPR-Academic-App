@@ -1,10 +1,22 @@
 package org.jaspr.hr.demo;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class TakeQuizController {
+    private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
+
+
+
+    User user = UserSession.getInstance().getCurrentUser();
+    String role = UserSession.getInstance().getRole();
+
+
     @FXML
     private Label quizTitle;
     @FXML
@@ -18,6 +30,11 @@ public class TakeQuizController {
     @FXML
     private Button optionD;
 
+    @FXML
+    private Button nextButton;
+    @FXML
+    private Button returnToPrevious;
+
 
 
     private Question[] questions;
@@ -26,6 +43,11 @@ public class TakeQuizController {
     int correctAnswerCount = 0;
     int incorrectAnswerCount = 0;
     int questionIndex = 0;
+    private int studentId;
+    private int quizId;
+
+
+    private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
     @FXML
     public void loadTitle(String title){
@@ -40,6 +62,15 @@ public class TakeQuizController {
         loadQuestion();
 
     }
+
+    @FXML
+    public void getInfo(int student, int quiz_id){
+        this.studentId = student;
+        this.quizId = quiz_id;
+
+    }
+
+
 
 
 
@@ -70,6 +101,11 @@ public class TakeQuizController {
             System.out.println("Quiz finished!");
             System.out.println("correct" + correctAnswerCount);
             System.out.println("incorrect" + incorrectAnswerCount);
+            int grade = correctAnswerCount/questions.length;
+            questionLabel.setText("Quiz FInished! You scored"+ correctAnswerCount + "/"+questions.length);
+
+            resultsDAO.addQuizResult(studentId, quizId, grade);
+
         }
     }
 
@@ -131,6 +167,26 @@ public class TakeQuizController {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
+        }
+
+    }
+
+    @FXML
+    private void onNextPressed(ActionEvent event) {
+
+
+    }
+
+
+    @FXML private void returnToPage() throws IOException {
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        if ("Teacher".equals(role) && user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
+
+        }else if ("Student".equals(role) && user instanceof Student) {
+            Student student = (Student) user;
+            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
         }
 
     }
