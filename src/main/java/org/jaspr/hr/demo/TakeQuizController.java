@@ -170,7 +170,5 @@ public class TakeQuizController {
             SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
         }
 
-
-
     }
 }

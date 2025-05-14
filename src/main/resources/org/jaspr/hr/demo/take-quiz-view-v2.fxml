@@ -46,7 +46,7 @@
                <children>
                   <HBox alignment="CENTER" maxWidth="550.0" prefHeight="40.0" prefWidth="777.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" minWidth="500.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="Quiz Title">
+                        <Label fx:id="quizTitle" alignment="CENTER" contentDisplay="CENTER" minWidth="500.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="Quiz Title">
                            <font>
                               <Font name="Arial" size="20.0" />
                            </font>
@@ -61,7 +61,7 @@
                   </HBox>
                   <HBox maxHeight="-Infinity" maxWidth="560.0" prefHeight="95.0" prefWidth="555.0">
                      <children>
-                        <Label alignment="TOP_LEFT" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="95.0" prefWidth="600.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 5;" text="Question:">
+                        <Label fx:id="questionLabel" alignment="TOP_LEFT" contentDisplay="CENTER" maxWidth="-Infinity" prefHeight="95.0" prefWidth="600.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 5;" text="Question:">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="13.0" />
                            </font>
