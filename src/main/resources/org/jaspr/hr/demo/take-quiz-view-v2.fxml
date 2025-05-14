@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="500.0" prefHeight="500.0" prefWidth="817.0" spacing="20.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.CreateQuizController">
+<VBox alignment="CENTER" maxHeight="500.0" prefHeight="500.0" prefWidth="817.0" spacing="20.0" style="-fx-background-color: #FFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TakeQuizController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -79,12 +79,12 @@
                   </HBox>
                   <HBox alignment="CENTER" spacing="10.0">
                      <children>
-                        <Button fx:id="loginButton" maxHeight="-Infinity" onAction="#onLoginButtonClick" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 500; -fx-background-color: #A8DDDC;" text="Option A" textFill="#5b5b5b">
+                        <Button fx:id="optionA" maxHeight="-Infinity" onAction="#onLoginButtonClick" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 500; -fx-background-color: #A8DDDC;" text="Option A" textFill="#5b5b5b">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="signUpButton" lineSpacing="2.0" minHeight="-Infinity" onAction="#onSignUpButtonClick" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC;" text="Option B" textFill="#5b5b5b">
+                        <Button fx:id="optionB" lineSpacing="2.0" minHeight="-Infinity" onAction="#onSignUpButtonClick" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC;" text="Option B" textFill="#5b5b5b">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
@@ -102,12 +102,12 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="65.0" spacing="10.0">
                      <children>
-                        <Button fx:id="loginButton1" maxHeight="-Infinity" onAction="#onLoginButtonClick" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC;" text="Option C" textFill="#5b5b5b">
+                        <Button fx:id="optionC" maxHeight="-Infinity" onAction="#onLoginButtonClick" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC;" text="Option C" textFill="#5b5b5b">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="signUpButton1" minHeight="50.0" onAction="#onSignUpButtonClick" prefHeight="100.0" prefWidth="250.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC;" text="Option D" textFill="#5b5b5b">
+                        <Button fx:id="optionD" minHeight="50.0" onAction="#onSignUpButtonClick" prefHeight="100.0" prefWidth="250.0" style="-fx-background-radius: 50; -fx-background-color: #A8DDDC;" text="Option D" textFill="#5b5b5b">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
