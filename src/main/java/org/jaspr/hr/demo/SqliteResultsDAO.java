@@ -1,6 +1,7 @@
 package org.jaspr.hr.demo;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 public class SqliteResultsDAO implements IResultsDAO {
@@ -51,11 +52,34 @@ public class SqliteResultsDAO implements IResultsDAO {
 
 
     @Override
-    public void addQuestionResult(int studentID, int quizID, int questionID, int grade) {
+    public void addQuestionResult(Student student, Quiz quiz, Question question, int grade) {
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO questionResults (quiz_id, question_id, student_id, grade)" +
+                    "VALUES (?,?, ?, ?)");
+            statement.setInt(1, quiz.getId());
+            statement.setInt(1, question.getId());
+            statement.setInt(1, student.getStudentID());
+            statement.setInt(1, grade);
+
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
     @Override
-    public void addQuizResult(int studentID, int quizID, int questionID, int grade) {
+    public void addQuizResult(Student student, Quiz quiz, int grade) {
+        try{
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO quizResults (quiz_id, student_id, grade)" +
+                    "VALUES (?,?, ?)");
+            statement.setInt(1, quiz.getId());
+            statement.setInt(1, student.getStudentID());
+            statement.setInt(1, grade);
+
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
