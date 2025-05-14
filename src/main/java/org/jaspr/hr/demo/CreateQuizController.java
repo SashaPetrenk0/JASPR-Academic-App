@@ -88,7 +88,7 @@ public class CreateQuizController {
         }
 
         int author = 0;
-        String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D";
+        String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D in the format; (Question 'Number as a digit' ':' 'Question text' '?') - new line - 'Question letter' ')' 'A) 'ans text' new line B) C) D) Answer: answer) do not under any circumstances deviate from this format in any way";
 
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
