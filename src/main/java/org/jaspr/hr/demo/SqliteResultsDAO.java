@@ -24,7 +24,7 @@ public class SqliteResultsDAO implements IResultsDAO {
                     "grade INTEGER NOT NULL,"+
                     "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
                     "FOREIGN KEY (question_id) REFERENCES questions(question_id)," +
-                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)," +
+                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)" +
                     ");";
             statement.execute(query);
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class SqliteResultsDAO implements IResultsDAO {
                     "student_id INTEGER NOT NULL"+
                     "grade INTEGER NOT NULL,"+
                     "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
-                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)," +
+                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)" +
                     ");";
             statement.execute(query);
         } catch (Exception e) {
