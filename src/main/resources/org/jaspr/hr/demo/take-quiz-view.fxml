@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jaspr.hr.demo.TakeQuizView"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jaspr.hr.demo.TakeQuizController"
+>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
 
-</AnchorPane>
+    <Label fx:id="quizTitle" text="Quiz Title"/>
+
+    <Label fx:id="questionLabel" text="Question"/>
+    <HBox>
+        <Button fx:id="optionA" text ="1" onAction="#optionAclicked" disable="false"/>
+        <Button fx:id="optionB" text ="2" onAction="#optionBclicked" disable="false"/>
+    </HBox>
+
+   <HBox>
+       <Button fx:id="optionC" text ="3" onAction="#optionCclicked" disable="false"/>
+       <Button fx:id="optionD" text ="4" onAction="#optionDclicked" disable="false"/>
+   </HBox>
+
+
+    <Button fx:id="nextQuestion" text="Next" onAction="#nextQuestion" />
+
+    <Button fx:id="leaveQuiz" text="Return" onAction="#leaveQuiz" />
+
+
+</VBox>

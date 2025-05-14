@@ -5,7 +5,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -76,6 +78,37 @@ public class RegisterController {
     private Button returnToPrevious;
 
 
+    @FXML
+    private Rectangle Rectangle1;
+    @FXML
+    private Rectangle Rectangle2;
+
+    @FXML
+    private Button submitButtonStudent;
+
+    @FXML
+    private Button submitButtonTeacher;
+
+    @FXML
+    private Button submitButtonParent;
+
+    @FXML
+    private Button submitButtonAdmin;
+
+    @FXML
+    private ImageView successIcon2;
+    @FXML
+    private ImageView successIcon1;
+    @FXML
+    private ImageView successIcon3;
+
+    @FXML
+    private ImageView successIcon4;
+
+
+
+
+
     private Student newStudent;
     private Teacher newTeacher;
     private Parent newParent;
@@ -87,6 +120,10 @@ public class RegisterController {
 
     @FXML
     private void onRoleSelected() {
+        // Hide decorative rectangles
+        Rectangle1.setVisible(false);
+        Rectangle2.setVisible(false);
+        
         // First hide everything
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
@@ -135,13 +172,21 @@ public class RegisterController {
                     age = Integer.parseInt(ageFieldStudent.getText().trim());
                     int studentID = Integer.parseInt(studentIDField.getText().trim());
 
-                    Student newStudent = new Student(name, age, studentID, email, password);
-                    userDAO.addStudent(newStudent);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Student newStudent = new Student(name, age, studentID, email);
+                    userDAO.addStudent(newStudent, hashedPassword, salt);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
+                    submitButtonStudent.setDisable(true);
 
+                    successfulSignUpLabelTeacher.setVisible(true);
+                    successfulSignUpLabelTeacher.setManaged(true);
 
-
+                    successIcon1.setVisible(true);
+                    successIcon1.setManaged(true);
+                    
                 }
                 case "Teacher" -> {
                     name = nameFieldTeacher.getText();
@@ -150,10 +195,21 @@ public class RegisterController {
                     age = Integer.parseInt(ageFieldTeacher.getText().trim());
                     int teacherID = Integer.parseInt(teacherIDField.getText().trim());
 
-                    Teacher newTeacher = new Teacher(name, age, teacherID, email, password);
-                    userDAO.addTeacher(newTeacher);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Teacher newTeacher = new Teacher(name, age, teacherID, email);
+                    userDAO.addTeacher(newTeacher, hashedPassword, salt);
                     successfulSignUpLabelTeacher.setText("Successful Teacher Registration! Welcome " + name + "!");
                     successfulSignUpLabelTeacher.setVisible(true);
+                    submitButtonTeacher.setVisible(false);
+                    submitButtonTeacher.setManaged(false);
+
+                    successfulSignUpLabelTeacher.setVisible(true);
+                    successfulSignUpLabelTeacher.setManaged(true);
+
+                    successIcon2.setVisible(true);
+                    successIcon2.setManaged(true);
 
 
                 }
@@ -164,10 +220,21 @@ public class RegisterController {
                     email = emailFieldParent.getText();
                     password = passwordFieldParent.getText();
 
-                    Parent newParent = new Parent(name, child, childID, email, password);
-                    userDAO.addParent(newParent);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Parent newParent = new Parent(name, child, childID, email);
+                    userDAO.addParent(newParent, hashedPassword, salt);
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                     successfulSignUpLabelParent.setVisible(true);
+                    submitButtonParent.setVisible(false);
+                    submitButtonParent.setManaged(false);
+
+                    successfulSignUpLabelParent.setVisible(true);
+                    successfulSignUpLabelParent.setManaged(true);
+
+                    successIcon3.setVisible(true);
+                    successIcon3.setManaged(true);
 
 
 
@@ -179,10 +246,22 @@ public class RegisterController {
                     age = Integer.parseInt(ageFieldAdmin.getText().trim());
                     int adminID = Integer.parseInt(adminIDField.getText().trim());
 
-                    Admin newAdmin = new Admin(name, age, adminID, email, password);
-                    userDAO.addAdmin(newAdmin);
+                    String salt = PasswordUtility.generateSalt();
+                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
+
+                    Admin newAdmin = new Admin(name, age, adminID, email);
+                    userDAO.addAdmin(newAdmin, hashedPassword, salt);
                     successfulSignUpLabelAdmin.setText("Successful Administrator Registration! Welcome " + name + "!");
                     successfulSignUpLabelAdmin.setVisible(true);
+
+                    submitButtonAdmin.setVisible(false);
+                    submitButtonAdmin.setManaged(false);
+
+                    successfulSignUpLabelAdmin.setVisible(true);
+                    successfulSignUpLabelAdmin.setManaged(true);
+
+                    successIcon4.setVisible(true);
+                    successIcon4.setManaged(true);
 
                     // TODO: Error handling for incorrect user inputs
                 }

@@ -1,5 +1,8 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,13 +12,18 @@ import java.util.List;
 public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
 
+
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
-        createStudentTable();
-        createTeacherTable();
-        createParentTable();
-        createAdminTable();
+
+                // Create all necessary tables
+                createStudentTable();
+                createTeacherTable();
+                createParentTable();
+                createAdminTable();
+
     }
+
 
     private void createStudentTable() {
         // Create table if not exists
@@ -24,9 +32,10 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS students ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "studentID INTEGER NOT NULL,"
+                    + "studentID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL"
+                    + "passwordHash VARCHAR NOT NULL,"
+                    + "salt TEXT NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -41,9 +50,10 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS teachers ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "teacherID INTEGER NOT NULL,"
+                    + "teacherID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL"
+                    + "passwordHash VARCHAR NOT NULL,"
+                    + "salt TEXT NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -60,7 +70,8 @@ public class SqliteUserDAO implements IUserDAO {
                     + "childName STRING NOT NULL,"
                     + "childID INTEGER NOT NULL,"
                     + "email VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL"
+                    + "passwordHash VARCHAR NOT NULL,"
+                    + "salt TEXT NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
@@ -75,70 +86,82 @@ public class SqliteUserDAO implements IUserDAO {
             String query = "CREATE TABLE IF NOT EXISTS admins ("
                     + "name STRING NOT NULL,"
                     + "age INTEGER NOT NULL,"
-                    + "adminID INTEGER NOT NULL,"
+                    + "adminID INTEGER PRIMARY KEY NOT NULL,"
                     + "email VARCHAR NOT NULL,"
-                    + "password VARCHAR NOT NULL"
+                    + "passwordHash VARCHAR NOT NULL,"
+                    + "salt TEXT NOT NULL"
                     + ")";
             statement.execute(query);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
+
     @Override
-    public void addStudent (Student student){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
+    public void addStudent(Student student, String password, String salt) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, passwordHash, salt)" +
+                    "VALUES (?, ?, ?, ?, ?, ?)");
             statement.setString(1, student.getName());
             statement.setInt(2, student.getAge());
             statement.setInt(3, student.getStudentID());
             statement.setString(4, student.getEmail());
-            statement.setString(5, student.getPassword());
+            statement.setString(5, password);
+            statement.setString(6, salt);
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addTeacher (Teacher teacher){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
+    public void addTeacher(Teacher teacher, String password, String salt) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, passwordHash, salt)" +
+                    "VALUES (?, ?, ?, ?, ?, ?)");
             statement.setString(1, teacher.getName());
             statement.setInt(2, teacher.getAge());
             statement.setInt(3, teacher.getTeacherID());
             statement.setString(4, teacher.getEmail());
-            statement.setString(5, teacher.getPassword());
+            statement.setString(5, password);
+            statement.setString(6, salt);
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addAdmin (Admin admin){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
+    public void addAdmin(Admin admin, String password, String salt) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, passwordHash, salt)" +
+                    "VALUES (?, ?, ?, ?, ?, ?)");
             statement.setString(1, admin.getName());
             statement.setInt(2, admin.getAge());
             statement.setInt(3, admin.getAdminID());
             statement.setString(4, admin.getEmail());
-            statement.setString(5, admin.getPassword());
+            statement.setString(5, password);
+            statement.setString(6, salt);
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @Override
-    public void addParent (Parent parent){
-        try{
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, password)" +
-                    "VALUES (?, ?, ?, ?, ?)");
+    public void addParent(Parent parent, String password, String salt) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, passwordHash, salt)" +
+                    "VALUES (?, ?, ?, ?, ?, ?)");
             statement.setString(1, parent.getName());
             statement.setInt(2, parent.getChildID());
             statement.setString(3, parent.getChildName());
             statement.setString(4, parent.getEmail());
-            statement.setString(5, parent.getPassword());
+            statement.setString(5, password);
+            statement.setString(6, salt);
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,8 +188,7 @@ public class SqliteUserDAO implements IUserDAO {
                         resultSet.getString("name"),
                         resultSet.getInt("age"),
                         studentID,
-                        resultSet.getString("email"),
-                        resultSet.getString("password")
+                        resultSet.getString("email")
                 );
             }
         } catch (Exception e) {
@@ -187,8 +209,7 @@ public class SqliteUserDAO implements IUserDAO {
                         resultSet.getString("name"),
                         resultSet.getInt("age"),
                         teacherID,
-                        resultSet.getString("email"),
-                        resultSet.getString("password")
+                        resultSet.getString("email")
                 );
             }
         } catch (Exception e) {
@@ -209,8 +230,7 @@ public class SqliteUserDAO implements IUserDAO {
                         resultSet.getString("name"),
                         resultSet.getInt("age"),
                         adminID,
-                        resultSet.getString("email"),
-                        resultSet.getString("password")
+                        resultSet.getString("email")
                 );
             }
         } catch (Exception e) {
@@ -222,7 +242,7 @@ public class SqliteUserDAO implements IUserDAO {
     @Override
     public Teacher getLoggedInTeacher(String email, String password){
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE email = ? AND password = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE email = ? AND passwordHash = ?");
             statement.setString(1, email);
             statement.setString(2, password);
 
@@ -232,8 +252,54 @@ public class SqliteUserDAO implements IUserDAO {
                         resultSet.getString("name"),
                         resultSet.getInt("age"),
                         resultSet.getInt("teacherID"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password")
+                        resultSet.getString("email")
+                );
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    //TODO: merge into getLoggedInUser
+    @Override
+    public Student getLoggedInStudent(String email, String password){
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students WHERE email = ? AND passwordHash = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Student(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        resultSet.getInt("studentID"),
+                        resultSet.getString("email")
+                );
+            }
+            //TODO: Error Handling
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Admin getLoggedInAdmin(String email, String password){
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM admins WHERE email = ? AND passwordHash = ?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Admin(
+                        resultSet.getString("name"),
+                        resultSet.getInt("age"),
+                        resultSet.getInt("adminID"),
+                        resultSet.getString("email")
                 );
             }
             //TODO: Error Handling
@@ -249,7 +315,7 @@ public class SqliteUserDAO implements IUserDAO {
         String[] tables = {"students", "teachers", "parents", "admins"};
         for (String table : tables) {
             try {
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE email = ? AND password = ?");
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE email = ? AND passwordHash = ?");
                 statement.setString(1, email);
                 statement.setString(2, password);
 
@@ -274,12 +340,75 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
+    @Override
+    public String getSalt(String email) {
+        String[] tables = {"students", "teachers", "admins", "parent"};
+
+        try {
+            for (String table : tables) {
+                String sql = "SELECT salt FROM " + table + " WHERE email = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, email);
+
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    // Found the user
+                    System.out.println("User found in table: " + table);
+                    return resultSet.getString("salt");
+                }
+                // else move to the next table
+            }
+
+            // If no user found
+            System.out.println("No user found with email: " + email);
+            return null;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean isStudentIDExists(int studentID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM students WHERE studentID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, studentID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, studentID exists
+                }
+            }
+        }
+        return false; // default: ID does not exist
+    }
+
+    public boolean isTeacherIDExists(int teacherID) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM teachers WHERE teacherID = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, teacherID);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // if count > 0, teacherID exists
+                }
+            }
+        }
+        return false; // default: ID does not exist
+    }
+
+    public boolean isAdminIDExists(int adminID) throws SQLException {
+        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM admins WHERE adminID = ?");
+        stmt.setInt(1, adminID);
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+        return rs.getInt(1) > 0;
+    }
+
 
     @Override
-    public void changePassword(String email, String oldPassword, String newPassword, String role) {
+    public boolean changePassword(String email, String oldPassword, String newPassword, String role) {
         String tableName = "";
 
-        switch (role){
+        switch (role) {
             case "Student":
                 tableName = "students";
                 break;
@@ -287,28 +416,50 @@ public class SqliteUserDAO implements IUserDAO {
                 tableName = "teachers";
                 break;
             case "Admin":
-                tableName = "admin";
+                tableName = "admins";
                 break;
             case "Parent":
                 tableName = "parent";
                 break;
             default:
                 System.out.println("Invalid role provided.");
-                return;
+                return false;
         }
-
 
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE " + tableName + " SET password = ?, WHERE email = ? AND password = ?");
-            statement.setString(1, newPassword);
-            statement.setString(2, email);
-            statement.setString(3, oldPassword);
-            //TODO: Error Handling
-            statement.executeUpdate();
+            // First check if the old password matches the one in the database
+            String checkPasswordQuery = "SELECT passwordHash FROM " + tableName + " WHERE email = ?";
+            PreparedStatement checkStatement = connection.prepareStatement(checkPasswordQuery);
+            checkStatement.setString(1, email);
+
+            ResultSet rs = checkStatement.executeQuery();
+
+            if (rs.next()) {
+                String currentPasswordInDb = rs.getString("passwordHash");
+
+                if (currentPasswordInDb.equals(oldPassword)) {
+                    // Password matches, now update it
+                    String updateQuery = "UPDATE " + tableName + " SET passwordHash = ? WHERE email = ?";
+                    PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+                    updateStatement.setString(1, newPassword);
+                    updateStatement.setString(2, email);
+
+                    int rowsUpdated = updateStatement.executeUpdate();
+                    return rowsUpdated > 0;  // Ensure at least one row is updated
+                } else {
+                    System.out.println("Old password does not match.");
+                    return false;
+                }
+            } else {
+                System.out.println("Email not found.");
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
     }
+
 
 
     // For use when viewing student names in lists of quiz results etc.
@@ -319,7 +470,7 @@ public class SqliteUserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement("SELECT name FROM students");
             ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 studentNames.add(name);
             }
@@ -332,19 +483,19 @@ public class SqliteUserDAO implements IUserDAO {
 
     // For use when a teacher is viewing their class list and details
     @Override
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 int age = resultSet.getInt("age");
                 int studentID = resultSet.getInt("studentID");
                 String email = resultSet.getString("email");
-                String password = resultSet.getString("password");
+                String password = resultSet.getString("passwordHash");
 
-                Student student = new Student(name, age, studentID, email, password);
+                Student student = new Student(name, age, studentID, email);
                 students.add(student);
             }
             //TODO: Error Handling
@@ -354,35 +505,92 @@ public class SqliteUserDAO implements IUserDAO {
         return students;
     }
 
-    // For database checking
-    public void printAllStudents() {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
-            ResultSet resultSet = statement.executeQuery();
 
-            System.out.println("---- All Students ----");
-            while (resultSet.next()) {
-                System.out.println("Name: " + resultSet.getString("name") +
-                        ", Age: " + resultSet.getInt("age") +
-                        ", ID: " + resultSet.getInt("studentID") +
-                        ", Email: " + resultSet.getString("email"));
+
+    public ObservableList<Teacher> getAllTeachers() {
+        ObservableList<Teacher> teachers = FXCollections.observableArrayList();
+        String query = "SELECT * FROM teachers";
+        try (PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                teachers.add(new Teacher(
+                        rs.getString("name"),
+                        rs.getInt("age"),
+                        rs.getInt("teacherID"),
+                        rs.getString("email")
+                ));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // For database checking
-    public void clearStudentsTable() {
-        try {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM students");
-            statement.executeUpdate();
-            System.out.println("All student records deleted.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return teachers;
     }
 
 
+
+
+    @Override
+    public boolean hasAnyStudents() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyTeachers() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM teachers LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyParents() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM parents LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyAdmins() {
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM admins LIMIT 1");
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasAnyRegisteredUsers() {
+        return hasAnyStudents()
+                || hasAnyTeachers()
+                || hasAnyParents()
+                || hasAnyAdmins();
+    }
+
+
+
+
 }
+
+
+
+
 

@@ -29,7 +29,16 @@ jamie says something!!!""");
     @FXML
     private Button nextButton;
 
-    // ... other methods
+    private final IUserDAO userDAO = new SqliteUserDAO();
+
+    @FXML
+    public void initialize() {
+        if (!userDAO.hasAnyRegisteredUsers()) {
+            loginButton.setDisable(true);   // Keep it disabled
+        } else {
+            loginButton.setDisable(false);  // Enable login
+        }
+    }
 
     @FXML
     protected void onAgreeCheckBoxClick() {

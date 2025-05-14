@@ -9,18 +9,34 @@ public class Quiz {
     private String topic;
     private int numOfQuestions;
     private int author;
-    private List<Question> questions;
+    private Question[] questions;
 
 
 
-    public Quiz(String title, String description, String topic, int numOfQuestions, int author, List<Question> questions){
+    public Quiz(String title, String description, String topic, int numOfQuestions, int author) {
         this.title = title;
         this.description = description;
         this.topic = topic;
         this.numOfQuestions = numOfQuestions;
         this.author = author;
-        this.questions = questions;
+        //  this.questions = questions;
+    }
 
+    public Quiz(int id, String title, String description, String topic, int numOfQuestions, int author){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.topic = topic;
+        this.numOfQuestions = numOfQuestions;
+        this.author = author;
+    }
+
+    public Question[] getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Question[] questions) {
+        this.questions = questions;
     }
 
     public void setAuthor(int author) {
@@ -34,7 +50,8 @@ public class Quiz {
     public int getId() {
         return id;
     }
-    private void setID(int id){
+
+    public void setId(int id){
         this.id = id;
     }
 
@@ -74,3 +91,5 @@ public class Quiz {
         return title + " " + topic +  " " + description + " " + numOfQuestions;
     }
 }
+
+/// I need a change to commit
