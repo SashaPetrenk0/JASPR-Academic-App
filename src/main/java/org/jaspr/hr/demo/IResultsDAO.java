@@ -7,7 +7,7 @@ public interface IResultsDAO {
      void getResultsByQuestion(int questionId, int correct);
 
      void getResultsByQuiz(int quizId);
-     void addQuizResult(Student student, Quiz quiz, int grade);
+     void addQuizResult(int studentID, int quizID, int grade);
 
 
 
