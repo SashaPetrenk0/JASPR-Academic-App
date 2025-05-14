@@ -10,12 +10,10 @@ import org.jaspr.hr.demo.Admin;
 import org.jaspr.hr.demo.Parent;
 import org.jaspr.hr.demo.Student;
 import org.jaspr.hr.demo.Teacher;
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
-import java.sql.*;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
 
 
 public class QuestionTests {
