@@ -125,7 +125,7 @@ public class ProfileController {
         idLabel.setText(Integer.toString(identification));
         emailLabel.setText(admin.getEmail());
 
-        nameLabel1.setText(admin.getName());
+        nameLabel1.setText("Welcome, " + admin.getName() + "!");
     }
 
     @FXML
