@@ -48,7 +48,7 @@
                         </Label>
                         <ImageView fitHeight="22.0" fitWidth="23.0" opacity="0.22" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@../../../../images_2/search.png" />
+<!--                                <Image url="@../../../../images_2/search.png" />-->
                             </image>
                             <HBox.margin>
                                 <Insets right="10.0" />
