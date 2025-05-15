@@ -5,10 +5,28 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jaspr.hr.demo.StudentViewResultsController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.jaspr.hr.demo.StudentViewResultsController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
 
-</AnchorPane>
+    <Label text="Your Quizzes"/>
+    <ComboBox fx:id="resultDropdown" onAction="#onQuizSelected" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+    </ComboBox>
+
+
+
+
+
+
+
+
+
+</VBox>
+
