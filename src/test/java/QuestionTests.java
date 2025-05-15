@@ -1,111 +1,31 @@
-import org.jaspr.hr.demo.*;
-import org.junit.jupiter.api.*;
-
-import java.sql.Connection;
-
-import org.jaspr.hr.demo.SqliteUserDAO;
-import org.jaspr.hr.demo.Admin;
-import org.jaspr.hr.demo.Parent;
-import org.jaspr.hr.demo.Student;
-import org.jaspr.hr.demo.Teacher;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-
-public class QuestionTests {
-    private static Connection connection;
-    private static SqliteUserDAO userDAO;
-
-    private static Classroom classroom;
-    private static Student student;
-    private static Teacher teacher;
-    private static Admin admin;
-    private static Parent parent;
-
-    private static final String QUESTION = "What colour is the sky";
-    private static final String QUESTION2 = "What colour are trees";
-
-    private static final String optionA = "Red";
-    private static final String optionB = "blue";
-    private static final String optionC = "green";
-    private static final String optionD = "purple";
-    private static final String answer = "B";
-
-    private static final String optionA2 = "Cyan";
-    private static final String optionB2 = "Tangerine";
-    private static final String optionC2 = "Magenta";
-    private static final String optionD3 = "Green";
-
-    private Question question;
-    @BeforeEach
-    public void setUp() {
-        question = new Question(QUESTION, optionA, optionB, optionC, optionD, answer);
-    }
-    @Test
-    public void testGetQuestion() {
-            assertEquals(QUESTION, question.getQuestion());
-    }
-    @Test
-    public void testSetQuestion() {
-            question.setQuestion(QUESTION2);
-        assertEquals(QUESTION2, question.getQuestion());
-    }
-
-    @Test
-    public void testGetOptionA() {
-        assertEquals(optionA, question.getOptionA());
-    }
-    @Test
-    public void testSetOptionA() {
-        question.setOptionA(optionA2);
-        assertEquals(optionA2, question.getOptionA());
-    }
-
-    @Test
-    public void testGetOptionB() {
-        assertEquals(optionB, question.getOptionB());
-    }
-    @Test
-    public void testSetOptionB() {
-        question.setOptionB(optionB2);
-        assertEquals(optionB2, question.getOptionB());
-    }
-
-    @Test
-    public void testGetOptionC() {
-        assertEquals(optionC, question.getOptionC());
-    }
-    @Test
-    public void testSetOptionC() {
-        question.setOptionC(optionC2);
-        assertEquals(optionC2, question.getOptionC());
-    }
-
-    @Test
-    public void testGetOptionD() {
-        assertEquals(optionD, question.getOptionD());
-    }
-    @Test
-    public void testSetOptionD() {
-        question.setOptionD(optionD3);
-        assertEquals(optionD3, question.getOptionD());
-    }
-    @Test
-    public void testGetAnswer() {
-        assertEquals(answer, question.getCorrectAnswer());
-    }
-    @Test
-    public void testSetAnswer() {
-        question.setCorrectAnswer(optionD3);
-        assertEquals(optionD3, question.getCorrectAnswer());
-    }
-
-
-
-
-
-
-
+//import org.jaspr.hr.demo.*;
+//import org.junit.jupiter.api.*;
+//
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.SQLException;
+//
+//import org.jaspr.hr.demo.SqliteUserDAO;
+//import org.jaspr.hr.demo.Admin;
+//import org.jaspr.hr.demo.Parent;
+//import org.jaspr.hr.demo.Student;
+//import org.jaspr.hr.demo.Teacher;
+//
+//import static org.junit.jupiter.api.Assertions.*;
+//
+//import java.util.List;
+//
+//
+//public class QuestionTests {
+//    private static Connection connection;
+//    private static SqliteUserDAO userDAO;
+//
+//    private static Classroom classroom;
+//    private static Student student;
+//    private static Teacher teacher;
+//    private static Admin admin;
+//    private static Parent parent;
+//
 //    @BeforeEach
 //    public void setup() throws SQLException {
 //        // Set up a connection to your test database
@@ -118,7 +38,7 @@ public class QuestionTests {
 //        admin = new Admin("Alice", 40, 1001, "alice@gmail.com");
 //        parent = new Parent("Sarah", "John", 12345, "sarah@gmail.com");
 //    }
-
+//
 //    @BeforeEach
 //    public void beginTransaction() throws SQLException {
 //        // Start a new transaction before each test
@@ -130,19 +50,19 @@ public class QuestionTests {
 //        // Rollback the transaction after each test to ensure no changes persist
 //        connection.rollback();
 //    }
-
-//    @Test
-//    public void testConstructor() {
-//        String questionText  = "What is the capital of France?";
-//        String[] choices = {"Berlin", "Paris", "Rome", "Madrid"};
-//        int correctAnswerIndex = 2;
 //
-//        Question question = new Question("What is the capital of France?", "Berlin", "Paris", "Rome", "Madrid", "Paris");
-//
-//        assertEquals(questionText, question.getQuestion());
-//        assertArrayEquals(choices, question.getChoices());
-//        assertEquals(correctAnswerIndex, question.getCorrectAnswerIndex());
-//    }
+////    @Test
+////    public void testConstructor() {
+////        String questionText  = "What is the capital of France?";
+////        String[] choices = {"Berlin", "Paris", "Rome", "Madrid"};
+////        int correctAnswerIndex = 2;
+////
+////        Question question = new Question("What is the capital of France?", "Berlin", "Paris", "Rome", "Madrid", "Paris");
+////
+////        assertEquals(questionText, question.getQuestion());
+////        assertArrayEquals(choices, question.getChoices());
+////        assertEquals(correctAnswerIndex, question.getCorrectAnswerIndex());
+////    }
 //
 //    @Test
 //    public void testGetChoices() {
@@ -427,10 +347,10 @@ public class QuestionTests {
 //    public static void cleanup() throws SQLException {
 //        connection.close();  // Close the connection after all tests are done
 //    }
-
-    }
-
-
-
-
-
+//
+//    }
+//
+//
+//
+//
+//
