@@ -68,13 +68,13 @@ public class SqliteResultsDAO implements IResultsDAO {
 
     }
     @Override
-    public void addQuizResult(int studentID, int quizID, int grade) {
+    public void addQuizResult(int quizID, int studentID, int grade) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO quizResults (quiz_id, student_id, grade)" +
-                    "VALUES (?,?, ?)");
+                    "VALUES (?,?,?)");
             statement.setInt(1, quizID);
-            statement.setInt(1, studentID);
-            statement.setInt(1, grade);
+            statement.setInt(2, studentID);
+            statement.setInt(3, grade);
 
             statement.executeUpdate();
         } catch (Exception e) {
