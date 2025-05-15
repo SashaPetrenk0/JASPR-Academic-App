@@ -105,6 +105,8 @@ public class StudentDashboardController {
 
                 controller.loadTitle(title);
                 controller.setQuestions(questions);
+                System.out.print(studentID);
+                System.out.print("quiz id" + quizID);
                 controller.getInfo(studentID,quizID);
 
                 Stage stage = new Stage();
