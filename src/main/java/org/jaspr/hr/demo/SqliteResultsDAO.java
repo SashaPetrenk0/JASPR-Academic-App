@@ -2,6 +2,7 @@ package org.jaspr.hr.demo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class SqliteResultsDAO implements IResultsDAO {
@@ -89,7 +90,25 @@ public class SqliteResultsDAO implements IResultsDAO {
     }
 
     @Override
-    public void getResultsByQuiz(int quizId) {
+    public void getResultsByQuiz(int studentID) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT quiz_id, grade FROM quizResults WHERE student_id = ?");
+            statement.setInt(1, studentID);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+
+                        //need to make a better query that gets the quiz name from the thing
+                        resultSet.getString("quiz_id"),
+                        resultSet.getInt("grade");
+
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
     }
 }
