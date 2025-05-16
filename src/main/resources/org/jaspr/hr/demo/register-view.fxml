@@ -32,7 +32,7 @@
                 <Circle fill="#86c5ff80" layoutX="-107.0" layoutY="617.0" radius="173.0" translateX="40.0" translateY="-30.0" />
             </Pane>
 
-            <ScrollPane fx:id="content_Scroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="590.0" prefHeight="590.0" prefViewportHeight="580.0" prefViewportWidth="800.0" prefWidth="760.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
+            <ScrollPane fx:id="content_Scroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="590.0" prefHeight="590.0" prefViewportHeight="600.0" prefViewportWidth="800.0" prefWidth="760.0" style="-fx-background-color: transparent; -fx-background: transparent;" vbarPolicy="NEVER">
 
                 <content>
                     <!-- Foreground content -->
@@ -99,6 +99,9 @@
 
                                 <!-- Submit Button -->
                                 <Button fx:id="submitButtonStudent" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold';                    -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                        <VBox.margin>
+                           <Insets bottom="10.0" />
+                        </VBox.margin>
                             </HBox>
                         </VBox>
 
@@ -144,6 +147,9 @@
 
                                 <!-- Submit Button -->
                                 <Button fx:id="submitButtonTeacher" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-margin: 0 0 20 0; -fx-font-family: 'Telugu Sangam MN Bold';                    -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                        <VBox.margin>
+                           <Insets bottom="10.0" />
+                        </VBox.margin>
                             </HBox>
                         </VBox>
 
