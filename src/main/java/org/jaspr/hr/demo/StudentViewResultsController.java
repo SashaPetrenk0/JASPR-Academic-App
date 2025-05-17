@@ -23,6 +23,13 @@ public class StudentViewResultsController {
 
     @FXML
     private ComboBox resultDropdown;
+    @FXML
+    private VBox allResultsBox;
+
+    @FXML
+    private VBox specificResultsBox;
+
+
     Student student = (Student) user;
 
 

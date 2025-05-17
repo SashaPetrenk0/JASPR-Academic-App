@@ -20,6 +20,16 @@
         </VBox.margin>
     </ComboBox>
 
+    <VBox fx:id="allResultsBox" >
+
+
+    </VBox>
+
+    <VBox fx:id="specificResultsBox" >
+
+
+    </VBox>
+
 
 
 
