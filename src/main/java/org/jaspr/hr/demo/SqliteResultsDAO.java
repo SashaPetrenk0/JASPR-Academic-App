@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SqliteResultsDAO implements IResultsDAO {
     private Connection connection;
@@ -90,23 +94,26 @@ public class SqliteResultsDAO implements IResultsDAO {
     }
 
     @Override
-    public void getResultsByQuiz(int studentID) {
+    public List<Map<String, Integer>> getResultsByQuiz(int studentID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT quiz_id, grade FROM quizResults WHERE student_id = ?");
             statement.setInt(1, studentID);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
+            List<Map<String, Integer>> results = new ArrayList<>();
 
-                        //need to make a better query that gets the quiz name from the thing
-                        resultSet.getString("quiz_id"),
-                        resultSet.getInt("grade");
-
-
-
+            while (resultSet.next()) {
+                Map<String, Integer> result = new HashMap<>();
+                result.put("quiz_id", resultSet.getInt("quiz_id"));
+                result.put("grade", resultSet.getInt("grade"));
+                results.add(result);
             }
+
+            return results;  // or return results;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
 
 
 
