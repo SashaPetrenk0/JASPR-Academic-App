@@ -21,8 +21,7 @@
     </ComboBox>
 
     <VBox fx:id="allResultsBox" >
-
-
+        <ListView fx:id="allResults"/>
     </VBox>
 
     <VBox fx:id="specificResultsBox" >

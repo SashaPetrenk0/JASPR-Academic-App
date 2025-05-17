@@ -29,6 +29,8 @@ public class StudentViewResultsController {
     @FXML
     private VBox specificResultsBox;
 
+    @FXML
+    private ListView allResults;
 
     Student student = (Student) user;
 
@@ -65,6 +67,7 @@ public class StudentViewResultsController {
         if (quiz == "All quizzes"){
             showOnlyResults(allResultsBox);
             List<Map<String, Integer>> quizResults = resultsDAO.getResultsByQuiz(student.getStudentID());
+            allResults.setItems(FXCollections.observableArrayList(quizResults));
         }
         else{
             showOnlyResults(specificResultsBox);
