@@ -24,8 +24,9 @@ public class QuizTest {
 
     @BeforeEach
     public void setUp() {
-        quiz = new Quiz(QUIZ_TITLE, DESC,TOPIC,NUMOFQUESTIONS,AUTHOR);
-        quizTwo = new Quiz(QUIZ_TITLE_TWO,DESC_TWO,TOPIC_TWO,NUMOFQUESTIONSTWO,AUTHOR_TWO);
+        quiz = new Quiz(1,QUIZ_TITLE,DESC,TOPIC,NUMOFQUESTIONS,AUTHOR);
+
+        // quizTwo = new Quiz(QUIZ_TITLE_TWO,DESC_TWO,TOPIC_TWO,NUMOFQUESTIONSTWO,AUTHOR_TWO);
     }
 
 

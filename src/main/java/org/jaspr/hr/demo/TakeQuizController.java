@@ -43,6 +43,11 @@ public class TakeQuizController {
     int correctAnswerCount = 0;
     int incorrectAnswerCount = 0;
     int questionIndex = 0;
+    private int studentId;
+    private int quizId;
+
+
+    private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
     @FXML
     public void loadTitle(String title){
@@ -57,6 +62,15 @@ public class TakeQuizController {
         loadQuestion();
 
     }
+
+    @FXML
+    public void getInfo(int student, int quiz_id){
+        this.studentId = student;
+        this.quizId = quiz_id;
+
+    }
+
+
 
 
 
@@ -87,6 +101,11 @@ public class TakeQuizController {
             System.out.println("Quiz finished!");
             System.out.println("correct" + correctAnswerCount);
             System.out.println("incorrect" + incorrectAnswerCount);
+            int grade = correctAnswerCount/questions.length;
+            questionLabel.setText("Quiz FInished! You scored"+ correctAnswerCount + "/"+questions.length);
+
+            resultsDAO.addQuizResult(studentId, quizId, grade);
+
         }
     }
 
