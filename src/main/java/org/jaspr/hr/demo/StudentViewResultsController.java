@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +38,11 @@ public class StudentViewResultsController {
     @FXML
     private PieChart pieChart;
 
+    @FXML
+    private ListView questionResults;
     Student student = (Student) user;
 
-
+    private Map<String, Quiz> quizTitleToQuizMap;
 
     public void initialize(){
         if ("Student".equals(role) && user instanceof Student) {
@@ -48,11 +51,17 @@ public class StudentViewResultsController {
             List<Quiz> assignedQuizzes = quizDAO.getQuizzesForStudent(student.getStudentID());
             List<String> quizTitles = new ArrayList<>();
             quizTitles.add("All quizzes");
+            quizTitleToQuizMap = new HashMap<>();
             for (Quiz quiz : assignedQuizzes) {
-                quizTitles.add(quiz.getTitle() + "-assigned by teacher");
+                String title = quiz.getTitle() + " - assigned by teacher";
+                quizTitles.add(title);
+                quizTitleToQuizMap.put(title, quiz);
             }
+
             for (Quiz quiz : userCreatedQuizzes) {
-                quizTitles.add(quiz.getTitle() + "-created by you");
+                String title = quiz.getTitle() + " - created by you";
+                quizTitles.add(title);
+                quizTitleToQuizMap.put(title, quiz);
             }
 
             resultDropdown.setItems(FXCollections.observableArrayList(quizTitles));
@@ -76,14 +85,22 @@ public class StudentViewResultsController {
         }
         else{
             showOnlyResults(specificResultsBox);
-            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                    new PieChart.Data("Correct", 30),
-                    new PieChart.Data("Incorrect", 70)
 
-            );
+            if(quizTitleToQuizMap.containsKey(quiz)){
+                Quiz selectedQuiz = quizTitleToQuizMap.get(quiz);
+                int quizID = selectedQuiz.getId();
+                questionResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuestion(quizID, student.getStudentID())));
+                ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                        new PieChart.Data("Correct", 30),
+                        new PieChart.Data("Incorrect", 70)
 
-            pieChart.setData(pieChartData);
-            pieChart.setTitle("Percentage of correct answers");
+                );
+
+                pieChart.setData(pieChartData);
+                pieChart.setTitle("Percentage of correct answers");
+
+            }
+
         }
     }
 
