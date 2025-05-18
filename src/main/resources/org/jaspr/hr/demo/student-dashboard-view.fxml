@@ -5,43 +5,116 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.StudentDashboardController">
+<VBox alignment="CENTER" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.StudentDashboardController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <HBox alignment="CENTER">
+   <StackPane alignment="TOP_LEFT" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
       <children>
-         <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi" />
+         <Pane maxHeight="46.0" maxWidth="760.0" prefHeight="46.0" prefWidth="760.0">
+            <children>
+               <Circle fill="#d7909080" layoutX="34.0" layoutY="29.0" radius="96.0" translateX="-20.0" translateY="10.0" />
+               <Circle fill="#ffb74d80" layoutX="689.0" layoutY="107.0" radius="84.0" translateX="80.0" translateY="-100.0" />
+               <Circle fill="#ffd34f5f" layoutX="659.0" layoutY="94.0" radius="47.0" translateX="40.0" translateY="-30.0" />
+               <Circle fill="#a8dadc80" layoutX="66.0" layoutY="530.0" radius="54.0" translateX="40.0" translateY="-30.0" />
+               <Circle fill="#86c5ff80" layoutX="-19.0" layoutY="529.0" radius="85.0" translateX="40.0" translateY="-30.0" />
+            </children>
+         </Pane>
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <children>
+               <HBox alignment="TOP_CENTER" prefHeight="60.0">
+                  <VBox.margin>
+                     <Insets bottom="10.0" top="10.0" />
+                  </VBox.margin>
+                  <children>
+                     <Label alignment="TOP_CENTER" style="-fx-font-size: 24px;" text="Student Dashboard">
+                        <HBox.margin>
+                           <Insets top="10.0" />
+                        </HBox.margin>
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER">
+                  <children>
+                     <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi">
+                        <HBox.margin>
+                           <Insets bottom="30.0" />
+                        </HBox.margin>
+                     </Label>
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER" maxWidth="600.0" prefHeight="100.0" prefWidth="200.0">
+                  <children>
+                     <VBox alignment="CENTER" minHeight="300.0" spacing="20.0">
+                        <padding>
+                           <Insets right="20.0" />
+                        </padding>
+                        <children>
+                           <Button fx:id="profileButton" maxHeight="-Infinity" minHeight="-Infinity" onAction="#onProfileClick" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="View Profile">
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                              <VBox.margin>
+                                 <Insets top="9.0" />
+                              </VBox.margin>
+                           </Button>
+                           <Button fx:id="createQuiz" maxWidth="Infinity" minHeight="35.0" onAction="#onAdd" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Create Quiz">
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                           </Button>
+                            <Button fx:id="takeQuiz" maxWidth="500.0" minHeight="35.0" onAction="#onTakeQuiz" prefWidth="150.0" style="-fx-background-color: #C1F3B9; -fx-background-radius: 100;" text="Take Quiz">
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                           </Button>
+                           <Button fx:id="viewAnalytics" maxWidth="500.0" minHeight="35.0" prefWidth="150.0" style="-fx-background-color: #C1F3B9; -fx-background-radius: 100;" text="View Analytics">
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                           </Button>
+                           <Button fx:id="logoutButton" minHeight="35.0" onAction="#onLogoutClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Logout">
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                           </Button>
+                        </children>
+                     </VBox>
+                     <VBox alignment="CENTER" minWidth="400.0">
+                        <children>
+
+                                                          <VBox alignment="CENTER" prefWidth="237.5" spacing="10">
+                                <Label text="My Quizzes" />
+                                <ListView fx:id="createdQuizzesLists">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </ListView>
+
+                                                          </VBox>
+
+                                                          <VBox alignment="CENTER" prefWidth="237.5" spacing="10">
+                                <Label text="Assigned Quizzes" />
+                                <ListView fx:id="assignedQuizzesList">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </ListView>
+
+                                                          </VBox>
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+               <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" />
+            </children>
+         </VBox>
       </children>
-   </HBox>
-
-                <HBox alignment="CENTER">
-        <Button fx:id="profileButton" alignment="CENTER" contentDisplay="CENTER" onAction="#onProfileClick" text="View Profile" />
-
-                </HBox>
-
-    <Label text="student view" />
-
-    <Button fx:id="createQuiz" maxWidth="-Infinity" onAction="#onAdd" prefWidth="500.0" text="Create Quiz" />
-    <Button fx:id="takeQuiz" maxWidth="500.0" onAction="#onTakeQuiz" prefWidth="500.0" text="Take Quiz" />
-   <HBox alignment="CENTER" maxWidth="500.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
-      <children>
-      
-          <VBox alignment="CENTER" prefWidth="237.5" spacing="10">
-              <Label text="My Quizzes" />
-              <ListView fx:id="createdQuizzesLists" />
-      
-          </VBox>
-      
-          <VBox alignment="CENTER" prefWidth="237.5" spacing="10">
-              <Label text="Assigned Quizzes" />
-              <ListView fx:id="assignedQuizzesList" />
-      
-          </VBox>
-      </children>
-   </HBox>
-
-    <Button fx:id="logoutButton" onAction="#onLogoutClicked" text="Logout" />
+   </StackPane>
 </VBox>
