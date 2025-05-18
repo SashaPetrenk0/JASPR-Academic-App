@@ -20,22 +20,22 @@ public class TeacherDashboardController {
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
     @FXML
-    private Button profileButton;
+    private ButtonBar profileButton;
 
     @FXML
     private Label personalisedGreeting;
 
     @FXML
-    private Button createQuiz;
+    private ButtonBar createQuiz;
 
     @FXML
     private ListView quizLists;
 
     @FXML
-    private Button logoutButton;
+    private ButtonBar logoutButton;
 
     @FXML
-    private Button assignQuizzes;
+    private ButtonBar assignQuizzes;
 
 
 

@@ -7,17 +7,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" minWidth="700.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.StudentDashboardController">
+<VBox alignment="CENTER" prefWidth="700.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.StudentDashboardController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <HBox>
-      <children>
-         <Label fx:id="personalisedGreeting1" style="-fx-font-size: 18px;" text="Hi" />
-      </children>
-   </HBox>
 
     <HBox>
+        <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi" />
         <Button fx:id="profileButton" onAction="#onProfileClick" text="View Profile" />
 
     </HBox>
