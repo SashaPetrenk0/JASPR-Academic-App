@@ -161,4 +161,34 @@ public class SqliteResultsDAO implements IResultsDAO {
 
 
     }
+
+    public Map<Integer, Double> getQuestionAccuracyForQuiz(int quizId, int classroomId) {
+        Map<Integer, Double> accuracyMap = new HashMap<>();
+        try {
+            String query = """
+            SELECT qr.question_id,
+                   SUM(CASE WHEN qr.grade = 1 THEN 1 ELSE 0 END) * 1.0 / COUNT(*) * 100 AS percent_correct
+            FROM questionResults qr
+            JOIN studentClassroom cs ON cs.studentId = qr.student_id
+            WHERE qr.quiz_id = ? AND cs.classroom_number = ?
+            GROUP BY qr.question_id
+        """;
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, quizId);
+            statement.setInt(2, classroomId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int questionId = resultSet.getInt("question_id");
+                double percentCorrect = resultSet.getDouble("percent_correct");
+                accuracyMap.put(questionId, percentCorrect);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return accuracyMap;
+    }
+
 }
