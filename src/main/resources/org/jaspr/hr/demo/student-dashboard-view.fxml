@@ -7,33 +7,41 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefWidth="700.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.StudentDashboardController">
+<VBox alignment="CENTER" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.StudentDashboardController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <HBox alignment="CENTER">
+      <children>
+         <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi" />
+      </children>
+   </HBox>
 
-    <HBox>
-        <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi" />
-        <Button fx:id="profileButton" onAction="#onProfileClick" text="View Profile" />
+                <HBox alignment="CENTER">
+        <Button fx:id="profileButton" alignment="CENTER" contentDisplay="CENTER" onAction="#onProfileClick" text="View Profile" />
 
-    </HBox>
+                </HBox>
 
     <Label text="student view" />
 
-    <Button fx:id="createQuiz" maxWidth="Infinity" onAction="#onAdd" text="Create Quiz" />
-    <Button fx:id="takeQuiz" maxWidth="Infinity" onAction="#onTakeQuiz" text="Take Quiz" />
-
-    <VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml">
-        <Label text="My Quizzes" />
-        <ListView fx:id="createdQuizzesLists" />
-
-    </VBox>
-
-    <VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml">
-        <Label text="Assigned Quizzes" />
-        <ListView fx:id="assignedQuizzesList" />
-
-    </VBox>
+    <Button fx:id="createQuiz" maxWidth="-Infinity" onAction="#onAdd" prefWidth="500.0" text="Create Quiz" />
+    <Button fx:id="takeQuiz" maxWidth="500.0" onAction="#onTakeQuiz" prefWidth="500.0" text="Take Quiz" />
+   <HBox alignment="CENTER" maxWidth="500.0" prefHeight="100.0" prefWidth="200.0" spacing="25.0">
+      <children>
+      
+          <VBox alignment="CENTER" prefWidth="237.5" spacing="10">
+              <Label text="My Quizzes" />
+              <ListView fx:id="createdQuizzesLists" />
+      
+          </VBox>
+      
+          <VBox alignment="CENTER" prefWidth="237.5" spacing="10">
+              <Label text="Assigned Quizzes" />
+              <ListView fx:id="assignedQuizzesList" />
+      
+          </VBox>
+      </children>
+   </HBox>
 
     <Button fx:id="logoutButton" onAction="#onLogoutClicked" text="Logout" />
 </VBox>
