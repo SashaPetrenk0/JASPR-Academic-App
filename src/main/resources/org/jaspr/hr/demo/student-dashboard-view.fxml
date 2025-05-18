@@ -69,11 +69,6 @@
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Button>
-                            <Button fx:id="takeQuiz" maxWidth="500.0" minHeight="35.0" onAction="#onTakeQuiz" prefWidth="150.0" style="-fx-background-color: #C1F3B9; -fx-background-radius: 100;" text="Take Quiz">
-                              <font>
-                                 <Font name="System Bold" size="12.0" />
-                              </font>
-                           </Button>
                            <Button fx:id="viewAnalytics" maxWidth="500.0" minHeight="35.0" prefWidth="150.0" style="-fx-background-color: #C1F3B9; -fx-background-radius: 100;" text="View Analytics">
                               <font>
                                  <Font name="System Bold" size="12.0" />
