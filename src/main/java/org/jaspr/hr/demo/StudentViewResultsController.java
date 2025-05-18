@@ -65,13 +65,10 @@ public class StudentViewResultsController {
         if (quiz.equals("All quizzes")){
             System.out.print("hello");
             showOnlyResults(allResultsBox);
-            List<Map<String, Integer>> quizResults = resultsDAO.getResultsByQuiz(student.getStudentID());
 
-            for (Map<String, Integer> quizResult : quizResults) {
-                    System.out.print(quizResult);
-            }
-            //TODO: this is displaying empty
-            allResults.setItems(FXCollections.observableArrayList(quizResults));
+            allResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuiz(student.getStudentID())));
+            //allResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuiz(20)));
+
         }
         else{
             showOnlyResults(specificResultsBox);

@@ -95,6 +95,7 @@ public class SqliteResultsDAO implements IResultsDAO {
 
     @Override
     public List<Map<String, Integer>> getResultsByQuiz(int studentID) {
+        System.out.print("method calles");
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT quiz_id, grade FROM quizResults WHERE student_id = ?");
             statement.setInt(1, studentID);
@@ -108,7 +109,8 @@ public class SqliteResultsDAO implements IResultsDAO {
                 results.add(result);
             }
 
-            return results;  // or return results;
+            System.out.print(results);
+            return results;
 
         } catch (Exception e) {
             e.printStackTrace();
