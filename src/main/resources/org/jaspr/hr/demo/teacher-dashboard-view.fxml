@@ -15,8 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml"
-           fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
+<StackPane maxWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
     <children>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
