@@ -98,9 +98,11 @@ public class TakeQuizController {
     @FXML
     private boolean checkAnswer(String answer){
         String correctAnswer = questions[questionIndex].getCorrectAnswer();
+        System.out.println("x "+questions[questionIndex].getId());
 
         if (answer.equals(correctAnswer)){
             System.out.println("correct");
+
             resultsDAO.addQuestionResult( quizId, questions[questionIndex].getId(), student.getStudentID(), 1 );
             return true;
 

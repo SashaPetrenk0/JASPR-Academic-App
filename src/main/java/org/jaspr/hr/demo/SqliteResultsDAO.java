@@ -62,9 +62,9 @@ public class SqliteResultsDAO implements IResultsDAO {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO questionResults (quiz_id, question_id, student_id, grade)" +
                     "VALUES (?,?, ?, ?)");
             statement.setInt(1, quizID );
-            statement.setInt(1, questionID);
-            statement.setInt(1, studentID);
-            statement.setInt(1, grade);
+            statement.setInt(2, questionID);
+            statement.setInt(3, studentID);
+            statement.setInt(4, grade);
 
             statement.executeUpdate();
         } catch (Exception e) {
