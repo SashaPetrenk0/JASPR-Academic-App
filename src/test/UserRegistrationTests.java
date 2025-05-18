@@ -1,0 +1,2 @@
+public class UserRegistrationTests {
+}

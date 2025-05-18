@@ -27,6 +27,9 @@ import java.util.stream.Collectors;
 public class QuizAssignmentDetailsController {
 
     @FXML
+    public Button assignButton;
+
+    @FXML
     private ListView<CheckBox> classroomListView;
 
     @FXML
