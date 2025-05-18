@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 
 import java.io.IOException;
+import java.util.List;
 
 
 public class TeacherDashboardController {
@@ -36,14 +37,11 @@ public class TeacherDashboardController {
     @FXML
     private Button assignQuizzes;
 
+
+
     @FXML
     public void initialize() {
-        if ("Teacher".equals(role) && user instanceof Teacher){
-            Teacher teacher = (Teacher) user;
-            quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(teacher)));
-            personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
-            System.out.println(teacher.getName() + teacher.getTeacherID());
-        }
+
     }
 
     private Object currentUser;
@@ -54,6 +52,31 @@ public class TeacherDashboardController {
             Teacher teacher = (Teacher) user;
         }
     }
+
+    //TODO: wherever the quiz list actually is, call this to set the list.
+    public void setQuizList(){
+        if ("Teacher".equals(role) && user instanceof Teacher){
+            Teacher teacher = (Teacher) user;
+            quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(teacher)));
+
+            quizLists.setCellFactory(listView -> new ListCell<String>() {
+                protected void updateItem(String quiz, boolean empty) {
+                    super.updateItem(quiz, empty);
+                    if (empty || quiz == null) {
+                        setText(null);
+                    } else {
+                        setText(quiz);
+                    }
+                }
+            });
+
+            personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
+            System.out.println(teacher.getName() + teacher.getTeacherID());
+        }
+    }
+
+
+
     @FXML
     public void onProfileClick() throws IOException {
         Stage stage = (Stage) profileButton.getScene().getWindow();
@@ -105,6 +128,16 @@ public class TeacherDashboardController {
         stage.setScene(new Scene(root));
     }
 
+    private static class MyListCell extends ListCell<Object> {
+        protected void updateItem(Quiz quiz, boolean empty) {
+            super.updateItem(quiz, empty);
+            if (empty || quiz == null) {
+                setText(null);
+            } else {
+                setText(quiz.getTitle());
+            }
+        }
+    }
 }
 
 
