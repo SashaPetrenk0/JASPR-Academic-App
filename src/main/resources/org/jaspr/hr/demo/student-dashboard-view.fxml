@@ -56,7 +56,7 @@
                            <Insets right="20.0" />
                         </padding>
                         <children>
-                           <Button fx:id="profileButton1" maxHeight="-Infinity" minHeight="-Infinity" onAction="#onProfileClick" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="View Profile">
+                           <Button fx:id="profileButton" maxHeight="-Infinity" minHeight="-Infinity" onAction="#onProfileClick" prefHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="View Profile">
                               <font>
                                  <Font name="System Bold" size="12.0" />
                               </font>
@@ -64,7 +64,7 @@
                                  <Insets top="9.0" />
                               </VBox.margin>
                            </Button>
-                           <Button fx:id="createQuiz1" maxWidth="Infinity" minHeight="35.0" onAction="#onAdd" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Create Quiz">
+                           <Button fx:id="createQuiz" maxWidth="Infinity" minHeight="35.0" onAction="#onAdd" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Create Quiz">
                               <font>
                                  <Font name="System Bold" size="12.0" />
                               </font>
@@ -74,12 +74,12 @@
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Button>
-                           <Button fx:id="takeQuiz1" maxWidth="500.0" minHeight="35.0" onAction="#onTakeQuiz" prefWidth="150.0" style="-fx-background-color: #C1F3B9; -fx-background-radius: 100;" text="View Analytics">
+                           <Button fx:id="viewAnalytics" maxWidth="500.0" minHeight="35.0" prefWidth="150.0" style="-fx-background-color: #C1F3B9; -fx-background-radius: 100;" text="View Analytics">
                               <font>
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Button>
-                           <Button fx:id="logoutButton1" minHeight="35.0" onAction="#onLogoutClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Logout">
+                           <Button fx:id="logoutButton" minHeight="35.0" onAction="#onLogoutClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Logout">
                               <font>
                                  <Font name="System Bold" size="12.0" />
                               </font>
