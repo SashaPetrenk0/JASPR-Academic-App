@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.chart.PieChart?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.jaspr.hr.demo.StudentViewResultsController">
     <padding>
@@ -25,6 +26,15 @@
     </VBox>
 
     <VBox fx:id="specificResultsBox" >
+        <Label text="Viewing question breakdown"/>
+        <VBox>
+            <Label text="pie chart" />
+            <PieChart fx:id="pieChart" layoutX="50" layoutY="50" prefHeight="400" prefWidth="400"/>
+
+        </VBox>
+        <VBox>
+            <Label text="list of the questions and the result "/>
+        </VBox>
 
 
     </VBox>

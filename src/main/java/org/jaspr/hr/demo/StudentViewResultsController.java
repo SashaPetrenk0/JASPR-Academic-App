@@ -1,8 +1,10 @@
 package org.jaspr.hr.demo;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -31,6 +33,9 @@ public class StudentViewResultsController {
 
     @FXML
     private ListView allResults;
+
+    @FXML
+    private PieChart pieChart;
 
     Student student = (Student) user;
 
@@ -71,6 +76,14 @@ public class StudentViewResultsController {
         }
         else{
             showOnlyResults(specificResultsBox);
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                    new PieChart.Data("Correct", 30),
+                    new PieChart.Data("Incorrect", 70)
+
+            );
+
+            pieChart.setData(pieChartData);
+            pieChart.setTitle("Percentage of correct answers");
         }
     }
 
