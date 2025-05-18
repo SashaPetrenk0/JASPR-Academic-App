@@ -67,7 +67,6 @@ public class StudentViewResultsController {
             showOnlyResults(allResultsBox);
 
             allResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuiz(student.getStudentID())));
-            //allResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuiz(20)));
 
         }
         else{
