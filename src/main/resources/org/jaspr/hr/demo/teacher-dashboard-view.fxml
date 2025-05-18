@@ -15,7 +15,8 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
     <children>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
@@ -147,7 +148,7 @@
                                                 <Image url="@../../../../images/ideas.png" />
                                             </image>
                                         </ImageView>
-                                        <Label id="assign-quizzes" onMouseClicked="#onAssignedQuizzesClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Quizzes" textFill="#0000007e">
+                                        <Label id="assign-quizzes" onMouseClicked="#onAssignQuizzesClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Quizzes" textFill="#0000007e">
                                             <font>
                                                 <Font size="24.0" />
                                             </font>
