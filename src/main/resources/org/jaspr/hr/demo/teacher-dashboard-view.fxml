@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
+<StackPane maxWidth="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
     <children>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <children>
@@ -191,7 +191,7 @@
                                         <Insets left="40.0" />
                                     </padding>
                                 </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                                <HBox fx:id="profileButton" alignment="CENTER_LEFT" onMouseClicked="#onProfileClick" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
                                     <children>
                                         <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
                                             <image>
