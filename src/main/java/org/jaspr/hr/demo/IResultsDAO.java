@@ -9,7 +9,7 @@ public interface IResultsDAO {
      List<Map<String, Integer>> getResultsByQuestion(int questionId, int correct);
 
      List<Map<String, Integer>> getResultsByQuiz(int quizId);
-     void addQuizResult(int studentID, int quizID, int grade);
+     void addQuizResult(int studentID, int quizID, double grade);
 
 
 

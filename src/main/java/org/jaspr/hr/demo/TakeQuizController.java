@@ -82,7 +82,7 @@ public class TakeQuizController {
             System.out.println("Quiz finished!");
             System.out.println("correct" + correctAnswerCount);
             System.out.println("incorrect" + incorrectAnswerCount);
-            int grade = correctAnswerCount/questions.length;
+            double grade = ((double) correctAnswerCount / questions.length) * 100;
             questionLabel.setText("Quiz FInished! You scored"+ correctAnswerCount + "/"+questions.length);
             System.out.print(studentId);
             System.out.print(quizId);
