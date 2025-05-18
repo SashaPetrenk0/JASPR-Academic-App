@@ -33,7 +33,8 @@
 
         </VBox>
         <VBox>
-            <Label text="list of the questions and the result "/>
+            <Label text="Question breakdown"/>
+            <ListView fx:id="questionResults"/>
         </VBox>
 
 
