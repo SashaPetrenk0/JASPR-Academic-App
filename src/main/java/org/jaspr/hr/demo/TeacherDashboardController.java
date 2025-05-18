@@ -105,6 +105,21 @@ public class TeacherDashboardController {
         stage.setScene(new Scene(root));
     }
 
+    @FXML
+    private void onAnalytics() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/teacher-view-results.fxml"));
+        Parent root = loader.load();
+
+        TeacherViewResultsController controller = loader.getController();
+        if (user instanceof Teacher) {
+            controller.setTeacher((Teacher) user);
+        }
+
+        Stage stage = (Stage) assignQuizzes.getScene().getWindow();
+        stage.setScene(new Scene(root));
+
+    }
+
 }
 
 
