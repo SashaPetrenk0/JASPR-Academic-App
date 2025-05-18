@@ -113,6 +113,26 @@ public class SqliteResultsDAO implements IResultsDAO {
         return null;
 
     }
+    public Integer getGrade (int quizID, int studentID) {
+      
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT grade FROM quizResults WHERE quiz_id = ? AND student_id = ? ORDER BY quiz_result_id DESC LIMIT 1;");
+            statement.setInt(1, quizID);
+            statement.setInt(2, studentID);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("grade");
+            } else {
+                return null; // No grade found
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      return null;
+        
+    }
 
     @Override
     public List<Map<String, Integer>> getResultsByQuiz(int studentID) {

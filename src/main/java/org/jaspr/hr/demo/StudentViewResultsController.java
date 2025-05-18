@@ -90,9 +90,10 @@ public class StudentViewResultsController {
                 Quiz selectedQuiz = quizTitleToQuizMap.get(quiz);
                 int quizID = selectedQuiz.getId();
                 questionResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuestion(quizID, student.getStudentID())));
+                int grade = resultsDAO.getGrade(quizID, student.getStudentID());
                 ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                        new PieChart.Data("Correct", 30),
-                        new PieChart.Data("Incorrect", 70)
+                        new PieChart.Data("Correct", grade ),
+                        new PieChart.Data("Incorrect", 100-grade)
 
                 );
 
