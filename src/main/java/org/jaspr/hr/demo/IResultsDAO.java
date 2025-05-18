@@ -4,7 +4,7 @@ import java.util.*;
 
 public interface IResultsDAO {
 
-     void addQuestionResult(Student student, Quiz quiz, Question question,  int correct);
+     void addQuestionResult( int quiz, int question, int student, int correct);
 
      List<Map<String, Integer>> getResultsByQuestion(int questionId, int correct);
 

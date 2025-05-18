@@ -32,6 +32,9 @@ public class TakeQuizController {
 
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
+    private final User user = UserSession.getInstance().getCurrentUser();
+    private Student student = (Student) user;
+
     @FXML
     public void loadTitle(String title){
         quizTitle.setText(title);
@@ -52,11 +55,6 @@ public class TakeQuizController {
         this.quizId = quiz_id;
 
     }
-
-
-
-
-
 
     @FXML
     public void loadQuestion(){
@@ -103,10 +101,12 @@ public class TakeQuizController {
 
         if (answer.equals(correctAnswer)){
             System.out.println("correct");
+            resultsDAO.addQuestionResult( quizId, questions[questionIndex].getId(), student.getStudentID(), 1 );
             return true;
 
         }else{
             System.out.println("wrong");
+            resultsDAO.addQuestionResult( quizId, questions[questionIndex].getId(), student.getStudentID(), 0 );
             return false;
         }
 
