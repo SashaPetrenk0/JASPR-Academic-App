@@ -6,7 +6,7 @@ public interface IResultsDAO {
 
      void addQuestionResult(Student student, Quiz quiz, Question question,  int correct);
 
-     void getResultsByQuestion(int questionId, int correct);
+     List<Map<String, Integer>> getResultsByQuestion(int questionId, int correct);
 
      List<Map<String, Integer>> getResultsByQuiz(int quizId);
      void addQuizResult(int studentID, int quizID, int grade);
