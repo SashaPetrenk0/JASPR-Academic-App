@@ -4,6 +4,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -103,128 +104,156 @@
                         <Pane prefHeight="22.0" prefWidth="321.0" />
                         <VBox prefHeight="573.0" prefWidth="321.0" spacing="20.0">
                             <children>
-                                <HBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button" stylesheets="@styles.css">
-                                    <opaqueInsets>
-                                        <Insets />
-                                    </opaqueInsets>
-                                    <children>
-                                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/dashboard.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label prefHeight="58.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Dashboard">
-                                            <font>
-                                                <Font name="System Bold" size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
-                                    <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/pen.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label id="create-quiz" onMouseClicked="#onAdd" prefHeight="46.0" prefWidth="196.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Create Quiz" textFill="#0000007e">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
-                                    <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/ideas.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label id="assign-quizzes" onMouseClicked="#onAssignQuizzesClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Quizzes" textFill="#0000007e">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
-                                    <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/graphic-progression.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Tracking" textFill="#0000007e">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
-                                    <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/persons-in-a-class.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Classes" textFill="#0000007e">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox fx:id="profileButton" alignment="CENTER_LEFT" onMouseClicked="#onProfileClick" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
-                                    <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/profile-user.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Profile" textFill="#0000007e">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
-                                    <children>
-                                        <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-                                            <image>
-                                                <Image url="@../../../../images/logout.png" />
-                                            </image>
-                                        </ImageView>
-                                        <Label id="logout" onMouseClicked="#onLogoutClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Logout" textFill="#0000007e">
-                                            <font>
-                                                <Font size="24.0" />
-                                            </font>
-                                        </Label>
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" />
-                                    </padding>
-                                </HBox>
+                        <ButtonBar>
+                           <buttons>
+                                      <HBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button" stylesheets="@styles.css">
+                                          <opaqueInsets>
+                                              <Insets />
+                                          </opaqueInsets>
+                                          <children>
+                                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../../images/dashboard.png" />
+                                                  </image>
+                                              </ImageView>
+                                              <Label prefHeight="58.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Dashboard">
+                                                  <font>
+                                                      <Font name="System Bold" size="24.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                          <padding>
+                                              <Insets left="40.0" />
+                                          </padding>
+                                      </HBox>
+                           </buttons>
+                        </ButtonBar>
+                        <ButtonBar>
+                           <buttons>
+                                      <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                                          <children>
+                                              <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../../images/pen.png" />
+                                                  </image>
+                                              </ImageView>
+                                              <Label id="create-quiz" onMouseClicked="#onAdd" prefHeight="46.0" prefWidth="196.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Create Quiz" textFill="#0000007e">
+                                                  <font>
+                                                      <Font size="24.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                          <padding>
+                                              <Insets left="40.0" />
+                                          </padding>
+                                      </HBox>
+                           </buttons>
+                        </ButtonBar>
+                        <ButtonBar onMouseClicked="#setQuizList">
+                           <buttons>
+                                      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                                          <children>
+                                              <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../../images/ideas.png" />
+                                                  </image>
+                                              </ImageView>
+                                              <Label id="assign-quizzes" onMouseClicked="#onAssignQuizzesClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Quizzes" textFill="#0000007e">
+                                                  <font>
+                                                      <Font size="24.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                          <padding>
+                                              <Insets left="40.0" />
+                                          </padding>
+                                      </HBox>
+                           </buttons>
+                        </ButtonBar>
+                        <ButtonBar>
+                           <buttons>
+                                      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                                          <children>
+                                              <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../../images/graphic-progression.png" />
+                                                  </image>
+                                              </ImageView>
+                                              <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Tracking" textFill="#0000007e">
+                                                  <font>
+                                                      <Font size="24.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                          <padding>
+                                              <Insets left="40.0" />
+                                          </padding>
+                                      </HBox>
+                           </buttons>
+                        </ButtonBar>
+                        <ButtonBar>
+                           <buttons>
+                                      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                                          <children>
+                                              <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../../images/persons-in-a-class.png" />
+                                                  </image>
+                                              </ImageView>
+                                              <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Classes" textFill="#0000007e">
+                                                  <font>
+                                                      <Font size="24.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                          <padding>
+                                              <Insets left="40.0" />
+                                          </padding>
+                                      </HBox>
+                           </buttons>
+                        </ButtonBar>
+                        <ButtonBar fx:id="profileButton" onMouseClicked="#onProfileClick">
+                           <buttons>
+                                      <HBox alignment="CENTER_LEFT" onMouseClicked="#onProfileClick" prefHeight="60.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                                          <children>
+                                              <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../../images/profile-user.png" />
+                                                  </image>
+                                              </ImageView>
+                                              <Label prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Profile" textFill="#0000007e">
+                                                  <font>
+                                                      <Font size="24.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                          <padding>
+                                              <Insets left="40.0" />
+                                          </padding>
+                                      </HBox>
+                           </buttons>
+                        </ButtonBar>
+                        <ButtonBar fx:id="logoutButton" onMouseClicked="#onLogoutClicked">
+                           <buttons>
+                                      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="321.0" spacing="20.0" styleClass="selected-button-mouse-moved" stylesheets="@styles.css">
+                                          <children>
+                                              <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                                                  <image>
+                                                      <Image url="@../../../../images/logout.png" />
+                                                  </image>
+                                              </ImageView>
+                                              <Label id="logout" onMouseClicked="#onLogoutClicked" prefHeight="40.0" prefWidth="148.0" styleClass="elements-shadows" stylesheets="@styles.css" text="Logout" textFill="#0000007e">
+                                                  <font>
+                                                      <Font size="24.0" />
+                                                  </font>
+                                              </Label>
+                                          </children>
+                                          <padding>
+                                              <Insets left="40.0" />
+                                          </padding>
+                                      </HBox>
+                           </buttons>
+                        </ButtonBar>
                             </children>
                         </VBox>
                     </children>
