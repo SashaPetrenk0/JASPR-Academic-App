@@ -97,7 +97,7 @@ public class StudentDashboardController {
             try {
                 Stage currentStage = (Stage) createdQuizzesLists.getScene().getWindow();
                 // Load new window
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view-v2.fxml"));
                 Parent root = loader.load();
 
                 // Pass data to next controller
@@ -131,7 +131,7 @@ public class StudentDashboardController {
         @FXML
         private void onTakeQuiz () throws IOException {
             Stage stage = (Stage) takeQuiz.getScene().getWindow();
-            SceneChanger.changeScene(stage, "take-quiz-view.fxml");
+            SceneChanger.changeScene(stage, "take-quiz-view-v2.fxml");
         }
 
     @FXML
