@@ -71,9 +71,9 @@
                     <font>
                         <Font name="Telugu Sangam MN Bold" size="13.0" />
                     </font></TextField>
-                <Button fx:id="LoginButton" onAction="#onLoginClicked" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: #A8DDDC;" text="Submit" textFill="WHITE">
+                <Button fx:id="LoginButton" onAction="#onLoginClicked" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: #A8DDDC;" text="Submit" textFill="#5b5b5b">
                     <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
+                        <Font name="System Bold" size="13.0" />
                     </font></Button>
                 <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0">
                     <children>
