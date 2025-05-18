@@ -57,17 +57,20 @@ public class StudentViewResultsController {
 
     @FXML
     private void onQuizSelected() {
-
         // First hide everything
         allResultsBox.setVisible(false);
         specificResultsBox.setVisible(false);
-
         // Then show the selected one
         String quiz = (String) resultDropdown.getValue();
-        if (quiz == "All quizzes"){
+        if (quiz.equals("All quizzes")){
+            System.out.print("hello");
             showOnlyResults(allResultsBox);
             List<Map<String, Integer>> quizResults = resultsDAO.getResultsByQuiz(student.getStudentID());
-            //TODO: this is displaying empty 
+
+            for (Map<String, Integer> quizResult : quizResults) {
+                    System.out.print(quizResult);
+            }
+            //TODO: this is displaying empty
             allResults.setItems(FXCollections.observableArrayList(quizResults));
         }
         else{
