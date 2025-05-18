@@ -98,7 +98,7 @@ public class StudentViewResultsController {
                 );
 
                 pieChart.setData(pieChartData);
-                pieChart.setTitle("Percentage of correct answers");
+                pieChart.setTitle("Percentage of correct answers from your latest attempt");
 
             }
 
