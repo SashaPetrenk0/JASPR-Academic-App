@@ -1,3 +1,4 @@
+package org.jaspr.hr.demo;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -177,15 +178,16 @@ public class TeacherViewResultsController {
             percentageColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPercentageText()));
         }
 
-        int totalQuestions = resultsDAO.getTotalQuestionsForQuiz(selectedQuiz.getId());
+        int totalQuestions = quizDAO.getTotalQuestionsForQuiz(selectedQuiz.getId());
 
         List<Map<String, String>> quizResults = resultsDAO.getStudentGradesForQuiz(selectedQuiz.getId(), selectedClassroom);
         ObservableList<StudentQuizResult> resultList = FXCollections.observableArrayList();
 
         for (Map<String, String> result : quizResults) {
             String studentName = result.get("student");
-            int grade = Integer.parseInt(result.get("grade"));
-            resultList.add(new StudentQuizResult(studentName, grade, totalQuestions));
+            int percentageGrade = Integer.parseInt(result.get("grade"));  // grade is percentage
+            int score = (int) Math.round(percentageGrade * totalQuestions / 100.0);
+            resultList.add(new StudentQuizResult(studentName, score, totalQuestions));
         }
 
         quizResultTable.setItems(resultList);
@@ -194,7 +196,6 @@ public class TeacherViewResultsController {
 
 
     }
-}
 
 
 
