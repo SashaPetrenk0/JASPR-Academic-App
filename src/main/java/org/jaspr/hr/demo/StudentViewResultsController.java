@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +35,12 @@ public class StudentViewResultsController {
     private VBox specificResultsBox;
 
     @FXML
-    private ListView allResults;
+    private TableView<Map<String, Object>> allResults;
+    @FXML
+    private TableColumn<Map<String, Object>, String> titleColumn;
+
+    @FXML
+    private TableColumn<Map<String, Object>, Integer> gradeColumn;
 
     @FXML
     private PieChart pieChart;
@@ -79,8 +86,21 @@ public class StudentViewResultsController {
         if (quiz.equals("All quizzes")){
             System.out.print("hello");
             showOnlyResults(allResultsBox);
+            // Cell value for title
+            titleColumn.setCellValueFactory(cellData -> {
+                Object value = cellData.getValue().get("title");
+                return new SimpleStringProperty(value != null ? value.toString() : "");
+            });
 
-            allResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuiz(student.getStudentID())));
+            // Cell value for grade
+            gradeColumn.setCellValueFactory(cellData -> {
+                Object value = cellData.getValue().get("grade");
+                return new SimpleIntegerProperty(value != null ? (Integer) value : 0).asObject();
+            });
+
+
+            List<Map<String, Object>> results = resultsDAO.getResultsByQuiz(student.getStudentID());
+            allResults.setItems(FXCollections.observableArrayList(results));
 
         }
         else{
