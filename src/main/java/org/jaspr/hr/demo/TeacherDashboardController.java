@@ -14,6 +14,8 @@ import java.io.IOException;
 
 
 public class TeacherDashboardController {
+
+
     User user = UserSession.getInstance().getCurrentUser();
     String role = UserSession.getInstance().getRole();
 
@@ -21,6 +23,12 @@ public class TeacherDashboardController {
 
     @FXML
     private VBox rootPane;
+
+    @FXML
+    public Button classrooms;
+
+    @FXML
+    public Button analytics;
 
     @FXML
     private Button profileButton;
