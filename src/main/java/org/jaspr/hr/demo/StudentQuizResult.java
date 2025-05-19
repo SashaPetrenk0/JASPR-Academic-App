@@ -1,18 +1,27 @@
 package org.jaspr.hr.demo;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class StudentQuizResult {
-    private final String student;
-    private final int grade;
+    private final SimpleStringProperty studentName;
+    private final SimpleStringProperty scoreText;
+    private final SimpleStringProperty percentageText;
 
-    public StudentQuizResult(String student, int grade){
-        this.student = student;
-        this.grade = grade;
+    public StudentQuizResult(String studentName, int score, int total) {
+        this.studentName = new SimpleStringProperty(studentName);
+        this.scoreText = new SimpleStringProperty(score + "/" + total);
+        this.percentageText = new SimpleStringProperty((int)((score * 100.0) / total) + "%");
     }
 
-    public String getStudent(){
-        return student;
+    public String getStudentName() {
+        return studentName.get();
     }
-    public int getGrade(){
-        return grade;
+
+    public String getScoreText() {
+        return scoreText.get();
+    }
+
+    public String getPercentageText() {
+        return percentageText.get();
     }
 }

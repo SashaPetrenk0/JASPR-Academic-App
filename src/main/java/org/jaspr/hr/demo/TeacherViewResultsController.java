@@ -1,4 +1,5 @@
-package org.jaspr.hr.demo;
+
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+        import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -57,6 +58,11 @@ public class TeacherViewResultsController {
     @FXML private VBox selectionBox;
 
     @FXML private BarChart<String, Number> barChart;
+
+    @FXML private TableView<StudentQuizResult> quizResultTable;
+    @FXML private TableColumn<StudentQuizResult, String> studentColumn;
+    @FXML private TableColumn<StudentQuizResult, String> gradeColumn;
+    @FXML private TableColumn<StudentQuizResult, String> percentageColumn;
 
 
     @FXML
@@ -165,30 +171,52 @@ public class TeacherViewResultsController {
 
             barChart.getData().clear();
             barChart.getData().add(series);
+
+            studentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStudentName()));
+            gradeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getScoreText()));
+            percentageColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPercentageText()));
         }
+
+        int totalQuestions = resultsDAO.getTotalQuestionsForQuiz(selectedQuiz.getId());
+
+        List<Map<String, String>> quizResults = resultsDAO.getStudentGradesForQuiz(selectedQuiz.getId(), selectedClassroom);
+        ObservableList<StudentQuizResult> resultList = FXCollections.observableArrayList();
+
+        for (Map<String, String> result : quizResults) {
+            String studentName = result.get("student");
+            int grade = Integer.parseInt(result.get("grade"));
+            resultList.add(new StudentQuizResult(studentName, grade, totalQuestions));
+        }
+
+        quizResultTable.setItems(resultList);
+
+
+
+
     }
+}
 
 
 
-    private void showOnlyResults(VBox boxToShow) {
-        boxToShow.setVisible(true);
-        boxToShow.setManaged(true);
-    }
+private void showOnlyResults(VBox boxToShow) {
+    boxToShow.setVisible(true);
+    boxToShow.setManaged(true);
+}
 
 
 
-    @FXML
-    private void returnToTeacherDashboard() throws IOException {
-        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
-    }
+@FXML
+private void returnToTeacherDashboard() throws IOException {
+    Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+    SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
+}
 
-    @FXML
-    private void returnToAnalyticsSelection() throws IOException {
-        allResultsBox.setVisible(false);
-        specificResultsBox.setVisible(false);
-        selectionBox.setVisible(true);
-    }
+@FXML
+private void returnToAnalyticsSelection() throws IOException {
+    allResultsBox.setVisible(false);
+    specificResultsBox.setVisible(false);
+    selectionBox.setVisible(true);
+}
 
 
 }

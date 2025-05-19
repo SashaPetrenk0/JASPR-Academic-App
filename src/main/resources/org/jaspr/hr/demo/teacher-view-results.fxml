@@ -53,6 +53,15 @@
             </yAxis>
         </BarChart>
 
+        <TableView fx:id="quizResultTable" prefHeight="200">
+            <columns>
+                <TableColumn fx:id="studentColumn" text="Student" prefWidth="150"/>
+                <TableColumn fx:id="gradeColumn" text="Score" prefWidth="100"/>
+                <TableColumn fx:id="percentageColumn" text="Percentage" prefWidth="100"/>
+            </columns>
+        </TableView>
+
+
         <Button text="Return" onAction="#returnToAnalyticsSelection" />
     </VBox>
 

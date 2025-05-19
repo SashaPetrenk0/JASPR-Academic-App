@@ -107,6 +107,23 @@ public class SqliteQuizDAO implements IQuizDAO {
         return null;
     }
 
+    public int getTotalQuestionsForQuiz(int quizId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT numOfQuestions FROM quizzes WHERE id = ?");
+            statement.setInt(1, quizId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);  // Returns the count of questions
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;  // Return 0 if something goes wrong
+    }
+
+
     //TODO: separate the question stuff into a separate interface?
     @Override
     public Question[] getQuestions(int id) {
