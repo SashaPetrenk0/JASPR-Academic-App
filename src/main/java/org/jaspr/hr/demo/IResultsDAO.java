@@ -8,7 +8,7 @@ public interface IResultsDAO {
 
      List<Map<String, Integer>> getResultsByQuestion(int questionId, int correct);
 
-     List<Map<String, Integer>> getResultsByQuiz(int quizId);
+     List<Map<String, Object>> getResultsByQuiz(int quizId);
      void addQuizResult(int studentID, int quizID, double grade);
 
 

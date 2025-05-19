@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import javafx.beans.binding.ObjectBinding;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -135,17 +137,18 @@ public class SqliteResultsDAO implements IResultsDAO {
     }
 
     @Override
-    public List<Map<String, Integer>> getResultsByQuiz(int studentID) {
+    public List<Map<String, Object>> getResultsByQuiz(int studentID) {
         System.out.print("method calles");
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT quiz_id, grade FROM quizResults WHERE student_id = ?");
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT quizzes.title, quizResults.grade FROM quizResults INNER JOIN quizzes ON quizResults.quiz_id=quizzes.id WHERE quizResults.student_id = ?;");
             statement.setInt(1, studentID);
             ResultSet resultSet = statement.executeQuery();
-            List<Map<String, Integer>> results = new ArrayList<>();
+            List<Map<String, Object>> results = new ArrayList<>();
 
             while (resultSet.next()) {
-                Map<String, Integer> result = new HashMap<>();
-                result.put("quiz_id", resultSet.getInt("quiz_id"));
+                Map<String, Object> result = new HashMap<>();
+                result.put("title", resultSet.getString("title"));
                 result.put("grade", resultSet.getInt("grade"));
                 results.add(result);
             }

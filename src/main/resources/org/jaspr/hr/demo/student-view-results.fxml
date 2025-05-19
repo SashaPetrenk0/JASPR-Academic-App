@@ -22,7 +22,12 @@
     </ComboBox>
 
     <VBox fx:id="allResultsBox" >
-        <ListView fx:id="allResults"/>
+        <TableView fx:id="allResults" xmlns:fx="http://javafx.com/fxml" prefWidth="400">
+            <columns>
+                <TableColumn fx:id="titleColumn" text="Quiz" prefWidth="200"/>
+                <TableColumn fx:id="gradeColumn" text="Grade" prefWidth="100"/>
+            </columns>
+        </TableView>
     </VBox>
 
     <VBox fx:id="specificResultsBox" >
