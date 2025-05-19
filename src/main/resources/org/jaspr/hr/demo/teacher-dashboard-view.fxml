@@ -97,7 +97,7 @@
                         <children>
                            <Label style="-fx-font-size: 18px;" text="Your Quizzes" />
                      
-                                   <ListView fx:id="quizLists" prefHeight="312.0" prefWidth="400.0" />
+                                   <ListView fx:id="quizLists" prefHeight="312.0" prefWidth="400.0" styleClass="list-cell" stylesheets="@styles.css" />
                         </children>
                      </VBox>
                   </children>
