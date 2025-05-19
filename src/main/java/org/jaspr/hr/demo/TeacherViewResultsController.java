@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
         import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.util.StringConverter;
@@ -64,6 +66,8 @@ public class TeacherViewResultsController {
     @FXML private TableColumn<StudentQuizResult, String> studentColumn;
     @FXML private TableColumn<StudentQuizResult, String> gradeColumn;
     @FXML private TableColumn<StudentQuizResult, String> percentageColumn;
+
+    @FXML private PieChart pieChart;
 
 
     @FXML
@@ -183,14 +187,29 @@ public class TeacherViewResultsController {
         List<Map<String, String>> quizResults = resultsDAO.getStudentGradesForQuiz(selectedQuiz.getId(), selectedClassroom);
         ObservableList<StudentQuizResult> resultList = FXCollections.observableArrayList();
 
+        int scores = 0;
         for (Map<String, String> result : quizResults) {
             String studentName = result.get("student");
             int percentageGrade = Integer.parseInt(result.get("grade"));  // grade is percentage
             int score = (int) Math.round(percentageGrade * totalQuestions / 100.0);
+            scores = score;
             resultList.add(new StudentQuizResult(studentName, score, totalQuestions));
         }
 
         quizResultTable.setItems(resultList);
+
+        int totalIncorrect = totalQuestions - scores;
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Correct", scores),
+                new PieChart.Data("Incorrect", totalIncorrect)
+        );
+
+        pieChart.setData(pieChartData);
+        pieChart.setTitle("Class Performance on Quiz: " + selectedQuiz.getTitle());
+
+
+
 
 
 
