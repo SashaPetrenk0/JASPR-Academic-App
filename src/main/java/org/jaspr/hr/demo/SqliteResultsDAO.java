@@ -31,7 +31,7 @@ public class SqliteResultsDAO implements IResultsDAO {
                     "grade INTEGER NOT NULL,"+
                     "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
                     "FOREIGN KEY (question_id) REFERENCES questions(question_id)," +
-                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)" +
+                    "FOREIGN KEY (student_id) REFERENCES students(studentID)" +
                     ");";
             statement.execute(query);
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class SqliteResultsDAO implements IResultsDAO {
                     "student_id INTEGER NOT NULL,"+
                     "grade INTEGER NOT NULL,"+
                     "FOREIGN KEY (quiz_id) REFERENCES quizzes(id)," +
-                    "FOREIGN KEY (student_id) REFERENCES questions(question_id)" +
+                    "FOREIGN KEY (student_id) REFERENCES students(studentID)" +
                     ");";
             statement.execute(query);
         } catch (Exception e) {
@@ -164,4 +164,66 @@ public class SqliteResultsDAO implements IResultsDAO {
 
 
     }
+
+    public Map<Integer, Double> getQuestionAccuracyForQuiz(int quizId, int classroomId) {
+        Map<Integer, Double> accuracyMap = new HashMap<>();
+        try {
+            String query = """
+            SELECT qr.question_id,
+                   SUM(CASE WHEN qr.grade = 1 THEN 1 ELSE 0 END) * 1.0 / COUNT(*) * 100 AS percent_correct
+            FROM questionResults qr
+            JOIN studentClassroom cs ON cs.studentId = qr.student_id
+            WHERE qr.quiz_id = ? AND cs.classroom_number = ?
+            GROUP BY qr.question_id
+        """;
+
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, quizId);
+            statement.setInt(2, classroomId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int questionId = resultSet.getInt("question_id");
+                double percentCorrect = resultSet.getDouble("percent_correct");
+                accuracyMap.put(questionId, percentCorrect);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return accuracyMap;
+    }
+
+    // DAO method remains the same (grade stored as String in map)
+    public List<Map<String, String>> getStudentGradesForQuiz(int quizId, int classroomNumber) {
+        List<Map<String, String>> results = new ArrayList<>();
+        String query = "SELECT s.name AS student_name, qr.grade " +
+                "FROM quizResults qr " +
+                "JOIN students s ON s.studentID = qr.student_id " +
+                "JOIN studentClassroom sc ON s.studentID = sc.studentId " +
+                "WHERE qr.quiz_id = ? AND sc.classroom_number = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, quizId);
+            statement.setInt(2, classroomNumber);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Map<String, String> row = new HashMap<>();
+                row.put("student", rs.getString("student_name"));
+                row.put("grade", String.valueOf(rs.getInt("grade")));  // store as String in map
+                results.add(row);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return results;
+    }
+
+
+
+
+
+
 }

@@ -88,6 +88,17 @@ public class StudentDashboardController {
                 }
             });
 
+            assignedQuizzesList.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) { // double-click
+                    Quiz selectedQuiz = assignedQuizzesList.getSelectionModel().getSelectedItem();
+                    if (selectedQuiz != null) {
+
+                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()),selectedQuiz.getId(), student.getStudentID());
+
+                    }
+                }
+            });
+
 
         }
     }
@@ -121,6 +132,36 @@ public class StudentDashboardController {
             }
 
         }
+
+    @FXML
+    private void openTakeAssignedQuiz (String title, Question[]questions, int quizID, int studentID ){
+        try {
+            Stage currentStage = (Stage) assignedQuizzesList.getScene().getWindow();
+            // Load new window
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view.fxml"));
+            Parent root = loader.load();
+
+            // Pass data to next controller
+            TakeQuizController controller = loader.getController();
+
+            controller.loadTitle(title);
+            controller.setQuestions(questions);
+            System.out.print(studentID);
+            System.out.print("quiz id" + quizID);
+            controller.getInfo(studentID,quizID);
+
+            Stage stage = new Stage();
+
+            stage.setWidth(currentStage.getWidth());
+            stage.setHeight(currentStage.getHeight());
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
         /// go to create quiz page
         @FXML

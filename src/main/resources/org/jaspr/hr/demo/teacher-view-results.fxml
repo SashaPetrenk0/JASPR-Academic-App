@@ -10,6 +10,7 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.jaspr.hr.demo.TeacherViewResultsController">
     <padding>
@@ -32,16 +33,8 @@
         <Button fx:id="returnToPrevious" text="Return" onAction="#returnToTeacherDashboard" />
     </VBox>
 
-
-
-    <VBox fx:id="allResultsBox" visible="false" managed="false">
-        <Label text="All Quiz Analytics" style="-fx-font-size: 30px;"/>
-        <Label text = "all rtesult"/>
-        <Button text="Return" onAction="#returnToAnalyticsSelection" />
-    </VBox>
-
     <VBox fx:id="specificResultsBox" visible="false" managed="false">
-        <Label text="Specific Quiz Analytics" style="-fx-font-size: 30px;"/>
+        <Label fx:id="QuizTitle" style="-fx-font-size: 30px;"/>
         <Label text = "specific quiz"/>
         <BarChart fx:id="barChart" title="Question Accuracy"
                   prefHeight="400" prefWidth="600">
@@ -53,7 +46,7 @@
             </yAxis>
         </BarChart>
 
-        <TableView fx:id="quizResultTable" prefHeight="200">
+        <TableView fx:id="quizResultTable" prefHeight="500">
             <columns>
                 <TableColumn fx:id="studentColumn" text="Student" prefWidth="150"/>
                 <TableColumn fx:id="gradeColumn" text="Score" prefWidth="100"/>
@@ -61,6 +54,9 @@
             </columns>
         </TableView>
 
+        <PieChart fx:id="pieChart" layoutX="50" layoutY="50" prefHeight="400" prefWidth="400"/>
+
+        <ListView fx:id="ranking"/>
 
         <Button text="Return" onAction="#returnToAnalyticsSelection" />
     </VBox>

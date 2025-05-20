@@ -31,6 +31,8 @@
 
     <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutClicked"/>
 
+    <Button fx:id="onAnalytics" text="Analytics" onAction="#onAnalytics" />
+
 
 
 </VBox>

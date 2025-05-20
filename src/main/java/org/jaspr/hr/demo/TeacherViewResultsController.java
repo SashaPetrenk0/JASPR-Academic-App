@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
         import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +27,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.util.StringConverter;
@@ -54,7 +56,6 @@ public class TeacherViewResultsController {
 
     private Teacher currentTeacher;
 
-    @FXML private VBox allResultsBox;
     @FXML private VBox specificResultsBox;
     @FXML private VBox selectionBox;
 
@@ -64,6 +65,12 @@ public class TeacherViewResultsController {
     @FXML private TableColumn<StudentQuizResult, String> studentColumn;
     @FXML private TableColumn<StudentQuizResult, String> gradeColumn;
     @FXML private TableColumn<StudentQuizResult, String> percentageColumn;
+
+    @FXML private Label QuizTitle;
+
+    @FXML private PieChart pieChart;
+
+    @FXML private ListView ranking;
 
 
     @FXML
@@ -89,7 +96,11 @@ public class TeacherViewResultsController {
         classroomComboBox.setConverter(new StringConverter<Integer>() {
             @Override
             public String toString(Integer classroomNumber) {
-                return "Classroom " + classroomNumber;
+                if (classroomNumber == null) {
+                    return null;
+                } else {
+                    return "Classroom " + classroomNumber;
+                }
             }
 
             @Override
@@ -102,8 +113,6 @@ public class TeacherViewResultsController {
 
         List<Quiz> quizzes = quizDAO.getAllQuizObjects(currentTeacher);
 
-        Quiz allQuizzesOption = new Quiz(-1,"All quizzes", "Summary", "Represents All Quizzes", 0, 0);
-        quizzes.add(0, allQuizzesOption); // Add the "All quizzes" option at the top
         quizSelection.setItems(FXCollections.observableArrayList(quizzes));
 
         quizSelection.setConverter(new StringConverter<Quiz>() {
@@ -130,26 +139,8 @@ public class TeacherViewResultsController {
             return;
         }
 
-        // UI logic previously in onQuizSelected()
-        if ("All quizzes".equals(selectedQuiz.getTitle())) {
-            showOnlyResults(allResultsBox);
-            selectionBox.setVisible(false);
-            Map<Integer, Double> accuracyMap =
-                    resultsDAO.getQuestionAccuracyForQuiz(selectedQuiz.getId(), selectedClassroom);
-
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Accuracy per Question");
-
-            for (Map.Entry<Integer, Double> entry : accuracyMap.entrySet()) {
-                String questionLabel = "Q" + entry.getKey();
-                double percent = entry.getValue();
-                series.getData().add(new XYChart.Data<>(questionLabel, percent));
-            }
-
-            barChart.getData().clear();
-            barChart.getData().add(series);
-        } else {
             showOnlyResults(specificResultsBox);
+            QuizTitle.setText(selectedQuiz.getTitle() + " Quiz Analytics");
             selectionBox.setVisible(false);
             Map<Integer, Double> accuracyMap =
                     resultsDAO.getQuestionAccuracyForQuiz(selectedQuiz.getId(), selectedClassroom);
@@ -176,24 +167,47 @@ public class TeacherViewResultsController {
             studentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStudentName()));
             gradeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getScoreText()));
             percentageColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPercentageText()));
-        }
+
 
         int totalQuestions = quizDAO.getTotalQuestionsForQuiz(selectedQuiz.getId());
 
         List<Map<String, String>> quizResults = resultsDAO.getStudentGradesForQuiz(selectedQuiz.getId(), selectedClassroom);
         ObservableList<StudentQuizResult> resultList = FXCollections.observableArrayList();
 
+        int scores = 0;
         for (Map<String, String> result : quizResults) {
             String studentName = result.get("student");
             int percentageGrade = Integer.parseInt(result.get("grade"));  // grade is percentage
             int score = (int) Math.round(percentageGrade * totalQuestions / 100.0);
+            scores = score;
             resultList.add(new StudentQuizResult(studentName, score, totalQuestions));
         }
 
         quizResultTable.setItems(resultList);
 
+        int totalIncorrect = totalQuestions - scores;
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+                new PieChart.Data("Correct", scores),
+                new PieChart.Data("Incorrect", totalIncorrect)
+        );
+
+        pieChart.setData(pieChartData);
+        pieChart.setTitle("Class Performance on Quiz: " + selectedQuiz.getTitle());
 
 
+        List<String> rankedStudentNames = resultList.stream()
+                .sorted((r1, r2) -> Integer.compare(r2.getScore(), r1.getScore()))
+                .map(StudentQuizResult::getStudentName)
+                .collect(Collectors.toList());
+
+// Add numbering (1. Student 1, 2. Student 2, etc.)
+        ObservableList<String> rankedDisplayList = FXCollections.observableArrayList();
+        for (int i = 0; i < rankedStudentNames.size(); i++) {
+            rankedDisplayList.add((i + 1) + ". " + rankedStudentNames.get(i));
+        }
+
+        ranking.setItems(rankedDisplayList);
 
     }
 
@@ -214,7 +228,6 @@ private void returnToTeacherDashboard() throws IOException {
 
 @FXML
 private void returnToAnalyticsSelection() throws IOException {
-    allResultsBox.setVisible(false);
     specificResultsBox.setVisible(false);
     selectionBox.setVisible(true);
 }
