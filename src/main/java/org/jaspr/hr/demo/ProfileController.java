@@ -14,19 +14,23 @@ import java.util.List;
 public class ProfileController {
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
+
     private final SqliteClassroomDAO classroomDAO = new SqliteClassroomDAO();
 
     @FXML
-    private Label nameLabel;
+    private TextField nameLabel;
 
     @FXML
-    private Label ageLabel;
+    private TextField ageLabel;
 
     @FXML
-    private Label idLabel;
+    private TextField idLabel;
 
     @FXML
-    private Label emailLabel;
+    private TextField emailLabel;
+
+    @FXML
+    private Label nameLabel1;
 
 
 
@@ -71,10 +75,14 @@ public class ProfileController {
     }
 
     private void loadStudentProfile(Student student) {
-        nameLabel.setText("Name: " + student.getName());
-        ageLabel.setText("Age: " + student.getAge());
-        idLabel.setText("ID: " + student.getStudentID());
-        emailLabel.setText("Email: " + student.getEmail());
+        nameLabel.setText(student.getName());
+        int age = student.getAge();
+        ageLabel.setText(Integer.toString(age));
+        int identification = student.getStudentID();
+        idLabel.setText(Integer.toString(identification));
+        emailLabel.setText(student.getEmail());
+
+        nameLabel1.setText(student.getName());
 
         List<Integer> classroomNumbers = classroomDAO.getClassroomNumbersForStudent(student.getStudentID());
 
@@ -91,10 +99,14 @@ public class ProfileController {
     }
 
     private void loadTeacherProfile(Teacher teacher) {
-        nameLabel.setText("Name: " + teacher.getName());
-        ageLabel.setText("Age: " + teacher.getAge());
-        idLabel.setText("ID: " + teacher.getTeacherID());
-        emailLabel.setText("Email: " + teacher.getEmail());
+        nameLabel.setText(teacher.getName());
+        int age = teacher.getAge();
+        ageLabel.setText(Integer.toString(age));
+        int identification = teacher.getTeacherID();
+        idLabel.setText(Integer.toString(identification));
+        emailLabel.setText(teacher.getEmail());
+
+        nameLabel1.setText(teacher.getName());
 
         List<Integer> classroomNumber = classroomDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
         if (classroomNumber != null) {
@@ -106,10 +118,14 @@ public class ProfileController {
     }
 
     private void loadAdminProfile(Admin admin) {
-        nameLabel.setText("Name: " + admin.getName());
-        ageLabel.setText("Age: " + admin.getAge());
-        idLabel.setText("ID: " + admin.getAdminID());
-        emailLabel.setText("Email: " + admin.getEmail());
+        nameLabel.setText(admin.getName());
+        int age = admin.getAge();
+        ageLabel.setText(Integer.toString(age));
+        int identification = admin.getAdminID();
+        idLabel.setText(Integer.toString(identification));
+        emailLabel.setText(admin.getEmail());
+
+        nameLabel1.setText("Welcome, " + admin.getName() + "!");
     }
 
     @FXML
