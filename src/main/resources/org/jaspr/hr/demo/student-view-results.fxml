@@ -40,10 +40,11 @@
         <VBox>
             <Label text="Question breakdown"/>
             <TableView fx:id="questionResults">
+                <columns>
                 <TableColumn fx:id="questionColumn" text="Question" prefWidth="200"/>
                 <TableColumn fx:id="answerColumn" text="Correct Answer" prefWidth="100"/>
                 <TableColumn fx:id="questionGradeColumn" text="Grade" prefWidth="100"/>
-
+                </columns>
             </TableView>
         </VBox>
 

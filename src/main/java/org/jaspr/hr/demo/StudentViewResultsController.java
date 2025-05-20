@@ -133,9 +133,7 @@ public class StudentViewResultsController {
                     return new SimpleIntegerProperty(value != null ? (Integer) value : 0).asObject();
                 });
 
-                List<Map<String, Object>> questions = resultsDAO.getResultsByQuestion(quizID, student.getStudentID());
-                questionResults.setItems(FXCollections.observableArrayList(questions));
-               // questionResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuestion(quizID, student.getStudentID())));
+                questionResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuestion(quizID, student.getStudentID())));
 
                 int grade = resultsDAO.getGrade(quizID, student.getStudentID());
                 ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
