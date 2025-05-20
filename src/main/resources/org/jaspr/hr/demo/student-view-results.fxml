@@ -39,7 +39,12 @@
         </VBox>
         <VBox>
             <Label text="Question breakdown"/>
-            <ListView fx:id="questionResults"/>
+            <TableView fx:id="questionResults">
+                <TableColumn fx:id="questionColumn" text="Question" prefWidth="200"/>
+                <TableColumn fx:id="answerColumn" text="Correct Answer" prefWidth="100"/>
+                <TableColumn fx:id="questionGradeColumn" text="Grade" prefWidth="100"/>
+
+            </TableView>
         </VBox>
 
 

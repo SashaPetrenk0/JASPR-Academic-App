@@ -113,32 +113,30 @@ public class StudentViewResultsController {
         }
         else{
             showOnlyResults(specificResultsBox);
-            // Cell value for title
-            questionColumn.setCellValueFactory(cellData -> {
-                Object value = cellData.getValue().get("question");
-                return new SimpleStringProperty(value != null ? value.toString() : "");
-            });
-
-            // Cell value for grade
-            questionGradeColumn.setCellValueFactory(cellData -> {
-                Object value = cellData.getValue().get("grade");
-                return new SimpleIntegerProperty(value != null ? (Integer) value : 0).asObject();
-            });
-
-            answerColumn.setCellValueFactory(cellData -> {
-                Object value = cellData.getValue().get("answer");
-                return new SimpleStringProperty(value != null ? value.toString() : "");
-            });
-
-
-
-            List<Map<String, Object>> results = resultsDAO.getResultsByQuiz(student.getStudentID());
-            allResults.setItems(FXCollections.observableArrayList(results));
 
             if(quizTitleToQuizMap.containsKey(quiz)){
                 Quiz selectedQuiz = quizTitleToQuizMap.get(quiz);
                 int quizID = selectedQuiz.getId();
-                questionResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuestion(quizID, student.getStudentID())));
+                // Cell value for title
+                questionColumn.setCellValueFactory(cellData -> {
+                    Object value = cellData.getValue().get("question");
+                    return new SimpleStringProperty(value != null ? value.toString() : "");
+                });
+                answerColumn.setCellValueFactory(cellData -> {
+                    Object value = cellData.getValue().get("answer");
+                    return new SimpleStringProperty(value != null ? value.toString() : "");
+                });
+
+                // Cell value for grade
+                questionGradeColumn.setCellValueFactory(cellData -> {
+                    Object value = cellData.getValue().get("grade");
+                    return new SimpleIntegerProperty(value != null ? (Integer) value : 0).asObject();
+                });
+
+                List<Map<String, Object>> questions = resultsDAO.getResultsByQuestion(quizID, student.getStudentID());
+                questionResults.setItems(FXCollections.observableArrayList(questions));
+               // questionResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuestion(quizID, student.getStudentID())));
+
                 int grade = resultsDAO.getGrade(quizID, student.getStudentID());
                 ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                         new PieChart.Data("Correct", grade ),
