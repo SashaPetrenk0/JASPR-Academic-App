@@ -42,7 +42,7 @@
     </VBox>
 
     <VBox fx:id="specificResultsBox" visible="false" managed="false">
-        <Label text="Specific Quiz Analytics" style="-fx-font-size: 30px;"/>
+        <Label fx:id="QuizTitle" style="-fx-font-size: 30px;"/>
         <Label text = "specific quiz"/>
         <BarChart fx:id="barChart" title="Question Accuracy"
                   prefHeight="400" prefWidth="600">
@@ -63,6 +63,9 @@
         </TableView>
 
         <PieChart fx:id="pieChart" layoutX="50" layoutY="50" prefHeight="400" prefWidth="400"/>
+
+        <ListView fx:id="ranking"/>
+
 
 
         <Button text="Return" onAction="#returnToAnalyticsSelection" />

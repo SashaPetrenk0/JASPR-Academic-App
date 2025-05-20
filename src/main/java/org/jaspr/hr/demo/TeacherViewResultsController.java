@@ -67,7 +67,11 @@ public class TeacherViewResultsController {
     @FXML private TableColumn<StudentQuizResult, String> gradeColumn;
     @FXML private TableColumn<StudentQuizResult, String> percentageColumn;
 
+    @FXML private Label QuizTitle;
+
     @FXML private PieChart pieChart;
+
+    @FXML private ListView ranking;
 
 
     @FXML
@@ -154,6 +158,7 @@ public class TeacherViewResultsController {
             barChart.getData().add(series);
         } else {
             showOnlyResults(specificResultsBox);
+            QuizTitle.setText(selectedQuiz.getTitle());
             selectionBox.setVisible(false);
             Map<Integer, Double> accuracyMap =
                     resultsDAO.getQuestionAccuracyForQuiz(selectedQuiz.getId(), selectedClassroom);
@@ -207,6 +212,22 @@ public class TeacherViewResultsController {
 
         pieChart.setData(pieChartData);
         pieChart.setTitle("Class Performance on Quiz: " + selectedQuiz.getTitle());
+
+
+        List<String> rankedStudentNames = resultList.stream()
+                .sorted((r1, r2) -> Integer.compare(r2.getScore(), r1.getScore()))
+                .map(StudentQuizResult::getStudentName)
+                .collect(Collectors.toList());
+
+// Add numbering (1. Student 1, 2. Student 2, etc.)
+        ObservableList<String> rankedDisplayList = FXCollections.observableArrayList();
+        for (int i = 0; i < rankedStudentNames.size(); i++) {
+            rankedDisplayList.add((i + 1) + ". " + rankedStudentNames.get(i));
+        }
+
+        ranking.setItems(rankedDisplayList);
+
+
 
 
 
