@@ -43,10 +43,18 @@ public class StudentViewResultsController {
     private TableColumn<Map<String, Object>, Integer> gradeColumn;
 
     @FXML
-    private PieChart pieChart;
+    private TableView<Map<String, Object>> questionResults;
+    @FXML
+    private TableColumn<Map<String, Object>, String> questionColumn;
+    @FXML
+    private TableColumn<Map<String, Object>, String> answerColumn;
 
     @FXML
-    private ListView questionResults;
+    private TableColumn<Map<String, Object>, Integer> questionGradeColumn;
+
+    @FXML
+    private PieChart pieChart;
+
     Student student = (Student) user;
 
     private Map<String, Quiz> quizTitleToQuizMap;
@@ -105,6 +113,27 @@ public class StudentViewResultsController {
         }
         else{
             showOnlyResults(specificResultsBox);
+            // Cell value for title
+            questionColumn.setCellValueFactory(cellData -> {
+                Object value = cellData.getValue().get("question");
+                return new SimpleStringProperty(value != null ? value.toString() : "");
+            });
+
+            // Cell value for grade
+            questionGradeColumn.setCellValueFactory(cellData -> {
+                Object value = cellData.getValue().get("grade");
+                return new SimpleIntegerProperty(value != null ? (Integer) value : 0).asObject();
+            });
+
+            answerColumn.setCellValueFactory(cellData -> {
+                Object value = cellData.getValue().get("answer");
+                return new SimpleStringProperty(value != null ? value.toString() : "");
+            });
+
+
+
+            List<Map<String, Object>> results = resultsDAO.getResultsByQuiz(student.getStudentID());
+            allResults.setItems(FXCollections.observableArrayList(results));
 
             if(quizTitleToQuizMap.containsKey(quiz)){
                 Quiz selectedQuiz = quizTitleToQuizMap.get(quiz);
