@@ -93,7 +93,7 @@ public class SqliteResultsDAO implements IResultsDAO {
     @Override
     public List<Map<String, Object>> getResultsByQuestion(int quizID, int studentID) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT questions.question, questionResults.grade FROM questionResults INNER JOIN questions ON questionResults.question_id=questions.question_id WHERE questionResults.quiz_id = ? AND questionResults.student_id = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT questions.question, questionResults.grade, questions.answer FROM questionResults INNER JOIN questions ON questionResults.question_id=questions.question_id WHERE questionResults.quiz_id = ? AND questionResults.student_id = ?");
             statement.setInt(1, quizID);
             statement.setInt(2, studentID);
             ResultSet resultSet = statement.executeQuery();
@@ -103,6 +103,7 @@ public class SqliteResultsDAO implements IResultsDAO {
                 Map<String, Object> result = new HashMap<>();
                 result.put("question", resultSet.getString("question"));
                 result.put("grade", resultSet.getInt("grade"));
+                result.put("answer", resultSet.getString("answer"));
                 results.add(result);
             }
 
