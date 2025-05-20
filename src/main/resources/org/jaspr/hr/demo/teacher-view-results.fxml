@@ -33,14 +33,6 @@
         <Button fx:id="returnToPrevious" text="Return" onAction="#returnToTeacherDashboard" />
     </VBox>
 
-
-
-    <VBox fx:id="allResultsBox" visible="false" managed="false">
-        <Label text="All Quiz Analytics" style="-fx-font-size: 30px;"/>
-        <Label text = "all rtesult"/>
-        <Button text="Return" onAction="#returnToAnalyticsSelection" />
-    </VBox>
-
     <VBox fx:id="specificResultsBox" visible="false" managed="false">
         <Label fx:id="QuizTitle" style="-fx-font-size: 30px;"/>
         <Label text = "specific quiz"/>
@@ -65,8 +57,6 @@
         <PieChart fx:id="pieChart" layoutX="50" layoutY="50" prefHeight="400" prefWidth="400"/>
 
         <ListView fx:id="ranking"/>
-
-
 
         <Button text="Return" onAction="#returnToAnalyticsSelection" />
     </VBox>

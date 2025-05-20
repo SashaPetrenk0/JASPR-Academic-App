@@ -56,7 +56,6 @@ public class TeacherViewResultsController {
 
     private Teacher currentTeacher;
 
-    @FXML private VBox allResultsBox;
     @FXML private VBox specificResultsBox;
     @FXML private VBox selectionBox;
 
@@ -97,7 +96,11 @@ public class TeacherViewResultsController {
         classroomComboBox.setConverter(new StringConverter<Integer>() {
             @Override
             public String toString(Integer classroomNumber) {
-                return "Classroom " + classroomNumber;
+                if (classroomNumber == null) {
+                    return null;
+                } else {
+                    return "Classroom " + classroomNumber;
+                }
             }
 
             @Override
@@ -110,8 +113,6 @@ public class TeacherViewResultsController {
 
         List<Quiz> quizzes = quizDAO.getAllQuizObjects(currentTeacher);
 
-        Quiz allQuizzesOption = new Quiz(-1,"All quizzes", "Summary", "Represents All Quizzes", 0, 0);
-        quizzes.add(0, allQuizzesOption); // Add the "All quizzes" option at the top
         quizSelection.setItems(FXCollections.observableArrayList(quizzes));
 
         quizSelection.setConverter(new StringConverter<Quiz>() {
@@ -138,27 +139,8 @@ public class TeacherViewResultsController {
             return;
         }
 
-        // UI logic previously in onQuizSelected()
-        if ("All quizzes".equals(selectedQuiz.getTitle())) {
-            showOnlyResults(allResultsBox);
-            selectionBox.setVisible(false);
-            Map<Integer, Double> accuracyMap =
-                    resultsDAO.getQuestionAccuracyForQuiz(selectedQuiz.getId(), selectedClassroom);
-
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            series.setName("Accuracy per Question");
-
-            for (Map.Entry<Integer, Double> entry : accuracyMap.entrySet()) {
-                String questionLabel = "Q" + entry.getKey();
-                double percent = entry.getValue();
-                series.getData().add(new XYChart.Data<>(questionLabel, percent));
-            }
-
-            barChart.getData().clear();
-            barChart.getData().add(series);
-        } else {
             showOnlyResults(specificResultsBox);
-            QuizTitle.setText(selectedQuiz.getTitle());
+            QuizTitle.setText(selectedQuiz.getTitle() + " Quiz Analytics");
             selectionBox.setVisible(false);
             Map<Integer, Double> accuracyMap =
                     resultsDAO.getQuestionAccuracyForQuiz(selectedQuiz.getId(), selectedClassroom);
@@ -185,7 +167,7 @@ public class TeacherViewResultsController {
             studentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStudentName()));
             gradeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getScoreText()));
             percentageColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPercentageText()));
-        }
+
 
         int totalQuestions = quizDAO.getTotalQuestionsForQuiz(selectedQuiz.getId());
 
@@ -227,14 +209,6 @@ public class TeacherViewResultsController {
 
         ranking.setItems(rankedDisplayList);
 
-
-
-
-
-
-
-
-
     }
 
 
@@ -254,7 +228,6 @@ private void returnToTeacherDashboard() throws IOException {
 
 @FXML
 private void returnToAnalyticsSelection() throws IOException {
-    allResultsBox.setVisible(false);
     specificResultsBox.setVisible(false);
     selectionBox.setVisible(true);
 }
