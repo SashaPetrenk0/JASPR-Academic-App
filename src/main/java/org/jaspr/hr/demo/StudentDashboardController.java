@@ -33,7 +33,7 @@ public class StudentDashboardController {
     private ListView<Quiz> createdQuizzesLists;
 
     @FXML
-    private Button takeQuiz;
+    private Button results;
 
     @FXML
     private ListView<Quiz> assignedQuizzesList;
@@ -92,7 +92,7 @@ public class StudentDashboardController {
         }
     }
 
-        @FXML
+    @FXML
         private void openTakeQuiz (String title, Question[]questions, int quizID, int studentID ){
             try {
                 Stage currentStage = (Stage) createdQuizzesLists.getScene().getWindow();
@@ -105,6 +105,8 @@ public class StudentDashboardController {
 
                 controller.loadTitle(title);
                 controller.setQuestions(questions);
+                System.out.print(studentID);
+                System.out.print("quiz id" + quizID);
                 controller.getInfo(studentID,quizID);
 
                 Stage stage = new Stage();
@@ -121,18 +123,19 @@ public class StudentDashboardController {
         }
 
         /// go to create quiz page
-        @FXML
+    @FXML
         protected void onAdd () throws IOException {
             Stage stage = (Stage) createQuiz.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-quiz-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
             stage.setScene(scene);
         }
-        @FXML
-        private void onTakeQuiz () throws IOException {
-            Stage stage = (Stage) takeQuiz.getScene().getWindow();
-            SceneChanger.changeScene(stage, "take-quiz-view-v2.fxml");
+    @FXML
+        private void onViewResults () throws IOException {
+            Stage stage = (Stage) results.getScene().getWindow();
+            SceneChanger.changeScene(stage, "student-view-results.fxml");
         }
+
 
     @FXML
     private void onLogoutClicked() {

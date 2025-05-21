@@ -26,33 +26,27 @@
                <Circle fill="#86c5ff80" layoutX="-19.0" layoutY="529.0" radius="85.0" translateX="40.0" translateY="-30.0" />
             </children>
          </Pane>
-         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <VBox alignment="TOP_CENTER" maxWidth="594.0" prefHeight="470.0" prefWidth="594.0" StackPane.alignment="CENTER">
             <children>
-               <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefWidth="600.0">
+               <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="62.0" prefWidth="570.0">
                   <VBox.margin>
                      <Insets bottom="10.0" top="10.0" />
                   </VBox.margin>
                   <children>
-                     <HBox alignment="TOP_CENTER">
+                     <HBox maxHeight="100.0" minHeight="43.0" prefHeight="43.0" prefWidth="570.0">
                         <children>
-                           <Label alignment="TOP_CENTER" style="-fx-font-size: 24px;" text="Teacher Dashboard">
+                           <Label fx:id="personalisedGreeting" prefHeight="35.0" prefWidth="330.0" style="-fx-font-size: 24px;" text="Emily's Dashboard">
                               <HBox.margin>
                                  <Insets bottom="40.0" top="10.0" />
                               </HBox.margin>
                            </Label>
                         </children>
                      </HBox>
-                     <HBox alignment="TOP_CENTER" prefWidth="600.0">
-                        <children>
-                        
-                            <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi" />
-                        </children>
-                     </HBox>
                   </children>
                </VBox>
-               <HBox alignment="CENTER" maxWidth="600.0" prefHeight="100.0" prefWidth="200.0">
+               <HBox alignment="CENTER" maxWidth="600.0" prefHeight="427.0" prefWidth="594.0">
                   <children>
-                     <VBox spacing="20.0">
+                     <VBox prefHeight="254.0" prefWidth="170.0" spacing="20.0">
                         <padding>
                            <Insets bottom="20.0" right="20.0" top="20.0" />
                         </padding>
@@ -78,6 +72,16 @@
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Button>
+                           <Button fx:id="assignQuizzes1" layoutX="10.0" layoutY="168.0" minHeight="35.0" onAction="#onAssignQuizzesClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Analytics">
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                           </Button>
+                           <Button fx:id="assignQuizzes11" layoutX="10.0" layoutY="223.0" minHeight="35.0" onAction="#onAssignQuizzesClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Classrooms">
+                              <font>
+                                 <Font name="System Bold" size="12.0" />
+                              </font>
+                           </Button>
                         
                             <Button fx:id="logoutButton" minHeight="35.0" onAction="#onLogoutClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Logout">
                               <font>
@@ -86,19 +90,22 @@
                            </Button>
                         </children>
                      </VBox>
-                     <VBox alignment="CENTER">
+                     <VBox>
                         <padding>
                            <Insets bottom="20.0" top="20.0" />
                         </padding>
                         <children>
                            <Label style="-fx-font-size: 18px;" text="Your Quizzes" />
                      
-                                   <ListView fx:id="quizLists" prefWidth="400.0" />
+                                   <ListView fx:id="quizLists" prefHeight="312.0" prefWidth="400.0" />
                         </children>
                      </VBox>
                   </children>
                </HBox>
             </children>
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
          </VBox>
       </children>
    </StackPane>

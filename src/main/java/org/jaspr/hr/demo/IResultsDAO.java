@@ -1,13 +1,15 @@
 package org.jaspr.hr.demo;
 
+import java.util.*;
+
 public interface IResultsDAO {
 
-     void addQuestionResult(Student student, Quiz quiz, Question question,  int correct);
+     void addQuestionResult( int quiz, int question, int student, int correct);
 
-     void getResultsByQuestion(int questionId, int correct);
+     List<Map<String, Integer>> getResultsByQuestion(int questionId, int correct);
 
-     void getResultsByQuiz(int quizId);
-     void addQuizResult(int studentID, int quizID, int grade);
+     List<Map<String, Integer>> getResultsByQuiz(int quizId);
+     void addQuizResult(int studentID, int quizID, double grade);
 
 
 

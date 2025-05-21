@@ -41,7 +41,7 @@ public class TeacherDashboardController {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(teacher)));
-            personalisedGreeting.setText("Hi, " + teacher.getName() + "!");
+            personalisedGreeting.setText(teacher.getName() + "'s Dashboard");
             System.out.println(teacher.getName() + teacher.getTeacherID());
         }
     }

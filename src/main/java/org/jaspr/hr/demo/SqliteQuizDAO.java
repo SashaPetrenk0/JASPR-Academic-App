@@ -116,20 +116,21 @@ public class SqliteQuizDAO implements IQuizDAO {
             ResultSet resultSet = statement.executeQuery();
             List<Question> questionList = new ArrayList<>();
 
-
-
             while (resultSet.next()) {
                 questionList.add(new Question(
+                        resultSet.getInt("question_id"),
                         resultSet.getString("question"),
                         resultSet.getString("optionA"),
                         resultSet.getString("optionB"),
                         resultSet.getString("optionC"),
                         resultSet.getString("optionD"),
                         resultSet.getString("answer")
+
                 ));
             }
 
-            System.out.println("Questions loaded: " + questionList.size()); // Debug
+            System.out.println("Questions loaded: " + questionList.size());
+            System.out.print("quizID " + questionList.getFirst().getId());// Debug
             return questionList.toArray(new Question[0]);
 
         } catch (Exception e) {
