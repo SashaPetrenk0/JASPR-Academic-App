@@ -155,7 +155,7 @@
 
                         <!-- Parent Form -->
                         <VBox fx:id="parentForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
-                            <Label style="-fx-font-size: 18px -fx-text-fill: black;" text="Parent Sign Up">
+                            <Label style="-fx-font-size: 18px; -fx-text-fill: black;" text="Parent Sign Up">
                                 <font>
                                     <Font name="Telugu Sangam MN" size="14.0" />
                                 </font>
