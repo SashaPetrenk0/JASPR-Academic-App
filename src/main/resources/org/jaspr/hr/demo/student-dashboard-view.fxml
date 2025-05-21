@@ -82,9 +82,12 @@
                         <children>
 
 
-    <VBox alignment="CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml">
+    <VBox alignment="CENTER_LEFT" spacing="10" xmlns:fx="http://javafx.com/fxml">
         <Label text="My Quizzes" />
-        <ListView fx:id="createdQuizzesLists" />
+        <ListView fx:id="createdQuizzesLists">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin></ListView>
 
                                                           </VBox>
 
