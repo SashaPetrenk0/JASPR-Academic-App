@@ -10,10 +10,14 @@ import org.jaspr.hr.demo.Admin;
 import org.jaspr.hr.demo.Parent;
 import org.jaspr.hr.demo.Student;
 import org.jaspr.hr.demo.Teacher;
+import org.jaspr.hr.demo.Question;
+import org.jaspr.hr.demo.Quiz;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+import java.sql.*;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
 
 
 public class QuestionTests {
@@ -25,6 +29,34 @@ public class QuestionTests {
     private static Teacher teacher;
     private static Admin admin;
     private static Parent parent;
+    private static Question question;
+    private static Question question2;
+    private static final int ID = 1;
+    private static final int ID_TWO = 2;
+    private static final String QUIZ_TITLE = "Chemistry";
+    private static final String QUIZ_TITLE_TWO = "Physics";
+    private static final String DESC = "Multiple choice quiz about chem";
+    private static final String DESC_TWO = "Multiple choice quiz about physics";
+    private static final String TOPIC = "Chemical reactions";
+    private static final String TOPIC_TWO = "Forces";
+    private static final int NUMOFQUESTIONS = 5;
+    private static final int NUMOFQUESTIONSTWO = 10;
+    private static final int AUTHOR = 1;
+    private static final int AUTHOR_TWO = 2;
+
+
+    private Quiz quiz;
+    private Quiz quizTwo;
+
+    @BeforeAll
+    public static void initial_setup() throws SQLException {
+        // Set up a connection to your test database
+        connection = DriverManager.getConnection("jdbc:sqlite:users.db");
+
+        // Initialize the userDAO with the connection
+        userDAO = new SqliteUserDAO();  // Ensure you pass the connection to the DAO
+        connection.setAutoCommit(false);  // Begin transaction
+    }
 
     @BeforeEach
     public void setup() throws SQLException {
@@ -37,44 +69,16 @@ public class QuestionTests {
         teacher = new Teacher("Steve", 35, 14321, "steve@gmail.com");
         admin = new Admin("Alice", 40, 1001, "alice@gmail.com");
         parent = new Parent("Sarah", "John", 12345, "sarah@gmail.com");
-    }
-
-    @BeforeEach
-    public void beginTransaction() throws SQLException {
-        // Start a new transaction before each test
-        connection.setAutoCommit(false);  // Begin transaction
+        quiz = new Quiz(QUIZ_TITLE, DESC,TOPIC,NUMOFQUESTIONS,AUTHOR);
+        quizTwo = new Quiz(QUIZ_TITLE_TWO,DESC_TWO,TOPIC_TWO,NUMOFQUESTIONSTWO,AUTHOR_TWO);
+        question = new Question("What colour is the sky?", "Red", "Green", "Blue", "Purple", "Blue");
+        question2 = new Question("What is the capital of France?", "Berlin", "Paris", "Rome", "Madrid", "Paris");
     }
 
     @AfterEach
     public void rollbackTransaction() throws SQLException {
         // Rollback the transaction after each test to ensure no changes persist
         connection.rollback();
-    }
-
-//    @Test
-//    public void testConstructor() {
-//        String questionText  = "What is the capital of France?";
-//        String[] choices = {"Berlin", "Paris", "Rome", "Madrid"};
-//        int correctAnswerIndex = 2;
-//
-//        Question question = new Question("What is the capital of France?", "Berlin", "Paris", "Rome", "Madrid", "Paris");
-//
-//        assertEquals(questionText, question.getQuestion());
-//        assertArrayEquals(choices, question.getChoices());
-//        assertEquals(correctAnswerIndex, question.getCorrectAnswerIndex());
-//    }
-
-    @Test
-    public void testGetChoices() {
-        String[] choices = {"Red", "Green", "Blue"};
-        Question question = new Question("What colour is the sky?", "Red", "Green", "Blue", "Purple", "Blue");
-
-        assertEquals("What colour is the sky?", question.getQuestion());
-        assertEquals("Red", question.getOptionA());
-        assertEquals("Green", question.getOptionB());
-        assertEquals("Blue", question.getOptionC());
-        assertEquals("Purple", question.getOptionD());
-        assertEquals("Blue", question.getCorrectAnswer());
     }
 
 
@@ -343,9 +347,100 @@ public class QuestionTests {
         public void testParentGetRole(){
             assertEquals("Parent", parent.getRole());
         }
+        // QUESTION CLASS UNIT TESTS
+
+    @Test
+    public void testGetChoices() {
+
+
+        assertEquals("What colour is the sky?", question.getQuestion());
+        assertEquals("Red", question.getOptionA());
+        assertEquals("Green", question.getOptionB());
+        assertEquals("Blue", question.getOptionC());
+        assertEquals("Purple", question.getOptionD());
+        assertEquals("Blue", question.getCorrectAnswer());
+    }
+
+    @Test
+    public void testSetQuestion() {
+        question.setQuestion("What is the capital of France?");
+        assertEquals("What is the capital of France?", question.getQuestion());
+    }
+
+    @Test
+    public void testSetChoices() {
+        question.setOptionA("Berlin");
+        assertEquals("Berlin", question.getOptionA());
+        question.setOptionB("Paris");
+        assertEquals("Paris", question.getOptionB());
+        question.setOptionC("Rome");
+        assertEquals("Rome", question.getOptionC());
+        question.setOptionD("What is the capital of France?");
+        assertEquals("Madrid", question.getOptionD());
+    }
+
+    @Test
+    public void testSetAnswer() {
+        question.setCorrectAnswer("Paris");
+        assertEquals("Paris", question.getCorrectAnswer());
+    }
+
+
+    @Test
+    public void testGetTitle() {
+        assertEquals(QUIZ_TITLE, quiz.getTitle());
+    }
+    @Test
+    public void testSetTitle() {
+        quiz.setTitle(QUIZ_TITLE_TWO);
+        assertEquals(QUIZ_TITLE_TWO, quiz.getTitle());
+    }
+    @Test
+    public void testGetDescription() {
+        assertEquals(DESC, quiz.getDescription());
+    }
+    @Test
+    public void testSetDescription() {
+        quiz.setDescription(DESC_TWO);
+        assertEquals(DESC_TWO, quiz.getDescription());
+    }
+    @Test
+    public void testGetTopic() {
+        assertEquals(TOPIC, quiz.getTopic());
+    }
+    @Test
+    public void testSetTopic() {
+        quiz.setTopic(TOPIC_TWO);
+        assertEquals(TOPIC_TWO, quiz.getTopic());
+    }
+    @Test
+    public void testGetNumOfQuestions() {
+        assertEquals(NUMOFQUESTIONS, quiz.getNumOfQuestions());
+    }
+    @Test
+    public void testSetNumOfQuestions() {
+        quiz.setNumOfQuestions(NUMOFQUESTIONSTWO);
+        assertEquals( NUMOFQUESTIONSTWO, quiz.getNumOfQuestions());
+    }
+
+    @Test
+    public void testGetAuthor() {
+        assertEquals(AUTHOR, quiz.getAuthor());
+    }
+    @Test
+    public void testSetAuthor() {
+        quiz.setAuthor(AUTHOR_TWO);
+        assertEquals( AUTHOR_TWO, quiz.getAuthor());
+    }
+
     @AfterAll
     public static void cleanup() throws SQLException {
-        connection.close();  // Close the connection after all tests are done
+            if (connection != null) {
+                connection.rollback(); // Reverts everything done during the test
+                connection.setAutoCommit(true); // (Optional) Reset for other use
+                connection.close(); // Clean up
+            }
+
     }
 
     }

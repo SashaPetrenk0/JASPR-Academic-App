@@ -49,6 +49,9 @@ public class TakeQuizController {
 
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
+    private final User user = UserSession.getInstance().getCurrentUser();
+    private Student student = (Student) user;
+
     @FXML
     public void loadTitle(String title){
         quizTitle.setText(title);
@@ -69,11 +72,6 @@ public class TakeQuizController {
         this.quizId = quiz_id;
 
     }
-
-
-
-
-
 
     @FXML
     public void loadQuestion(){
@@ -101,10 +99,11 @@ public class TakeQuizController {
             System.out.println("Quiz finished!");
             System.out.println("correct" + correctAnswerCount);
             System.out.println("incorrect" + incorrectAnswerCount);
-            int grade = correctAnswerCount/questions.length;
+            double grade = ((double) correctAnswerCount / questions.length) * 100;
             questionLabel.setText("Quiz FInished! You scored"+ correctAnswerCount + "/"+questions.length);
-
-            resultsDAO.addQuizResult(studentId, quizId, grade);
+            System.out.print(studentId);
+            System.out.print(quizId);
+            resultsDAO.addQuizResult(quizId, studentId, grade);
 
         }
     }
@@ -116,13 +115,17 @@ public class TakeQuizController {
     @FXML
     private boolean checkAnswer(String answer){
         String correctAnswer = questions[questionIndex].getCorrectAnswer();
+        System.out.println("x "+questions[questionIndex].getId());
 
         if (answer.equals(correctAnswer)){
             System.out.println("correct");
+
+            resultsDAO.addQuestionResult( quizId, questions[questionIndex].getId(), student.getStudentID(), 1 );
             return true;
 
         }else{
             System.out.println("wrong");
+            resultsDAO.addQuestionResult( quizId, questions[questionIndex].getId(), student.getStudentID(), 0 );
             return false;
         }
 
