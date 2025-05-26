@@ -1,7 +1,7 @@
 package org.jaspr.hr.demo;
 
 /**
- * A simple model class representing a student with an age and student id.
+ * A simple model class inheriting email and name from the user class, representing a student with an age and student id.
  */
 
 public class Student extends User {
@@ -15,6 +15,7 @@ public class Student extends User {
      * @param studentID The unique identifier of the student
      * @param email The email of the student
      */
+
     public Student(String name, int age, int studentID, String email){
         super(name, email);
         this.age = age;
