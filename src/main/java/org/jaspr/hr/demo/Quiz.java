@@ -1,6 +1,8 @@
 package org.jaspr.hr.demo;
 
-import java.util.List;
+/**
+ * A simple model class representing a quiz with an id, title, description,topic,number of questions, author and array of questions
+ */
 
 public class Quiz {
     private int id;
@@ -11,7 +13,14 @@ public class Quiz {
     private int author;
     private Question[] questions;
 
-
+    /**
+     * Constructs a new Quiz with the specified title, description,topic,number of questions, author.
+     * @param title the title of the quiz
+     * @param description the description of the quiz (used as a prompt for AI)
+     * @param topic topic of quiz
+     * @param numOfQuestions number of questions in the quiz (also used to prompt AI)
+     * @param author id of the user who made the quiz
+     */
 
     public Quiz(String title, String description, String topic, int numOfQuestions, int author) {
         this.title = title;
@@ -19,10 +28,20 @@ public class Quiz {
         this.topic = topic;
         this.numOfQuestions = numOfQuestions;
         this.author = author;
-        //  this.questions = questions;
+
     }
 
-    public Quiz(int id, String title, String description, String topic, int numOfQuestions, int author){
+    /**
+     * Constructs a new Quiz with the specified id, title, description,topic,number of questions, author.
+     * @param id the id of the quiz
+     * @param title the title of the quiz
+     * @param description the description of the quiz (used as a prompt for AI)
+     * @param topic topic of quiz
+     * @param numOfQuestions number of questions in the quiz (also used to prompt AI)
+     * @param author id of the user who made the quiz
+     */
+
+    public Quiz(int id, String title, String description, String topic, int numOfQuestions, int author) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -51,7 +70,7 @@ public class Quiz {
         return id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -87,9 +106,4 @@ public class Quiz {
         this.topic = topic;
     }
 
-    public String getQuizDetails(){
-        return title + " " + topic +  " " + description + " " + numOfQuestions;
-    }
 }
-
-/// I need a change to commit
