@@ -31,7 +31,7 @@ public class TakeQuizController {
 
 
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
-
+    private final User user = UserSession.getInstance().getCurrentUser();
     private Student student = (Student) user;
 
     @FXML
