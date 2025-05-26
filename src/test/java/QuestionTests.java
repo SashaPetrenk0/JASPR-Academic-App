@@ -375,7 +375,7 @@ public class QuestionTests {
         assertEquals("Paris", question.getOptionB());
         question.setOptionC("Rome");
         assertEquals("Rome", question.getOptionC());
-        question.setOptionD("What is the capital of France?");
+        question.setOptionD("Madrid");
         assertEquals("Madrid", question.getOptionD());
     }
 
