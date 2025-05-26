@@ -1,22 +1,10 @@
 package org.jaspr.hr.demo;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 
 public class TakeQuizController {
-    private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
-
-
-
-    User user = UserSession.getInstance().getCurrentUser();
-    String role = UserSession.getInstance().getRole();
-
-
     @FXML
     private Label quizTitle;
     @FXML
@@ -29,11 +17,6 @@ public class TakeQuizController {
     private Button optionC;
     @FXML
     private Button optionD;
-
-    @FXML
-    private Button nextButton;
-    @FXML
-    private Button returnToPrevious;
 
 
 
@@ -169,26 +152,6 @@ public class TakeQuizController {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
-        }
-
-    }
-
-    @FXML
-    private void onNextPressed(ActionEvent event) {
-
-
-    }
-
-
-    @FXML private void returnToPage() throws IOException {
-        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        if ("Teacher".equals(role) && user instanceof Teacher){
-            Teacher teacher = (Teacher) user;
-            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
-
-        }else if ("Student".equals(role) && user instanceof Student) {
-            Student student = (Student) user;
-            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
         }
 
     }
