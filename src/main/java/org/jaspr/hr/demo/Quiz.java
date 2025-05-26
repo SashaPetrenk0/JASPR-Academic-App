@@ -13,6 +13,14 @@ public class Quiz {
     private int author;
     private Question[] questions;
 
+    /**
+     * Constructs a new Quiz with the specified title, description,topic,number of questions, author.
+     * @param title the title of the quiz
+     * @param description the description of the quiz (used as a prompt for AI)
+     * @param topic topic of quiz
+     * @param numOfQuestions number of questions in the quiz (also used to prompt AI)
+     * @param author id of the user who made the quiz
+     */
 
     public Quiz(String title, String description, String topic, int numOfQuestions, int author) {
         this.title = title;
@@ -22,6 +30,16 @@ public class Quiz {
         this.author = author;
 
     }
+
+    /**
+     * Constructs a new Quiz with the specified id, title, description,topic,number of questions, author.
+     * @param id the id of the quiz
+     * @param title the title of the quiz
+     * @param description the description of the quiz (used as a prompt for AI)
+     * @param topic topic of quiz
+     * @param numOfQuestions number of questions in the quiz (also used to prompt AI)
+     * @param author id of the user who made the quiz
+     */
 
     public Quiz(int id, String title, String description, String topic, int numOfQuestions, int author) {
         this.id = id;
