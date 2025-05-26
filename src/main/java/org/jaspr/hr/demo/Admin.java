@@ -22,4 +22,12 @@ public class Admin extends User {
     public int getAdminID(){
         return adminID;
     }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setAdminID(int adminID) {
+        this.adminID = adminID;
+    }
 }

@@ -22,4 +22,12 @@ public class Parent extends User {
     public int getChildID(){
         return childID;
     }
+
+    public void setChildName(String childName) {
+        this.childName = childName;
+    }
+
+    public void setChildID(int childID) {
+        this.childID = childID;
+    }
 }
