@@ -35,7 +35,7 @@
             <VBox alignment="CENTER" spacing="30.0">
             <HBox prefHeight="60.0" prefWidth="1057.0">
                <children>
-                      <Label alignment="TOP_LEFT" style="-fx-font-size: 30px;" text="Please Make Assignment Selection:">
+                      <Label alignment="TOP_LEFT" style="-fx-font-size: 30px;" text="Please make assignment selection:">
                           <font>
                               <Font name="Telugu Sangam MN" size="13.0" />
                           </font>
@@ -46,20 +46,23 @@
                </children>
             </HBox>
 
-                <VBox prefHeight="246.0" prefWidth="1057.0" spacing="20.0" style="-fx-background-color: #F0F0F0; -fx-background-radius: 20; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.2, 0, 4);">
+                <VBox prefHeight="246.0" prefWidth="1057.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-padding: 30;">
 
-                    <HBox prefHeight="40.0" prefWidth="800.0">
+                    <HBox prefHeight="173.0" prefWidth="997.0">
                         <children>
-                            <VBox alignment="CENTER_LEFT" opacity="0.85" prefHeight="94.0" prefWidth="1009.0" spacing="20.0" style="-fx-background-color: #a5d6a7; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                            <VBox alignment="CENTER_LEFT" opacity="0.85" prefHeight="141.0" prefWidth="997.0" spacing="20.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
                                 <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Classroom:" />
-                                <ComboBox fx:id="classroomComboBox" prefHeight="30.0" prefWidth="785.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 10;" />
+                                <ComboBox fx:id="classroomComboBox" prefHeight="49.0" prefWidth="967.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 10;" />
+                        <HBox.margin>
+                           <Insets bottom="30.0" />
+                        </HBox.margin>
                             </VBox>
                         </children>
                     </HBox>
 
                     <HBox prefHeight="0.0" prefWidth="800.0">
                         <children>
-                            <VBox prefHeight="56.0" prefWidth="490.0" spacing="8.0" style="-fx-background-color: #a5d6a7; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                            <VBox prefHeight="56.0" prefWidth="490.0" spacing="8.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
                                 <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Teacher:" />
                                 <VBox fx:id="teacherRadioList" spacing="10.0" />
                                 <HBox.margin>
@@ -67,7 +70,7 @@
                                 </HBox.margin>
                             </VBox>
 
-                            <VBox prefHeight="56.0" prefWidth="527.0" style="-fx-background-color: #a5d6a7; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                            <VBox prefHeight="56.0" prefWidth="527.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
                                 <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Students:" />
                                 <VBox fx:id="studentVBox" spacing="10.0" />
                             </VBox>
@@ -77,7 +80,7 @@
             <HBox alignment="CENTER" prefHeight="101.0" prefWidth="1057.0">
                <children>
       
-                      <Button fx:id="assignUsers" onAction="#assignUsers" prefHeight="49.0" prefWidth="1057.0" style="-fx-background-radius: 30; -fx-background-color: #A8DDDC;" text="Assign" textFill="WHITE">
+                      <Button fx:id="assignUsers" onAction="#assignUsers" prefHeight="49.0" prefWidth="1057.0" style="-fx-background-radius: 30; -fx-background-color: #C1F3B9;" text="Assign" textFill="#6f6b6b">
                           <font>
                               <Font name="Telugu Sangam MN Bold" size="23.0" />
                           </font>
