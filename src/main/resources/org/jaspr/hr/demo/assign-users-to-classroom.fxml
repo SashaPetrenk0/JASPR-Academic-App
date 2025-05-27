@@ -63,7 +63,7 @@
                     <HBox prefHeight="0.0" prefWidth="800.0">
                         <children>
                             <VBox prefHeight="56.0" prefWidth="490.0" spacing="8.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
-                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Teacher:" />
+                                <Label style=" -fx-font-size: 14px;" text="Select Teacher:" />
                                 <VBox fx:id="teacherRadioList" spacing="10.0" />
                                 <HBox.margin>
                                     <Insets right="20.0" />
@@ -71,7 +71,7 @@
                             </VBox>
 
                             <VBox prefHeight="56.0" prefWidth="527.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
-                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Students:" />
+                                <Label style=" -fx-font-size: 14px;" text="Select Students:" />
                                 <VBox fx:id="studentVBox" spacing="10.0" />
                             </VBox>
                         </children>
@@ -80,9 +80,9 @@
             <HBox alignment="CENTER" prefHeight="101.0" prefWidth="1057.0">
                <children>
       
-                      <Button fx:id="assignUsers" onAction="#assignUsers" prefHeight="49.0" prefWidth="1057.0" style="-fx-background-radius: 30; -fx-background-color: #C1F3B9;" text="Assign" textFill="#6f6b6b">
+                      <Button fx:id="assignUsers" onAction="#assignUsers" prefHeight="76.0" prefWidth="1057.0" style="-fx-background-radius: 25; -fx-background-color: #C1F3B9;" text="Create Assignment" textFill="#393535">
                           <font>
-                              <Font name="Telugu Sangam MN Bold" size="23.0" />
+                              <Font name="Telugu Sangam MN Bold" size="21.0" />
                           </font>
                       </Button>
                </children>
