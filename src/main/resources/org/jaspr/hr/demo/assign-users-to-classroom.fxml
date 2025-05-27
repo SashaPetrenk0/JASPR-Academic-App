@@ -28,7 +28,7 @@
                 <Circle fill="#c68fd780" layoutX="916.0" layoutY="54.0" radius="137.0" translateX="80.0" translateY="-100.0" />
                 <Circle fill="#ffd34f5f" layoutX="823.0" layoutY="110.0" radius="63.0" translateX="40.0" translateY="-30.0" />
                 <Circle fill="#f8ba6d80" layoutX="68.0" layoutY="760.0" radius="56.0" translateX="20.0" translateY="-30.0" />
-                <Circle fill="#86c5ff80" layoutX="-198.0" layoutY="708.0" radius="82.0" translateX="180.0" translateY="-30.0" />
+                <Circle fill="#86c5ff80" layoutX="-196.0" layoutY="706.0" radius="84.0" translateX="180.0" translateY="-30.0" />
             </Pane>
 
             <!-- Foreground Content -->
