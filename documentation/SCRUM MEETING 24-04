@@ -1,0 +1,51 @@
+SCRUM MEETING 
+•	Everyone write at least 10-unit tests about one particular functionality
+o	Pragati: Create classroom, assigning teachers and students, maybe viewing details for each user 
+o	Roman: Registration unit testing 
+o	Aud: Edit quiz for teacher and student 
+o	Jamie: Login unit testing 
+o	Sasha: Create quiz for teacher and create quiz for student
+•	Pragati  - Create classroom, assign teacher and student to classrooms, 
+•	Jamie and Audrey finalising the styling of FXML files – home page, registration page, login page, teacher dashboard, student dashboard
+•	Audrey -  Edit quizzes for teacher and student, move documentation files from old repository into new
+•	Roman – all user registration error handling, all user login error handling, work on admin tasks error handling
+•	Sasha – Replicate teacher create quiz for student, finished for Week 9 checkpoint
+•	Video:
+o	Pragati and Sasha to write script and plan video
+	Record video on Monday night 5pm 
+o	Audrey and Roman and Jamie to speak
+
+Notes from Tutor about Week 9 Video
+•	Have slides mixed with screenshots
+•	Easy to talk about nice and clear
+•	Don’t all have to speak  
+•	One person speak the whole time – maybe either Jamie/aud/roman
+•	List of what we need to talk about on canvas
+•	Being marked on how we use oop
+•	Bro literally said to bullshit our way through this lol
+•	Not testing sending and retrieving from the database – just testing data entry so error handling tests will be the bulk of it
+•	Format and edit what were doing???
+•	Login security
+•	SALTING hash function for password
+•	Highlight in the video that we have that
+•	Data filtering ?? what does he mean
+•	App itself
+•	One page with a bit of functionality
+•	Or a page with no real functionality and that still links to other pages 
+•	Landing page needs to be high fidelity
+•	(so we need to  figure out the design style we want to pursue (like what sasha sent maybe or something else) but make sure we have a really fire landing page 
+•	Come up with a logo
+•	We don’t have to have a lot of pages to do well
+•	Unit is not about programming, more about project management – we can have someone who is doing just project management 
+•	Expecting registration and lpgin and that the datasbe is working
+•	Expecting a dashboard screen that looks nice
+•	(don’t expect too much beyond that so were doing well)
+•	But to get more marks they want us to show more so we should show everything we have planned to have
+•	Submitting screenshots of project management
+•	Overview of whose doing what on Trello
+•	Should be able to search for who is doing each thing
+•	(a screeshot of what each person is doing on Trello)
+•	Show that we a really using the trello 
+•	Sorting by member, sorting by completed/not completed ETC
+
+
