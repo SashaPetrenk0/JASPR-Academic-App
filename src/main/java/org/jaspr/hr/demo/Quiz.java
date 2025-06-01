@@ -19,7 +19,7 @@ public class Quiz {
         this.topic = topic;
         this.numOfQuestions = numOfQuestions;
         this.author = author;
-        //  this.questions = questions;
+
     }
 
     public Quiz(int id, String title, String description, String topic, int numOfQuestions, int author){
