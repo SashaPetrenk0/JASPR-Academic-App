@@ -1,0 +1,31 @@
+SCRUM MEETING
+•	Sasha checkpoint to do: 
+o	Make the AI generate the quiz questions 
+o	Make the results show up on the app and not in the console
+o	Be able to edit existing quizzes
+o	Create results table, show on a page
+•	Pragati:
+o	Create a page where teachers can assign a quiz to their students
+	To the whole class as well as one particular student
+o	Teacher views results for students in their class sorted by quiz
+o	Error handle for assigning classrooms functionality (in the console but not on the app right now)
+o	Tidy up error handling overall
+o	Add a middle classrooms dashboard page after the classrooms page
+•	Audrey:
+o	Style teacher dashboard
+o	Style student dashboard 
+o	At least 5 unit tests – about Question model class
+•	Jamie:
+o	Style the admin classroom page (literally only two buttons)
+o	Style the admin create classroom page
+o	Style the admin assigning people page
+o	Fix the registration teacher thing (Pragati tried but she got confused oopsies sorry Jamie)
+o	Also for registration fields, it says name in the box itself but not above, could we add labels above the text box to indicate what goes there?
+•	Roman:	
+o	Style the taking the quiz page (HIGH PRIORITY)
+o	Style the admin dashboard page 
+
+Extra front end things:
+o	Style the student “assigned quizzes” page where they see all their assigned quizzes (back end not done – potentially for Week 13 submission)
+o	Style the teacher assigns quizzes to students page (back end not done – potentially for week 13 submission)
+

@@ -1,5 +1,9 @@
 package org.jaspr.hr.demo;
 
+/**
+ * An abstract class representing a user with a  name email, and role (student, teacher admin)
+ */
+
 public abstract class User {
    protected String name;
    protected String email;
@@ -21,5 +25,14 @@ public abstract class User {
     public String getEmail()
     {
         return email;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

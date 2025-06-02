@@ -28,7 +28,7 @@
             </Pane>
             <HBox prefHeight="49.0" style="-fx-background-radius: 50; -fx-padding: 10px 20px;">
                <children>
-                  <Button fx:id="returnToPrevious" onAction="#returnToPage" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
+                  <Button fx:id="returnToPrevious"  style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
@@ -122,7 +122,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
                      <children>
-                        <Button fx:id="nextButton" minHeight="50.0" onAction="#onNextPressed" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
+                        <Button fx:id="nextButton" minHeight="50.0" onAction="#nextQuestion" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
