@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
@@ -13,10 +14,21 @@ import java.io.IOException;
 
 
 public class TeacherDashboardController {
+
+
     User user = UserSession.getInstance().getCurrentUser();
     String role = UserSession.getInstance().getRole();
 
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
+
+    @FXML
+    private VBox rootPane;
+
+    @FXML
+    public Button classrooms;
+
+    @FXML
+    public Button analytics;
 
     @FXML
     private Button profileButton;
@@ -41,6 +53,13 @@ public class TeacherDashboardController {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
             quizLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(teacher)));
+
+            quizLists.focusedProperty().addListener((obs, oldVal, newVal) -> {
+                if (!newVal) {
+                    quizLists.getSelectionModel().clearSelection();
+                }
+            });
+
             personalisedGreeting.setText(teacher.getName() + "'s Dashboard");
             System.out.println(teacher.getName() + teacher.getTeacherID());
         }

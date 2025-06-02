@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
+<VBox id="rootPane" alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -72,7 +72,7 @@
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Button>
-                           <Button fx:id="assignQuizzes1" layoutX="10.0" layoutY="168.0" minHeight="35.0" onAction="#onAssignQuizzesClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Analytics">
+                           <Button fx:id="analytics" layoutX="10.0" layoutY="168.0" minHeight="35.0" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Analytics">
                               <font>
                                  <Font name="System Bold" size="12.0" />
                               </font>
@@ -97,7 +97,7 @@
                         <children>
                            <Label style="-fx-font-size: 18px;" text="Your Quizzes" />
                      
-                                   <ListView fx:id="quizLists" prefHeight="312.0" prefWidth="400.0" />
+                                   <ListView fx:id="quizLists" prefHeight="312.0" prefWidth="400.0" styleClass="list-cell" stylesheets="@styles.css" />
                         </children>
                      </VBox>
                   </children>

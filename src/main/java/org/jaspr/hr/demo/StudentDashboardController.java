@@ -44,7 +44,7 @@ public class StudentDashboardController {
     public void initialize() {
         if ("Student".equals(role) && user instanceof Student) {
             Student student = (Student) user;
-            personalisedGreeting.setText("Hi, " + student.getName() + "!");
+            personalisedGreeting.setText(student.getName() + "'s Dashboard");
             createdQuizzesLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
 
             createdQuizzesLists.setCellFactory(listView -> new ListCell<>() {
