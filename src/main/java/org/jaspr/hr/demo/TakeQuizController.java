@@ -1,22 +1,11 @@
 package org.jaspr.hr.demo;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 
 public class TakeQuizController {
-    private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
-
-
-
-    User user = UserSession.getInstance().getCurrentUser();
-    String role = UserSession.getInstance().getRole();
-
-
     @FXML
     private Label quizTitle;
     @FXML
@@ -30,12 +19,9 @@ public class TakeQuizController {
     @FXML
     private Button optionD;
 
-    @FXML
-    private Button nextButton;
+
     @FXML
     private Button returnToPrevious;
-
-
 
     private Question[] questions;
 
@@ -48,7 +34,6 @@ public class TakeQuizController {
 
 
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
-
     private final User user = UserSession.getInstance().getCurrentUser();
     private Student student = (Student) user;
 
@@ -100,7 +85,7 @@ public class TakeQuizController {
             System.out.println("correct" + correctAnswerCount);
             System.out.println("incorrect" + incorrectAnswerCount);
             double grade = ((double) correctAnswerCount / questions.length) * 100;
-            questionLabel.setText("Quiz FInished! You scored"+ correctAnswerCount + "/"+questions.length);
+            questionLabel.setText("Quiz Finished! You scored"+ correctAnswerCount + "/"+questions.length);
             System.out.print(studentId);
             System.out.print(quizId);
             resultsDAO.addQuizResult(quizId, studentId, grade);
@@ -109,9 +94,10 @@ public class TakeQuizController {
     }
 
     @FXML
-    public void leaveQuiz() {
+    private void onReturn(){
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
     }
-
     @FXML
     private boolean checkAnswer(String answer){
         String correctAnswer = questions[questionIndex].getCorrectAnswer();
@@ -170,26 +156,6 @@ public class TakeQuizController {
             correctAnswerCount ++;
         } else{
             incorrectAnswerCount ++;
-        }
-
-    }
-
-    @FXML
-    private void onNextPressed(ActionEvent event) {
-
-
-    }
-
-
-    @FXML private void returnToPage() throws IOException {
-        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
-        if ("Teacher".equals(role) && user instanceof Teacher){
-            Teacher teacher = (Teacher) user;
-            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
-
-        }else if ("Student".equals(role) && user instanceof Student) {
-            Student student = (Student) user;
-            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
         }
 
     }

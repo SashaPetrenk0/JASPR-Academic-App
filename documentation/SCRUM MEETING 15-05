@@ -1,0 +1,68 @@
+SCRUM MEETING 15-05
+
+CHALLENGES 
+•	Aud: Merge issues with controller conflicts restricting scene builder use 
+•	Jamie: Had trouble dynamic scrolling on the registration page
+•	Roman: Redoing unit tests from integration tests
+•	Sasha: StudentID is null when passing results into results table
+•	Sasha: Maven dependency issues when making JavaDoc
+•	Pragati: Merging all the unit tests while resolving conflicts and merging from main
+•	Pragati: Issue with maven dependencies
+
+FRONT END
+•	Jamie: 
+o	Classroom menu
+o	Classroom creation
+o	Classroom assignment pages
+o	Finalise any edits on your pages (before the due date)
+o	URGENT  (push and merge your profile page and register
+•	Audrey (Monday):
+o	Teacher dashboard – linking with all the other files (URGENT)
+o	Student Dashboard (URGENT)
+o	Make the slides – Audrey (Done by Week 12 Tuesday)
+o	Teacher dashboard analytics (Week 12 Sunday)
+o	Change Password Page (Week 12 Sunday)
+o	Styling the Teacher clicks on a quiz and it takes them to a page with all the questions (add a fake edit question button next to each question) (Week 13 Wednesday)
+•	Roman – Urgent could be by week 11 sunday: 
+o	Roman to email unit coordinator (URGENT)
+o	Taking the quiz page (merging into main) – talk to Sasha about clicking on different options (URGENT)
+	After quiz is done, hide the HBox and put the score big on the screen (only thing on the screen) Pragati
+o	Ollama Downloaded (URGENT)
+o	Unit tests – Fixing romans to be setters and getters (URGENT)
+	Fixing Audrey to be individual setters 
+o	Write the script – Roman (Done by Week 12 Tuesday)
+o	
+o	Teacher assigning quizzes page 1 (Week 12 Wednesday)
+o	Teacher assigning quizzes page 2 – styled but not merged(Week 12 Wednesday)
+o	Admin dashboard (Week 12 Friday)
+o	Student dashboard analytics (Week 12 Sunday)
+
+BACK END
+•	Sasha: Finish up the JavaDoc (?? – maybe next Thursday to check??)
+•	Sasha: Student Results Analytics (Week 12 Tuesday)
+o	Drop down with all quizzes 
+	Choose between individual quizzes or all the quizzes
+	Show analytics respectively 
+o	Make blank page
+•	Sasha: When you click on a quiz that a teacher has just created you should be able to view all the questions (Week 12 Friday)
+o	Add a fake edit button
+•	Pragati: Teacher Results Analytics (Week 12 Tuesday)
+o	Make blank page
+•	Pragati: Commenting EVERYTHING CRYY (comment in main)
+
+SMALL RANDOM THINGS TO DOS
+•	Pragati : Add a return button on the login page
+•	LAST STEP: move files into folders 
+•	Pragati: Go through the interface and add all the override things to all the DAOs
+•	Resolve all the TODOs in the code 
+•	Commenting everything??
+o	Back end: people do all the classes
+•	Pragati/Jamie: Polish up Trello
+•	Audrey: Add a click to take quiz label on the student dashboard (to make the taking quiz more intuitive)
+•	Pragati: Add all the documentation to git (minute minutes in GIT)
+
+PRESENTATION
+•	Make the slides – Audrey (Done by Week 12 Tuesday)
+•	Write the script – Roman (Done by Week 12 Tuesday)
+
+

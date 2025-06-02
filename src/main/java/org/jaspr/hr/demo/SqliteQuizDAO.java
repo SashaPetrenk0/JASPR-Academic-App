@@ -4,10 +4,16 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the Quiz Data Access Object that handles
+ * the CRUD operations for the Quiz class with the database.
+ */
+public class SqliteQuizDAO {
+    private final Connection connection;
 
-public class SqliteQuizDAO implements IQuizDAO {
-    private Connection connection;
-
+    /**
+     * Create all tables and get instance of database connection
+     */
     public SqliteQuizDAO() {
         connection = SqliteConnection.getInstance();
         createQuizTable();
@@ -15,6 +21,10 @@ public class SqliteQuizDAO implements IQuizDAO {
         createQuizAssignmentsTable();
 
     }
+
+    /**
+     * Create a table in the database to store quizzes
+     */
     private void createQuizTable() {
         // Create table if not exists
         try {
@@ -32,6 +42,10 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Create a table in the database to store questions
+     */
     private void createQuestionTable() {
         // Create table if not exists
         try {
@@ -52,7 +66,25 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
     }
+    public int getTotalQuestionsForQuiz(int quizId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT numOfQuestions FROM quizzes WHERE id = ?");
+            statement.setInt(1, quizId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);  // Returns the count of questions
+            }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;  // Return 0 if something goes wrong
+    }
+
+    /**
+     * Create a table in the database to store assignments of quizzes to classes
+     */
     private void createQuizAssignmentsTable() {
         // Create table if not exists
         try {
@@ -74,41 +106,14 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
     }
 
-
-    public void close() {
-        try {
-            connection.close();
-        } catch (SQLException ex) {
-            System.err.println(ex);
-        }
-    }
-
     // Pull all attributes of a specific student for Display Details functionality in profile
-    @Override
-    public Quiz getQuiz(int id) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM quizzes WHERE id = ?");
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return new Quiz(
 
-                        resultSet.getString("title"),
-                        resultSet.getString("description"),
-                        resultSet.getString("topic"),
-                        resultSet.getInt("numOfQuestions"),
-                        resultSet.getInt("author")
+    /**
+     * Retrieve all questions from the database that correspond to a given quiz id
+     * @param id the quiz id that will be used to find correct questions
+     * @return an array of question objects
+     */
 
-                );
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    //TODO: separate the question stuff into a separate interface?
-    @Override
     public Question[] getQuestions(int id) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM questions WHERE id = ?");
@@ -138,7 +143,12 @@ public class SqliteQuizDAO implements IQuizDAO {
         }
         return null;
     }
-    @Override
+    /**
+     * Adds a new question to the database.
+     * @param quiz The quiz that the question belongs to
+     * @param question the question object
+     */
+
     public void addQuestion(Question question, Quiz quiz) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO questions (id,question, optionA, optionB, optionC, optionD, answer)" +
@@ -157,7 +167,7 @@ public class SqliteQuizDAO implements IQuizDAO {
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int generatedId = generatedKeys.getInt(1);
-                    //set id of quiz to the autoincremented id
+                    //set id of quiz to the auto incremented id
                     question.setId(generatedId);
                 }
             }
@@ -169,8 +179,11 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
 
+    /**
+     * Adds a new quiz to the database.
+     * @param quiz The quiz to add.
+     */
 
-    @Override
     public void addQuiz(Quiz quiz) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO quizzes (title, description, topic, numOfQuestions, author)" +
@@ -199,42 +212,12 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     }
 
-    @Override
-    public void editQuiz(String email, String oldPassword, String newPassword, String role) {
-        String tableName = "";
+    /**
+     * Retrieves all quizzes created by a teacher from the database.
+     * @param teacher teacher who owns the quizzes.
+     * @return  string list of titles of quizzes created by the teacher
+     */
 
-        switch (role){
-            case "Student":
-                tableName = "students";
-                break;
-            case "Teacher":
-                tableName = "teachers";
-                break;
-            case "Admin":
-                tableName = "admin";
-                break;
-            case "Parent":
-                tableName = "parent";
-                break;
-            default:
-                System.out.println("Invalid role provided.");
-                return;
-        }
-
-
-        try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE " + tableName + " SET password = ?, WHERE email = ? AND password = ?");
-            statement.setString(1, newPassword);
-            statement.setString(2, email);
-            statement.setString(3, oldPassword);
-            //TODO: Error Handling
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
     public List<String> getAllQuizzes(Teacher teacher) {
 
         List<String> quizzes = new ArrayList<>();
@@ -257,7 +240,11 @@ public class SqliteQuizDAO implements IQuizDAO {
     }
 
 
-    @Override
+    /**
+     * Retrieves all quizzes created by a teacher from the database.
+     * @param teacher teacher who owns the quizzes.
+     * @return  object list all quizzes created by the teacher
+     */
     public List<Quiz> getAllQuizObjects(Teacher teacher) {
 
         List<Quiz> quizzes = new ArrayList<>();
@@ -284,7 +271,11 @@ public class SqliteQuizDAO implements IQuizDAO {
 
     }
 
-    @Override
+    /**
+     * Retrieves all quizzes created by a student from the database.
+     * @param student student who created the quizzes.
+     * @return  object list all quizzes created by the student
+     */
     public List<Quiz> getAllQuizzes(Student student) {
         List<Quiz> quizzes = new ArrayList<>();
         try {
@@ -307,12 +298,6 @@ public class SqliteQuizDAO implements IQuizDAO {
             e.printStackTrace();
         }
         return quizzes;
-    }
-
-    @Override
-    public List<Quiz> getAllQuizzes(Teacher teacher, Student student) {
-
-        return List.of();
     }
 
     public List<Quiz> getQuizzesForStudent(int studentID){
@@ -344,29 +329,6 @@ public class SqliteQuizDAO implements IQuizDAO {
         return quizzes;
     }
 
-
-
-
-
-
-
-    // For database checking
-    public void printAllStudents() {
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students");
-            ResultSet resultSet = statement.executeQuery();
-
-            System.out.println("---- All Students ----");
-            while (resultSet.next()) {
-                System.out.println("Name: " + resultSet.getString("name") +
-                        ", Age: " + resultSet.getInt("age") +
-                        ", ID: " + resultSet.getInt("studentID") +
-                        ", Email: " + resultSet.getString("email"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public String assignQuizToClassroom(int quiz_id, int classroom_number) {
         try {
