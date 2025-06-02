@@ -150,14 +150,19 @@ public class StudentViewResultsController {
         }
     }
 
+    /**
+     * Method to only show the section of the page that has been selected
+     * @param boxToShow the VBox element that is chosen to be shown
+     */
     private void showOnlyResults(VBox boxToShow) {
 
+        //hide all quiz results section
         allResultsBox.setVisible(false);
         allResultsBox.setManaged(false);
-
+        //hide specific quiz results section
         specificResultsBox.setVisible(false);
         specificResultsBox.setManaged(false);
-
+        //show the box that has been selected
         boxToShow.setVisible(true);
         boxToShow.setManaged(true);
     }
