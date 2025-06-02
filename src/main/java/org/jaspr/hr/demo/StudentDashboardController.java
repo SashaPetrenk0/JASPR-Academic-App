@@ -131,7 +131,7 @@ public class StudentDashboardController {
     @FXML
         private void onViewResults () throws IOException {
             Stage stage = (Stage) viewAnalytics.getScene().getWindow();
-            SceneChanger.changeScene(stage, "student-view-viewAnalytics.fxml");
+            SceneChanger.changeScene(stage, "student-view-results.fxml");
         }
 
 
