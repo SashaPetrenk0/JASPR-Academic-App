@@ -4,12 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import java.io.IOException;
-import java.util.List;
 
 import javafx.scene.Parent;
 
@@ -33,7 +31,7 @@ public class StudentDashboardController {
     private ListView<Quiz> createdQuizzesLists;
 
     @FXML
-    private Button results;
+    private Button viewAnalytics;
 
     @FXML
     private ListView<Quiz> assignedQuizzesList;
@@ -132,8 +130,8 @@ public class StudentDashboardController {
         }
     @FXML
         private void onViewResults () throws IOException {
-            Stage stage = (Stage) results.getScene().getWindow();
-            SceneChanger.changeScene(stage, "student-view-results.fxml");
+            Stage stage = (Stage) viewAnalytics.getScene().getWindow();
+            SceneChanger.changeScene(stage, "student-view-viewAnalytics.fxml");
         }
 
 
