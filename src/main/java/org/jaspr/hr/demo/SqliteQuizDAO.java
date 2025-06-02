@@ -66,6 +66,21 @@ public class SqliteQuizDAO {
             e.printStackTrace();
         }
     }
+    public int getTotalQuestionsForQuiz(int quizId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT numOfQuestions FROM quizzes WHERE id = ?");
+            statement.setInt(1, quizId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);  // Returns the count of questions
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;  // Return 0 if something goes wrong
+    }
 
     /**
      * Create a table in the database to store assignments of quizzes to classes
