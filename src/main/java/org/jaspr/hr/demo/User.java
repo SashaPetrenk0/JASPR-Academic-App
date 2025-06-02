@@ -5,13 +5,18 @@ public abstract class User {
    protected String email;
    protected String role;
 
+    public User() {
+
+    }
+
    public User(String name, String email){
        this.name = name;
        this.email = email;
        this.role = getRole();
    }
 
-   public abstract String getRole();
+
+    public abstract String getRole();
 
    public String getName()
    {

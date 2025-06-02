@@ -4,6 +4,11 @@ public class Teacher extends User {
     private int age;
     private int teacherID;
 
+    public Teacher (){
+        super();
+
+    }
+
     public Teacher(String name, int age, int teacherID, String email){
         super(name, email);
         this.age = age;

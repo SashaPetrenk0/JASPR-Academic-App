@@ -4,6 +4,10 @@ public class Student extends User {
     private int age;
     private int studentID;
 
+    public Student (){
+        super();
+    }
+
     public Student(String name, int age, int studentID, String email){
         super(name, email);
         this.age = age;

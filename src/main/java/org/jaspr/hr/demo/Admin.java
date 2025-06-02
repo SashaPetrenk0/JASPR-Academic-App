@@ -4,6 +4,10 @@ public class Admin extends User {
     private int age;
     private int adminID;
 
+    public Admin (){
+        super();
+    }
+
     public Admin(String name, int age, int adminID, String email){
         super(name, email);
         this.age = age;
