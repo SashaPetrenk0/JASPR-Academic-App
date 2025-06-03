@@ -30,6 +30,8 @@ public class StudentViewResultsController {
     private ComboBox resultDropdown;
     @FXML
     private VBox allResultsBox;
+    @FXML
+    private Button returnToPrevious;
 
     @FXML
     private VBox specificResultsBox;
@@ -165,5 +167,11 @@ public class StudentViewResultsController {
         //show the box that has been selected
         boxToShow.setVisible(true);
         boxToShow.setManaged(true);
+    }
+
+    @FXML
+    private void returnToStudentDashboard() throws IOException {
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
     }
 }

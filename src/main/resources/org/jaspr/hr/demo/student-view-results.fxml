@@ -38,7 +38,7 @@
                   <children>
                      <HBox prefHeight="371.0" prefWidth="760.0" style="-fx-background-radius: 50; -fx-padding: 10px 20px;">
                         <children>
-                           <Button fx:id="returnToAssignment" onAction="#returnToAssignment" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
+                           <Button fx:id="returnToPrevious" onAction="#returnToStudentDashboard" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
                               <font>
                                  <Font name="Arial" size="14.0" />
                               </font>
