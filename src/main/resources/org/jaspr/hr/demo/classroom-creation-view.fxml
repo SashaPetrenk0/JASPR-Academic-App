@@ -20,9 +20,6 @@
             <HBox prefHeight="52.0" prefWidth="500.0" spacing="20.0">
                 <children>
                     <Button fx:id="returnToPrevious" onAction="#returnToClassrooms" prefHeight="33.0" prefWidth="77.0" style="-fx-background-radius: 10; -fx-background-color: #C1F3B9; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-color: #B0B0B0;" text="← Return">
-                        <font>
-                            <Font name="System Bold" size="13.0" />
-                        </font>
                     </Button>
                 </children>
                 <VBox.margin>
@@ -92,8 +89,6 @@
             <Label fx:id="statusLabel" style="-fx-text-fill: red;" text="" wrapText="true" />
         </VBox>
     </center>
-
-    <!-- New right section: Pane with circles -->
     <right>
         <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;">
             <children>
