@@ -1,34 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.jaspr.hr.demo.AdminClassroomController">
+<BorderPane prefHeight="480.0" prefWidth="760.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.AdminClassroomController">
     <center>
         <VBox alignment="CENTER" spacing="20.0">
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
+         <VBox prefHeight="97.0" prefWidth="720.0" spacing="30.0">
+            <children>
+      
+                  <Label prefHeight="23.0" prefWidth="261.0" style="-fx-font-size: 18px;" text="Classrooms" />
+            </children>
+         </VBox>
+            <Button fx:id="ClassRoomCreation" onAction="#onCreateClassroomClick" prefHeight="64.0" prefWidth="636.0" style="-fx-background-radius: 30; -fx-background-color: #C1F3B9;" text="Create a Classroom">
+            <font>
+               <Font name="Telugu Sangam MN Bold" size="13.0" />
+            </font></Button>
+            <Button fx:id="AssignButton" onAction="#onAssignUsersClick" prefHeight="26.0" prefWidth="634.0" style="-fx-background-radius: 30; -fx-background-color: #C1F3B9;" text="Assign">
+            <font>
+               <Font name="Telugu Sangam MN Bold" size="13.0" />
+            </font></Button>
 
-            <Label text="Classrooms" style="-fx-font-size: 18px;"/>
-            <Button fx:id="ClassRoomCreation" text="Create a Classroom" onAction="#onCreateClassroomClick"/>
-            <Button fx:id="AssignButton" text="Assign" onAction="#onAssignUsersClick"/>
-
-            <TableView fx:id="classroomTable" prefWidth="500">
+            <TableView fx:id="classroomTable" prefWidth="668.0">
                 <columns>
-                    <TableColumn fx:id="classroomNumberColumn" text="Classroom Number"/>
-                    <TableColumn fx:id="classroomCapacityColumn" text="Classroom Capacity"/>
-                    <TableColumn fx:id="numTeachersColumn" text="Number of Assigned Teachers"/>
-                    <TableColumn fx:id="numStudentsColumn" text="Number of Assigned Students"/>
+                    <TableColumn fx:id="classroomNumberColumn" text="Classroom Number" />
+                    <TableColumn fx:id="classroomCapacityColumn" text="Classroom Capacity" />
+                    <TableColumn fx:id="numTeachersColumn" text="Number of Assigned Teachers" />
+                    <TableColumn fx:id="numStudentsColumn" text="Number of Assigned Students" />
                 </columns>
             </TableView>
-
-            <Button fx:id="returnToDashboard" text="Return" onAction="#returnToDashboard"/>
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="720.0">
+            <children>
+      
+                  <Button fx:id="returnToDashboard" alignment="CENTER" onAction="#returnToDashboard" prefHeight="34.0" prefWidth="309.0" style="-fx-background-radius: 30; -fx-background-color: #D3D3D3;" text="Return" />
+            </children>
+         </VBox>
         </VBox>
     </center>
 </BorderPane>
