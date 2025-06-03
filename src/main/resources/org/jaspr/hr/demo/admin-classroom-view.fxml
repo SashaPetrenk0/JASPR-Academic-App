@@ -7,26 +7,28 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jaspr.hr.demo.AdminClassroomController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.jaspr.hr.demo.AdminClassroomController">
+    <center>
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
 
-    <Label text="Classrooms" style="-fx-font-size: 18px;"/>
-    <Button fx:id="ClassRoomCreation" text = "Create a Classroom" onAction="#onCreateClassroomClick" />
-    <Button fx:id="AssignButton" text = "Assign" onAction="#onAssignUsersClick" />
+            <Label text="Classrooms" style="-fx-font-size: 18px;"/>
+            <Button fx:id="ClassRoomCreation" text="Create a Classroom" onAction="#onCreateClassroomClick"/>
+            <Button fx:id="AssignButton" text="Assign" onAction="#onAssignUsersClick"/>
 
-    <TableView fx:id = "classroomTable" prefWidth = "500">
-        <columns>
-            <TableColumn fx:id = "classroomNumberColumn" text = "Classroom Number"/>
-            <TableColumn fx:id = "classroomCapacityColumn" text = "Classroom Capacity"/>
-            <TableColumn fx:id = "numTeachersColumn" text = "Number of Assigned Teachers"/>
-            <TableColumn fx:id = "numStudentsColumn" text = "Number of Assigned Students"/>
-        </columns>
-    </TableView>
-    <Button fx:id="returnToDashboard" text = "Return" onAction="#returnToDashboard" />
+            <TableView fx:id="classroomTable" prefWidth="500">
+                <columns>
+                    <TableColumn fx:id="classroomNumberColumn" text="Classroom Number"/>
+                    <TableColumn fx:id="classroomCapacityColumn" text="Classroom Capacity"/>
+                    <TableColumn fx:id="numTeachersColumn" text="Number of Assigned Teachers"/>
+                    <TableColumn fx:id="numStudentsColumn" text="Number of Assigned Students"/>
+                </columns>
+            </TableView>
 
-
-</VBox>
-
+            <Button fx:id="returnToDashboard" text="Return" onAction="#returnToDashboard"/>
+        </VBox>
+    </center>
+</BorderPane>
