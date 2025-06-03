@@ -30,9 +30,9 @@
             </Pane>
 
             <VBox alignment="CENTER" spacing="30.0">
-                <HBox alignment="CENTER_LEFT" prefWidth="1057.0">
+                <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="867.0">
                     <children>
-                        <Label style="-fx-font-size: 30px; -fx-font-weight: bold;" text="Classrooms" textFill="#000000">
+                        <Label prefHeight="37.0" prefWidth="312.0" style="-fx-font-size: 30px;" text="Classrooms" textFill="#000000">
                             <font>
                                 <Font name="Telugu Sangam MN" size="30.0" />
                             </font>
@@ -41,6 +41,9 @@
                             </HBox.margin>
                         </Label>
                     </children>
+               <VBox.margin>
+                  <Insets right="20.0" />
+               </VBox.margin>
                 </HBox>
 
                 <VBox prefWidth="1057.0" spacing="20.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 20; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
