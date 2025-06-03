@@ -110,6 +110,8 @@
       </children>
    </StackPane>
 
+    <Button fx:id="onAnalytics" text="Analytics" onAction="#onAnalytics" />
+
 
 
 </VBox>

@@ -1,5 +1,7 @@
 package org.jaspr.hr.demo;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,13 +35,26 @@ public class StudentViewResultsController {
     private VBox specificResultsBox;
 
     @FXML
-    private ListView allResults;
+    private TableView<Map<String, Object>> allResults;
+    @FXML
+    private TableColumn<Map<String, Object>, String> titleColumn;
+
+    @FXML
+    private TableColumn<Map<String, Object>, Integer> gradeColumn;
+
+    @FXML
+    private TableView<Map<String, Object>> questionResults;
+    @FXML
+    private TableColumn<Map<String, Object>, String> questionColumn;
+    @FXML
+    private TableColumn<Map<String, Object>, String> answerColumn;
+
+    @FXML
+    private TableColumn<Map<String, Object>, Integer> questionGradeColumn;
 
     @FXML
     private PieChart pieChart;
 
-    @FXML
-    private ListView questionResults;
     Student student = (Student) user;
 
     private Map<String, Quiz> quizTitleToQuizMap;
@@ -79,8 +94,21 @@ public class StudentViewResultsController {
         if (quiz.equals("All quizzes")){
             System.out.print("hello");
             showOnlyResults(allResultsBox);
+            // Cell value for title
+            titleColumn.setCellValueFactory(cellData -> {
+                Object value = cellData.getValue().get("title");
+                return new SimpleStringProperty(value != null ? value.toString() : "");
+            });
 
-            allResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuiz(student.getStudentID())));
+            // Cell value for grade
+            gradeColumn.setCellValueFactory(cellData -> {
+                Object value = cellData.getValue().get("grade");
+                return new SimpleIntegerProperty(value != null ? (Integer) value : 0).asObject();
+            });
+
+
+            List<Map<String, Object>> results = resultsDAO.getResultsByQuiz(student.getStudentID());
+            allResults.setItems(FXCollections.observableArrayList(results));
 
         }
         else{
@@ -89,7 +117,24 @@ public class StudentViewResultsController {
             if(quizTitleToQuizMap.containsKey(quiz)){
                 Quiz selectedQuiz = quizTitleToQuizMap.get(quiz);
                 int quizID = selectedQuiz.getId();
+                // Cell value for title
+                questionColumn.setCellValueFactory(cellData -> {
+                    Object value = cellData.getValue().get("question");
+                    return new SimpleStringProperty(value != null ? value.toString() : "");
+                });
+                answerColumn.setCellValueFactory(cellData -> {
+                    Object value = cellData.getValue().get("answer");
+                    return new SimpleStringProperty(value != null ? value.toString() : "");
+                });
+
+                // Cell value for grade
+                questionGradeColumn.setCellValueFactory(cellData -> {
+                    Object value = cellData.getValue().get("grade");
+                    return new SimpleIntegerProperty(value != null ? (Integer) value : 0).asObject();
+                });
+
                 questionResults.setItems(FXCollections.observableArrayList(resultsDAO.getResultsByQuestion(quizID, student.getStudentID())));
+
                 int grade = resultsDAO.getGrade(quizID, student.getStudentID());
                 ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                         new PieChart.Data("Correct", grade ),
@@ -105,14 +150,19 @@ public class StudentViewResultsController {
         }
     }
 
+    /**
+     * Method to only show the section of the page that has been selected
+     * @param boxToShow the VBox element that is chosen to be shown
+     */
     private void showOnlyResults(VBox boxToShow) {
 
+        //hide all quiz results section
         allResultsBox.setVisible(false);
         allResultsBox.setManaged(false);
-
+        //hide specific quiz results section
         specificResultsBox.setVisible(false);
         specificResultsBox.setManaged(false);
-
+        //show the box that has been selected
         boxToShow.setVisible(true);
         boxToShow.setManaged(true);
     }

@@ -4,12 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import java.io.IOException;
-import java.util.List;
 
 import javafx.scene.Parent;
 
@@ -33,7 +31,7 @@ public class StudentDashboardController {
     private ListView<Quiz> createdQuizzesLists;
 
     @FXML
-    private Button results;
+    private Button viewAnalytics;
 
     @FXML
     private ListView<Quiz> assignedQuizzesList;
@@ -88,6 +86,17 @@ public class StudentDashboardController {
                 }
             });
 
+            assignedQuizzesList.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2) { // double-click
+                    Quiz selectedQuiz = assignedQuizzesList.getSelectionModel().getSelectedItem();
+                    if (selectedQuiz != null) {
+
+                        openTakeQuiz(selectedQuiz.getTitle(), quizDAO.getQuestions(selectedQuiz.getId()),selectedQuiz.getId(), student.getStudentID());
+
+                    }
+                }
+            });
+
 
         }
     }
@@ -122,6 +131,36 @@ public class StudentDashboardController {
 
         }
 
+    @FXML
+    private void openTakeAssignedQuiz (String title, Question[]questions, int quizID, int studentID ){
+        try {
+            Stage currentStage = (Stage) assignedQuizzesList.getScene().getWindow();
+            // Load new window
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view.fxml"));
+            Parent root = loader.load();
+
+            // Pass data to next controller
+            TakeQuizController controller = loader.getController();
+
+            controller.loadTitle(title);
+            controller.setQuestions(questions);
+            System.out.print(studentID);
+            System.out.print("quiz id" + quizID);
+            controller.getInfo(studentID,quizID);
+
+            Stage stage = new Stage();
+
+            stage.setWidth(currentStage.getWidth());
+            stage.setHeight(currentStage.getHeight());
+
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
         /// go to create quiz page
     @FXML
         protected void onAdd () throws IOException {
@@ -132,7 +171,7 @@ public class StudentDashboardController {
         }
     @FXML
         private void onViewResults () throws IOException {
-            Stage stage = (Stage) results.getScene().getWindow();
+            Stage stage = (Stage) viewAnalytics.getScene().getWindow();
             SceneChanger.changeScene(stage, "student-view-results.fxml");
         }
 
