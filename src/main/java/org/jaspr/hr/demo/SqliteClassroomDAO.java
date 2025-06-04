@@ -5,14 +5,14 @@ import java.sql.Connection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.xml.transform.Result;
+
 import java.sql.*;
         import java.util.ArrayList;
 import java.util.List;
 
 
-public class SqliteClassroomDAO implements IClassroomDAO {
-    private Connection connection;
+public class SqliteClassroomDAO  {
+    private final Connection connection;
 
 
     public SqliteClassroomDAO() {
@@ -69,7 +69,7 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         }
     }
 
-    @Override
+
     public ObservableList<Classroom> getUpdatedClassrooms() {
         ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
 
@@ -96,7 +96,7 @@ public class SqliteClassroomDAO implements IClassroomDAO {
 
         return classrooms;
     }
-    @Override
+
     public boolean classroomNumberExists(int classroomNumber) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT 1 FROM classrooms WHERE classroom_number = ?");
@@ -110,7 +110,7 @@ public class SqliteClassroomDAO implements IClassroomDAO {
     }
 
 
-    @Override
+
     public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
         try {
             // Start a transaction
@@ -166,7 +166,7 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         }
     }
 
-    @Override
+
     public Integer getAssignedTeacherId(int classroomNumber) {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT teacherID FROM classrooms WHERE classroom_number = ?");
@@ -182,7 +182,7 @@ public class SqliteClassroomDAO implements IClassroomDAO {
     }
 
 
-    @Override
+
     public List<Integer> getClassroomNumbersForStudent(int studentID) {
         List<Integer> classroomNumbers = new ArrayList<>();
 
@@ -204,7 +204,7 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         return classroomNumbers;
     }
 
-    @Override
+
     public List<Integer> getClassroomNumberForTeacher(int teacherID) {
         List<Integer> classroomNumbers = new ArrayList<>();
 

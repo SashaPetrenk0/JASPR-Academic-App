@@ -3,14 +3,14 @@ package org.jaspr.hr.demo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.xml.transform.Result;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SqliteUserDAO implements IUserDAO {
-    private Connection connection;
+public class SqliteUserDAO {
+    private final Connection connection;
 
 
     public SqliteUserDAO() {
@@ -100,7 +100,7 @@ public class SqliteUserDAO implements IUserDAO {
 
 
 
-    @Override
+
     public void addStudent(Student student, String password, String salt) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, passwordHash, salt)" +
@@ -117,7 +117,7 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-    @Override
+
     public void addTeacher(Teacher teacher, String password, String salt) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, passwordHash, salt)" +
@@ -134,7 +134,7 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-    @Override
+
     public void addAdmin(Admin admin, String password, String salt) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, passwordHash, salt)" +
@@ -151,7 +151,7 @@ public class SqliteUserDAO implements IUserDAO {
         }
     }
 
-    @Override
+
     public void addParent(Parent parent, String password, String salt) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, passwordHash, salt)" +
@@ -177,7 +177,7 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     // Pull all attributes of a specific student for Display Details functionality in profile
-    @Override
+
     public Student getStudent(int studentID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM students WHERE studentID = ?");
@@ -198,7 +198,7 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     // Pull all attributes of a specific teacher for Display Details functionality in profile
-    @Override
+
     public Teacher getTeacher(int teacherID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE teacherID = ?");
@@ -219,7 +219,7 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     // Pull all attributes of a specific admin for Display Details functionality in profile
-    @Override
+
     public Admin getAdmin(int adminID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM admins WHERE adminID = ?");
@@ -239,7 +239,7 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
-    @Override
+
     public Teacher getLoggedInTeacher(String email, String password){
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE email = ? AND passwordHash = ?");
@@ -263,7 +263,7 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     //TODO: merge into getLoggedInUser
-    @Override
+
     public Student getLoggedInStudent(String email, String password){
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM students WHERE email = ? AND passwordHash = ?");
@@ -286,7 +286,7 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
-    @Override
+
     public Admin getLoggedInAdmin(String email, String password){
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM admins WHERE email = ? AND passwordHash = ?");
@@ -309,7 +309,7 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
-    @Override
+
     public String Authenticate(String email, String password) {
         // Check authentication information against all four user tables
         String[] tables = {"students", "teachers", "parents", "admins"};
@@ -340,7 +340,7 @@ public class SqliteUserDAO implements IUserDAO {
         return null;
     }
 
-    @Override
+
     public String getSalt(String email) {
         String[] tables = {"students", "teachers", "admins", "parent"};
 
@@ -404,7 +404,7 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
 
-    @Override
+
     public boolean changePassword(String email, String oldPassword, String newPassword, String role) {
         String tableName = "";
 
@@ -463,7 +463,7 @@ public class SqliteUserDAO implements IUserDAO {
 
 
     // For use when viewing student names in lists of quiz results etc.
-    @Override
+
     public List<String> getAllStudentNames() {
         List<String> studentNames = new ArrayList<>();
         try {
@@ -482,7 +482,7 @@ public class SqliteUserDAO implements IUserDAO {
     }
 
     // For use when a teacher is viewing their class list and details
-    @Override
+
     public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
         try {
@@ -529,7 +529,7 @@ public class SqliteUserDAO implements IUserDAO {
 
 
 
-    @Override
+
     public boolean hasAnyStudents() {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students LIMIT 1");
@@ -541,7 +541,7 @@ public class SqliteUserDAO implements IUserDAO {
         return false;
     }
 
-    @Override
+
     public boolean hasAnyTeachers() {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM teachers LIMIT 1");
@@ -553,7 +553,7 @@ public class SqliteUserDAO implements IUserDAO {
         return false;
     }
 
-    @Override
+
     public boolean hasAnyParents() {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM parents LIMIT 1");
@@ -565,7 +565,7 @@ public class SqliteUserDAO implements IUserDAO {
         return false;
     }
 
-    @Override
+
     public boolean hasAnyAdmins() {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM admins LIMIT 1");
@@ -577,7 +577,7 @@ public class SqliteUserDAO implements IUserDAO {
         return false;
     }
 
-    @Override
+
     public boolean hasAnyRegisteredUsers() {
         return hasAnyStudents()
                 || hasAnyTeachers()
