@@ -1,6 +1,10 @@
 package org.jaspr.hr.demo;
 
-public class QuizManager {
+/**
+ *
+ */
+
+public class QuizHelper {
         private Question[] questions;
         private int questionIndex = 0;
         private int correctCount = 0;
@@ -8,7 +12,7 @@ public class QuizManager {
 
         private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
-        public QuizManager(Question[] questions) {
+        public QuizHelper(Question[] questions) {
             this.questions = questions;
         }
 

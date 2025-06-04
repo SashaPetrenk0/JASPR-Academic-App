@@ -26,7 +26,7 @@ public class TakeQuizController {
     private int studentId;
     private int quizId;
 
-    private QuizManager quizManager;
+    private QuizHelper quizHelper;
 
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
     private final User user = UserSession.getInstance().getCurrentUser();
@@ -41,7 +41,7 @@ public class TakeQuizController {
     @FXML
     public void setQuestions(Question[] questions){
         //this.questions = questions;
-        quizManager = new QuizManager(questions);
+        quizHelper = new QuizHelper(questions);
         loadQuestion();
 
     }
@@ -55,20 +55,20 @@ public class TakeQuizController {
 
     @FXML
     public void loadQuestion(){
-        if (quizManager.getTotalQuestions() == 0) {
+        if (quizHelper.getTotalQuestions() == 0) {
             System.out.println("Questions not yet set — skipping load.");
             return;
         }
-        System.out.println(quizManager.getCurrentQuestion());
-        questionLabel.setText(quizManager.getCurrentQuestion().getQuestion());
-        optionA.setText(quizManager.getCurrentQuestion().getOptionA());
-        optionB.setText(quizManager.getCurrentQuestion().getOptionB());
-        optionC.setText(quizManager.getCurrentQuestion().getOptionC());
-        optionD.setText(quizManager.getCurrentQuestion().getOptionD());
+        System.out.println(quizHelper.getCurrentQuestion());
+        questionLabel.setText(quizHelper.getCurrentQuestion().getQuestion());
+        optionA.setText(quizHelper.getCurrentQuestion().getOptionA());
+        optionB.setText(quizHelper.getCurrentQuestion().getOptionB());
+        optionC.setText(quizHelper.getCurrentQuestion().getOptionC());
+        optionD.setText(quizHelper.getCurrentQuestion().getOptionD());
     }
 
     public void nextQuestion() {
-        if(quizManager.nextQuestion()){
+        if(quizHelper.nextQuestion()){
             //refresh the display with the next question in the array
             loadQuestion();
             optionA.setDisable(false);
@@ -77,10 +77,10 @@ public class TakeQuizController {
             optionD.setDisable(false);
         } else {
             System.out.println("Quiz finished!");
-            System.out.println("correct" + quizManager.getCorrectCount());
-            System.out.println("incorrect" + quizManager.getIncorrectCount());
-            double grade = ((double) quizManager.getCorrectCount() / quizManager.getTotalQuestions()) * 100;
-            questionLabel.setText("Quiz Finished! You scored"+ quizManager.getCorrectCount() + "/"+quizManager.getTotalQuestions());
+            System.out.println("correct" + quizHelper.getCorrectCount());
+            System.out.println("incorrect" + quizHelper.getIncorrectCount());
+            double grade = ((double) quizHelper.getCorrectCount() / quizHelper.getTotalQuestions()) * 100;
+            questionLabel.setText("Quiz Finished! You scored"+ quizHelper.getCorrectCount() + "/"+ quizHelper.getTotalQuestions());
             System.out.print(studentId);
             System.out.print(quizId);
             resultsDAO.addQuizResult(quizId, studentId, grade);
@@ -98,10 +98,10 @@ public class TakeQuizController {
     @FXML
     public void optionAclicked() {
         optionA.setDisable(true);
-        if (quizManager.checkAnswer("A")) {
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,1);
+        if (quizHelper.checkAnswer("A")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,0);
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
 
@@ -110,30 +110,30 @@ public class TakeQuizController {
     @FXML
     public void optionBclicked() {
         optionB.setDisable(true);
-        if (quizManager.checkAnswer("B")) {
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,1);
+        if (quizHelper.checkAnswer("B")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,0);
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
     }
     @FXML
     public void optionCclicked() {
         optionC.setDisable(true);
-        if (quizManager.checkAnswer("C")) {
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,1);
+        if (quizHelper.checkAnswer("C")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,0);
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
     }
     @FXML
     public void optionDclicked() {
         optionD.setDisable(true);
-        if (quizManager.checkAnswer("D")) {
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,1);
+        if (quizHelper.checkAnswer("D")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            quizManager.recordAnswerResult(quizId,quizManager.getCurrentQuestion(),student,0);
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
     }
