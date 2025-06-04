@@ -5,7 +5,7 @@ package org.jaspr.hr.demo;
  */
 
 public class QuizHelper {
-        private Question[] questions;
+        private final Question[] questions;
         private int questionIndex = 0;
         private int correctCount = 0;
         private int incorrectCount = 0;
