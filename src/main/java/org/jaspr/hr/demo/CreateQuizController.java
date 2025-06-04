@@ -44,10 +44,6 @@ public class CreateQuizController {
     @FXML
     private Label errorLabel;
 
-
-
-
-
     @FXML
     private VBox descriptionSection;
 
@@ -81,15 +77,16 @@ public class CreateQuizController {
             return;
         }
 
-        //TODO: decide on maximum number of questions
         if(length > 20){
             errorLabel.setText("Number of Questions must not exceed 20.");
             return;
         }
 
         int author = 0;
+        //prompt for the AI, taking data entered by the user in the fxml fields
         String prompt = "Write " + length + " multiple choice questions about "+desc+" with 4 options, A, B, C and D in the format; 'Question:' 'Question text' '?' - new line - 'Question letter' ')' repeated for A, B, C, D - new line - 'Answer:' 'Question letter'')'. Do not under any circumstances deviate from this format in any way and do not forget to write the answer";
 
+        //if the logged-in user is a teacher, use the getTeacherID method
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
             author = teacher.getTeacherID();
