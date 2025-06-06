@@ -2,6 +2,7 @@ package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 
 public class TakeQuizController {
@@ -19,6 +20,8 @@ public class TakeQuizController {
     private Button optionD;
 
 
+    @FXML
+    private Button returnToPrevious;
 
     private Question[] questions;
 
@@ -82,7 +85,7 @@ public class TakeQuizController {
             System.out.println("correct" + correctAnswerCount);
             System.out.println("incorrect" + incorrectAnswerCount);
             double grade = ((double) correctAnswerCount / questions.length) * 100;
-            questionLabel.setText("Quiz FInished! You scored"+ correctAnswerCount + "/"+questions.length);
+            questionLabel.setText("Quiz Finished! You scored"+ correctAnswerCount + "/"+questions.length);
             System.out.print(studentId);
             System.out.print(quizId);
             resultsDAO.addQuizResult(quizId, studentId, grade);
@@ -91,9 +94,10 @@ public class TakeQuizController {
     }
 
     @FXML
-    public void leaveQuiz() {
+    private void onReturn(){
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
     }
-
     @FXML
     private boolean checkAnswer(String answer){
         String correctAnswer = questions[questionIndex].getCorrectAnswer();
