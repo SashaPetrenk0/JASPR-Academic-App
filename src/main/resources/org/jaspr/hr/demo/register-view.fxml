@@ -107,11 +107,6 @@
 
 
 
-
-
-
-
-
                         <!-- Teacher Form -->
                         <VBox fx:id="teacherForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
                             <Label style="-fx-font-size: 18px; -fx-text-fill: black;" text="Teacher Sign Up">
