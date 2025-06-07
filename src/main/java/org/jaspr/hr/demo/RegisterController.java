@@ -225,6 +225,7 @@ public class RegisterController {
 
                     Parent newParent = new Parent(name, child, childID, email);
                     userDAO.addParent(newParent, hashedPassword, salt);
+
                     successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
                     successfulSignUpLabelParent.setVisible(true);
                     submitButtonParent.setVisible(false);
