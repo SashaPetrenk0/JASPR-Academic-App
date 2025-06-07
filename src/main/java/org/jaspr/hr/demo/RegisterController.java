@@ -188,7 +188,13 @@ public class RegisterController {
 
                     successIcon1.setVisible(true);
                     successIcon1.setManaged(true);
-                    
+
+                    nameFieldStudent.setDisable(true);
+                    emailFieldStudent.setDisable(true);
+                    passwordFieldStudent.setDisable(true);
+                    ageFieldStudent.setDisable(true);
+                    studentIDField.setDisable(true);
+
                 }
                 case "Teacher" -> {
                     name = nameFieldTeacher.getText();
@@ -212,6 +218,12 @@ public class RegisterController {
 
                     successIcon2.setVisible(true);
                     successIcon2.setManaged(true);
+
+                    nameFieldTeacher.setDisable(true);
+                    emailFieldTeacher.setDisable(true);
+                    passwordFieldTeacher.setDisable(true);
+                    ageFieldTeacher.setDisable(true);
+                    teacherIDField.setDisable(true);
 
 
                 }
@@ -239,7 +251,11 @@ public class RegisterController {
                     successIcon3.setVisible(true);
                     successIcon3.setManaged(true);
 
-
+                    nameFieldParent.setDisable(true);
+                    childNameField.setDisable(true);
+                    childIDField.setDisable(true);
+                    emailFieldParent.setDisable(true);
+                    passwordFieldParent.setDisable(true);
 
                 }
                 case "Admin" -> {
@@ -265,6 +281,12 @@ public class RegisterController {
 
                     successIcon4.setVisible(true);
                     successIcon4.setManaged(true);
+
+                    nameFieldAdmin.setDisable(true);
+                    emailFieldAdmin.setDisable(true);
+                    passwordFieldAdmin.setDisable(true);
+                    ageFieldAdmin.setDisable(true);
+                    adminIDField.setDisable(true);
 
                     // TODO: Error handling for incorrect user inputs
                 }
