@@ -164,11 +164,11 @@
                             <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Name" />
                             <TextField fx:id="nameFieldParent" promptText="Name" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
-                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Age" />
-                            <TextField fx:id="ageFieldParent" promptText="Age" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Child Name(s)" />
+                            <TextField fx:id="childNameField" promptText="Child Name" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
-                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Parent ID" />
-                            <TextField fx:id="parentIDField" promptText="Parent ID" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Child ID" />
+                            <TextField fx:id="childIDField" promptText="Child ID" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
                             <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Email" />
                             <TextField fx:id="emailFieldParent" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
