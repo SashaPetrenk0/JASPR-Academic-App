@@ -154,17 +154,29 @@
                         </VBox>
 
                         <!-- Parent Form -->
+                        <!-- Parent Form -->
                         <VBox fx:id="parentForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
                             <Label style="-fx-font-size: 18px; -fx-text-fill: black;" text="Parent Sign Up">
                                 <font>
                                     <Font name="Telugu Sangam MN" size="14.0" />
                                 </font>
                             </Label>
+
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Name" />
                             <TextField fx:id="nameFieldParent" promptText="Name" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Age" />
                             <TextField fx:id="ageFieldParent" promptText="Age" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Parent ID" />
                             <TextField fx:id="parentIDField" promptText="Parent ID" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Email" />
                             <TextField fx:id="emailFieldParent" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Password" />
                             <TextField fx:id="passwordFieldParent" promptText="Password" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
+
                             <HBox alignment="CENTER" spacing="10">
                                 <!-- Icon -->
                                 <ImageView fx:id="successIcon3" fitHeight="20.0" fitWidth="20.0" opacity="0.84" pickOnBounds="true" preserveRatio="true" translateY="5.0" visible="false">
@@ -174,14 +186,15 @@
                                 </ImageView>
 
                                 <!-- Success Message -->
-                                <Label fx:id="successfulSignUpLabelParent" managed="false" style="-fx-font-family: 'Telugu Sangam MN'; -fx-text-fill: #4CAF50;                   -fx-border-color: #F0F0F0; -fx-background-color: #F0F0F0;                   -fx-border-width: 2; -fx-border-radius: 8;                   -fx-background-radius: 6; -fx-padding: 12 18;" visible="false" />
+                                <Label fx:id="successfulSignUpLabelParent" managed="false" style="-fx-font-family: 'Telugu Sangam MN'; -fx-text-fill: #4CAF50; -fx-border-color: #F0F0F0; -fx-background-color: #F0F0F0; -fx-border-width: 2; -fx-border-radius: 8; -fx-background-radius: 6; -fx-padding: 12 18;" visible="false" />
 
                                 <!-- Submit Button -->
-                                <Button fx:id="submitButtonParent" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold';                    -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                                <Button fx:id="submitButtonParent" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                                <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                </VBox.margin>
                             </HBox>
                         </VBox>
-
-
 
                         <!-- Admin Form -->
                         <VBox fx:id="adminForm" managed="false" prefHeight="900.0" prefWidth="740.0" spacing="20.0" visible="false">
@@ -198,7 +211,8 @@
 
                             <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="ID Number" />
                             <TextField fx:id="adminIDField" promptText="Admin ID" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
-                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Email" />
+
+                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Email" />
                             <TextField fx:id="emailFieldAdmin" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
                             <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Password" />
