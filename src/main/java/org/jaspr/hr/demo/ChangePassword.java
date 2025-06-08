@@ -5,18 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import javafx.scene.control.*;
-import javafx.collections.FXCollections;
 import java.io.IOException;
 import javafx.scene.Parent;
 
+/**
+ * Controller class for handling user password changes.
+ * Supports multiple user roles including Student, Teacher, and Admin.
+ */
 public class ChangePassword {
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
@@ -38,11 +34,19 @@ public class ChangePassword {
 
     private Object currentUser;
 
+    /**
+     * Sets the current logged-in user object
+     * @param user the current user object (Student, Teacher, Admin)
+     */
     public void setCurrentUser(Object user) {
         this.currentUser = user;
 
     }
 
+    /**
+     * Determines the role of the current user.
+     * @return a string representing the user's role or null if unknown
+     */
     public String getRole() {
         if (currentUser instanceof Student) {
             return "Student";
@@ -56,18 +60,22 @@ public class ChangePassword {
         return null;
     }
 
-
+    /**
+     * Handles the password change action triggered by the user.
+     * Validates input, hashes passwords with salt, and attempts to update the password in the database.
+     * Displays relevant success or error messages.
+     */
     public void onChangePasswordClicked() {
         String role = getRole();
         String email = emailField.getText();
         String currentPwd = currentPasswordField.getText();
-        String user_salt = userDAO.getSalt(email);
-
-        String hashedCurredPwd = PasswordUtility.hashPassword(currentPwd, user_salt);
         String newPwd = newPasswordField.getText();
+
+        String user_salt = userDAO.getSalt(email);
+        String hashedCurredPwd = PasswordUtility.hashPassword(currentPwd, user_salt);
         String hashedNewPwd = PasswordUtility.hashPassword(newPwd, user_salt);
 
-
+        // Validate input fields
         if (email == null || email.isEmpty() || currentPwd == null || currentPwd.isEmpty() || newPwd == null || newPwd.isEmpty()) {
             ChangePwdError.setText("Please fill all fields.");
             ChangePwdError.setVisible(true);
@@ -77,44 +85,55 @@ public class ChangePassword {
             ChangePwdError.setVisible(true);
             return;
         }
-        else {
 
-            boolean success = userDAO.changePassword(email, hashedCurredPwd, hashedNewPwd, role);
+        // Add inputted fields to database
+        boolean success = userDAO.changePassword(email, hashedCurredPwd, hashedNewPwd, role);
 
-            if (success) {
-                // After successful password change, fetch the updated user data
-                refreshCurrentUser();
-
-                // Update currentUser immediately after password change
-                ChangePwdError.setText("Password Successfully Changed!");
-                ChangePwdError.setVisible(true);
-            } else {
-                ChangePwdError.setText("Error changing password. Please confirm your details are correct.");
-                ChangePwdError.setVisible(true);
-            }
+        if (success) {
+            // After successful password change, fetch the updated user data
+            refreshCurrentUser();
+            ChangePwdError.setText("Password Successfully Changed!");
+            ChangePwdError.setVisible(true);
+        } else {
+            ChangePwdError.setText("Error changing password. Please confirm your details are correct.");
+            ChangePwdError.setVisible(true);
         }
+
     }
 
+    /**
+     * Refreshes the currentUser object by fetching the latest user data from the database, based on role
+     */
     private void refreshCurrentUser() {
         String role = getRole();
+
+        // Fetch updated student info
         if ("Student".equals(role)) {
             Student student = (Student) currentUser;
-            student = userDAO.getStudent(student.getStudentID()); // Fetch updated student info
-            setCurrentUser(student); // Set the updated student info
-        } else if ("Teacher".equals(role)) {
+            student = userDAO.getStudent(student.getStudentID());
+            setCurrentUser(student);
+        }
+        // Fetch updated teacher info
+        else if ("Teacher".equals(role)) {
             Teacher teacher = (Teacher) currentUser;
-            teacher = userDAO.getTeacher(teacher.getTeacherID()); // Fetch updated teacher info
-            setCurrentUser(teacher); // Set the updated teacher info
-        } else if ("Admin".equals(role)) {
+            teacher = userDAO.getTeacher(teacher.getTeacherID());
+            setCurrentUser(teacher);
+        }
+        // Fetch updated admin info
+        else if ("Admin".equals(role)) {
             Admin admin = (Admin) currentUser;
-            admin = userDAO.getAdmin(admin.getAdminID()); // Fetch updated admin info
-            setCurrentUser(admin); // Set the updated admin info
+            admin = userDAO.getAdmin(admin.getAdminID());
+            setCurrentUser(admin);
         } else {
-            // Fallback, handle unknown role
             ChangePwdError.setText("Unknown role.");
             ChangePwdError.setVisible(true);
         }
     }
+
+    /**
+     * Handles the return button action, navigating the user back to the profile view.
+     * @throws IOException if fxml fails to load
+     */
     @FXML
     private void onReturnClicked() throws IOException {
 
@@ -134,8 +153,6 @@ public class ChangePassword {
             stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
             stage.show();
         }
-
-//TODO: add this for teacher and admin
     }
 }
 
