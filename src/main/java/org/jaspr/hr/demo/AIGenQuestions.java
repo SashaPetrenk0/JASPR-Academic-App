@@ -3,18 +3,30 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility class for generating and parsing AI-generated multiple-choice questions
+ * The questions are fetched from Ollama 3.2 via asynchronous call
+ */
 public class AIGenQuestions {
+
+    /**
+     * Inner class that implements the ResponseListener interface.
+     * It handles the asynchronous response returned by the Ollama API,
+     * extracts questions from the response string using regex, and prints them to the console.
+     */
     static class MyResponseListener implements ResponseListener {
 
+        /**
+         * Called when a response is received from the Ollama API.
+         * Parses the response text to extract question data and prints it.
+         * @param response The response object containing the AI-generated question text.
+         */
         @Override
         public void onResponseReceived(OllamaResponse response) {
-//            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-//            System.out.print("Ollama says: ");
-//            System.out.println(response.getResponse());
-//            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.print("Ollama says: ");
             String input = response.getResponse();
-            //TODO: create thread so that this stuff can be accessed
+
+            // Pattern to match the full question format including options and answer.
             Pattern fullQuestionPattern = Pattern.compile(
                     "Question \\d+:\\s*(.*?)\\s*" +           // Question text
                             "A\\)\\s*(.*?)\\s*" +                     // Option A
@@ -28,6 +40,7 @@ public class AIGenQuestions {
             Matcher matcher = fullQuestionPattern.matcher(input);
             List<Question> questions = new ArrayList<>();
 
+            // Extract all questions from the response using the pattern.
             while (matcher.find()) {
                 String qText = matcher.group(1).trim();
                 String a = matcher.group(2).trim();
@@ -39,6 +52,7 @@ public class AIGenQuestions {
                 questions.add(new Question(qText, a, b, c, d, correct));
             }
 
+            // Print each extracted question and its options.
             for (Question q : questions) {
                 System.out.println("Q: " + q.getQuestion());
                 System.out.println("a: " + q.getOptionA());

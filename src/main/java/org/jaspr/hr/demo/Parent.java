@@ -4,8 +4,8 @@ public class Parent extends User {
     private String childName;
     private int childID;
 
-    public Parent(String name, String childName, int childID, String email){
-        super(name, email);
+    public Parent(String name, int age, String childName, int childID, String email){
+        super(name, age, email);
         this.childName = childName;
         this.childID = childID;
     }
@@ -31,3 +31,4 @@ public class Parent extends User {
         this.childID = childID;
     }
 }
+

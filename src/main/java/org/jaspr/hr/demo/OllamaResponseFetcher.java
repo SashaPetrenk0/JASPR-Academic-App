@@ -34,12 +34,23 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Handles communication with the Ollama API server by sending prompts and receiving responses using HTTP POST requests.
+ * Includes synchronous and asynchronous fetch methods.
+ */
 public class OllamaResponseFetcher {
 
+    // Constant representing the custom User-Agent string.
     private static final String USERAGENT = "OLLAMA FETCHER";
+    //Logger instance for logging information and warnings
     public static final Logger logger = Logger.getLogger(OllamaResponseFetcher.class.getName());
+    // API endpoint URL for the Ollama model server.
     private final String apiURL;
 
+    /**
+     * Constructs a new OllamaResponseFetcher with the given API URL.
+     * @param apiURL the endpoint to send the POST requests to
+     */
     public OllamaResponseFetcher(String apiURL) {
         this.apiURL = apiURL;
     }
@@ -57,6 +68,11 @@ public class OllamaResponseFetcher {
         return conn;
     }
 
+    /**
+     * Internal method that performs the actual POST request with the specified JSON string.
+     * @param simpleJsonObj the JSON string to send
+     * @return the parsed OllamaResponse}, or null on failure
+     */
     private OllamaResponse fetchOllamaResponse(String simpleJsonObj) {
         HttpURLConnection conn = null;
         String output = null;
@@ -97,6 +113,12 @@ public class OllamaResponseFetcher {
         return response;
     }
 
+    /**
+     * Constructs a prompt request and sends it to the Ollama API synchronously.
+     * @param model the model name to use
+     * @param prompt the prompt string to send
+     * @return the parsed OllamaResponse, or null on failure
+     */
     public OllamaResponse fetchOllamaResponse(String model, String prompt) {
 
         // tested with model llama v3.2 -for documentation on how to format the JSON request https://github.com/ollama/ollama/blob/main/docs/api.md
@@ -111,7 +133,12 @@ public class OllamaResponseFetcher {
     }
 
 
-
+    /**
+     * Sends the given prompt to the Ollama API asynchronously and invokes the provided callback.
+     * @param model the model name to use
+     * @param prompt the prompt string to send
+     * @param responseListener the listener to notify when the response is received
+     */
     public void fetchAsynchronousOllamaResponse(String model, String prompt, ResponseListener responseListener) {
         Thread thread = new Thread(){
             public void run(){
@@ -122,6 +149,11 @@ public class OllamaResponseFetcher {
         thread.start();
     }
 
+    /**
+     * Reads the input from an HttpURLConnection and returns it as a String.
+     * @param conn the connection to read from
+     * @return the full response body as a string
+     */
     protected String readConnInput(HttpURLConnection conn) {
         InputStream is = null;
         InputStreamReader isr = null;
@@ -150,6 +182,5 @@ public class OllamaResponseFetcher {
 
         return sb.toString();
     }
-
 
 }
