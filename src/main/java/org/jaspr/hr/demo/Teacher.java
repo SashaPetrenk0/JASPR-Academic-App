@@ -5,7 +5,6 @@ package org.jaspr.hr.demo;
  */
 
 public class Teacher extends User {
-    private int age;
     private int teacherID;
 
     /**
@@ -17,8 +16,7 @@ public class Teacher extends User {
      */
 
     public Teacher(String name, int age, int teacherID, String email){
-        super(name, email);
-        this.age = age;
+        super(name, age, email);
         this.teacherID = teacherID;
     }
 
@@ -27,8 +25,9 @@ public class Teacher extends User {
         return "Teacher";
     }
 
+    @Override
     public int getAge() {
-        return age;
+        return super.getAge();
     }
 
     @Override
@@ -38,10 +37,6 @@ public class Teacher extends User {
 
     public int getTeacherID(){
         return teacherID;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     public void setTeacherID(int teacherID) {

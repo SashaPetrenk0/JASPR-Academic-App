@@ -5,7 +5,6 @@ package org.jaspr.hr.demo;
  * Includes additional admin-specific attributes such as age and admin ID
  */
 public class Admin extends User {
-    private int age;
     private int adminID;
 
     /**
@@ -16,8 +15,7 @@ public class Admin extends User {
      * @param email The email of the admin
      */
     public Admin(String name, int age, int adminID, String email){
-        super(name, email);
-        this.age = age;
+        super(name, age, email);
         this.adminID = adminID;
     }
 
@@ -30,29 +28,12 @@ public class Admin extends User {
     public String getRole() {
         return "Admin";
     }
-
-    /**
-     * Returns the age of the admin
-     * @return age as an integer
-     */
-    public int getAge() {
-        return age;
-    }
-
     /**
      * Returns the unique identifier of the admin
      * @return ID as an integer
      */
     public int getAdminID(){
         return adminID;
-    }
-
-    /**
-     * Sets the age of the admin
-     * @param age
-     */
-    public void setAge(int age) {
-        this.age = age;
     }
 
     /**

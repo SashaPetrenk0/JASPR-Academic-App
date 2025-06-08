@@ -93,24 +93,27 @@ public class LoginController {
      */
     private void handleLoginSuccess(String role, String email, String hashedPassword) {
         Stage stage = (Stage) LoginButton.getScene().getWindow();
+        Object loggedInUser = userDAO.getLoggedInUser(email, hashedPassword, role);
+
+        if (loggedInUser == null) {
+            showError(loginIncorrectError, "Login failed. Please check your credentials.");
+            return;
+        }
 
         switch (role) {
             case "Student":
-                Student loggedInStudent = userDAO.getLoggedInStudent(email, hashedPassword);
-                UserSession.getInstance().setCurrentUser(loggedInStudent, role);
+                UserSession.getInstance().setCurrentUser((Student) loggedInUser, role);
                 SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
                 break;
 
             case "Teacher":
-                Teacher loggedInTeacher = userDAO.getLoggedInTeacher(email, hashedPassword);
-                UserSession.getInstance().setCurrentUser(loggedInTeacher, role);
+                UserSession.getInstance().setCurrentUser((Teacher) loggedInUser, role);
                 System.out.println("Teacher successfully logged in");
                 SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
                 break;
 
             case "Admin":
-                Admin loggedInAdmin = userDAO.getLoggedInAdmin(email, hashedPassword);
-                UserSession.getInstance().setCurrentUser(loggedInAdmin, role);
+                UserSession.getInstance().setCurrentUser((Admin) loggedInUser, role);
                 System.out.println("Admin successfully logged in");
                 SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
                 break;
@@ -121,6 +124,7 @@ public class LoginController {
                 break;
         }
     }
+
 
     /**
      * Handles return button click. Navigates back to the welcome screen.

@@ -2,29 +2,30 @@ package org.jaspr.hr.demo;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * DAO class for managing user data in an SQLite database.
+ * Handles creation of user tables and CRUD operations for students, teachers, and admins.
+ */
 public class SqliteUserDAO {
     private final Connection connection;
 
-
+    /**
+     * Constructor initialises the SQLite connection and creates all required tables.
+     */
     public SqliteUserDAO() {
         connection = SqliteConnection.getInstance();
-
-                // Create all necessary tables
                 createStudentTable();
                 createTeacherTable();
-                createParentTable();
                 createAdminTable();
-
     }
 
-
+    /**
+     * Creates the students table if it does not exist with name, age, studentID, email, hashed password, and salt columns.
+     */
     private void createStudentTable() {
         // Create table if not exists
         try {
@@ -43,6 +44,9 @@ public class SqliteUserDAO {
         }
     }
 
+    /**
+     * Creates the teacher table if it does not exist with name, age, teacherID, email, hashed password, and salt columns.
+     */
     private void createTeacherTable() {
         // Create table if not exists
         try {
@@ -61,24 +65,9 @@ public class SqliteUserDAO {
         }
     }
 
-    private void createParentTable() {
-        // Create table if not exists
-        try {
-            Statement statement = connection.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS parents ("
-                    + "name STRING NOT NULL,"
-                    + "childName STRING NOT NULL,"
-                    + "childID INTEGER NOT NULL,"
-                    + "email VARCHAR NOT NULL,"
-                    + "passwordHash VARCHAR NOT NULL,"
-                    + "salt TEXT NOT NULL"
-                    + ")";
-            statement.execute(query);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    /**
+     * Creates the admin table if it does not exist with name, age, adminID, email, hashed password, and salt columns.
+     */
     private void createAdminTable() {
         // Create table if not exists
         try {
@@ -97,10 +86,12 @@ public class SqliteUserDAO {
         }
     }
 
-
-
-
-
+    /**
+     * Inserts a student into the database.
+     * @param student the student object to add
+     * @param password the hashed password
+     * @param salt the salt used for hashing
+     */
     public void addStudent(Student student, String password, String salt) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO students (name, age, studentID, email, passwordHash, salt)" +
@@ -117,7 +108,12 @@ public class SqliteUserDAO {
         }
     }
 
-
+    /**
+     * Adds a new teacher to the database.
+     * @param teacher the teacher object to add
+     * @param password the hashed password
+     * @param salt the salt used for hashing
+     */
     public void addTeacher(Teacher teacher, String password, String salt) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO teachers (name, age, teacherID, email, passwordHash, salt)" +
@@ -134,7 +130,12 @@ public class SqliteUserDAO {
         }
     }
 
-
+    /**
+     * Adds a new admin to the database.
+     * @param admin the admin object to add
+     * @param password the hashed password
+     * @param salt the salt used for hashing
+     */
     public void addAdmin(Admin admin, String password, String salt) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO admins (name, age, adminID, email, passwordHash, salt)" +
@@ -151,33 +152,11 @@ public class SqliteUserDAO {
         }
     }
 
-
-    public void addParent(Parent parent, String password, String salt) {
-        try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO parents (name, childID, childName, email, passwordHash, salt)" +
-                    "VALUES (?, ?, ?, ?, ?, ?)");
-            statement.setString(1, parent.getName());
-            statement.setInt(2, parent.getChildID());
-            statement.setString(3, parent.getChildName());
-            statement.setString(4, parent.getEmail());
-            statement.setString(5, password);
-            statement.setString(6, salt);
-            statement.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void close() {
-        try {
-            connection.close();
-        } catch (SQLException ex) {
-            System.err.println(ex);
-        }
-    }
-
-    // Pull all attributes of a specific student for Display Details functionality in profile
-
+    /**
+     * Retrieves a student by ID.
+     * @param studentID the ID of the student
+     * @return the matching Student object or null if not found
+     */
     public Student getStudent(int studentID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM students WHERE studentID = ?");
@@ -197,8 +176,12 @@ public class SqliteUserDAO {
         return null;
     }
 
-    // Pull all attributes of a specific teacher for Display Details functionality in profile
 
+    /**
+     * Retrieves a teacher by ID.
+     * @param teacherID the ID of the teacher
+     * @return the matching Teacher object or null if not found
+     */
     public Teacher getTeacher(int teacherID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE teacherID = ?");
@@ -218,8 +201,12 @@ public class SqliteUserDAO {
         return null;
     }
 
-    // Pull all attributes of a specific admin for Display Details functionality in profile
 
+    /**
+     * Retrieves an admin by ID.
+     * @param adminID the ID of the admin
+     * @return the matching Admin object or null if not found
+     */
     public Admin getAdmin(int adminID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM admins WHERE adminID = ?");
@@ -239,80 +226,73 @@ public class SqliteUserDAO {
         return null;
     }
 
+    /**
+     * Authenticates and returns a user object (Student, Teacher, or Admin) based on role, email, and password.
+     * @param email the user's email
+     * @param password the hashed password
+     * @param role the role of the user: "Student", "Teacher", or "Admin"
+     * @return the matching user object as an Object (cast as needed), or null if not found
+     */
+    public Object getLoggedInUser(String email, String password, String role) {
+        String tableName;
+        String idColumn;
 
-    public Teacher getLoggedInTeacher(String email, String password){
+        switch (role) {
+            case "Student":
+                tableName = "students";
+                idColumn = "studentID";
+                break;
+            case "Teacher":
+                tableName = "teachers";
+                idColumn = "teacherID";
+                break;
+            case "Admin":
+                tableName = "admins";
+                idColumn = "adminID";
+                break;
+            default:
+                return null; // Invalid role
+        }
+
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM teachers WHERE email = ? AND passwordHash = ?");
+            String query = "SELECT * FROM " + tableName + " WHERE email = ? AND passwordHash = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, email);
             statement.setString(2, password);
 
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return new Teacher(
-                        resultSet.getString("name"),
-                        resultSet.getInt("age"),
-                        resultSet.getInt("teacherID"),
-                        resultSet.getString("email")
-                );
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                int id = rs.getInt(idColumn);
+                String userEmail = rs.getString("email");
+
+                switch (role) {
+                    case "Student":
+                        return new Student(name, age, id, userEmail);
+                    case "Teacher":
+                        return new Teacher(name, age, id, userEmail);
+                    case "Admin":
+                        return new Admin(name, age, id, userEmail);
+                }
             }
-            //TODO: Error Handling
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
-    }
 
-    //TODO: merge into getLoggedInUser
-
-    public Student getLoggedInStudent(String email, String password){
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM students WHERE email = ? AND passwordHash = ?");
-            statement.setString(1, email);
-            statement.setString(2, password);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return new Student(
-                        resultSet.getString("name"),
-                        resultSet.getInt("age"),
-                        resultSet.getInt("studentID"),
-                        resultSet.getString("email")
-                );
-            }
-            //TODO: Error Handling
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    public Admin getLoggedInAdmin(String email, String password){
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM admins WHERE email = ? AND passwordHash = ?");
-            statement.setString(1, email);
-            statement.setString(2, password);
-
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return new Admin(
-                        resultSet.getString("name"),
-                        resultSet.getInt("age"),
-                        resultSet.getInt("adminID"),
-                        resultSet.getString("email")
-                );
-            }
-            //TODO: Error Handling
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return null;
     }
 
 
+    /**
+     * Authenticates provided email and password against database of registered users
+     * @param email the user's email
+     * @param password the hashed password
+     * @return role "Student", "Teacher", or "Admin" if found, otherwise null
+     */
     public String Authenticate(String email, String password) {
         // Check authentication information against all four user tables
-        String[] tables = {"students", "teachers", "parents", "admins"};
+        String[] tables = {"students", "teachers", "admins"};
         for (String table : tables) {
             try {
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + table + " WHERE email = ? AND passwordHash = ?");
@@ -341,6 +321,11 @@ public class SqliteUserDAO {
     }
 
 
+    /**
+     * Retrieves the salt for a given user's email.
+     * @param email the user's email
+     * @return the salt string or null if not found
+     */
     public String getSalt(String email) {
         String[] tables = {"students", "teachers", "admins", "parent"};
 
@@ -356,9 +341,7 @@ public class SqliteUserDAO {
                     System.out.println("User found in table: " + table);
                     return resultSet.getString("salt");
                 }
-                // else move to the next table
             }
-
             // If no user found
             System.out.println("No user found with email: " + email);
             return null;
@@ -369,42 +352,14 @@ public class SqliteUserDAO {
         }
     }
 
-    public boolean isStudentIDExists(int studentID) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM students WHERE studentID = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, studentID);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0; // if count > 0, studentID exists
-                }
-            }
-        }
-        return false; // default: ID does not exist
-    }
-
-    public boolean isTeacherIDExists(int teacherID) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM teachers WHERE teacherID = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, teacherID);
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0; // if count > 0, teacherID exists
-                }
-            }
-        }
-        return false; // default: ID does not exist
-    }
-
-    public boolean isAdminIDExists(int adminID) throws SQLException {
-        PreparedStatement stmt = connection.prepareStatement("SELECT COUNT(*) FROM admins WHERE adminID = ?");
-        stmt.setInt(1, adminID);
-        ResultSet rs = stmt.executeQuery();
-        rs.next();
-        return rs.getInt(1) > 0;
-    }
-
-
-
+    /**
+     * Changes the password for a user after verifying the old password.
+     * @param email the user's email
+     * @param oldPassword the current hashed password
+     * @param newPassword the new hashed password
+     * @param role the user's role
+     * @return true if the password was changed successfully, false otherwise
+     */
     public boolean changePassword(String email, String oldPassword, String newPassword, String role) {
         String tableName = "";
 
@@ -461,27 +416,10 @@ public class SqliteUserDAO {
     }
 
 
-
-    // For use when viewing student names in lists of quiz results etc.
-
-    public List<String> getAllStudentNames() {
-        List<String> studentNames = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement("SELECT name FROM students");
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                studentNames.add(name);
-            }
-            //TODO: Error Handling
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return studentNames;
-    }
-
-    // For use when a teacher is viewing their class list and details
+    /**
+     * Retrieves all students from the database.
+     * @return a list of all Student objects
+     */
 
     public List<Student> getAllStudents() {
         List<Student> students = new ArrayList<>();
@@ -506,7 +444,10 @@ public class SqliteUserDAO {
     }
 
 
-
+    /**
+     * Retrieves all teachers from the database.
+     * @return an ObservableList of all Teacher objects
+     */
     public ObservableList<Teacher> getAllTeachers() {
         ObservableList<Teacher> teachers = FXCollections.observableArrayList();
         String query = "SELECT * FROM teachers";
@@ -526,10 +467,10 @@ public class SqliteUserDAO {
         return teachers;
     }
 
-
-
-
-
+    /**
+     * Checks if there are any students in the database.
+     * @return true if at least one student exists, false otherwise
+     */
     public boolean hasAnyStudents() {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM students LIMIT 1");
@@ -541,7 +482,10 @@ public class SqliteUserDAO {
         return false;
     }
 
-
+    /**
+     * Checks if there are any teachers in the database.
+     * @return true if at least one teacher exists, false otherwise
+     */
     public boolean hasAnyTeachers() {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM teachers LIMIT 1");
@@ -553,19 +497,10 @@ public class SqliteUserDAO {
         return false;
     }
 
-
-    public boolean hasAnyParents() {
-        try {
-            PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM parents LIMIT 1");
-            ResultSet rs = stmt.executeQuery();
-            return rs.next();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
+    /**
+     * Checks if there are any admins in the database.
+     * @return true if at least one admin exists, false otherwise
+     */
     public boolean hasAnyAdmins() {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT 1 FROM admins LIMIT 1");
@@ -577,11 +512,13 @@ public class SqliteUserDAO {
         return false;
     }
 
-
+    /**
+     * Checks if there are any users in the database.
+     * @return true if any user exists, false otherwise
+     */
     public boolean hasAnyRegisteredUsers() {
         return hasAnyStudents()
                 || hasAnyTeachers()
-                || hasAnyParents()
                 || hasAnyAdmins();
     }
 

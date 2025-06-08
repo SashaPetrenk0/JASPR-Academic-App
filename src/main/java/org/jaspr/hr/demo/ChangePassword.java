@@ -54,8 +54,6 @@ public class ChangePassword {
             return "Teacher";
         } else if (currentUser instanceof Admin) {
             return "Admin";
-        } else if (currentUser instanceof Parent) {
-            return "Parent";
         }
         return null;
     }
