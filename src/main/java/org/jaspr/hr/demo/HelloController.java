@@ -16,7 +16,7 @@ public class HelloController {
     @FXML
     private Button loginButton;
 
-    private final IUserDAO userDAO = new SqliteUserDAO();
+    private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     @FXML
     public void initialize() {

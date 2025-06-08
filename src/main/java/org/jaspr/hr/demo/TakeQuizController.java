@@ -23,19 +23,14 @@ public class TakeQuizController {
     @FXML
     private Button returnToPrevious;
 
-    private Question[] questions;
-
-
-    int correctAnswerCount = 0;
-    int incorrectAnswerCount = 0;
-    int questionIndex = 0;
     private int studentId;
     private int quizId;
 
+    private QuizHelper quizHelper;
 
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
     private final User user = UserSession.getInstance().getCurrentUser();
-    private Student student = (Student) user;
+    private final Student student = (Student) user;
 
     @FXML
     public void loadTitle(String title){
@@ -45,8 +40,8 @@ public class TakeQuizController {
 
     @FXML
     public void setQuestions(Question[] questions){
-        this.questions = questions;
-        System.out.println(questions.length);
+        //this.questions = questions;
+        quizHelper = new QuizHelper(questions);
         loadQuestion();
 
     }
@@ -60,32 +55,32 @@ public class TakeQuizController {
 
     @FXML
     public void loadQuestion(){
-        if (questions == null || questions.length == 0) {
+        if (quizHelper.getTotalQuestions() == 0) {
             System.out.println("Questions not yet set — skipping load.");
             return;
         }
-        System.out.println(questionIndex);
-        questionLabel.setText(questions[questionIndex].getQuestion());
-        optionA.setText(questions[questionIndex].getOptionA());
-        optionB.setText(questions[questionIndex].getOptionB());
-        optionC.setText(questions[questionIndex].getOptionC());
-        optionD.setText(questions[questionIndex].getOptionD());
+        System.out.println(quizHelper.getCurrentQuestion());
+        questionLabel.setText(quizHelper.getCurrentQuestion().getQuestion());
+        optionA.setText(quizHelper.getCurrentQuestion().getOptionA());
+        optionB.setText(quizHelper.getCurrentQuestion().getOptionB());
+        optionC.setText(quizHelper.getCurrentQuestion().getOptionC());
+        optionD.setText(quizHelper.getCurrentQuestion().getOptionD());
     }
 
     public void nextQuestion() {
-        questionIndex++;
-        if (questionIndex < questions.length) {
-            loadQuestion();// refresh display with new question
+        if(quizHelper.nextQuestion()){
+            //refresh the display with the next question in the array
+            loadQuestion();
             optionA.setDisable(false);
             optionB.setDisable(false);
             optionC.setDisable(false);
             optionD.setDisable(false);
         } else {
             System.out.println("Quiz finished!");
-            System.out.println("correct" + correctAnswerCount);
-            System.out.println("incorrect" + incorrectAnswerCount);
-            double grade = ((double) correctAnswerCount / questions.length) * 100;
-            questionLabel.setText("Quiz Finished! You scored"+ correctAnswerCount + "/"+questions.length);
+            System.out.println("correct" + quizHelper.getCorrectCount());
+            System.out.println("incorrect" + quizHelper.getIncorrectCount());
+            double grade = ((double) quizHelper.getCorrectCount() / quizHelper.getTotalQuestions()) * 100;
+            questionLabel.setText("Quiz Finished! You scored"+ quizHelper.getCorrectCount() + "/"+ quizHelper.getTotalQuestions());
             System.out.print(studentId);
             System.out.print(quizId);
             resultsDAO.addQuizResult(quizId, studentId, grade);
@@ -98,32 +93,15 @@ public class TakeQuizController {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
         SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
     }
-    @FXML
-    private boolean checkAnswer(String answer){
-        String correctAnswer = questions[questionIndex].getCorrectAnswer();
-        System.out.println("x "+questions[questionIndex].getId());
 
-        if (answer.equals(correctAnswer)){
-            System.out.println("correct");
-
-            resultsDAO.addQuestionResult( quizId, questions[questionIndex].getId(), student.getStudentID(), 1 );
-            return true;
-
-        }else{
-            System.out.println("wrong");
-            resultsDAO.addQuestionResult( quizId, questions[questionIndex].getId(), student.getStudentID(), 0 );
-            return false;
-        }
-
-    }
 
     @FXML
     public void optionAclicked() {
         optionA.setDisable(true);
-        if (checkAnswer("A")) {
-            correctAnswerCount ++;
+        if (quizHelper.checkAnswer("A")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            incorrectAnswerCount ++;
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
 
@@ -132,30 +110,30 @@ public class TakeQuizController {
     @FXML
     public void optionBclicked() {
         optionB.setDisable(true);
-        if (checkAnswer("B")) {
-            correctAnswerCount ++;
+        if (quizHelper.checkAnswer("B")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            incorrectAnswerCount ++;
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
     }
     @FXML
     public void optionCclicked() {
         optionC.setDisable(true);
-        if (checkAnswer("C")) {
-            correctAnswerCount ++;
+        if (quizHelper.checkAnswer("C")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            incorrectAnswerCount ++;
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
     }
     @FXML
     public void optionDclicked() {
         optionD.setDisable(true);
-        if (checkAnswer("D")) {
-            correctAnswerCount ++;
+        if (quizHelper.checkAnswer("D")) {
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,1);
         } else{
-            incorrectAnswerCount ++;
+            quizHelper.recordAnswerResult(quizId, quizHelper.getCurrentQuestion(),student,0);
         }
 
     }
