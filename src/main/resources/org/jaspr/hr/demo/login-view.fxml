@@ -81,8 +81,11 @@
                     </children>
                 </HBox>
                 <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0" />
-                <Label fx:id="loginEmptyError" text="" visible="false" />
                 <Label fx:id="loginIncorrectError" text="" visible="false" />
+                <Button fx:id="ReturnButton" onAction="#onReturnClicked" prefHeight="29.0" prefWidth="117.0" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-background-radius: 10;" text="Return" textFill="WHITE">
+                    <font>
+                        <Font name="Telugu Sangam MN Bold" size="13.0" />
+                    </font></Button>
             </VBox>
         </StackPane>
     </center>

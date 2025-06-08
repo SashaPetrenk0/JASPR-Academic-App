@@ -1,12 +1,16 @@
 package org.jaspr.hr.demo;
 
-
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for handling login interactions for all user roles.
+ * Supports authentication via the SqliteUserDAO and role-based redirection.
+ */
 public class LoginController {
 
+    /** DAO for all user related queries */
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
     @FXML
@@ -14,105 +18,113 @@ public class LoginController {
     @FXML
     private TextField loginPasswordField;
     @FXML
-    private Label loginEmptyError;
-    @FXML
     private Label loginIncorrectError;
     @FXML
     private Button LoginButton;
     @FXML
     private Button ReturnButton;
 
+    /**
+     * Initializes the login form fields and sets styles for error labels.
+     */
     @FXML
     private void initialize() {
         loginEmailField.setFocusTraversable(false);
         loginPasswordField.setFocusTraversable(false);
-
-        loginEmptyError.setStyle("-fx-font-family: 'Telugu Sangam MN'; -fx-font-size: 12px; -fx-text-fill: #d9534f;");
-
-
+        loginIncorrectError.setStyle("-fx-font-family: 'Telugu Sangam MN'; -fx-font-size: 12px; -fx-text-fill: #d9534f;");
     }
 
-
+    /**
+     * Handles login button click. Validates input, hashes password, authenticates role,
+     * and redirects to the appropriate dashboard view.
+     */
     @FXML
     private void onLoginClicked(){
 
         String email = loginEmailField.getText().trim();
         String password = loginPasswordField.getText().trim();
         String user_salt = userDAO.getSalt(email);
+
+        // Error Handle: Enter both fields
+        if (email.isEmpty() || password.isEmpty()){
+            showError(loginIncorrectError, "Please enter both a valid Email and a Password");
+            return;
+        }
+
+
+        // Error Handle: Email not found
         if (user_salt == null) {
-            System.out.println("No salt found for this user. Please check the email.");
-            loginIncorrectError.setText("Login information incorrect. Please try again.");
-            loginIncorrectError.setVisible(true);
+            showError(loginIncorrectError, "Login information incorrect. Please try again.");
             return;
         }
         String hashedPwd = PasswordUtility.hashPassword(password, user_salt);
 
-        if (email.isEmpty() || password.isEmpty()){
-            loginEmptyError.setText("Please enter both a valid Email and a Password");
-            loginEmptyError.setVisible(true);
-            return;
-        }
 
-
-        // Calls authentication method
+        // Calls authentication method and determines role of successfully logged in user
         String role = userDAO.Authenticate(email, hashedPwd);
 
-        // If no matches
+        // If no matches for role
         if (role == null){
-            loginIncorrectError.setText("Login information incorrect. Please try again.");
-            loginIncorrectError.setVisible(true);
+            showError(loginIncorrectError, "Login information incorrect. Please try again.");
             return;
         }
-        // If "Student" role returned
-        if ("Student".equals(role)){
-            System.out.println("Student successfully logged in");
-            Student loggedInStudent = userDAO.getLoggedInStudent(email, hashedPwd);
-            UserSession.getInstance().setCurrentUser(loggedInStudent, role);
-            // Change scene to student dashboard
-            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with student dasboard
-            Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
-        }
 
-        // If "Teacher" role returned
-        if ("Teacher".equals(role)){
-            System.out.println("Teacher successfully logged in");
-            Teacher loggedInTeacher = userDAO.getLoggedInTeacher(email, hashedPwd);
-            UserSession.getInstance().setCurrentUser(loggedInTeacher, role);
-            // Change scene to student dashboard
-            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with teacher dashboard
-            Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
-
-
-
-
-
-
-        }
-
-        // If "Parent" role returned
-        if ("Parent".equals(role)){
-            System.out.println("Parent successfully logged in");
-            // Change scene to student dashboard
-            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with parent dashboard
-//            Stage stage = (Stage) LoginButton.getScene().getWindow();
-//            SceneChanger.changeScene(stage, "INSERT FXML FILE HERE e.g.parent-dashboard-view.fxml");
-        }
-
-        // If "Admin" role returned
-        if ("Admin".equals(role)){
-            Admin loggedInAdmin = userDAO.getLoggedInAdmin(email, hashedPwd);
-            UserSession.getInstance().setCurrentUser(loggedInAdmin, role);
-            // Change scene to student dashboard
-            System.out.println("Admin successfully logged in");
-            // TODO: Whoever is doing the dasboard pages uncomment below and replace INSERT FXML HERE with admin dashboard
-            Stage stage = (Stage) LoginButton.getScene().getWindow();
-            SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
-        }
+        // Handle successful login based on user role
+        handleLoginSuccess(role, email, hashedPwd);
 
     }
 
+    /**
+     * Shows the specified error message in the given label.
+     * @param label the label to display the error
+     * @param message the error message to display
+     */
+    private void showError(Label label, String message) {
+        label.setText(message);
+        label.setVisible(true);
+    }
+
+    /**
+     * Handles login success by creating user sessions and redirecting
+     * to the appropriate dashboard based on the role.
+     * @param role the role returned from authentication
+     * @param email the user's email
+     * @param hashedPassword the hashed password used for login
+     */
+    private void handleLoginSuccess(String role, String email, String hashedPassword) {
+        Stage stage = (Stage) LoginButton.getScene().getWindow();
+
+        switch (role) {
+            case "Student":
+                Student loggedInStudent = userDAO.getLoggedInStudent(email, hashedPassword);
+                UserSession.getInstance().setCurrentUser(loggedInStudent, role);
+                SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
+                break;
+
+            case "Teacher":
+                Teacher loggedInTeacher = userDAO.getLoggedInTeacher(email, hashedPassword);
+                UserSession.getInstance().setCurrentUser(loggedInTeacher, role);
+                System.out.println("Teacher successfully logged in");
+                SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
+                break;
+
+            case "Admin":
+                Admin loggedInAdmin = userDAO.getLoggedInAdmin(email, hashedPassword);
+                UserSession.getInstance().setCurrentUser(loggedInAdmin, role);
+                System.out.println("Admin successfully logged in");
+                SceneChanger.changeScene(stage, "admin-dashboard-view.fxml");
+                break;
+
+            default:
+                System.err.println("Unhandled role: " + role);
+                showError(loginIncorrectError, "Unrecognized user role.");
+                break;
+        }
+    }
+
+    /**
+     * Handles return button click. Navigates back to the welcome screen.
+     */
     @FXML
     private void onReturnClicked() {
         Stage stage = (Stage) ReturnButton.getScene().getWindow();
