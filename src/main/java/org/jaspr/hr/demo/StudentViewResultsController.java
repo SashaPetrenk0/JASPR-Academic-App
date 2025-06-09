@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javafx.stage.Stage;
+import java.io.IOException;
+
+
 
 /**
  * Class to populate the results page that the student sees and to control the UI elements on this page

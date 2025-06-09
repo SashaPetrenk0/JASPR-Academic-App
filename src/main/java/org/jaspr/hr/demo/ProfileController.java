@@ -39,6 +39,9 @@ public class ProfileController {
     private Label enrollmentLabel;
 
     @FXML
+    private TextField classroomField;
+
+    @FXML
     private Button changePwd;
 
     @FXML
@@ -126,14 +129,17 @@ public class ProfileController {
         populateCommonFields(teacher.getName(), teacher.getAge(), teacher.getTeacherID(), teacher.getEmail());
         nameLabel1.setText("Welcome, " + teacher.getName() + "!");
 
-        // Show classroom number if assigned
         List<Integer> classroomNumber = classroomDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
-        if (classroomNumber != null) {
-            enrollmentLabel.setText("Classroom: " + classroomNumber);
+
+        if (classroomNumber != null && !classroomNumber.isEmpty()) {
+            String text = "Classroom: " + classroomNumber.toString().replaceAll("[\\[\\]]", ""); // e.g. "Classroom: 12"
+            classroomField.setText(text);
         } else {
-            enrollmentLabel.setText("No classroom assigned");
+            classroomField.setText("No classroom assigned");
         }
-        enrollmentLabel.setVisible(true);
+
+        // You don’t need enrollmentLabel to be visible anymore
+        enrollmentLabel.setVisible(false);
     }
 
     /**
