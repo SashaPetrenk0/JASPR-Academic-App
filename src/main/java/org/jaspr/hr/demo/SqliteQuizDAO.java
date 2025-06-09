@@ -263,7 +263,7 @@ public class SqliteQuizDAO {
 
                 quizzes.add(new Quiz(id, title, description, topic, numOfQuestions, author));
             }
-            //TODO: Error Handling
+
         } catch (Exception e) {
             e.printStackTrace();
         }
