@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="589.0" prefWidth="790.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.ProfileController">
@@ -37,7 +38,7 @@
                                  <Insets left="20.0" />
                               </HBox.margin>
                            </Pane>
-                           <TextField fx:id="nameLabel" prefHeight="0.0" prefWidth="284.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" editable="false" />
+                           <TextField fx:id="nameLabel" editable="false" prefHeight="0.0" prefWidth="284.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" />
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" prefHeight="9.0" prefWidth="515.0">
@@ -48,7 +49,7 @@
                                  <Insets left="20.0" />
                               </HBox.margin>
                            </Pane>
-                           <TextField fx:id="ageLabel" prefHeight="26.0" prefWidth="284.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" editable="false" />
+                           <TextField fx:id="ageLabel" editable="false" prefHeight="26.0" prefWidth="284.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" />
                         </children>
                      </HBox>
                      <HBox alignment="CENTER_LEFT" prefHeight="9.0" prefWidth="515.0">
@@ -59,7 +60,7 @@
                                  <Insets left="20.0" />
                               </HBox.margin>
                            </Pane>
-                           <TextField fx:id="idLabel" prefHeight="26.0" prefWidth="284.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" editable="false" />
+                           <TextField fx:id="idLabel" editable="false" prefHeight="26.0" prefWidth="284.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" />
                         </children>
                      </HBox>
                   </children>
@@ -90,7 +91,7 @@
                                  <Insets left="20.0" />
                               </HBox.margin>
                            </Pane>
-                           <TextField  fx:id="emailLabel" prefHeight="28.0" prefWidth="292.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" editable="false"/>
+                           <TextField fx:id="emailLabel" editable="false" prefHeight="28.0" prefWidth="292.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" />
                         </children>
                      </HBox>
                   </children>
@@ -102,7 +103,7 @@
          </VBox>
          <VBox alignment="TOP_CENTER" prefHeight="71.0" prefWidth="515.0" spacing="20.0">
             <children>
-               <Button fx:id="ReturnButton" alignment="CENTER" contentDisplay="CENTER" onAction="#onReturnClicked" prefHeight="36.0" prefWidth="203.0" style="-fx-background-radius: 30; -fx-background-color: #63aba8;" text="Return" textFill="WHITE">
+               <Button fx:id="ReturnButton" alignment="CENTER" contentDisplay="CENTER" onAction="#onReturnClicked" prefHeight="36.0" prefWidth="203.0" style="-fx-background-radius: 30; -fx-background-color: #a8dadc;" text="Return" textFill="WHITE">
                   <font>
                      <Font name="Telugu Sangam MN Bold" size="13.0" />
                   </font>
@@ -118,9 +119,9 @@
       </VBox>
    </center>
    <left>
-      <VBox prefHeight="574.0" prefWidth="275.0" style="-fx-background-color: #63aba8;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="574.0" prefWidth="275.0" style="-fx-background-color: #a8dadc;" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #a8dadc;">
                <children>
                   <ImageView fitHeight="65.0" fitWidth="63.0" opacity="0.69" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -128,26 +129,34 @@
                      </image>
                   </ImageView>
                   <Label fx:id="nameLabel1" contentDisplay="CENTER" textFill="WHITE" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" style="-fx-background-radius: 30; -fx-background-color: #A8DDDC;" text="Edit Profile" textFill="#5b5656" />
+                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" style="-fx-background-radius: 30; -fx-background-color: #63aba8;" text="Edit Profile" textFill="#2f2828">
+                     <font>
+                        <Font name="Telugu Sangam MN Bold" size="13.0" />
+                     </font></Button>
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="223.0" prefWidth="275.0" spacing="20.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: lightgray;">
+                  <Line endX="100.0" startX="-100.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Line>
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #a8dadc;">
                      <children>
                         <ImageView fitHeight="31.0" fitWidth="30.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../images_2/user.png" />
                            </image>
                         </ImageView>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 30; -fx-background-color: #63aba8;" text="Profile" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #a8dadc;" text="Profile" textFill="#616161">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: lightgray;">
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #a8dadc;">
                      <children>
                         <ImageView fitHeight="29.0" fitWidth="133.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -155,7 +164,7 @@
                            </image>
                         </ImageView>
 
-                        <Button fx:id="changePwd" alignment="TOP_LEFT" onAction="#onChangePwdClicked" prefHeight="45.0" prefWidth="172.0" style="-fx-background-radius: 30; -fx-background-color: #63aba8;" text=" Change Password" textFill="WHITE">
+                        <Button fx:id="changePwd" alignment="TOP_LEFT" onAction="#onChangePwdClicked" prefHeight="45.0" prefWidth="172.0" style="-fx-background-color: #a8dadc;" text=" Change Password" textFill="#616161">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
@@ -165,28 +174,28 @@
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="275.0" style="-fx-border-color: lightgray; -fx-border-width: 1;">
+                  <HBox alignment="CENTER" prefHeight="64.0" prefWidth="275.0" style="-fx-background-color: #a8dadc;">
                      <children>
-                        <ImageView fitHeight="31.0" fitWidth="29.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="31.0" fitWidth="38.0" opacity="0.74" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../images_2/settings.png" />
                            </image>
                         </ImageView>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" style="-fx-background-radius: 30; -fx-background-color: #63aba8; -fx-border-color: transparent; -fx-border-width: 0;" text="Settings" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #a8dadc;" text="Settings" textFill="#616161">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
                         </Button>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-border-color: lightgray;">
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #a8dadc;">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.52" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../images_2/padlock.png" />
                            </image>
                         </ImageView>
-                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-radius: 30; -fx-background-color: #63aba8;" text="Privacy Policy" textFill="WHITE">
+                        <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #a8dadc;" text="Privacy Policy" textFill="#616161">
                            <font>
                               <Font name="Telugu Sangam MN Bold" size="15.0" />
                            </font>
