@@ -44,7 +44,7 @@
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                 </padding>
-                <VBox alignment="BOTTOM_CENTER" prefHeight="107.0" prefWidth="291.0">
+                <VBox alignment="BOTTOM_CENTER" prefHeight="136.0" prefWidth="291.0">
                     <children>
                         <Text fill="#63aba8" strokeType="OUTSIDE" strokeWidth="0.0" text="AcademIQ" wrappingWidth="150.076416015625">
                             <font>
@@ -58,12 +58,15 @@
                         </Text>
                     </children>
                 </VBox>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please Log In">
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome! Please Log In" wrappingWidth="152.83578491210938">
                     <font>
                         <Font name="Telugu Sangam MN" size="14.0" />
                     </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
                 </Text>
-                <TextField fx:id="loginEmailField" maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0" promptText="Email" style="-fx-background-radius: 50; -fx-border-radius: 50;">
+                <TextField fx:id="loginEmailField" maxHeight="47.0" maxWidth="291.0" prefHeight="47.0" prefWidth="291.0" promptText="Email" style="-fx-background-radius: 50; -fx-border-radius: 50;">
                     <font>
                         <Font name="Telugu Sangam MN Bold" size="13.0" />
                     </font></TextField>
@@ -80,12 +83,16 @@
                         <Label alignment="BOTTOM_RIGHT" prefHeight="9.0" prefWidth="106.0" text="Forgot Password?" textFill="#1f70bc" />
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="291.0" />
+            <HBox prefHeight="0.0" prefWidth="291.0">
+               <children>
+                      <Button fx:id="ReturnButton" onAction="#onReturnClicked" prefHeight="33.0" prefWidth="82.0" style="-fx-background-color: transparent; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-background-radius: 30;" text="← Return" textFill="WHITE">
+                          <font>
+                              <Font name="Telugu Sangam MN Bold" size="12.0" />
+                          </font>
+                  </Button>
+               </children>
+            </HBox>
                 <Label fx:id="loginIncorrectError" text="" visible="false" />
-                <Button fx:id="ReturnButton" onAction="#onReturnClicked" prefHeight="29.0" prefWidth="117.0" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-background-radius: 10;" text="Return" textFill="WHITE">
-                    <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font></Button>
             </VBox>
         </StackPane>
     </center>
