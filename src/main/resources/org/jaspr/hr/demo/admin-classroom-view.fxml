@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="760.0" prefWidth="1057.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.AdminClassroomController">
+<BorderPane maxWidth="800.0" minWidth="800.0" prefHeight="760.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.AdminClassroomController">
 
     <padding>
         <Insets bottom="40" left="40" right="40" top="40" />
@@ -23,10 +23,10 @@
         <StackPane>
             <Pane prefHeight="760.0" prefWidth="1057.0">
                 <Circle fill="#d7909080" layoutX="-50.0" layoutY="-55.0" radius="154.0" translateX="-20.0" translateY="10.0" />
-                <Circle fill="#c68fd780" layoutX="932.0" layoutY="38.0" radius="121.0" translateX="80.0" translateY="-100.0" />
-                <Circle fill="#ffd34f5f" layoutX="838.0" layoutY="95.0" radius="48.0" translateX="40.0" translateY="-80.0" />
-                <Circle fill="#f8ba6d80" layoutX="68.0" layoutY="760.0" radius="56.0" translateX="20.0" translateY="-30.0" />
-                <Circle fill="#86c5ff80" layoutX="-196.0" layoutY="706.0" radius="84.0" translateX="180.0" translateY="-30.0" />
+                <Circle fill="#c68fd780" layoutX="932.0" layoutY="38.0" radius="121.0" translateX="-150.0" translateY="-100.0" />
+                <Circle fill="#ffd34f5f" layoutX="846.0" layoutY="87.0" radius="40.0" translateX="-180.0" translateY="-80.0" />
+                <Circle fill="#f8ba6d80" layoutX="66.0" layoutY="762.0" radius="54.0" translateX="-10.0" translateY="-30.0" />
+                <Circle fill="#86c5ff80" layoutX="-210.0" layoutY="720.0" radius="70.0" translateX="180.0" translateY="-30.0" />
             </Pane>
 
             <VBox alignment="CENTER" spacing="30.0">
@@ -37,7 +37,7 @@
                                 <Font name="Telugu Sangam MN" size="30.0" />
                             </font>
                             <HBox.margin>
-                                <Insets left="30.0" />
+                                <Insets left="10.0" />
                             </HBox.margin>
                         </Label>
                     </children>
@@ -46,28 +46,31 @@
                </VBox.margin>
                 </HBox>
 
-                <VBox prefWidth="1057.0" spacing="20.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 20; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
-                    <Button fx:id="ClassRoomCreation" onAction="#onCreateClassroomClick" prefHeight="56.0" prefWidth="997.0" style="-fx-background-radius: 25; -fx-background-color: #C1F3B9;" text="Create a Classroom" textFill="#393535">
+                <VBox prefHeight="139.0" prefWidth="668.0" spacing="20.0" style="-fx-background-color: #a9dadb; -fx-background-radius: 20; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                    <Button fx:id="ClassRoomCreation" onAction="#onCreateClassroomClick" prefHeight="27.0" prefWidth="660.0" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" text="Create a Classroom" textFill="#393535">
                         <font>
-                            <Font name="Telugu Sangam MN Bold" size="16.0" />
+                            <Font name="Telugu Sangam MN Bold" size="13.0" />
                         </font>
                     </Button>
 
-                    <Button fx:id="AssignButton" onAction="#onAssignUsersClick" prefHeight="56.0" prefWidth="997.0" style="-fx-background-radius: 25; -fx-background-color: #C1F3B9;" text="Assign" textFill="#393535">
+                    <Button fx:id="AssignButton" onAction="#onAssignUsersClick" prefHeight="26.0" prefWidth="660.0" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" text="Assign" textFill="#393535">
                         <font>
-                            <Font name="Telugu Sangam MN Bold" size="16.0" />
+                            <Font name="Telugu Sangam MN Bold" size="13.0" />
                         </font>
                     </Button>
                 </VBox>
 
-                <TableView fx:id="classroomTable" prefHeight="300.0" prefWidth="997.0" style="-fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 4, 0.2, 0, 2);">
+                <TableView fx:id="classroomTable" prefHeight="300.0" prefWidth="997.0" style="-fx-border-color: #e0e0e0;" styleClass="clean-table">
+
+
                     <columns>
-                        <TableColumn fx:id="classroomNumberColumn" prefWidth="204.96226501464844" text="Classroom Number" />
-                        <TableColumn fx:id="classroomCapacityColumn" prefWidth="309.5378189086914" text="Classroom Capacity" />
-                        <TableColumn fx:id="numTeachersColumn" prefWidth="172.94027709960938" text="Number of Assigned Teachers" />
-                        <TableColumn fx:id="numStudentsColumn" prefWidth="289.1653137207031" text="Number of Assigned Students" />
+                        <TableColumn fx:id="classroomNumberColumn" prefWidth="168.1729965209961" style="-fx-font-size: 14px;" text="Classroom Number" />
+                        <TableColumn fx:id="classroomCapacityColumn" prefWidth="176.32704162597656" style="-fx-font-size: 14px;" text="Classroom Capacity" />
+                        <TableColumn fx:id="numTeachersColumn" prefWidth="180.87832641601562" style="-fx-font-size: 14px;" text="Assigned Teachers" />
+                        <TableColumn fx:id="numStudentsColumn" prefWidth="171.99053955078125" style="-fx-font-size: 14px;" text="Assigned Students" />
                     </columns>
                 </TableView>
+
                 <HBox alignment="CENTER">
                     <children>
                         <Button fx:id="returnToDashboard" onAction="#returnToDashboard" prefHeight="40.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #D3D3D3;" text="Return" textFill="#000000">
