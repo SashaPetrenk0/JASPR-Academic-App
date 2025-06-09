@@ -27,6 +27,9 @@ public class StudentViewResultsController {
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
     @FXML
+    private Button returnToPrevious;
+
+    @FXML
     private ComboBox resultDropdown;
     @FXML
     private VBox allResultsBox;
@@ -165,5 +168,11 @@ public class StudentViewResultsController {
         //show the box that has been selected
         boxToShow.setVisible(true);
         boxToShow.setManaged(true);
+    }
+
+    @FXML
+    private void returnToStudentDashboard() throws IOException {
+        Stage stage = (Stage) returnToPrevious.getScene().getWindow();
+        SceneChanger.changeScene(stage, "student-dashboard-view.fxml");
     }
 }
