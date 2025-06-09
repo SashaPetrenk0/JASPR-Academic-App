@@ -11,14 +11,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class to handle database interactions related to storing quiz and question results
+ */
 public class SqliteResultsDAO  {
     private final Connection connection;
 
+    /**
+     * Open database connection and create tables
+     */
     public SqliteResultsDAO() {
         connection = SqliteConnection.getInstance();
         createQuestionResultsTable();
         createQuizResultsTable();
     }
+
+    /**
+     * Create the question results table if it doesn't already exist
+     * Store a student's result for individual questions in this table
+     */
     private void createQuestionResultsTable() {
         // Create table if not exists
         try {
@@ -39,6 +50,9 @@ public class SqliteResultsDAO  {
         }
     }
 
+    /**
+     * Create the quiz results table is one doesn't exist to store the students' results for quizzes
+     */
     private void createQuizResultsTable() {
         // Create table if not exists
         try {
@@ -58,7 +72,13 @@ public class SqliteResultsDAO  {
     }
 
 
-
+    /**
+     * Add a question result to the database
+     * @param quizID id of the quiz that the question belongs to
+     * @param questionID id of the question being answered
+     * @param studentID id of the student who answered the question
+     * @param grade grade, 1 for correct or 0 for incorrect
+     */
     public void addQuestionResult(int quizID, int questionID, int studentID, int grade) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO questionResults (quiz_id, question_id, student_id, grade)" +
@@ -75,6 +95,12 @@ public class SqliteResultsDAO  {
 
     }
 
+    /**
+     * Add a quiz result to the database
+     * @param quizID id of the quiz
+     * @param studentID id of the student who took the quiz
+     * @param grade percentage of correct answers
+     */
     public void addQuizResult(int quizID, int studentID, double grade) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO quizResults (quiz_id, student_id, grade)" +
