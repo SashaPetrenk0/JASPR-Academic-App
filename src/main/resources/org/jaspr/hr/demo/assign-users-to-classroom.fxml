@@ -32,7 +32,7 @@
                <VBox alignment="CENTER" spacing="30.0">
             <HBox prefHeight="35.0" prefWidth="720.0">
                <children>
-                      <Label alignment="TOP_LEFT" prefHeight="7.0" prefWidth="348.0" style="-fx-font-size: 30px;" text="Make assignment selection:">
+                      <Label alignment="TOP_LEFT" prefHeight="7.0" prefWidth="348.0" style="-fx-font-size: 20px;" text="Make assignment selection:">
                           <font>
                               <Font name="Telugu Sangam MN" size="13.0" />
                           </font>
@@ -42,7 +42,7 @@
                       </Label>
                </children>
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
             </HBox>
 
@@ -51,7 +51,10 @@
                        <HBox prefHeight="124.0" prefWidth="1051.0">
                         <children>
                             <VBox alignment="CENTER_LEFT" opacity="0.85" prefHeight="88.0" prefWidth="660.0" spacing="20.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
-                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Classroom:" />
+                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Classroom:">
+                           <font>
+                              <Font size="12.0" />
+                           </font></Label>
                                 <ComboBox fx:id="classroomComboBox" prefHeight="49.0" prefWidth="967.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 10;" />
                         <HBox.margin>
                            <Insets bottom="10.0" />
@@ -82,7 +85,7 @@
       
                          <Button fx:id="assignUsers" onAction="#assignUsers" prefHeight="44.0" prefWidth="663.0" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" text="Create Assignment" textFill="#393535">
                           <font>
-                              <Font name="Telugu Sangam MN Bold" size="16.0" />
+                              <Font name="Telugu Sangam MN Bold" size="13.0" />
                           </font>
                       </Button>
                </children>
