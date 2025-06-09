@@ -19,8 +19,10 @@
             </padding>
             <HBox prefHeight="52.0" prefWidth="500.0" spacing="20.0">
                 <children>
-                    <Button fx:id="returnToPrevious" onAction="#returnToClassrooms" prefHeight="33.0" prefWidth="77.0" style="-fx-background-radius: 10; -fx-background-color: #C1F3B9; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-color: #B0B0B0;" text="← Return">
-                    </Button>
+                    <Button fx:id="returnToPrevious" onAction="#returnToClassrooms" prefHeight="33.0" prefWidth="77.0" style="-fx-background-radius: 10; -fx-background-color: #D3D3D3; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px;" text="← Return">
+                  <font>
+                     <Font name="Telugu Sangam MN" size="13.0" />
+                  </font></Button>
                 </children>
                 <VBox.margin>
                     <Insets left="20.0" top="20.0" />
@@ -93,8 +95,8 @@
         <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;">
             <children>
                 <Circle centerX="50.0" centerY="50.0" fill="#a3d6ff70" layoutX="-44.0" layoutY="-44.0" radius="86.0" />
-                <Circle centerX="100.0" centerY="100.0" fill="#ffbac19d" layoutX="76.0" layoutY="76.0" radius="101.0" />
-                <Circle centerX="150.0" centerY="60.0" fill="#fae6b9d6" layoutX="52.0" layoutY="52.0" radius="91.0" translateX="-50.0" translateY="400.0" />
+                <Circle centerX="100.0" centerY="100.0" fill="#cfb9e878" layoutX="76.0" layoutY="76.0" radius="101.0" />
+                <Circle centerX="150.0" centerY="60.0" fill="#ffbae877" layoutX="52.0" layoutY="52.0" radius="91.0" translateX="-50.0" translateY="400.0" />
             </children>
         </Pane>
     </right>
