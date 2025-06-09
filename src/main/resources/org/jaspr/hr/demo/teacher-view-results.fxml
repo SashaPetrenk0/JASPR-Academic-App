@@ -1,65 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jaspr.hr.demo.TeacherViewResultsController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="556.0" prefWidth="800.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.TeacherViewResultsController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-
-    <VBox spacing="20.0" fx:id="selectionBox" visible="true">
-        <Label text="Select what analytics you would like to view" style="-fx-font-size: 30px;"/>
-        <VBox>
-            <Label text="Select Classroom:" style="-fx-font-weight: bold;"/>
-            <ComboBox fx:id="classroomComboBox" />
-        </VBox>
-        <VBox>
-            <Label text="Quiz Selected:" style="-fx-font-weight: bold;"/>
-            <ComboBox fx:id="quizSelection" />
-        </VBox>
-
-        <Button fx:id="generateAnalytics" text="Generate Analytics" onAction="#generateAnalytics" />
-
-        <Button fx:id="returnToPrevious" text="Return" onAction="#returnToTeacherDashboard" />
-    </VBox>
-
-    <VBox fx:id="specificResultsBox" visible="false" managed="false">
-        <Label fx:id="QuizTitle" style="-fx-font-size: 30px;"/>
-        <Label text = "specific quiz"/>
-        <BarChart fx:id="barChart" title="Question Accuracy"
-                  prefHeight="400" prefWidth="600">
-            <xAxis>
-                <CategoryAxis label="Question ID" />
-            </xAxis>
-            <yAxis>
-                <NumberAxis label="Percentage Correct" />
-            </yAxis>
-        </BarChart>
-
-        <TableView fx:id="quizResultTable" prefHeight="500">
-            <columns>
-                <TableColumn fx:id="studentColumn" text="Student" prefWidth="150"/>
-                <TableColumn fx:id="gradeColumn" text="Score" prefWidth="100"/>
-                <TableColumn fx:id="percentageColumn" text="Percentage" prefWidth="100"/>
-            </columns>
-        </TableView>
-
-        <PieChart fx:id="pieChart" layoutX="50" layoutY="50" prefHeight="400" prefWidth="400"/>
-
-        <ListView fx:id="ranking"/>
-
-        <Button text="Return" onAction="#returnToAnalyticsSelection" />
-    </VBox>
+   <StackPane alignment="TOP_LEFT" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
+      <children>
+         <Pane maxHeight="46.0" maxWidth="760.0" prefHeight="46.0" prefWidth="760.0">
+            <children>
+               <Circle fill="#d7909080" layoutX="34.0" layoutY="29.0" radius="96.0" translateX="-20.0" translateY="10.0" />
+               <Circle fill="#ffb74d80" layoutX="663.0" layoutY="107.0" radius="84.0" translateX="80.0" translateY="-100.0" />
+               <Circle fill="#ffd34f5f" layoutX="639.0" layoutY="94.0" radius="47.0" translateX="40.0" translateY="-30.0" />
+               <Circle fill="#a8dadc80" layoutX="66.0" layoutY="530.0" radius="54.0" translateX="40.0" translateY="-30.0" />
+               <Circle fill="#86c5ff80" layoutX="-19.0" layoutY="529.0" radius="85.0" translateX="40.0" translateY="-30.0" />
+            </children>
+         </Pane>
+      
+          <VBox fx:id="selectionBox" spacing="20.0" style="-fx-padding: 10px 20px;" visible="true">
+            <HBox alignment="TOP_LEFT" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
+               <children>
+                  <Button fx:id="returnToPrevious" onAction="#returnToTeacherDashboard" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="15.0" top="5.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
+              <Label style="-fx-font-size: 30px;" text="Select what analytics you would like to view" />
+              <VBox>
+                  <Label style="-fx-font-weight: bold;" text="Select Classroom:" />
+               <ComboBox fx:id="classroomComboBox"  prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
+              </VBox>
+              <VBox>
+                  <Label style="-fx-font-weight: bold;" text="Quiz Selected:" />
+               <ComboBox fx:id="quizSelection" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
+              </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="720.0" spacing="20.0">
+               <children>
+                  <Button fx:id="generateAnalytics" onAction="#generateAnalytics" prefHeight="38.0" prefWidth="446.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
+                     <font>
+                        <Font name="Telugu Sangam MN Bold" size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets top="50.0" />
+               </padding>
+            </VBox>
+          </VBox>
+      
+             <VBox fx:id="specificResultsBox" managed="false" visible="false">
+              <Label fx:id="QuizTitle" style="-fx-font-size: 30px;" />
+              <Label text="specific quiz" />
+              <BarChart fx:id="barChart" prefHeight="400" prefWidth="600" title="Question Accuracy">
+                  <xAxis>
+                      <CategoryAxis label="Question ID" />
+                  </xAxis>
+                  <yAxis>
+                      <NumberAxis label="Percentage Correct" />
+                  </yAxis>
+              </BarChart>
+      
+                 <TableView fx:id="quizResultTable" prefHeight="500">
+                  <columns>
+                      <TableColumn fx:id="studentColumn" prefWidth="150" text="Student" />
+                      <TableColumn fx:id="gradeColumn" prefWidth="100" text="Score" />
+                      <TableColumn fx:id="percentageColumn" prefWidth="100" text="Percentage" />
+                  </columns>
+              </TableView>
+      
+                 <PieChart fx:id="pieChart" layoutX="50" layoutY="50" prefHeight="400" prefWidth="400" />
+      
+                 <ListView fx:id="ranking" />
+      
+                 <Button onAction="#returnToAnalyticsSelection" text="Return" />
+          </VBox>
+      </children>
+   </StackPane>
 
 </VBox>
-

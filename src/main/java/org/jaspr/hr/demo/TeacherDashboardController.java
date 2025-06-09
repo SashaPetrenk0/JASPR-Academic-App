@@ -37,6 +37,9 @@ public class TeacherDashboardController {
     private Button assignQuizzes;
 
     @FXML
+    private Button analytics;
+
+    @FXML
     public void initialize() {
         if ("Teacher".equals(role) && user instanceof Teacher){
             Teacher teacher = (Teacher) user;
