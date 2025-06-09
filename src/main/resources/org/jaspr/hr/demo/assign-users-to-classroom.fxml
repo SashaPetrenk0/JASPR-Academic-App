@@ -30,7 +30,7 @@
             </Pane>
 
                <VBox alignment="CENTER" spacing="30.0">
-            <HBox prefHeight="35.0" prefWidth="720.0">
+            <HBox prefHeight="0.0" prefWidth="720.0">
                <children>
                       <Label alignment="TOP_LEFT" prefHeight="7.0" prefWidth="348.0" style="-fx-font-size: 20px;" text="Make assignment selection:">
                           <font>
@@ -46,7 +46,7 @@
                </VBox.margin>
             </HBox>
 
-                   <VBox prefHeight="193.0" prefWidth="720.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-padding: 30;">
+                   <VBox prefHeight="208.0" prefWidth="720.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-padding: 30;">
 
                        <HBox prefHeight="124.0" prefWidth="1051.0">
                         <children>
