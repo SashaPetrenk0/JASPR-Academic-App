@@ -91,7 +91,7 @@ public class StudentViewResultsController {
     }
 
     /**
-     *
+     * display the elements based on if one quiz has been selected or if all quizzes have been selected
      */
     @FXML
     private void onQuizSelected() {
@@ -101,7 +101,6 @@ public class StudentViewResultsController {
         // Then show the selected one
         String quiz = (String) resultDropdown.getValue();
         if (quiz.equals("All quizzes")){
-            System.out.print("hello");
             showOnlyResults(allResultsBox);
             // Cell value for title
             titleColumn.setCellValueFactory(cellData -> {
