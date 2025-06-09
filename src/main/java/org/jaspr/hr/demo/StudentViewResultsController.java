@@ -4,22 +4,20 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class to populate the results page that the student sees and to control the UI elements on this page
+ */
 public class StudentViewResultsController {
+    //get the current user
     private final User user = UserSession.getInstance().getCurrentUser();
     private final String role = UserSession.getInstance().getRole();
 
@@ -59,21 +57,29 @@ public class StudentViewResultsController {
 
     private Map<String, Quiz> quizTitleToQuizMap;
 
+    /**
+     * Populate the dropdown list options with the quizzes assigned to the student and with student made quizzes
+     * automatically upon opening this page
+     */
     public void initialize(){
         if ("Student".equals(role) && user instanceof Student) {
             Student student = (Student) user;
             List<Quiz> userCreatedQuizzes = quizDAO.getAllQuizzes(student);
             List<Quiz> assignedQuizzes = quizDAO.getQuizzesForStudent(student.getStudentID());
+            //add all quizzes option to dropdown
             List<String> quizTitles = new ArrayList<>();
             quizTitles.add("All quizzes");
             quizTitleToQuizMap = new HashMap<>();
+            //iterate through assigned quizzes and add the title to the list to show
             for (Quiz quiz : assignedQuizzes) {
                 String title = quiz.getTitle() + " - assigned by teacher";
                 quizTitles.add(title);
+                //use a hashmap so that the quiz object for the selected quiz can be accessed later
                 quizTitleToQuizMap.put(title, quiz);
             }
 
             for (Quiz quiz : userCreatedQuizzes) {
+                //iterate through self created quizzes and add the title to the list to show
                 String title = quiz.getTitle() + " - created by you";
                 quizTitles.add(title);
                 quizTitleToQuizMap.put(title, quiz);
@@ -84,6 +90,9 @@ public class StudentViewResultsController {
         }
     }
 
+    /**
+     *
+     */
     @FXML
     private void onQuizSelected() {
         // First hide everything

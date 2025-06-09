@@ -12,6 +12,10 @@ public class QuizHelper {
 
         private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
+    /**
+     * Constructs a new quiz helper object
+     * @param questions an array of question objects that will be manipulated to create the quiz logic
+     */
     public QuizHelper(Question[] questions) {
             this.questions = questions;
         }
