@@ -105,7 +105,7 @@
             </Line>
          </children>
          <BorderPane.margin>
-            <Insets top="10.0" />
+            <Insets bottom="20.0" top="10.0" />
          </BorderPane.margin>
       </VBox>
    </top>
