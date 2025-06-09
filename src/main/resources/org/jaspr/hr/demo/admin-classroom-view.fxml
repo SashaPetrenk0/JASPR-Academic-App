@@ -5,100 +5,83 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="510.4" prefWidth="800.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.AdminClassroomController">
+<BorderPane maxWidth="800.0" minWidth="800.0" prefHeight="760.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.AdminClassroomController">
+
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="40" left="40" right="40" top="40" />
     </padding>
-   <StackPane alignment="TOP_LEFT" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
-      <children>
-         <Pane maxHeight="46.0" maxWidth="760.0" prefHeight="46.0" prefWidth="760.0">
-            <children>
-               <Circle fill="#d7909080" layoutX="34.0" layoutY="29.0" radius="96.0" translateX="-20.0" translateY="10.0" />
-               <Circle fill="#ffb74d80" layoutX="663.0" layoutY="107.0" radius="84.0" translateX="80.0" translateY="-100.0" />
-               <Circle fill="#ffd34f5f" layoutX="639.0" layoutY="94.0" radius="47.0" translateX="40.0" translateY="-30.0" />
-               <Circle fill="#a8dadc80" layoutX="66.0" layoutY="530.0" radius="54.0" translateX="40.0" translateY="-30.0" />
-               <Circle fill="#86c5ff80" layoutX="-19.0" layoutY="529.0" radius="85.0" translateX="40.0" translateY="-30.0" />
-            </children>
-         </Pane>
-         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-            <children>
-               <HBox alignment="CENTER" prefHeight="59.0" prefWidth="760.0" style="-fx-background-radius: 50;">
-                  <children>
-                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                        <children>
-                           <Button fx:id="returnToDashboard" onAction="#returnToDashboard" prefHeight="27.0" prefWidth="91.0" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
-                              <font>
-                                 <Font name="Arial" size="14.0" />
-                              </font>
-                              <padding>
-                                 <Insets bottom="5.0" left="10.0" right="15.0" top="5.0" />
-                              </padding>
-                           </Button>
-                        </children>
-                     </HBox>
-                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                        <children>
-                           <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="44.0" prefWidth="225.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="Classrooms">
-                              <font>
-                                 <Font name="Arial" size="20.0" />
-                              </font>
-                              <HBox.margin>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </HBox.margin>
-                              <padding>
-                                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
-                              </padding>
-                           </Label>
-                        </children>
-                     </HBox>
-                     <Region prefHeight="65.0" prefWidth="200.0" />
-                  </children>
-                  <padding>
-                     <Insets bottom="10.0" top="10.0" />
-                  </padding>
-               </HBox>
-               <HBox alignment="CENTER" maxWidth="550.0" prefHeight="40.0" prefWidth="777.0" />
-               <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
-                  <children>
-                     <Button fx:id="ClassRoomCreation" minHeight="50.0" onAction="#onCreateClassroomClick" prefHeight="50.0" prefWidth="168.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Create a Classroom">
+
+    <center>
+        <StackPane>
+            <Pane prefHeight="760.0" prefWidth="1057.0">
+                <Circle fill="#d7909080" layoutX="-50.0" layoutY="-55.0" radius="154.0" translateX="-20.0" translateY="10.0" />
+                <Circle fill="#c68fd780" layoutX="932.0" layoutY="38.0" radius="121.0" translateX="-150.0" translateY="-100.0" />
+                <Circle fill="#ffd34f5f" layoutX="846.0" layoutY="87.0" radius="40.0" translateX="-180.0" translateY="-80.0" />
+                <Circle fill="#f8ba6d80" layoutX="66.0" layoutY="762.0" radius="54.0" translateX="-10.0" translateY="-30.0" />
+                <Circle fill="#86c5ff80" layoutX="-210.0" layoutY="720.0" radius="70.0" translateX="180.0" translateY="-30.0" />
+            </Pane>
+
+            <VBox alignment="CENTER" spacing="30.0">
+                <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="867.0">
+                    <children>
+                        <Label prefHeight="37.0" prefWidth="312.0" style="-fx-font-size: 30px;" text="Classrooms" textFill="#000000">
+                            <font>
+                                <Font name="Telugu Sangam MN" size="30.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+               <VBox.margin>
+                  <Insets right="20.0" />
+               </VBox.margin>
+                </HBox>
+
+                <VBox prefHeight="139.0" prefWidth="668.0" spacing="20.0" style="-fx-background-color: #a9dadb; -fx-background-radius: 20; -fx-padding: 30; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                    <Button fx:id="ClassRoomCreation" onAction="#onCreateClassroomClick" prefHeight="27.0" prefWidth="660.0" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" text="Create a Classroom" textFill="#393535">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                            <Font name="Telugu Sangam MN Bold" size="13.0" />
                         </font>
-                     </Button>
-                     <Button fx:id="AssignButton" minHeight="50.0" onAction="#onAssignUsersClick" prefHeight="50.0" prefWidth="96.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Assign">
+                    </Button>
+
+                    <Button fx:id="AssignButton" onAction="#onAssignUsersClick" prefHeight="26.0" prefWidth="660.0" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" text="Assign" textFill="#393535">
                         <font>
-                           <Font name="System Bold" size="13.0" />
+                            <Font name="Telugu Sangam MN Bold" size="13.0" />
                         </font>
-                     </Button>
-                  </children>
-                  <padding>
-                     <Insets bottom="20.0" />
-                  </padding>
-               </HBox>
-            
-                <TableView fx:id="classroomTable" prefWidth="500">
+                    </Button>
+                </VBox>
+
+                <TableView fx:id="classroomTable" prefHeight="300.0" prefWidth="997.0" style="-fx-border-color: #e0e0e0;" styleClass="clean-table">
+
+
                     <columns>
-                        <TableColumn fx:id="classroomNumberColumn" prefWidth="138.3999900817871" text="Classroom Number" />
-                        <TableColumn fx:id="classroomCapacityColumn" minWidth="0.0" prefWidth="156.80006408691406" text="Classroom Capacity" />
-                        <TableColumn fx:id="numTeachersColumn" prefWidth="219.20001220703125" text="Number of Assigned Teachers" />
-                        <TableColumn fx:id="numStudentsColumn" prefWidth="203.20001220703125" text="Number of Assigned Students" />
+                        <TableColumn fx:id="classroomNumberColumn" prefWidth="168.1729965209961" style="-fx-font-size: 14px;" text="Classroom Number" />
+                        <TableColumn fx:id="classroomCapacityColumn" prefWidth="176.32704162597656" style="-fx-font-size: 14px;" text="Classroom Capacity" />
+                        <TableColumn fx:id="numTeachersColumn" prefWidth="180.87832641601562" style="-fx-font-size: 14px;" text="Assigned Teachers" />
+                        <TableColumn fx:id="numStudentsColumn" prefWidth="171.99053955078125" style="-fx-font-size: 14px;" text="Assigned Students" />
                     </columns>
                 </TableView>
-            </children>
-            <padding>
-               <Insets left="20.0" right="20.0" />
-            </padding>
-         </VBox>
-      </children>
-   </StackPane>
 
+                <HBox alignment="CENTER">
+                    <children>
+                        <Button fx:id="returnToDashboard" onAction="#returnToDashboard" prefHeight="40.0" prefWidth="300.0" style="-fx-background-radius: 25; -fx-background-color: #D3D3D3;" text="Return" textFill="#000000">
+                            <font>
+                                <Font name="Telugu Sangam MN Bold" size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
 
-</VBox>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

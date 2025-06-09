@@ -26,3 +26,66 @@
     -fx-background-color: rgba(255, 255, 255, 0.3);
 
 }
+/* Soft, rounded TableView container */
+.clean-table {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-background-radius: 16;
+    -fx-border-radius: 16;
+    -fx-padding: 10;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Transparent and clean header background */
+.clean-table .column-header-background,
+.clean-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+/* Bubble-like header label styling */
+.clean-table .column-header .label {
+    -fx-font-family: "Telugu Sangam MN";
+    -fx-font-size: 14px;
+    -fx-font-weight: normal; /* remove bold */
+    -fx-text-fill: #333;
+    -fx-background-color: transparent;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 6 12;
+}
+
+/* Remove sort arrows */
+.clean-table .column-header .arrow {
+    -fx-background-color: transparent;
+}
+
+/* Soft cell appearance */
+.clean-table .table-cell {
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #e0e0e0;
+    -fx-padding: 8 12;
+    -fx-background-color: transparent;
+    -fx-text-fill: #222;
+}
+
+/* Soft row hover and selection */
+.clean-table .table-row-cell:filled:selected,
+.clean-table .table-row-cell:focused:selected {
+    -fx-background-color: #C1F3B9;
+    -fx-text-fill: #393535;
+}
+
+.clean-table .table-row-cell:filled:hover {
+    -fx-background-color: #E6F8E8;
+}
+
+/* Remove focus ring */
+.clean-table:focused {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
