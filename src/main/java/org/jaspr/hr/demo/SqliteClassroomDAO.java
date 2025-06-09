@@ -1,20 +1,23 @@
 package org.jaspr.hr.demo;
 
 import java.sql.Connection;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import javax.xml.transform.Result;
 import java.sql.*;
-        import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Access Object (DAO) class for managing classroom-related operations in the SQLite database.
+ * This includes creation, assignment, and retrieval of admin, teacher, and student data.
+ */
+public class SqliteClassroomDAO  {
+    private final Connection connection;
 
-public class SqliteClassroomDAO implements IClassroomDAO {
-    private Connection connection;
 
-
+    /**
+     * Constructor that initializes the database connection and ensures required tables exist.
+     */
     public SqliteClassroomDAO() {
         connection = SqliteConnection.getInstance();
         createClassroomTable();
@@ -22,6 +25,9 @@ public class SqliteClassroomDAO implements IClassroomDAO {
 
     }
 
+    /**
+     * Creates the classrooms table if it doesn't already exist.
+     */
     private void createClassroomTable() {
         try {
             Statement statement = connection.createStatement();
@@ -38,6 +44,12 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         }
     }
 
+    /**
+     * Adds a new classroom record to the database.
+     * @param classroomNumber the ID/number of the classroom
+     * @param capacity the maximum number of students the classroom can hold
+     * @return true if the insertion is successful, false otherwise
+     */
     public boolean createClassroom(int classroomNumber, int capacity) {
 
         try {
@@ -52,6 +64,9 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         }
     }
 
+    /**
+     * Creates the studentClassroom join table for many-to-many relationship between students and classrooms.
+     */
     private void createStudentClassroom() {
         try {
             Statement statement = connection.createStatement();
@@ -69,7 +84,10 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         }
     }
 
-    @Override
+    /**
+     * Retrieves all classrooms with their student and teacher counts.
+     * @return  an observable list of Classroom objects.
+     */
     public ObservableList<Classroom> getUpdatedClassrooms() {
         ObservableList<Classroom> classrooms = FXCollections.observableArrayList();
 
@@ -96,7 +114,12 @@ public class SqliteClassroomDAO implements IClassroomDAO {
 
         return classrooms;
     }
-    @Override
+
+    /**
+     * Checks if a classroom with a specific number already exists.
+     * @param classroomNumber the classroom number to check
+     * @return true if the classroom exists, false otherwise
+     */
     public boolean classroomNumberExists(int classroomNumber) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT 1 FROM classrooms WHERE classroom_number = ?");
@@ -110,7 +133,13 @@ public class SqliteClassroomDAO implements IClassroomDAO {
     }
 
 
-    @Override
+    /**
+     * Assigns a teacher and list of students to a classroom by appending to the classrooms and studentClassrooms table
+     * @param selectedClassroom the classroom to assign users to
+     * @param selectedTeacher the teacher to assign
+     * @param selectedStudents list of students to assign
+     * @return true if assignment is successful, false otherwise
+     */
     public boolean assignUsers(Classroom selectedClassroom, Teacher selectedTeacher, List<Student> selectedStudents) {
         try {
             // Start a transaction
@@ -166,7 +195,11 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         }
     }
 
-    @Override
+    /**
+     * Retrieves the teacher ID assigned to a given classroom.
+     * @param classroomNumber the classroom number to check
+     * @return the teacher ID if found, null otherwise
+     */
     public Integer getAssignedTeacherId(int classroomNumber) {
         try {
             PreparedStatement stmt = connection.prepareStatement("SELECT teacherID FROM classrooms WHERE classroom_number = ?");
@@ -182,7 +215,11 @@ public class SqliteClassroomDAO implements IClassroomDAO {
     }
 
 
-    @Override
+    /**
+     * Gets all classroom numbers in which a student is enrolled.
+     * @param studentID the ID of the student
+     * @return integer list of classroom numbers the student is enrolled in
+     */
     public List<Integer> getClassroomNumbersForStudent(int studentID) {
         List<Integer> classroomNumbers = new ArrayList<>();
 
@@ -204,7 +241,11 @@ public class SqliteClassroomDAO implements IClassroomDAO {
         return classroomNumbers;
     }
 
-    @Override
+    /**
+     * Gets all classroom numbers that are assigned to a specific teacher.
+     * @param teacherID the ID of the teacher
+     * @return integer list of classroom numbers assigned to the teacher
+     */
     public List<Integer> getClassroomNumberForTeacher(int teacherID) {
         List<Integer> classroomNumbers = new ArrayList<>();
 
