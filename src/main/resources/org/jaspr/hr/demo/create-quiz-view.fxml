@@ -49,13 +49,17 @@
             </font>
             </Label>
             <HBox prefHeight="160.0" prefWidth="777.0">
+                <VBox.margin>
+                    <Insets top="10.0" bottom="5.0" />
+                </VBox.margin>
+
                 <children>
                     <TextField fx:id="descriptionField" alignment="TOP_LEFT" maxHeight="337.0" prefHeight="107.0" prefWidth="737.0" promptText="Description" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                         <font>
                             <Font name="Telugu Sangam MN" size="13.0" />
                         </font>
                         <HBox.margin>
-                            <Insets left="20.0" right="20.0" />
+                            <Insets left="20.0" right="20.0" bottom="0.0" />
                         </HBox.margin>
                     </TextField>
                 </children>
@@ -134,7 +138,7 @@
    </HBox>
         </children>
     </VBox>
-   <HBox prefHeight="181.0" prefWidth="777.0" />
+   <HBox prefHeight="10.0" prefWidth="777.0" />
 
     <HBox alignment="CENTER" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
         <children>
