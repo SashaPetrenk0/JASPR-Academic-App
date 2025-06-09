@@ -34,7 +34,7 @@
                             <Circle fill="#86c5ff80" layoutX="-19.0" layoutY="529.0" radius="85.0" translateX="40.0" translateY="-30.0" />
                         </children>
                     </Pane>
-                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                         <children>
                             <HBox prefHeight="371.0" prefWidth="760.0" style="-fx-background-radius: 50; -fx-padding: 10px 20px;">
                                 <children>
@@ -58,7 +58,7 @@
                                 </VBox.margin>
                             </ComboBox>
 
-                            <VBox fx:id="allResultsBox" alignment="CENTER">
+                            <VBox fx:id="allResultsBox" alignment="TOP_CENTER">
                                 <TableView fx:id="allResults" maxWidth="-Infinity" minHeight="200.0" prefWidth="600.0" style="-fx-background-radius: 10;" xmlns:fx="http://javafx.com/fxml">
                                     <columns>
                                         <TableColumn fx:id="titleColumn" minWidth="300.0" prefWidth="300.0" text="Quiz" />
@@ -70,18 +70,18 @@
                                 </TableView>
                             </VBox>
 
-                            <VBox fx:id="specificResultsBox" alignment="CENTER">
+                            <VBox fx:id="specificResultsBox" alignment="TOP_CENTER">
                                 <Label text="Viewing question breakdown">
                                     <VBox.margin>
                                         <Insets bottom="20.0" />
                                     </VBox.margin>
                                 </Label>
-                                <VBox alignment="CENTER" maxWidth="600.0">
+                                <VBox alignment="TOP_CENTER" maxWidth="600.0">
                                     <Label text="pie chart" />
-                                    <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="300.0" prefHeight="400" prefWidth="400" />
+                                    <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="200.0" prefHeight="400" prefWidth="400" />
 
                                 </VBox>
-                                <VBox alignment="CENTER">
+                                <VBox alignment="TOP_CENTER">
                                     <Label text="Question breakdown">
                                         <VBox.margin>
                                             <Insets bottom="20.0" />
