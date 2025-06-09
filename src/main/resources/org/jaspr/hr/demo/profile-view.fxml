@@ -63,6 +63,23 @@
                            <TextField fx:id="idLabel" editable="false" prefHeight="26.0" prefWidth="284.0" style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" />
                         </children>
                      </HBox>
+
+                     <HBox alignment="CENTER_LEFT" prefHeight="9.0" prefWidth="515.0">
+                        <children>
+                           <Label alignment="CENTER" contentDisplay="CENTER" text="Classroom:" />
+                           <Pane prefHeight="28.0" prefWidth="20.0">
+                              <HBox.margin>
+                                 <Insets left="20.0" />
+                              </HBox.margin>
+                           </Pane>
+                           <TextField fx:id="classroomField" editable="false" prefHeight="26.0" prefWidth="284.0"
+                                      style="-fx-border-radius: 50; -fx-background-color: #FFFFFF; -fx-border-width: 1; -fx-border-color: lightgray; -fx-background-insets: 0;" />
+                        </children>
+                     </HBox>
+
+
+
+
                   </children>
                   <padding>
                      <Insets left="30.0" />
