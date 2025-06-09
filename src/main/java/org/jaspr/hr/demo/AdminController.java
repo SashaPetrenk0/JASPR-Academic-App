@@ -41,6 +41,10 @@ public class AdminController {
         this.currentUser = user;
         if (user instanceof Teacher){
             Teacher teacher = (Teacher) user;
+            personalisedGreeting.setText(teacher.getName() + "'s Dashboard");
+        } else if (user instanceof Admin){
+            Admin admin = (Admin) user;
+            personalisedGreeting.setText(admin.getName() + "'s Dashboard");
         }
     }
 
