@@ -23,6 +23,7 @@ public class TeacherDashboardController {
     @FXML
     private Button profileButton;
 
+
     @FXML
     private Label personalisedGreeting;
 
@@ -98,6 +99,7 @@ public class TeacherDashboardController {
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         stage.setScene(scene);
     }
+
 
     /**
      * When the logout button is pressed, change the scene to the opening page
