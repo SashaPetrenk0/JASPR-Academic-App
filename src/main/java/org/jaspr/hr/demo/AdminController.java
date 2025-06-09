@@ -21,6 +21,9 @@ public class AdminController {
     private Button ClassRoomCreation;
 
     @FXML
+    private Label personalisedGreeting;
+
+    @FXML
     private Button classRoomButton;
 
     @FXML
@@ -30,6 +33,7 @@ public class AdminController {
     private Button logoutButton;
 
     User user = UserSession.getInstance().getCurrentUser();
+
 
     private Object currentUser;
 
