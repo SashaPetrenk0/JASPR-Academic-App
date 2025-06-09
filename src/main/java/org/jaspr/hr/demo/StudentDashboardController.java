@@ -11,7 +11,9 @@ import java.io.IOException;
 
 import javafx.scene.Parent;
 
-
+/**
+ * Class used to control the UI for the student dashboard and handle passing data to further controllers
+ */
 public class StudentDashboardController {
     private final User user = UserSession.getInstance().getCurrentUser();
     private final String role = UserSession.getInstance().getRole();
@@ -39,14 +41,17 @@ public class StudentDashboardController {
     @FXML
     private Button logoutButton;
 
-
+    /**
+     * Method that is run automatically when this page is opened
+     */
     @FXML
     public void initialize() {
+        //verify that the logged in user is a student
         if ("Student".equals(role) && user instanceof Student) {
             Student student = (Student) user;
             personalisedGreeting.setText("Hi, " + student.getName() + "!");
+            //populate listView with quizzes created by the student
             createdQuizzesLists.setItems(FXCollections.observableArrayList(quizDAO.getAllQuizzes(student)));
-
             createdQuizzesLists.setCellFactory(listView -> new ListCell<>() {
                 @Override
                 protected void updateItem(Quiz quiz, boolean empty) {
@@ -59,8 +64,8 @@ public class StudentDashboardController {
                 }
             });
 
+            //populate second listView with quizzes assigned to the logged in student by a teacher
             assignedQuizzesList.setItems(FXCollections.observableArrayList(quizDAO.getQuizzesForStudent(student.getStudentID())));
-
             assignedQuizzesList.setCellFactory(param -> new ListCell<Quiz>() {
                 @Override
                 protected void updateItem(Quiz quiz, boolean empty) {
@@ -73,7 +78,6 @@ public class StudentDashboardController {
                 }
             });
 
-            //TODO: Set the on mouse clicked method on the teacher assigned quizzes as well as the student created ones
 
             createdQuizzesLists.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2) { // double-click
@@ -101,6 +105,14 @@ public class StudentDashboardController {
         }
     }
 
+    /**
+     * Pass data to the take quiz controller and change the scene
+     * @param title the title of the selected quiz
+     * @param questions array of question objects corresponding to the selected quiz
+     * @param quizID id of the selected quiz
+     * @param studentID the id of the student who is currently logged in
+     */
+
     @FXML
         private void openTakeQuiz (String title, Question[]questions, int quizID, int studentID ){
             try {
@@ -112,12 +124,14 @@ public class StudentDashboardController {
                 // Pass data to next controller
                 TakeQuizController controller = loader.getController();
 
+                //pass the quiz title to the take quiz page
                 controller.loadTitle(title);
+                //pass the question array
                 controller.setQuestions(questions);
-                System.out.print(studentID);
-                System.out.print("quiz id" + quizID);
+               //pass the student id and quiz id so this can be used for results
                 controller.getInfo(studentID,quizID);
 
+                //change the scene
                 Stage stage = new Stage();
 
                 stage.setWidth(currentStage.getWidth());
@@ -131,51 +145,33 @@ public class StudentDashboardController {
 
         }
 
-    @FXML
-    private void openTakeAssignedQuiz (String title, Question[]questions, int quizID, int studentID ){
-        try {
-            Stage currentStage = (Stage) assignedQuizzesList.getScene().getWindow();
-            // Load new window
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("take-quiz-view.fxml"));
-            Parent root = loader.load();
 
-            // Pass data to next controller
-            TakeQuizController controller = loader.getController();
-
-            controller.loadTitle(title);
-            controller.setQuestions(questions);
-            System.out.print(studentID);
-            System.out.print("quiz id" + quizID);
-            controller.getInfo(studentID,quizID);
-
-            Stage stage = new Stage();
-
-            stage.setWidth(currentStage.getWidth());
-            stage.setHeight(currentStage.getHeight());
-
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-        /// go to create quiz page
+    /**
+     * Method to change the scene to the create quiz fxml file, actioned when the create quiz button is clicked.
+     */
     @FXML
         protected void onAdd () throws IOException {
+            //get current scene from button
             Stage stage = (Stage) createQuiz.getScene().getWindow();
+            //change the scene
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("create-quiz-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
             stage.setScene(scene);
         }
+
+    /**
+     * Method to change the scene when the view results button is clicked
+     */
     @FXML
-        private void onViewResults () throws IOException {
+        private void onViewResults() {
             Stage stage = (Stage) viewAnalytics.getScene().getWindow();
             SceneChanger.changeScene(stage, "student-view-results.fxml");
         }
 
 
+    /**
+     * Method to show the starting page when the user presses the logout button
+     */
     @FXML
     private void onLogoutClicked() {
         UserSession.getInstance().clearSession();
@@ -194,6 +190,9 @@ public class StudentDashboardController {
         }
     }
 
+    /**
+     * Pass the current user to the profile fxml page and change the scene
+     */
     @FXML
     public void onProfileClick() throws IOException {
         Stage stage = (Stage) profileButton.getScene().getWindow();
