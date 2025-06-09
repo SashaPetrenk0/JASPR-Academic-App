@@ -1,6 +1,6 @@
 package org.jaspr.hr.demo;
 
-import javafx.beans.binding.ObjectBinding;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SqliteResultsDAO implements IResultsDAO {
-    private Connection connection;
+public class SqliteResultsDAO  {
+    private final Connection connection;
 
     public SqliteResultsDAO() {
         connection = SqliteConnection.getInstance();
@@ -58,7 +58,7 @@ public class SqliteResultsDAO implements IResultsDAO {
     }
 
 
-    @Override
+
     public void addQuestionResult(int quizID, int questionID, int studentID, int grade) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO questionResults (quiz_id, question_id, student_id, grade)" +
@@ -74,7 +74,7 @@ public class SqliteResultsDAO implements IResultsDAO {
         }
 
     }
-    @Override
+
     public void addQuizResult(int quizID, int studentID, double grade) {
         try{
             PreparedStatement statement = connection.prepareStatement("INSERT INTO quizResults (quiz_id, student_id, grade)" +
@@ -90,7 +90,7 @@ public class SqliteResultsDAO implements IResultsDAO {
 
     }
 
-    @Override
+
     public List<Map<String, Object>> getResultsByQuestion(int quizID, int studentID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT questions.question, questionResults.grade, questions.answer FROM questionResults INNER JOIN questions ON questionResults.question_id=questions.question_id WHERE questionResults.quiz_id = ? AND questionResults.student_id = ?");
@@ -137,7 +137,7 @@ public class SqliteResultsDAO implements IResultsDAO {
         
     }
 
-    @Override
+
     public List<Map<String, Object>> getResultsByQuiz(int studentID) {
         System.out.print("method calles");
         try {

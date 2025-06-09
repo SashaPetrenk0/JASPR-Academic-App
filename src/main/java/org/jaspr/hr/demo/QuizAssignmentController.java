@@ -12,8 +12,11 @@ import javafx.scene.input.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 import javafx.scene.Parent;
+//TODO: maybe split this up into a couple classes
 
-
+/**
+ * Controller class used to facilitate UI actions and to assign quizzes to classrooms
+ */
 public class QuizAssignmentController {
 
     @FXML
@@ -27,8 +30,13 @@ public class QuizAssignmentController {
 
     private Teacher teacher;
 
+    //use instance of quizDAO
     private final SqliteQuizDAO quizDAO = new SqliteQuizDAO();
 
+    /**
+     * Set the current teacher, populate the quiz listView with the quizzes made by the teacher.
+     * @param teacher the logged in teacher
+     */
     public void setTeacher(Teacher teacher){
         quizzes = quizDAO.getAllQuizObjects(teacher);
         quizListView.getItems().setAll(quizzes);
@@ -41,19 +49,22 @@ public class QuizAssignmentController {
                 if (empty || quiz == null) {
                     setText(null);
                 } else {
-                    setText(quiz.getTitle()); // or quiz.getName(), depending on your field
+                    //if quizzes exist, display the title of each quiz in the listView
+                    setText(quiz.getTitle());
                 }
             }
         });
 
 
-
-
     }
 
+    /**
+     * Method to handle users clicking on the listView
+     */
     @FXML
     private void handleQuizClicked(MouseEvent event) throws IOException {
-        if(event.getClickCount() == 1){
+        int SINGLE_CLICK = 1;
+        if(event.getClickCount() == SINGLE_CLICK){
             Quiz selectedQuiz = quizListView.getSelectionModel().getSelectedItem();
             if (selectedQuiz != null){
                 goToQuiz(selectedQuiz);
@@ -61,17 +72,28 @@ public class QuizAssignmentController {
         }
     }
 
+    /**
+     * Change the fxml page and pass the quiz object to that page
+     * @param quiz selected quiz object from the listView
+     * @throws IOException
+     */
     private void goToQuiz(Quiz quiz) throws IOException {
+        //get the next fxml file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/jaspr/hr/demo/quiz-assignment-details.fxml"));
         Parent root = loader.load();
 
         QuizAssignmentDetailsController controller = loader.getController();
-        controller.setQuiz(quiz, teacher); // <--- Pass quiz object
+        //pass the quiz and the current teacher to the next controller for the new fxml page
+        controller.setQuiz(quiz, teacher);
 
         Stage stage = (Stage) quizListView.getScene().getWindow();
         stage.setScene(new Scene(root));
 
     }
+
+    /**
+     * Method to return to the teacher dashboard when the return button is pressed.
+     */
 
     @FXML
     private void returnToDashboard() throws IOException {

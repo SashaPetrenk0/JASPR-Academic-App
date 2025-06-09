@@ -72,16 +72,12 @@
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Button>
-                           <Button fx:id="assignQuizzes1" layoutX="10.0" layoutY="168.0" minHeight="35.0" onAction="#onAssignQuizzesClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Analytics">
+                           <Button fx:id="onAnalytics" layoutX="10.0" layoutY="168.0" minHeight="35.0" onAction="#onAnalytics" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="View Analytics">
                               <font>
                                  <Font name="System Bold" size="12.0" />
                               </font>
                            </Button>
-                           <Button fx:id="assignQuizzes11" layoutX="10.0" layoutY="223.0" minHeight="35.0" onAction="#onAssignQuizzesClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Classrooms">
-                              <font>
-                                 <Font name="System Bold" size="12.0" />
-                              </font>
-                           </Button>
+
                         
                             <Button fx:id="logoutButton" minHeight="35.0" onAction="#onLogoutClicked" prefWidth="150.0" style="-fx-background-radius: 100; -fx-background-color: #C1F3B9;" text="Logout">
                               <font>
@@ -110,7 +106,6 @@
       </children>
    </StackPane>
 
-    <Button fx:id="onAnalytics" text="Analytics" onAction="#onAnalytics" />
 
 
 

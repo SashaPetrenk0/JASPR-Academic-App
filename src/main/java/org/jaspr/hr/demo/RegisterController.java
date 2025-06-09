@@ -115,7 +115,7 @@ public class RegisterController {
     private Admin newAdmin;
 
     public void initialize(){
-        roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
+        roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Admin"));
     }
 
     @FXML
@@ -127,7 +127,6 @@ public class RegisterController {
         // First hide everything
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
-        parentForm.setVisible(false);
         adminForm.setVisible(false);
 
         // Then show the selected one
@@ -135,7 +134,6 @@ public class RegisterController {
         switch(role){
             case "Student" -> showOnlyForm(studentForm);
             case "Teacher" -> showOnlyForm(teacherForm);
-            case "Parent" -> showOnlyForm(parentForm);
             case "Admin" -> showOnlyForm(adminForm);
         }
     }
@@ -146,9 +144,6 @@ public class RegisterController {
 
         teacherForm.setVisible(false);
         teacherForm.setManaged(false);
-
-        parentForm.setVisible(false);
-        parentForm.setManaged(false);
 
         adminForm.setVisible(false);
         adminForm.setManaged(false);
@@ -210,32 +205,6 @@ public class RegisterController {
 
                     successIcon2.setVisible(true);
                     successIcon2.setManaged(true);
-
-
-                }
-                case "Parent" -> {
-                    name = nameFieldParent.getText();
-                    String child = childNameField.getText();
-                    int childID = Integer.parseInt(childIDField.getText().trim());
-                    email = emailFieldParent.getText();
-                    password = passwordFieldParent.getText();
-
-                    String salt = PasswordUtility.generateSalt();
-                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
-
-                    Parent newParent = new Parent(name, child, childID, email);
-                    userDAO.addParent(newParent, hashedPassword, salt);
-                    successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
-                    successfulSignUpLabelParent.setVisible(true);
-                    submitButtonParent.setVisible(false);
-                    submitButtonParent.setManaged(false);
-
-                    successfulSignUpLabelParent.setVisible(true);
-                    successfulSignUpLabelParent.setManaged(true);
-
-                    successIcon3.setVisible(true);
-                    successIcon3.setManaged(true);
-
 
 
                 }

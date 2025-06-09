@@ -2,19 +2,22 @@ package org.jaspr.hr.demo;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Controller class responsible for displaying user profile data and handling UI interactions related to profile viewing
+ */
 public class ProfileController {
 
+    /** DAO for user related queries */
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
 
+    /** DAO for classroom related queries */
     private final SqliteClassroomDAO classroomDAO = new SqliteClassroomDAO();
 
     @FXML
@@ -32,8 +35,6 @@ public class ProfileController {
     @FXML
     private Label nameLabel1;
 
-
-
     @FXML
     private Label enrollmentLabel;
 
@@ -46,6 +47,10 @@ public class ProfileController {
     // Either student, teacher, admin, parent
     private Object currentUser;
 
+    /**
+     * Sets the current user and loads the appropriate profile.
+     * @param user the logged-in user
+     */
     public void setCurrentUser(Object user) {
         this.currentUser = user;
 
@@ -61,6 +66,10 @@ public class ProfileController {
         }
     }
 
+    /**
+     * Returns the role of the current user as a string.
+     * @return the user's role
+     */
     public String getRole() {
         if (currentUser instanceof Student) {
             return "Student";
@@ -68,24 +77,35 @@ public class ProfileController {
             return "Teacher";
         } else if (currentUser instanceof Admin) {
             return "Admin";
-        } else if (currentUser instanceof Parent) {
-            return "Parent";
         }
         return null;
     }
 
-    private void loadStudentProfile(Student student) {
-        nameLabel.setText(student.getName());
-        int age = student.getAge();
-        ageLabel.setText(Integer.toString(age));
-        int identification = student.getStudentID();
-        idLabel.setText(Integer.toString(identification));
-        emailLabel.setText(student.getEmail());
+    /**
+     * Fills shared profile fields for any role
+     * @param name name of user
+     * @param age age of user
+     * @param id unique identifier of user (studentID, teacherID, or adminID)
+     * @param email email of user
+     */
+    private void populateCommonFields(String name, int age, int id, String email) {
+        nameLabel.setText(name);
+        ageLabel.setText(String.valueOf(age));
+        idLabel.setText(String.valueOf(id));
+        emailLabel.setText(email);
+    }
 
-        nameLabel1.setText(student.getName());
+    /**
+     * Loads student-specific profile details into the UI.
+     * @param student the student whose profile is displayed
+     */
+    private void loadStudentProfile(Student student) {
+        populateCommonFields(student.getName(), student.getAge(), student.getStudentID(), student.getEmail());
+        nameLabel1.setText("Welcome, " + student.getName() + "!");
 
         List<Integer> classroomNumbers = classroomDAO.getClassroomNumbersForStudent(student.getStudentID());
 
+        // Message if no classroom assignment yet
         if (classroomNumbers == null || classroomNumbers.isEmpty()) {
             enrollmentLabel.setText("No classroom assigned");
         } else {
@@ -98,16 +118,15 @@ public class ProfileController {
         enrollmentLabel.setVisible(true);
     }
 
+    /**
+     * Loads teacher-specific profile details into the UI.
+     * @param teacher the teacher whose profile is displayed
+     */
     private void loadTeacherProfile(Teacher teacher) {
-        nameLabel.setText(teacher.getName());
-        int age = teacher.getAge();
-        ageLabel.setText(Integer.toString(age));
-        int identification = teacher.getTeacherID();
-        idLabel.setText(Integer.toString(identification));
-        emailLabel.setText(teacher.getEmail());
+        populateCommonFields(teacher.getName(), teacher.getAge(), teacher.getTeacherID(), teacher.getEmail());
+        nameLabel1.setText("Welcome, " + teacher.getName() + "!");
 
-        nameLabel1.setText(teacher.getName());
-
+        // Show classroom number if assigned
         List<Integer> classroomNumber = classroomDAO.getClassroomNumberForTeacher(teacher.getTeacherID());
         if (classroomNumber != null) {
             enrollmentLabel.setText("Classroom: " + classroomNumber);
@@ -117,17 +136,21 @@ public class ProfileController {
         enrollmentLabel.setVisible(true);
     }
 
+    /**
+     * Loads admin-specific profile details into the UI.
+     * @param admin the admin whose profile is displayed
+     *
+     */
     private void loadAdminProfile(Admin admin) {
-        nameLabel.setText(admin.getName());
-        int age = admin.getAge();
-        ageLabel.setText(Integer.toString(age));
-        int identification = admin.getAdminID();
-        idLabel.setText(Integer.toString(identification));
-        emailLabel.setText(admin.getEmail());
-
+        populateCommonFields(admin.getName(), admin.getAge(), admin.getAdminID(), admin.getEmail());
         nameLabel1.setText("Welcome, " + admin.getName() + "!");
     }
 
+
+    /**
+     * Called when the "Change Password" button is clicked.
+     * Loads change password fxml page and passes the current user
+     */
     @FXML
     private void onChangePwdClicked() {
         try {
@@ -139,24 +162,22 @@ public class ProfileController {
             controller.setCurrentUser(currentUser); // pass the logged in user
 
             // Set scene with specific width and height
-            Scene scene = new Scene(root, HelloApplication.WIDTH, HelloApplication.HEIGHT); // width = 600, height = 400 (example)
-            stage.setScene(scene); // just reuse the stage
+            Scene scene = new Scene(root, HelloApplication.WIDTH, HelloApplication.HEIGHT);
+            stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Called when the "Change Password" button is clicked.
+     * Reloads user data and navigates to their respective dashboard.
+     * @throws IOException if fxml cannot load
+     */
     @FXML
     private void onReturnClicked() throws IOException {
-        // Ensure currentUser is updated before navigating to the dashboard
-        if (currentUser instanceof Student) {
-            currentUser = userDAO.getStudent(((Student) currentUser).getStudentID());  // Reload student data
-        } else if (currentUser instanceof Teacher) {
-            currentUser = userDAO.getTeacher(((Teacher) currentUser).getTeacherID());  // Reload teacher data
-        } else if (currentUser instanceof Admin) {
-            currentUser = userDAO.getAdmin(((Admin) currentUser).getAdminID());  // Reload admin data
-        }
+        refreshCurrentUser();
         // Get the user's role and navigate accordingly
         String role = getRole();
         FXMLLoader loader = null;
@@ -183,6 +204,19 @@ public class ProfileController {
         Stage stage = (Stage) ReturnButton.getScene().getWindow();
         stage.setScene(new Scene(root, SceneChanger.WIDTH, SceneChanger.HEIGHT));
         stage.show();
+    }
+
+    /**
+     * Refreshes the current user by reloading their data from the database.
+     */
+    private void refreshCurrentUser() {
+        if (currentUser instanceof Student s) {
+            currentUser = userDAO.getStudent(s.getStudentID());
+        } else if (currentUser instanceof Teacher t) {
+            currentUser = userDAO.getTeacher(t.getTeacherID());
+        } else if (currentUser instanceof Admin a) {
+            currentUser = userDAO.getAdmin(a.getAdminID());
+        }
     }
 
 }
