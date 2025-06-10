@@ -108,7 +108,6 @@ public class RegisterController {
         // First hide everything
         studentForm.setVisible(false);
         teacherForm.setVisible(false);
-        parentForm.setVisible(false);
         adminForm.setVisible(false);
 
         // Then show the selected one
@@ -116,7 +115,6 @@ public class RegisterController {
         switch(role){
             case "Student" -> showOnlyForm(studentForm);
             case "Teacher" -> showOnlyForm(teacherForm);
-            case "Parent" -> showOnlyForm(parentForm);
             case "Admin" -> showOnlyForm(adminForm);
         }
     }
@@ -127,9 +125,6 @@ public class RegisterController {
 
         teacherForm.setVisible(false);
         teacherForm.setManaged(false);
-
-        parentForm.setVisible(false);
-        parentForm.setManaged(false);
 
         adminForm.setVisible(false);
         adminForm.setManaged(false);
