@@ -4,36 +4,25 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-        import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-
-import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javafx.fxml.FXML;
+
 import javafx.util.StringConverter;
 
-import javax.xml.transform.Result;
 
+/**
+ * Class to populate the results page that the teacher sees and to control the UI elements on this page
+ */
 public class TeacherViewResultsController {
 
     @FXML
@@ -81,16 +70,26 @@ public class TeacherViewResultsController {
     private final SqliteResultsDAO resultsDAO = new SqliteResultsDAO();
 
 
+    /**
+     * Set the current teacher as the teacher who is logged in and display relevant data for the teacher
+     * @param teacher teacher object passed from the dashboard
+     */
     public void setTeacher(Teacher teacher) {
         this.currentTeacher = teacher;
         loadClassroomsForTeacher();
         loadQuizzesForTeacher();
     }
+
+    /**
+     * Display the classroom numbers in a comboBox
+     */
     private void loadClassroomsForTeacher() {
         if (currentTeacher == null) return;
 
+        //store all classroom numbers that the teacher is assigned to in a list
         List<Integer> classroomNumbers = classroomDAO.getClassroomNumberForTeacher(currentTeacher.getTeacherID());
         ObservableList<Integer> observableClassroomNumbers = FXCollections.observableArrayList(classroomNumbers);
+        //display list of classrooms
         classroomComboBox.setItems(observableClassroomNumbers);
 
         classroomComboBox.setConverter(new StringConverter<Integer>() {
@@ -109,6 +108,10 @@ public class TeacherViewResultsController {
             }
         });
     }
+
+    /**
+     * Display the quizzes that the teacher has created in a comboBox
+     */
     private void loadQuizzesForTeacher() {
 
         List<Quiz> quizzes = quizDAO.getAllQuizObjects(currentTeacher);
@@ -116,6 +119,7 @@ public class TeacherViewResultsController {
         quizSelection.setItems(FXCollections.observableArrayList(quizzes));
 
         quizSelection.setConverter(new StringConverter<Quiz>() {
+            //only show the quiz title
             @Override
             public String toString(Quiz quiz) {
                 if (quiz == null) return "";
@@ -124,16 +128,20 @@ public class TeacherViewResultsController {
 
             @Override
             public Quiz fromString(String string) {
-                return null; // not needed for this use case
+                return null;
             }
         });
     }
 
+    /**
+     * Populate the bar graph, pie chart, and tables with data from the results tables accessed through resultsDAO
+     */
     @FXML
     private void generateAnalytics() {
         Quiz selectedQuiz = quizSelection.getValue();
         Integer selectedClassroom = classroomComboBox.getValue();
 
+        //error handling
         if (selectedQuiz == null || selectedClassroom == null) {
             statusLabel.setText("Please select both a classroom and a quiz.");
             return;
@@ -212,21 +220,29 @@ public class TeacherViewResultsController {
     }
 
 
-
-private void showOnlyResults(VBox boxToShow) {
+    /**
+     * Method to set which part of the page (VBox) should be visible
+     * @param boxToShow the VBox that should be visible
+     */
+    private void showOnlyResults(VBox boxToShow) {
     boxToShow.setVisible(true);
     boxToShow.setManaged(true);
 }
 
 
-
-@FXML
+    /**
+     * Method to return to the teacher dashboard when the return button is pressed
+     */
+    @FXML
 private void returnToTeacherDashboard() throws IOException {
     Stage stage = (Stage) returnToPrevious.getScene().getWindow();
     SceneChanger.changeScene(stage, "teacher-dashboard-view.fxml");
 }
 
-@FXML
+    /**
+     * Method to return to the selection menu on the analytics page
+     */
+    @FXML
 private void returnToAnalyticsSelection() throws IOException {
     specificResultsBox.setVisible(false);
     selectionBox.setVisible(true);
