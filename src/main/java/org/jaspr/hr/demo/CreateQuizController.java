@@ -159,7 +159,7 @@ public class CreateQuizController {
 
         // Save the initial quiz entry (without questions)
         quizDAO.addQuiz(newQuiz);
-        successMessage.setText("Quiz " + title + " created successfully! Yay :)");
+        successMessage.setText("Quiz " + title + " created successfully!");
         successMessage.setVisible(true);
         createQuiz.setDisable(true);
         //TODO: create error handling for if from is not complete
