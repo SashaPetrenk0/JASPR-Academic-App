@@ -60,7 +60,7 @@
                     </Button>
                 </VBox>
 
-                <TableView fx:id="classroomTable" prefHeight="300.0" prefWidth="997.0" style="-fx-border-color: #e0e0e0;" styleClass="clean-table">
+                <TableView fx:id="classroomTable" prefHeight="300.0" prefWidth="997.0" style="-fx-border-color: #e0e0e0;" styleClass="improved-table">
 
 
                     <columns>
