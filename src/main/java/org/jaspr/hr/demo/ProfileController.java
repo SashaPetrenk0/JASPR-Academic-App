@@ -115,7 +115,6 @@ public class ProfileController {
             classroomField.setText("No classroom assigned");
         }
 
-        // Hide enrollmentLabel, since we’re using classroomField
         enrollmentLabel.setVisible(false);
     }
 
@@ -137,7 +136,6 @@ public class ProfileController {
             classroomField.setText("No classroom assigned");
         }
 
-        // You don’t need enrollmentLabel to be visible anymore
         enrollmentLabel.setVisible(false);
     }
 
