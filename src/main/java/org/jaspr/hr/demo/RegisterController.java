@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Class to control the functionality of buttons on the register fxml page
+ */
 public class RegisterController {
 
     private final SqliteUserDAO userDAO = new SqliteUserDAO();
@@ -44,17 +47,6 @@ public class RegisterController {
     private TextField passwordFieldTeacher;
 
     @FXML
-    private TextField nameFieldParent;
-    @FXML
-    private TextField childNameField;
-    @FXML
-    private TextField childIDField;
-    @FXML
-    private TextField emailFieldParent;
-    @FXML
-    private TextField passwordFieldParent;
-
-    @FXML
     private TextField nameFieldAdmin;
     @FXML
     private TextField ageFieldAdmin;
@@ -69,8 +61,6 @@ public class RegisterController {
     private Label successfulSignUpLabelStudent;
     @FXML
     private Label successfulSignUpLabelTeacher;
-    @FXML
-    private Label successfulSignUpLabelParent;
     @FXML
     private Label successfulSignUpLabelAdmin;
 
@@ -89,8 +79,6 @@ public class RegisterController {
     @FXML
     private Button submitButtonTeacher;
 
-    @FXML
-    private Button submitButtonParent;
 
     @FXML
     private Button submitButtonAdmin;
@@ -114,10 +102,17 @@ public class RegisterController {
     private Parent newParent;
     private Admin newAdmin;
 
+    /**
+     * Method to populate dropdown menu with user type options.
+     * This method runs automatically when the page opens
+     */
     public void initialize(){
         roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Admin"));
     }
 
+    /**
+     * Displaying the correct form pased on which user is selected from the dropdown
+     */
     @FXML
     private void onRoleSelected() {
         // Hide decorative rectangles
@@ -138,6 +133,10 @@ public class RegisterController {
         }
     }
 
+    /**
+     * Hide all forms apart from the one for the selected user
+     * @param formToShow the form for the selected user, teacher, student or admin
+     */
     private void showOnlyForm(VBox formToShow) {
         studentForm.setVisible(false);
         studentForm.setManaged(false);
@@ -152,7 +151,10 @@ public class RegisterController {
         formToShow.setManaged(true);
     }
 
-
+    /**
+     * Method to handle the registration form being submitted
+     * Retreives data from the fxml labels and creates a new user objects, adds to database using userDAO methods
+     */
     @FXML
         private void onSubmitClicked(){
             String role = roleComboBox.getValue();
@@ -241,6 +243,9 @@ public class RegisterController {
 
         }
 
+    /**
+     * Method to handle returning to the opening page if the return button is pressed
+     */
     @FXML private void returnToHomePage() throws IOException {
         Stage stage = (Stage) returnToPrevious.getScene().getWindow();
         SceneChanger.changeScene(stage, "hello-view.fxml");
