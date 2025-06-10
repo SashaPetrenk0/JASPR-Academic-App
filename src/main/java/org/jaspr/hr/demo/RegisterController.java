@@ -19,7 +19,7 @@ public class RegisterController {
     @FXML
     private ComboBox<String> roleComboBox;
     @FXML
-    private VBox studentForm, teacherForm, parentForm, adminForm;
+    private VBox studentForm, teacherForm, adminForm;
 
     @FXML
     private TextField nameFieldStudent;
@@ -43,16 +43,6 @@ public class RegisterController {
     @FXML
     private TextField passwordFieldTeacher;
 
-    @FXML
-    private TextField nameFieldParent;
-    @FXML
-    private TextField childNameField;
-    @FXML
-    private TextField childIDField;
-    @FXML
-    private TextField emailFieldParent;
-    @FXML
-    private TextField passwordFieldParent;
 
     @FXML
     private TextField nameFieldAdmin;
@@ -69,8 +59,6 @@ public class RegisterController {
     private Label successfulSignUpLabelStudent;
     @FXML
     private Label successfulSignUpLabelTeacher;
-    @FXML
-    private Label successfulSignUpLabelParent;
     @FXML
     private Label successfulSignUpLabelAdmin;
 
@@ -90,18 +78,11 @@ public class RegisterController {
     private Button submitButtonTeacher;
 
     @FXML
-    private Button submitButtonParent;
-
-    @FXML
     private Button submitButtonAdmin;
-
     @FXML
     private ImageView successIcon2;
     @FXML
     private ImageView successIcon1;
-    @FXML
-    private ImageView successIcon3;
-
     @FXML
     private ImageView successIcon4;
 
@@ -227,37 +208,7 @@ public class RegisterController {
 
 
                 }
-                case "Parent" -> {
-                    name = nameFieldParent.getText();
-                    String child = childNameField.getText();
-                    int childID = Integer.parseInt(childIDField.getText().trim());
-                    email = emailFieldParent.getText();
-                    password = passwordFieldParent.getText();
 
-                    String salt = PasswordUtility.generateSalt();
-                    String hashedPassword = PasswordUtility.hashPassword(password, salt);
-
-                    Parent newParent = new Parent(name, child, childID, email);
-                    userDAO.addParent(newParent, hashedPassword, salt);
-
-                    successfulSignUpLabelParent.setText("Successful Parent Registration! Welcome " + name + "!");
-                    successfulSignUpLabelParent.setVisible(true);
-                    submitButtonParent.setVisible(false);
-                    submitButtonParent.setManaged(false);
-
-                    successfulSignUpLabelParent.setVisible(true);
-                    successfulSignUpLabelParent.setManaged(true);
-
-                    successIcon3.setVisible(true);
-                    successIcon3.setManaged(true);
-
-                    nameFieldParent.setDisable(true);
-                    childNameField.setDisable(true);
-                    childIDField.setDisable(true);
-                    emailFieldParent.setDisable(true);
-                    passwordFieldParent.setDisable(true);
-
-                }
                 case "Admin" -> {
                     name = nameFieldAdmin.getText();
                     email = emailFieldAdmin.getText();
