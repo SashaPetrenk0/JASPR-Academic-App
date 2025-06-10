@@ -116,7 +116,12 @@ public class SqliteResultsDAO  {
 
     }
 
-
+    /**
+     * Fetch the results for each question in a given quiz taken by a given student
+     * @param quizID the id of the quiz that the questions belong to
+     * @param studentID the id of the student who took the quiz
+     * @return a list containing the question, the result and the correct answer
+     */
     public List<Map<String, Object>> getResultsByQuestion(int quizID, int studentID) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT questions.question, questionResults.grade, questions.answer FROM questionResults INNER JOIN questions ON questionResults.question_id=questions.question_id WHERE questionResults.quiz_id = ? AND questionResults.student_id = ?");
@@ -142,6 +147,13 @@ public class SqliteResultsDAO  {
         return null;
 
     }
+
+    /**
+     * Fetch only the grade for a quiz
+     * @param quizID the id of the quiz that is being marked
+     * @param studentID the id of the student who took the quiz
+     * @return the grade that the student received for the quiz as an integer
+     */
     public Integer getGrade (int quizID, int studentID) {
       
         try {
@@ -163,7 +175,11 @@ public class SqliteResultsDAO  {
         
     }
 
-
+    /**
+     * Fetch all the quiz results for a particular student
+     * @param studentID the id of the student whose results are desired
+     * @return a list of quiz titles and results for the student
+     */
     public List<Map<String, Object>> getResultsByQuiz(int studentID) {
         System.out.print("method calles");
         try {
@@ -192,6 +208,7 @@ public class SqliteResultsDAO  {
 
     }
 
+   //TODO: pragati can you comment this i dont really get the sql what is qr
     public Map<Integer, Double> getQuestionAccuracyForQuiz(int quizId, int classroomId) {
         Map<Integer, Double> accuracyMap = new HashMap<>();
         try {
