@@ -216,8 +216,15 @@ public class RegisterController {
                     successIcon2.setVisible(true);
                     successIcon2.setManaged(true);
 
+                    nameFieldTeacher.setDisable(true);
+                    emailFieldTeacher.setDisable(true);
+                    passwordFieldTeacher.setDisable(true);
+                    ageFieldTeacher.setDisable(true);
+                    teacherIDField.setDisable(true);
+
 
                 }
+
                 case "Admin" -> {
                     name = nameFieldAdmin.getText();
                     email = emailFieldAdmin.getText();
@@ -241,6 +248,12 @@ public class RegisterController {
 
                     successIcon4.setVisible(true);
                     successIcon4.setManaged(true);
+
+                    nameFieldAdmin.setDisable(true);
+                    emailFieldAdmin.setDisable(true);
+                    passwordFieldAdmin.setDisable(true);
+                    ageFieldAdmin.setDisable(true);
+                    adminIDField.setDisable(true);
 
                     // TODO: Error handling for incorrect user inputs
                 }
