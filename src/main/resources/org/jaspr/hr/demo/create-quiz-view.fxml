@@ -156,9 +156,17 @@
             </Button>
         </children>
     </HBox>
+    <HBox alignment="CENTER" prefHeight="14.0" prefWidth="777.0" style="-fx-background-radius: 50;">
+        <children>
+            <Label fx:id="errorLabel" alignment="CENTER" style="-fx-text-fill: red; -fx-font-size: 14px;" text="" visible="false" />
+        </children>
+    </HBox>
 
-    <Label fx:id="successMessage" alignment="CENTER" style="-fx-text-fill: green; -fx-font-size: 14px;" text="" visible="false" />
-
+    <HBox alignment="CENTER" prefHeight="14.0" prefWidth="777.0" style="-fx-background-radius: 50;">
+        <children>
+            <Label fx:id="successMessage" alignment="CENTER" style="-fx-text-fill: green; -fx-font-size: 14px;" text="" visible="false" />
+        </children>
+    </HBox>
     <HBox prefHeight="60.0" prefWidth="777.0" />
    <Pane prefHeight="200.0" prefWidth="777.0">
       <children>
