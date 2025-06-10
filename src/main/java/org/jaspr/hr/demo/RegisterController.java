@@ -111,7 +111,7 @@ public class RegisterController {
     }
 
     /**
-     * Displaying the correct form pased on which user is selected from the dropdown
+     * Displaying the correct form based on which user is selected from the dropdown
      */
     @FXML
     private void onRoleSelected() {
