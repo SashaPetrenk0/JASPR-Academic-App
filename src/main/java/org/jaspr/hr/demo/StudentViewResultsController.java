@@ -8,6 +8,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
