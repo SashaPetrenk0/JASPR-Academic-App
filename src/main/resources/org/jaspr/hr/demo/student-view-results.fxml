@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.StudentViewResultsController" stylesheets="@styles.css">
+<VBox alignment="TOP_CENTER" spacing="20.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.StudentViewResultsController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -63,11 +63,11 @@
                            <VBox alignment="TOP_CENTER" prefHeight="200.0">
                               <children>
             
-                                        <VBox fx:id="allResultsBox" alignment="TOP_CENTER">
-                                            <TableView fx:id="allResults" maxWidth="-Infinity" minHeight="200.0" prefWidth="600.0" styleClass="clean-table" xmlns:fx="http://javafx.com/fxml">
+                                        <VBox fx:id="allResultsBox" alignment="TOP_CENTER" spacing="20.0">
+                                            <TableView fx:id="allResults" maxWidth="-Infinity" minHeight="200.0" prefWidth="630.0" styleClass="clean-table" xmlns:fx="http://javafx.com/fxml">
                                                 <columns>
-                                                    <TableColumn fx:id="titleColumn" minWidth="300.0" prefWidth="300.0" text="Quiz" />
-                                                    <TableColumn fx:id="gradeColumn" minWidth="300.0" prefWidth="300.0" text="Grade %" />
+                                                    <TableColumn fx:id="titleColumn" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" text="Quiz" />
+                                                    <TableColumn fx:id="gradeColumn" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" text="Grade %" />
                                                 </columns>
                                                 <VBox.margin>
                                                     <Insets bottom="20.0" top="10.0" />
@@ -92,20 +92,23 @@
                                                         <Insets bottom="20.0" />
                                                     </VBox.margin>
                                                 </Label>
-                                                <TableView fx:id="questionResults" maxWidth="600.0" minHeight="-Infinity" prefHeight="200.0" styleClass="clean-table">
+                                                <TableView fx:id="questionResults" maxWidth="630.0" minHeight="-Infinity" prefHeight="200.0" styleClass="clean-table">
                                                     <columns>
                                                         <TableColumn fx:id="questionColumn" minWidth="300.0" prefWidth="300.0" text="Question" />
-                                                        <TableColumn fx:id="answerColumn" prefWidth="150.0" text="Correct Answer" />
-                                                        <TableColumn fx:id="questionGradeColumn" prefWidth="150.0" text="Grade" />
+                                                        <TableColumn fx:id="answerColumn" prefWidth="125.0" text="Correct Answer" />
+                                                        <TableColumn fx:id="questionGradeColumn" prefWidth="125.0" text="Grade" />
                                                     </columns>
                                                 </TableView>
                                             </VBox>
+                                    <VBox.margin>
+                                       <Insets top="10.0" />
+                                    </VBox.margin>
             
             
                                         </VBox>
                               </children>
                               <padding>
-                                 <Insets left="70.0" right="70.0" />
+                                 <Insets left="40.0" right="40.0" />
                               </padding>
                            </VBox>
                         </content>
