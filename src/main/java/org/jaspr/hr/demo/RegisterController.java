@@ -176,14 +176,22 @@ public class RegisterController {
                     userDAO.addStudent(newStudent, hashedPassword, salt);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
-                    submitButtonStudent.setDisable(true);
 
-                    successfulSignUpLabelTeacher.setVisible(true);
-                    successfulSignUpLabelTeacher.setManaged(true);
+                    submitButtonStudent.setVisible(false);
+                    submitButtonStudent.setManaged(false);
+
+                    successfulSignUpLabelStudent.setVisible(true);
+                    successfulSignUpLabelStudent.setManaged(true);
 
                     successIcon1.setVisible(true);
                     successIcon1.setManaged(true);
-                    
+
+                    nameFieldStudent.setDisable(true);
+                    emailFieldStudent.setDisable(true);
+                    passwordFieldStudent.setDisable(true);
+                    ageFieldStudent.setDisable(true);
+                    studentIDField.setDisable(true);
+
                 }
                 case "Teacher" -> {
                     name = nameFieldTeacher.getText();
