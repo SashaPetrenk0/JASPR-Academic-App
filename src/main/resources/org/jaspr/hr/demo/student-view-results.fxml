@@ -58,9 +58,9 @@
                                     <Insets bottom="30.0" top="10.0" />
                                 </VBox.margin>
                             </ComboBox>
-                     <ScrollPane minHeight="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                     <ScrollPane maxWidth="700.0" minHeight="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: transparent;">
                         <content>
-                           <VBox alignment="TOP_CENTER" prefHeight="200.0">
+                           <VBox alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="732.0" prefWidth="700.0">
                               <children>
             
                                         <VBox fx:id="allResultsBox" alignment="TOP_CENTER" spacing="20.0">
@@ -92,11 +92,11 @@
                                                         <Insets bottom="20.0" />
                                                     </VBox.margin>
                                                 </Label>
-                                                <TableView fx:id="questionResults" maxWidth="630.0" minHeight="-Infinity" prefHeight="200.0" styleClass="clean-table">
+                                                <TableView fx:id="questionResults" maxWidth="640.0" minHeight="-Infinity" prefHeight="200.0" prefWidth="640.0" styleClass="clean-table">
                                                     <columns>
                                                         <TableColumn fx:id="questionColumn" minWidth="300.0" prefWidth="300.0" text="Question" />
-                                                        <TableColumn fx:id="answerColumn" prefWidth="125.0" text="Correct Answer" />
-                                                        <TableColumn fx:id="questionGradeColumn" prefWidth="125.0" text="Grade" />
+                                                        <TableColumn fx:id="answerColumn" prefWidth="150.0" text="Correct Answer" />
+                                                        <TableColumn fx:id="questionGradeColumn" prefWidth="150.0" text="Grade" />
                                                     </columns>
                                                 </TableView>
                                             </VBox>
@@ -107,14 +107,14 @@
             
                                         </VBox>
                               </children>
-                              <padding>
-                                 <Insets left="40.0" right="40.0" />
-                              </padding>
                            </VBox>
                         </content>
                         <VBox.margin>
                            <Insets />
                         </VBox.margin>
+                        <opaqueInsets>
+                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        </opaqueInsets>
                      </ScrollPane>
                         </children>
                     </VBox>
