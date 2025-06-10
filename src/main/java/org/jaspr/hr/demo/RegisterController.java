@@ -99,7 +99,7 @@ public class RegisterController {
 
     private Student newStudent;
     private Teacher newTeacher;
-    private Parent newParent;
+
     private Admin newAdmin;
 
     /**

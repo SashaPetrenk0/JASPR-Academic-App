@@ -28,7 +28,7 @@ public class QuestionTests {
     private static Student student;
     private static Teacher teacher;
     private static Admin admin;
-    private static Parent parent;
+
     private static Question question;
     private static Question question2;
     private static final int ID = 1;
@@ -68,7 +68,6 @@ public class QuestionTests {
         student = new Student("John", 16, 12345, "john@gmail.com");
         teacher = new Teacher("Steve", 35, 14321, "steve@gmail.com");
         admin = new Admin("Alice", 40, 1001, "alice@gmail.com");
-        parent = new Parent("Sarah", "John", 12345, "sarah@gmail.com");
         quiz = new Quiz(QUIZ_TITLE, DESC,TOPIC,NUMOFQUESTIONS,AUTHOR);
         quizTwo = new Quiz(QUIZ_TITLE_TWO,DESC_TWO,TOPIC_TWO,NUMOFQUESTIONSTWO,AUTHOR_TWO);
         question = new Question("What colour is the sky?", "Red", "Green", "Blue", "Purple", "Blue");
