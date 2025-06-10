@@ -49,13 +49,17 @@
             </font>
             </Label>
             <HBox prefHeight="160.0" prefWidth="777.0">
+                <VBox.margin>
+                    <Insets bottom="5.0" top="10.0" />
+                </VBox.margin>
+
                 <children>
                     <TextField fx:id="descriptionField" alignment="TOP_LEFT" maxHeight="337.0" prefHeight="107.0" prefWidth="737.0" promptText="Description" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                         <font>
                             <Font name="Telugu Sangam MN" size="13.0" />
                         </font>
                         <HBox.margin>
-                            <Insets left="20.0" right="20.0" />
+                            <Insets bottom="0.0" left="20.0" right="20.0" />
                         </HBox.margin>
                     </TextField>
                 </children>
@@ -64,7 +68,7 @@
     </VBox>
 
 
-    <VBox fx:id="initialQuizFields" spacing="10.0" >
+    <VBox fx:id="initialQuizFields" spacing="10.0">
         <children>
     <HBox maxWidth="828.0" prefHeight="17.0" prefWidth="500.0">
         <children>
@@ -134,12 +138,12 @@
    </HBox>
         </children>
     </VBox>
-   <HBox prefHeight="181.0" prefWidth="777.0" />
+   <HBox prefHeight="10.0" prefWidth="777.0" />
 
-    <HBox alignment="CENTER" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
+    <HBox alignment="CENTER" prefHeight="14.0" prefWidth="777.0" style="-fx-background-radius: 50;">
         <children>
             <Label />
-            <Button fx:id="nextButton" onAction="#onNextPressed" prefHeight="145.0" prefWidth="445.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next" >
+            <Button fx:id="nextButton" onAction="#onNextPressed" prefHeight="145.0" prefWidth="445.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
                 <font>
                     <Font name="Telugu Sangam MN Bold" size="13.0" />
                 </font>
@@ -156,10 +160,10 @@
     <Label fx:id="successMessage" alignment="CENTER" style="-fx-text-fill: green; -fx-font-size: 14px;" text="" visible="false" />
 
     <HBox prefHeight="60.0" prefWidth="777.0" />
-   <Pane prefHeight="200.0" prefWidth="200.0">
+   <Pane prefHeight="200.0" prefWidth="777.0">
       <children>
-         <Circle fill="#a8dadc80" layoutX="-51.0" layoutY="18.0" radius="85.0" />
-         <Circle fill="#86c5ff80" layoutX="61.0" layoutY="50.0" radius="73.0" translateY="20.0" />
+         <Circle fill="#a8dadc80" layoutX="-51.0" layoutY="18.0" radius="85.0" translateY="50.0" />
+         <Circle fill="#86c5ff80" layoutX="61.0" layoutY="50.0" radius="73.0" translateY="70.0" />
          <Circle fill="#8b71b580" layoutX="753.0" layoutY="54.0" radius="90.0" />
       </children>
    </Pane>

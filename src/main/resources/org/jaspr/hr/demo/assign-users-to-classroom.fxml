@@ -1,47 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.jaspr.hr.demo.AssignUsersToClassController">
+<BorderPane prefHeight="760.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.AssignUsersToClassController">
+
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="40" left="40" right="40" top="40" />
     </padding>
 
-    <Label text="Assign Teachers and Students to a Classroom" style="-fx-font-size: 30px;"/>
+    <center>
+        <StackPane maxHeight="760.0" maxWidth="1057.0" prefHeight="760.0" prefWidth="1057.0">
+            <Pane maxHeight="760.0" maxWidth="1057.0" prefHeight="760.0" prefWidth="1057.0">
+                <Circle fill="#d7909080" layoutX="-65.0" layoutY="-70.0" radius="139.0" translateX="-20.0" translateY="10.0" />
+                <Circle fill="#c68fd780" layoutX="938.0" layoutY="32.0" radius="115.0" translateX="-140.0" translateY="-100.0" />
+                <Circle fill="#ffd34f5f" layoutX="852.0" layoutY="81.0" radius="34.0" translateX="-170.0" translateY="-80.0" />
+                <Circle fill="#f8ba6d80" layoutX="62.0" layoutY="766.0" radius="50.0" translateX="-10.0" translateY="-30.0" />
+                <Circle fill="#86c5ff80" layoutX="-207.0" layoutY="717.0" radius="73.0" translateX="180.0" translateY="-30.0" />
+            </Pane>
 
-    <!-- Show registered teachers -->
+               <VBox alignment="CENTER" spacing="30.0">
+            <HBox prefHeight="0.0" prefWidth="720.0">
+               <children>
+                      <Label alignment="TOP_LEFT" prefHeight="7.0" prefWidth="348.0" style="-fx-font-size: 20px;" text="Make assignment selection:">
+                          <font>
+                              <Font name="Telugu Sangam MN" size="13.0" />
+                          </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                      </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
 
+                   <VBox prefHeight="208.0" prefWidth="720.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-padding: 30;">
 
+                       <HBox prefHeight="124.0" prefWidth="1051.0">
+                        <children>
+                            <VBox alignment="CENTER_LEFT" opacity="0.85" prefHeight="88.0" prefWidth="660.0" spacing="20.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                                <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Select Classroom:">
+                           <font>
+                              <Font size="12.0" />
+                           </font></Label>
+                                <ComboBox fx:id="classroomComboBox" prefHeight="49.0" prefWidth="967.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 10;" />
+                        <HBox.margin>
+                           <Insets bottom="10.0" />
+                        </HBox.margin>
+                            </VBox>
+                        </children>
+                    </HBox>
 
-    <HBox spacing="20.0">
-        <VBox>
-            <Label text="Select Classroom:" style="-fx-font-weight: bold;"/>
-            <ComboBox fx:id="classroomComboBox" />
-        </VBox>
-        <VBox>
-            <Label text="Select Teacher:" style="-fx-font-weight: bold;"/>
-            <VBox fx:id="teacherRadioList" spacing="10.0"/>
-        </VBox>
-        <VBox>
-            <Label text="Select Students:" style="-fx-font-weight: bold;"/>
-            <VBox fx:id="studentVBox" spacing="10.0"/>
-        </VBox>
-    </HBox>
+                       <HBox prefHeight="0.0" prefWidth="800.0">
+                        <children>
+                            <VBox prefHeight="56.0" prefWidth="490.0" spacing="8.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                                <Label style=" -fx-font-size: 14px;" text="Select Teacher:" />
+                                <VBox fx:id="teacherRadioList" spacing="10.0" />
+                                <HBox.margin>
+                                    <Insets right="20.0" />
+                                </HBox.margin>
+                            </VBox>
 
-    <Button fx:id="assignUsers" text="Assign" onAction="#assignUsers" />
+                               <VBox prefHeight="56.0" prefWidth="527.0" style="-fx-background-color: #A8DDDC; -fx-background-radius: 12; -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.2, 0, 2);">
+                                <Label style=" -fx-font-size: 14px;" text="Select Students:" />
+                                <VBox fx:id="studentVBox" spacing="10.0" />
+                            </VBox>
+                        </children>
+                    </HBox>
+                </VBox>
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="720.0">
+               <children>
+      
+                         <Button fx:id="assignUsers" onAction="#assignUsers" prefHeight="44.0" prefWidth="663.0" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" text="Create Assignment" textFill="#393535">
+                          <font>
+                              <Font name="Telugu Sangam MN Bold" size="13.0" />
+                          </font>
+                      </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            </VBox>
+        </StackPane>
+    </center>
+   <top>
+      <VBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="720.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="TOP_LEFT" prefHeight="17.0" prefWidth="351.0" text="Search..." textFill="#00000072">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <Line endX="53.82208251953125" opacity="0.44" startX="-255.47787475585938" startY="-1.4483928680419922E-4">
+               <VBox.margin>
+                  <Insets right="40.0" />
+               </VBox.margin>
+            </Line>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
 
-    <Label fx:id="statusLabel" text="" wrapText="true" style="-fx-text-fill: red;"/>
-
-
-
-
-    <Button fx:id="returnToPrevious" text="Return" onAction="#returnToClassroom" />
-
-</VBox>
-
+</BorderPane>
