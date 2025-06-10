@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -24,9 +19,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherViewResultsController">
+<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="510.4" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherViewResultsController">
     <content>
-        <VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #fff;">
+        <VBox spacing="20.0" style="-fx-background-color: #fff;">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
@@ -43,7 +38,7 @@
                         </children>
                     </Pane>
 
-                    <VBox alignment="TOP_CENTER" maxWidth="760.0" spacing="20.0" VBox.vgrow="ALWAYS">
+                    <VBox alignment="TOP_CENTER" maxWidth="760.0" prefHeight="593.0" prefWidth="758.0" spacing="20.0" VBox.vgrow="ALWAYS">
                         <!-- Return Button -->
                         <HBox prefWidth="760.0" style="-fx-background-radius: 50;">
                             <children>
@@ -61,22 +56,26 @@
                         <!-- Selection Section -->
                         <VBox fx:id="selectionBox" alignment="CENTER" maxWidth="600.0" spacing="20.0" visible="true">
                             <Label style="-fx-font-size: 30px;" text="Select what analytics you would like to view" />
-
-                            <VBox alignment="CENTER">
-                                <Label style="-fx-font-weight: bold;" text="Select Classroom:" />
-                                <ComboBox fx:id="classroomComboBox" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
-                            </VBox>
-
-                            <VBox alignment="CENTER">
-                                <Label style="-fx-font-weight: bold;" text="Quiz Selected:" />
-                                <ComboBox fx:id="quizSelection" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
-                            </VBox>
-
-                            <Button fx:id="generateAnalytics" onAction="#generateAnalytics" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Generate Analytics">
-                                <font>
-                                    <Font name="System Bold" size="13.0" />
-                                </font>
-                            </Button>
+                     <VBox alignment="TOP_CENTER" prefHeight="346.0" prefWidth="600.0" spacing="40.0">
+                        <children>
+      
+                                  <VBox alignment="CENTER">
+                                      <Label style="-fx-font-weight: bold;" text="Select Classroom:" />
+                                      <ComboBox fx:id="classroomComboBox" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
+                                  </VBox>
+      
+                                  <VBox alignment="CENTER">
+                                      <Label style="-fx-font-weight: bold;" text="Quiz Selected:" />
+                                      <ComboBox fx:id="quizSelection" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
+                                  </VBox>
+      
+                                  <Button fx:id="generateAnalytics" onAction="#generateAnalytics" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Generate Analytics">
+                                      <font>
+                                          <Font name="System Bold" size="13.0" />
+                                      </font>
+                                  </Button>
+                        </children>
+                     </VBox>
                         </VBox>
 
                         <!-- Results Section -->
@@ -104,6 +103,9 @@
                             <ListView fx:id="ranking" minHeight="50.0" minWidth="-Infinity" prefHeight="200" prefWidth="600.0" />
                             <Button onAction="#returnToAnalyticsSelection" text="Return" />
                         </VBox>
+                  <padding>
+                     <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                  </padding>
                     </VBox>
                 </children>
             </StackPane>
