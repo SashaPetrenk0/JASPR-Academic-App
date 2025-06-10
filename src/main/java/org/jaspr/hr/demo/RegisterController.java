@@ -19,7 +19,7 @@ public class RegisterController {
     @FXML
     private ComboBox<String> roleComboBox;
     @FXML
-    private VBox studentForm, teacherForm, adminForm;
+    private VBox studentForm, teacherForm, parentForm, adminForm;
 
     @FXML
     private TextField nameFieldStudent;
@@ -96,7 +96,7 @@ public class RegisterController {
     private Admin newAdmin;
 
     public void initialize(){
-        roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Parent", "Admin"));
+        roleComboBox.setItems(FXCollections.observableArrayList("Student", "Teacher", "Admin"));
     }
 
     @FXML
