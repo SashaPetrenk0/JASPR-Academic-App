@@ -145,7 +145,7 @@
                         <Image url="@../../../../images_2/user.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="nameLabel1" contentDisplay="CENTER" textFill="WHITE" />
+                  <Label fx:id="nameLabel1" contentDisplay="CENTER" textFill="BLACK" />
                   <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="114.0" style="-fx-background-radius: 30; -fx-background-color: #63aba8;" text="Edit Profile" textFill="#2f2828">
                      <font>
                         <Font name="Telugu Sangam MN Bold" size="13.0" />
