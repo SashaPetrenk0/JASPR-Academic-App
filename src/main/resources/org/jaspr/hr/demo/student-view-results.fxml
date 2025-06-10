@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
@@ -57,47 +58,61 @@
                                     <Insets bottom="30.0" top="10.0" />
                                 </VBox.margin>
                             </ComboBox>
-
-                            <VBox fx:id="allResultsBox" alignment="TOP_CENTER">
-                                <TableView fx:id="allResults" maxWidth="-Infinity" minHeight="200.0" prefWidth="600.0" style="-fx-background-radius: 10;" xmlns:fx="http://javafx.com/fxml">
-                                    <columns>
-                                        <TableColumn fx:id="titleColumn" minWidth="300.0" prefWidth="300.0" text="Quiz" />
-                                        <TableColumn fx:id="gradeColumn" minWidth="300.0" prefWidth="300.0" text="Grade %" />
-                                    </columns>
-                                    <VBox.margin>
-                                        <Insets bottom="20.0" />
-                                    </VBox.margin>
-                                </TableView>
-                            </VBox>
-
-                            <VBox fx:id="specificResultsBox" alignment="TOP_CENTER">
-                                <Label text="Viewing question breakdown">
-                                    <VBox.margin>
-                                        <Insets bottom="20.0" />
-                                    </VBox.margin>
-                                </Label>
-                                <VBox alignment="TOP_CENTER" maxWidth="600.0">
-                                    <Label text="pie chart" />
-                                    <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="200.0" prefHeight="400" prefWidth="400" />
-
-                                </VBox>
-                                <VBox alignment="TOP_CENTER">
-                                    <Label text="Question breakdown">
-                                        <VBox.margin>
-                                            <Insets bottom="20.0" />
-                                        </VBox.margin>
-                                    </Label>
-                                    <TableView fx:id="questionResults" maxWidth="600.0" minHeight="-Infinity" prefHeight="200.0" style="-fx-background-radius: 10;">
-                                        <columns>
-                                            <TableColumn fx:id="questionColumn" minWidth="300.0" prefWidth="300.0" text="Question" />
-                                            <TableColumn fx:id="answerColumn" prefWidth="150.0" text="Correct Answer" />
-                                            <TableColumn fx:id="questionGradeColumn" prefWidth="150.0" text="Grade" />
-                                        </columns>
-                                    </TableView>
-                                </VBox>
-
-
-                            </VBox>
+                     <ScrollPane minHeight="-Infinity" prefHeight="400.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+                        <content>
+                           <VBox alignment="TOP_CENTER" prefHeight="200.0">
+                              <children>
+            
+                                        <VBox fx:id="allResultsBox" alignment="TOP_CENTER">
+                                            <TableView fx:id="allResults" maxWidth="-Infinity" minHeight="200.0" prefWidth="600.0" style="-fx-background-radius: 10;" xmlns:fx="http://javafx.com/fxml">
+                                                <columns>
+                                                    <TableColumn fx:id="titleColumn" minWidth="300.0" prefWidth="300.0" text="Quiz" />
+                                                    <TableColumn fx:id="gradeColumn" minWidth="300.0" prefWidth="300.0" text="Grade %" />
+                                                </columns>
+                                                <VBox.margin>
+                                                    <Insets bottom="20.0" top="10.0" />
+                                                </VBox.margin>
+                                            </TableView>
+                                        </VBox>
+            
+                                        <VBox fx:id="specificResultsBox" alignment="TOP_CENTER">
+                                            <Label text="Viewing question breakdown">
+                                                <VBox.margin>
+                                                    <Insets bottom="20.0" />
+                                                </VBox.margin>
+                                            </Label>
+                                            <VBox alignment="TOP_CENTER" maxWidth="600.0">
+                                                <Label text="pie chart" />
+                                                <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="200.0" prefHeight="400" prefWidth="400" />
+            
+                                            </VBox>
+                                            <VBox alignment="TOP_CENTER">
+                                                <Label text="Question breakdown">
+                                                    <VBox.margin>
+                                                        <Insets bottom="20.0" />
+                                                    </VBox.margin>
+                                                </Label>
+                                                <TableView fx:id="questionResults" maxWidth="600.0" minHeight="-Infinity" prefHeight="200.0" style="-fx-background-radius: 10;">
+                                                    <columns>
+                                                        <TableColumn fx:id="questionColumn" minWidth="300.0" prefWidth="300.0" text="Question" />
+                                                        <TableColumn fx:id="answerColumn" prefWidth="150.0" text="Correct Answer" />
+                                                        <TableColumn fx:id="questionGradeColumn" prefWidth="150.0" text="Grade" />
+                                                    </columns>
+                                                </TableView>
+                                            </VBox>
+            
+            
+                                        </VBox>
+                              </children>
+                              <padding>
+                                 <Insets left="70.0" right="70.0" />
+                              </padding>
+                           </VBox>
+                        </content>
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                     </ScrollPane>
                         </children>
                     </VBox>
                 </children>
