@@ -81,7 +81,7 @@
                                                                     <PieChart fx:id="pieChart" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400" prefWidth="600.0" />
             
                                                                     <ListView fx:id="ranking" maxWidth="550.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="550.0" />
-                                    <Button alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" onAction="#returnToAnalyticsSelection" prefHeight="38.0" prefWidth="446.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" minWidth="100.0" onAction="#returnToAnalyticsSelection" prefHeight="38.0" prefWidth="446.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Return">
                                        <font>
                                           <Font name="Telugu Sangam MN Bold" size="13.0" />
                                        </font>
