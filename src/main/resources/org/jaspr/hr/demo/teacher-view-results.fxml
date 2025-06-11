@@ -82,7 +82,7 @@
                   </yAxis>
               </BarChart>
       
-                 <TableView fx:id="quizResultTable" minWidth="-Infinity" prefHeight="500" prefWidth="600.0">
+                 <TableView fx:id="quizResultTable" minWidth="-Infinity" prefHeight="500" prefWidth="600.0" styleClass="clean-table">
                   <columns>
                       <TableColumn fx:id="studentColumn" prefWidth="150" text="Student" />
                       <TableColumn fx:id="gradeColumn" prefWidth="100" text="Score" />
