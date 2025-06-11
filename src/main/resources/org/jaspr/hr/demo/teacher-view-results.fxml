@@ -22,7 +22,7 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <StackPane alignment="TOP_LEFT" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
+   <StackPane alignment="TOP_CENTER" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
       <children>
          <Pane maxHeight="46.0" maxWidth="760.0" prefHeight="46.0" prefWidth="760.0">
             <children>
@@ -33,69 +33,77 @@
                <Circle fill="#86c5ff80" layoutX="-19.0" layoutY="529.0" radius="85.0" translateX="40.0" translateY="-30.0" />
             </children>
          </Pane>
-      
-          <VBox fx:id="selectionBox" spacing="20.0" style="-fx-padding: 10px 20px;" visible="true">
-            <HBox alignment="TOP_LEFT" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
-               <children>
-                  <Button fx:id="returnToPrevious" onAction="#returnToTeacherDashboard" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
-                     <font>
-                        <Font name="Arial" size="14.0" />
-                     </font>
+         <VBox>
+            <children>
+            
+                <VBox fx:id="selectionBox" alignment="CENTER" spacing="20.0" style="-fx-padding: 10px 20px;" visible="false">
+                  <HBox alignment="TOP_LEFT" prefHeight="44.0" prefWidth="777.0" style="-fx-background-radius: 50;">
+                     <children>
+                        <Button fx:id="returnToPrevious" onAction="#returnToTeacherDashboard" style="-fx-background-color: #D3D3D3; -fx-hover-background-color: #B0B0B0; -fx-text-fill: #000000; -fx-font-family: 'Telugu Sangam MN Bold'; -fx-font-size: 12px; -fx-background-radius: 10;" text="← Return">
+                           <font>
+                              <Font name="Arial" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="5.0" left="10.0" right="15.0" top="5.0" />
+                           </padding>
+                        </Button>
+                     </children>
+                  </HBox>
+                    <Label style="-fx-font-size: 30px;" text="Select what analytics you would like to view" />
+                    <VBox alignment="CENTER">
+                        <Label style="-fx-font-weight: bold;" text="Select Classroom:" />
+                     <ComboBox fx:id="classroomComboBox" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
+                    </VBox>
+                    <VBox alignment="CENTER">
+                        <Label style="-fx-font-weight: bold;" text="Quiz Selected:" />
+                     <ComboBox fx:id="quizSelection" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
+                    </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="720.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="generateAnalytics" onAction="#generateAnalytics" prefHeight="38.0" prefWidth="446.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
+                           <font>
+                              <Font name="Telugu Sangam MN Bold" size="13.0" />
+                           </font>
+                        </Button>
+                     </children>
                      <padding>
-                        <Insets bottom="5.0" left="10.0" right="15.0" top="5.0" />
+                        <Insets top="50.0" />
                      </padding>
-                  </Button>
-               </children>
-            </HBox>
-              <Label style="-fx-font-size: 30px;" text="Select what analytics you would like to view" />
-              <VBox alignment="CENTER">
-                  <Label style="-fx-font-weight: bold;" text="Select Classroom:" />
-               <ComboBox fx:id="classroomComboBox" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
-              </VBox>
-              <VBox alignment="CENTER">
-                  <Label style="-fx-font-weight: bold;" text="Quiz Selected:" />
-               <ComboBox fx:id="quizSelection" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
-              </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="720.0" spacing="20.0">
-               <children>
-                  <Button fx:id="generateAnalytics" onAction="#generateAnalytics" prefHeight="38.0" prefWidth="446.0" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-background-color: #C1F3B9;" text="Next">
-                     <font>
-                        <Font name="Telugu Sangam MN Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets top="50.0" />
-               </padding>
-            </VBox>
-          </VBox>
-      
-             <VBox fx:id="specificResultsBox" alignment="TOP_CENTER" managed="false" minHeight="600.0" minWidth="600.0" visible="false">
-              <Label fx:id="QuizTitle" style="-fx-font-size: 30px;" />
-              <Label text="specific quiz" />
-              <BarChart fx:id="barChart" minWidth="-Infinity" prefHeight="400" prefWidth="600" title="Question Accuracy">
-                  <xAxis>
-                      <CategoryAxis label="Question ID" />
-                  </xAxis>
-                  <yAxis>
-                      <NumberAxis label="Percentage Correct" />
-                  </yAxis>
-              </BarChart>
-      
-                 <TableView fx:id="quizResultTable" minWidth="-Infinity" prefHeight="500" prefWidth="600.0" styleClass="improved-table">
-                  <columns>
-                      <TableColumn fx:id="studentColumn" prefWidth="150" text="Student" />
-                      <TableColumn fx:id="gradeColumn" prefWidth="100" text="Score" />
-                      <TableColumn fx:id="percentageColumn" prefWidth="100" text="Percentage" />
-                  </columns>
-              </TableView>
-      
-                 <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400" prefWidth="600.0" />
-      
-                 <ListView fx:id="ranking" minHeight="100.0" minWidth="-Infinity" prefWidth="600.0" />
-      
-                 <Button onAction="#returnToAnalyticsSelection" text="Return" />
-          </VBox>
+                  </VBox>
+                </VBox>
+            
+                   <VBox fx:id="specificResultsBox" alignment="TOP_CENTER" managed="false" maxHeight="1000.0" maxWidth="600.0" minHeight="52.0" minWidth="170.0" prefHeight="52.0" prefWidth="170.0">
+                    <Label fx:id="QuizTitle" alignment="CENTER" contentDisplay="CENTER" minHeight="30.0" minWidth="-Infinity" prefWidth="600.0" style="-fx-font-size: 30px;" />
+                    <Label minHeight="30.0" minWidth="-Infinity" prefHeight="40.0" prefWidth="600.0" text="specific quiz" />
+                    <BarChart fx:id="barChart" minWidth="-Infinity" prefHeight="400" prefWidth="600" title="Question Accuracy">
+                        <xAxis>
+                            <CategoryAxis label="Question ID" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis label="Percentage Correct" />
+                        </yAxis>
+                    </BarChart>
+            
+                       <TableView fx:id="quizResultTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" styleClass="improved-table">
+                        <columns>
+                            <TableColumn fx:id="studentColumn" prefWidth="150" text="Student" />
+                            <TableColumn fx:id="gradeColumn" prefWidth="100" text="Score" />
+                            <TableColumn fx:id="percentageColumn" prefWidth="100" text="Percentage" />
+                        </columns>
+                    </TableView>
+            
+                       <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400" prefWidth="600.0" />
+            
+                       <ListView fx:id="ranking" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="600.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </ListView>
+            
+                       <Button onAction="#returnToAnalyticsSelection" text="Return" />
+                </VBox>
+            </children>
+         </VBox>
       </children>
    </StackPane>
 
