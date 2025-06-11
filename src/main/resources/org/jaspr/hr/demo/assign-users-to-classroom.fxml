@@ -34,7 +34,7 @@
                <children>
                       <Label alignment="TOP_LEFT" prefHeight="7.0" prefWidth="348.0" style="-fx-font-size: 20px;" text="Make assignment selection:">
                           <font>
-                              <Font name="Telugu Sangam MN" size="13.0" />
+                              <Font name="Arial" size="20.0" />
                           </font>
                      <HBox.margin>
                         <Insets left="30.0" />
