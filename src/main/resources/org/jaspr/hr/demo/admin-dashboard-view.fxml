@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.AdminController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -56,7 +56,7 @@
                                           <Insets />
                                        </VBox.margin>
                                     </Button>
-                                    <Button fx:id="assignQuizzes11" minHeight="35.0" onAction="#onAssignQuizzesClicked" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #ffffff75;" text="Classrooms">
+                                    <Button fx:id="classRoomButton" minHeight="35.0" onAction="#onClassroomClick" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #ffffff75;" text="Classrooms">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
