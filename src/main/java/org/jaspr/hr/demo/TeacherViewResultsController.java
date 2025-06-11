@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
@@ -171,6 +172,7 @@ public class TeacherViewResultsController {
 
             barChart.getData().clear();
             barChart.getData().add(series);
+
 
             studentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStudentName()));
             gradeColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getScoreText()));
