@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import org.jaspr.hr.demo.SqliteUserDAO;
 import org.jaspr.hr.demo.Admin;
-import org.jaspr.hr.demo.Parent;
 import org.jaspr.hr.demo.Student;
 import org.jaspr.hr.demo.Teacher;
 import org.jaspr.hr.demo.Question;
@@ -28,7 +27,7 @@ public class QuestionTests {
     private static Student student;
     private static Teacher teacher;
     private static Admin admin;
-    private static Parent parent;
+
     private static Question question;
     private static Question question2;
     private static final int ID = 1;
@@ -48,15 +47,6 @@ public class QuestionTests {
     private Quiz quiz;
     private Quiz quizTwo;
 
-    @BeforeAll
-    public static void initial_setup() throws SQLException {
-        // Set up a connection to your test database
-      //  connection = DriverManager.getConnection("jdbc:sqlite:users.db");
-
-        // Initialize the userDAO with the connection
-        //userDAO = new SqliteUserDAO();  // Ensure you pass the connection to the DAO
-        //connection.setAutoCommit(false);  // Begin transaction
-    }
 
     @BeforeEach
     public void setup() throws SQLException {
@@ -68,7 +58,6 @@ public class QuestionTests {
         student = new Student("John", 16, 12345, "john@gmail.com");
         teacher = new Teacher("Steve", 35, 14321, "steve@gmail.com");
         admin = new Admin("Alice", 40, 1001, "alice@gmail.com");
-        parent = new Parent("Sarah", "John", 12345, "sarah@gmail.com");
         quiz = new Quiz(QUIZ_TITLE, DESC,TOPIC,NUMOFQUESTIONS,AUTHOR);
         quizTwo = new Quiz(QUIZ_TITLE_TWO,DESC_TWO,TOPIC_TWO,NUMOFQUESTIONSTWO,AUTHOR_TWO);
         question = new Question("What colour is the sky?", "Red", "Green", "Blue", "Purple", "Blue");

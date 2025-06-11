@@ -47,26 +47,6 @@ public class UserTests {
         assertEquals("bob@example.com", teacher.getEmail());
     }
 
-    @Test
-    public void testParentGettersAndSetters() {
-        Parent parent = new Parent("Sarah Johnson", "Emily Johnson", 12345, "sarah@example.com");
-
-        assertEquals("Sarah Johnson", parent.getName());
-        assertEquals("Emily Johnson", parent.getChildName());
-        assertEquals(12345, parent.getChildID());
-        assertEquals("sarah@example.com", parent.getEmail());
-
-        // Set new values
-        parent.setName("Tom Harris");
-        parent.setChildName("Jake Harris");
-        parent.setChildID(67890);
-        parent.setEmail("tom@example.com");
-
-        assertEquals("Tom Harris", parent.getName());
-        assertEquals("Jake Harris", parent.getChildName());
-        assertEquals(67890, parent.getChildID());
-        assertEquals("tom@example.com", parent.getEmail());
-    }
 
     @Test
     public void testAdminGettersAndSetters() {

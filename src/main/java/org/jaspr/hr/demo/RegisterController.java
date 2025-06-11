@@ -22,7 +22,7 @@ public class RegisterController {
     @FXML
     private ComboBox<String> roleComboBox;
     @FXML
-    private VBox studentForm, teacherForm, parentForm, adminForm;
+    private VBox studentForm, teacherForm, adminForm;
 
     @FXML
     private TextField nameFieldStudent;
@@ -99,7 +99,6 @@ public class RegisterController {
 
     private Student newStudent;
     private Teacher newTeacher;
-    private Parent newParent;
     private Admin newAdmin;
 
     /**
