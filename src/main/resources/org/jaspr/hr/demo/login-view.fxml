@@ -18,7 +18,6 @@
 
     <left>
         <StackPane prefWidth="449.0" style="-fx-background-color: #f0f0f0;" BorderPane.alignment="CENTER">
-            <!-- Big decorative bubbles for left side -->
             <Circle fill="#86C5FF80" radius="122.0" translateX="-220.0" translateY="-100.0" />
             <Circle fill="#cfb9e880" radius="112.0" translateX="60.0" translateY="-180.0" />
             <Circle fill="#FFB74D80" radius="65.0" translateX="-120.0" translateY="100.0" />
@@ -33,13 +32,9 @@
             <Circle fill="#a5d6a740" radius="70.0" translateY="10.0" />
         </StackPane>
     </left>
-
     <center>
         <StackPane>
-            <!-- Decorative background bubbles for center (optional) -->
             <Circle fill="#70a85240" radius="72.0" translateX="-200.0" translateY="-150.0" />
-
-            <!-- Actual login form (on top layer) -->
             <VBox alignment="CENTER" maxWidth="333.0" prefHeight="460.0" prefWidth="333.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                 <padding>
                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
