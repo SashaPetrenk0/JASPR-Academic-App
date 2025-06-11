@@ -18,7 +18,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="556.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherViewResultsController">
+<VBox alignment="TOP_CENTER" spacing="20.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherViewResultsController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -48,11 +48,11 @@
                </children>
             </HBox>
               <Label style="-fx-font-size: 30px;" text="Select what analytics you would like to view" />
-              <VBox>
+              <VBox alignment="CENTER">
                   <Label style="-fx-font-weight: bold;" text="Select Classroom:" />
                <ComboBox fx:id="classroomComboBox" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
               </VBox>
-              <VBox>
+              <VBox alignment="CENTER">
                   <Label style="-fx-font-weight: bold;" text="Quiz Selected:" />
                <ComboBox fx:id="quizSelection" prefHeight="26.0" prefWidth="212.0" style="-fx-background-radius: 50; -fx-background-color: #F0F8FF; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" />
               </VBox>
@@ -70,10 +70,10 @@
             </VBox>
           </VBox>
       
-             <VBox fx:id="specificResultsBox" managed="false" visible="false">
+             <VBox fx:id="specificResultsBox" alignment="TOP_CENTER" managed="false" minHeight="600.0" minWidth="600.0" visible="false">
               <Label fx:id="QuizTitle" style="-fx-font-size: 30px;" />
               <Label text="specific quiz" />
-              <BarChart fx:id="barChart" prefHeight="400" prefWidth="600" title="Question Accuracy">
+              <BarChart fx:id="barChart" minWidth="-Infinity" prefHeight="400" prefWidth="600" title="Question Accuracy">
                   <xAxis>
                       <CategoryAxis label="Question ID" />
                   </xAxis>
@@ -82,7 +82,7 @@
                   </yAxis>
               </BarChart>
       
-                 <TableView fx:id="quizResultTable" prefHeight="500">
+                 <TableView fx:id="quizResultTable" minWidth="-Infinity" prefHeight="500" prefWidth="600.0">
                   <columns>
                       <TableColumn fx:id="studentColumn" prefWidth="150" text="Student" />
                       <TableColumn fx:id="gradeColumn" prefWidth="100" text="Score" />
@@ -90,9 +90,9 @@
                   </columns>
               </TableView>
       
-                 <PieChart fx:id="pieChart" layoutX="50" layoutY="50" prefHeight="400" prefWidth="400" />
+                 <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400" prefWidth="600.0" />
       
-                 <ListView fx:id="ranking" />
+                 <ListView fx:id="ranking" minHeight="100.0" minWidth="-Infinity" prefWidth="600.0" />
       
                  <Button onAction="#returnToAnalyticsSelection" text="Return" />
           </VBox>
