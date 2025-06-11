@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.TeacherDashboardController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.StudentDashboardController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -39,7 +39,7 @@
                                     <children>
                                         <HBox alignment="CENTER">
                                             <children>
-                                                <Label fx:id="personalisedGreeting1" style="-fx-font-size: 18px;" text="Hi">
+                                                <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi">
                                                     <HBox.margin>
                                                         <Insets bottom="20.0" top="20.0" />
                                                     </HBox.margin>
@@ -107,7 +107,7 @@
                                                 <Font name="System Bold" size="12.0" />
                                             </font>
                                         </Button>
-                                        <Button fx:id="onAnalytics" layoutX="10.0" layoutY="168.0" minHeight="35.0" onAction="#onAnalytics" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #FFFFFF75;" text="View Analytics">
+                                        <Button fx:id="viewAnalytics" layoutX="10.0" layoutY="168.0" minHeight="35.0" onAction="#onViewResults" prefWidth="200.0" style="-fx-background-radius: 25; -fx-background-color: #FFFFFF75;" text="View Analytics">
                                             <font>
                                                 <Font name="System Bold" size="12.0" />
                                             </font>
