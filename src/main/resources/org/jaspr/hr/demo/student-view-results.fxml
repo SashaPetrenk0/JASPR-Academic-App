@@ -64,7 +64,7 @@
                               <children>
             
                                         <VBox fx:id="allResultsBox" alignment="TOP_CENTER" spacing="20.0">
-                                            <TableView fx:id="allResults" maxWidth="-Infinity" minHeight="200.0" prefWidth="630.0" styleClass="clean-table" xmlns:fx="http://javafx.com/fxml">
+                                            <TableView fx:id="allResults" maxWidth="-Infinity" minHeight="200.0" prefWidth="630.0" styleClass="improved-table" xmlns:fx="http://javafx.com/fxml">
                                                 <columns>
                                                     <TableColumn fx:id="titleColumn" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" text="Quiz" />
                                                     <TableColumn fx:id="gradeColumn" maxWidth="300.0" minWidth="200.0" prefWidth="300.0" text="Grade %" />
@@ -76,13 +76,13 @@
                                         </VBox>
             
                                         <VBox fx:id="specificResultsBox" alignment="TOP_CENTER">
-                                            <Label text="Viewing question breakdown">
+
                                                 <VBox.margin>
                                                     <Insets bottom="20.0" />
                                                 </VBox.margin>
-                                            </Label>
+
                                             <VBox alignment="TOP_CENTER" maxWidth="600.0">
-                                                <Label text="pie chart" />
+
                                                 <PieChart fx:id="pieChart" layoutX="50" layoutY="50" minHeight="200.0" prefHeight="400" prefWidth="400" />
             
                                             </VBox>
@@ -92,7 +92,7 @@
                                                         <Insets bottom="20.0" />
                                                     </VBox.margin>
                                                 </Label>
-                                                <TableView fx:id="questionResults" maxWidth="640.0" minHeight="-Infinity" prefHeight="200.0" prefWidth="640.0" styleClass="clean-table">
+                                                <TableView fx:id="questionResults" maxWidth="640.0" minHeight="-Infinity" prefHeight="200.0" prefWidth="640.0" styleClass="improved-table">
                                                     <columns>
                                                         <TableColumn fx:id="questionColumn" minWidth="300.0" prefWidth="300.0" text="Question" />
                                                         <TableColumn fx:id="answerColumn" prefWidth="150.0" text="Correct Answer" />
