@@ -52,7 +52,7 @@
    <left>
       <VBox alignment="CENTER" prefHeight="460.0" prefWidth="368.0" style="-fx-background-color: #5FD7BB;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="301.0" fitWidth="337.0" opacity="0.86" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="301.0" fitWidth="337.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../images_2/icons.png" />
                </image>
