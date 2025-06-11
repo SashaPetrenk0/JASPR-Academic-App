@@ -82,6 +82,7 @@
                 </VBox>
             <HBox alignment="CENTER" prefHeight="72.0" prefWidth="720.0">
                <children>
+                   <Label fx:id="statusLabel" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" />
       
                          <Button fx:id="assignUsers" onAction="#assignUsers" prefHeight="44.0" prefWidth="663.0" style="-fx-background-radius: 25; -fx-background-color: #cbeec4;" text="Create Assignment" textFill="#393535">
                           <font>
