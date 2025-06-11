@@ -23,10 +23,10 @@
 
             <!-- Background bubbles (fixed in place) -->
             <Pane maxHeight="470.0" maxWidth="760.0" prefHeight="470.0" prefWidth="760.0">
-                <Circle fill="#d7909080" layoutX="-37.0" layoutY="-42.0" radius="167.0" translateX="-20.0" translateY="10.0" />
+                <Circle fill="#d7909080" layoutX="-11.0" layoutY="-68.0" radius="193.0" translateX="-20.0" translateY="10.0" />
                 <Circle fill="#ffb74d80" layoutX="716.0" layoutY="54.0" radius="137.0" translateX="80.0" translateY="-100.0" />
                 <Circle fill="#ffd34f5f" layoutX="639.0" layoutY="94.0" radius="47.0" translateX="40.0" translateY="-30.0" />
-                <Circle fill="#a8dadc80" layoutX="82.0" layoutY="546.0" radius="70.0" translateX="40.0" translateY="-30.0" />
+                <Circle fill="#a8dadc80" layoutX="57.0" layoutY="571.0" radius="95.0" translateX="40.0" translateY="-30.0" />
                 <Rectangle fx:id="Rectangle1" arcHeight="5.0" arcWidth="5.0" fill="#a8dadc" height="306.0" layoutX="86.0" layoutY="-106.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" translateX="168.0" translateY="210.0" width="248.0" />
                 <Rectangle fx:id="Rectangle2" arcHeight="5.0" arcWidth="5.0" fill="#a9dadba4" height="306.0" layoutX="96.0" layoutY="-96.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" translateX="145.0" translateY="190.0" width="248.0" />
                 <Circle fill="#86c5ff80" layoutX="-107.0" layoutY="617.0" radius="173.0" translateX="40.0" translateY="-30.0" />
@@ -71,34 +71,19 @@
                                     <Font name="Telugu Sangam MN" size="14.0" />
                                 </font>
                             </Label>
-                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Name">
-                                <font>
-                                    <Font name="System Bold" size="12.0" />
-                                </font></Label>
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Name" />
                             <TextField fx:id="nameFieldStudent" promptText="Name" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
-                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Age">
-                                <font>
-                                    <Font name="System Bold" size="12.0" />
-                                </font></Label>
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Age" />
                             <TextField fx:id="ageFieldStudent" promptText="Age" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
-                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Student ID">
-                                <font>
-                                    <Font name="System Bold" size="12.0" />
-                                </font></Label>
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Student ID" />
                             <TextField fx:id="studentIDField" promptText="Student ID" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
-                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Email">
-                                <font>
-                                    <Font name="System Bold" size="12.0" />
-                                </font></Label>
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Email" />
                             <TextField fx:id="emailFieldStudent" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
-                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Password">
-                                <font>
-                                    <Font name="System Bold" size="12.0" />
-                                </font></Label>
+                            <Label style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 0 0 0 10;" text="Password" />
                             <TextField fx:id="passwordFieldStudent" promptText="Password" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
                             <HBox alignment="CENTER" spacing="10">
@@ -114,18 +99,11 @@
 
                                 <!-- Submit Button -->
                                 <Button fx:id="submitButtonStudent" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold';                    -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
-                                <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                </VBox.margin>
+                        <VBox.margin>
+                           <Insets bottom="10.0" />
+                        </VBox.margin>
                             </HBox>
                         </VBox>
-
-
-
-
-
-
-
 
                         <!-- Teacher Form -->
                         <VBox fx:id="teacherForm" managed="false" prefWidth="740.0" spacing="20.0" visible="false">
@@ -162,13 +140,11 @@
 
                                 <!-- Submit Button -->
                                 <Button fx:id="submitButtonTeacher" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-margin: 0 0 20 0; -fx-font-family: 'Telugu Sangam MN Bold';                    -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
-                                <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                </VBox.margin>
+                        <VBox.margin>
+                           <Insets bottom="10.0" />
+                        </VBox.margin>
                             </HBox>
                         </VBox>
-
-
 
                         <!-- Admin Form -->
                         <VBox fx:id="adminForm" managed="false" prefHeight="900.0" prefWidth="740.0" spacing="20.0" visible="false">
@@ -185,7 +161,8 @@
 
                             <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="ID Number" />
                             <TextField fx:id="adminIDField" promptText="Admin ID" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
-                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Email"  />
+
+                            <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Email" />
                             <TextField fx:id="emailFieldAdmin" promptText="Email" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN';" />
 
                             <Label style="-fx-font-size: 12px; -fx-text-fill: black; -fx-font-weight: bold; -fx-padding: 0 0 0 10;" text="Password" />
@@ -204,14 +181,14 @@
 
                                 <!-- Submit Button -->
                                 <Button fx:id="submitButtonAdmin" onAction="#onSubmitClicked" prefWidth="170.0" style="-fx-background-radius: 50; -fx-font-family: 'Telugu Sangam MN Bold';                    -fx-background-color: #A8DDDC; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 6, 0.3, 0, 2);" text="Submit" textFill="WHITE" />
+                                <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                </VBox.margin>
                             </HBox>
                         </VBox>
-
-
                     </VBox>
                 </content>
             </ScrollPane>
-
         </StackPane>
     </center>
     <bottom>
