@@ -14,6 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.PasswordField?>
 <BorderPane prefHeight="460.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.LoginController">
 
     <left>
@@ -65,10 +66,10 @@
                     <font>
                         <Font name="Telugu Sangam MN Bold" size="13.0" />
                     </font></TextField>
-                <TextField fx:id="loginPasswordField" maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0" promptText="Password" style="-fx-border-radius: 50; -fx-background-radius: 50;">
+                <PasswordField fx:id="loginPasswordField" maxHeight="37.0" maxWidth="291.0" prefHeight="37.0" prefWidth="291.0" promptText="Password" style="-fx-border-radius: 50; -fx-background-radius: 50;">
                     <font>
                         <Font name="Telugu Sangam MN Bold" size="13.0" />
-                    </font></TextField>
+                    </font></PasswordField>
                 <Button fx:id="LoginButton" onAction="#onLoginClicked" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 50; -fx-border-radius: 50; -fx-background-color: #A8DDDC;" text="Submit" textFill="WHITE">
                     <font>
                         <Font name="Telugu Sangam MN Bold" size="13.0" />

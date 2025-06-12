@@ -33,7 +33,7 @@ public class RegisterController {
     @FXML
     private TextField emailFieldStudent;
     @FXML
-    private TextField passwordFieldStudent;
+    private PasswordField passwordFieldStudent;
 
     @FXML
     private TextField nameFieldTeacher;
@@ -44,7 +44,7 @@ public class RegisterController {
     @FXML
     private TextField emailFieldTeacher;
     @FXML
-    private TextField passwordFieldTeacher;
+    private PasswordField passwordFieldTeacher;
 
     @FXML
     private TextField nameFieldAdmin;
@@ -55,7 +55,7 @@ public class RegisterController {
     @FXML
     private TextField emailFieldAdmin;
     @FXML
-    private TextField passwordFieldAdmin;
+    private PasswordField passwordFieldAdmin;
 
     @FXML
     private Label successfulSignUpLabelStudent;
