@@ -22,7 +22,7 @@ public class RegisterController {
     @FXML
     private ComboBox<String> roleComboBox;
     @FXML
-    private VBox studentForm, teacherForm, adminForm;
+    private VBox studentForm, teacherForm, parentForm, adminForm;
 
     @FXML
     private TextField nameFieldStudent;
@@ -33,7 +33,7 @@ public class RegisterController {
     @FXML
     private TextField emailFieldStudent;
     @FXML
-    private TextField passwordFieldStudent;
+    private PasswordField passwordFieldStudent;
 
     @FXML
     private TextField nameFieldTeacher;
@@ -44,7 +44,7 @@ public class RegisterController {
     @FXML
     private TextField emailFieldTeacher;
     @FXML
-    private TextField passwordFieldTeacher;
+    private PasswordField passwordFieldTeacher;
 
     @FXML
     private TextField nameFieldAdmin;
@@ -55,7 +55,7 @@ public class RegisterController {
     @FXML
     private TextField emailFieldAdmin;
     @FXML
-    private TextField passwordFieldAdmin;
+    private PasswordField passwordFieldAdmin;
 
     @FXML
     private Label successfulSignUpLabelStudent;
@@ -99,6 +99,7 @@ public class RegisterController {
 
     private Student newStudent;
     private Teacher newTeacher;
+
     private Admin newAdmin;
 
     /**
@@ -110,7 +111,7 @@ public class RegisterController {
     }
 
     /**
-     * Displaying the correct form pased on which user is selected from the dropdown
+     * Displaying the correct form based on which user is selected from the dropdown
      */
     @FXML
     private void onRoleSelected() {
@@ -175,14 +176,22 @@ public class RegisterController {
                     userDAO.addStudent(newStudent, hashedPassword, salt);
                     successfulSignUpLabelStudent.setText("Successful Student Registration! Welcome " + name + "!");
                     successfulSignUpLabelStudent.setVisible(true);
-                    submitButtonStudent.setDisable(true);
 
-                    successfulSignUpLabelTeacher.setVisible(true);
-                    successfulSignUpLabelTeacher.setManaged(true);
+                    submitButtonStudent.setVisible(false);
+                    submitButtonStudent.setManaged(false);
+
+                    successfulSignUpLabelStudent.setVisible(true);
+                    successfulSignUpLabelStudent.setManaged(true);
 
                     successIcon1.setVisible(true);
                     successIcon1.setManaged(true);
-                    
+
+                    nameFieldStudent.setDisable(true);
+                    emailFieldStudent.setDisable(true);
+                    passwordFieldStudent.setDisable(true);
+                    ageFieldStudent.setDisable(true);
+                    studentIDField.setDisable(true);
+
                 }
                 case "Teacher" -> {
                     name = nameFieldTeacher.getText();
@@ -207,8 +216,15 @@ public class RegisterController {
                     successIcon2.setVisible(true);
                     successIcon2.setManaged(true);
 
+                    nameFieldTeacher.setDisable(true);
+                    emailFieldTeacher.setDisable(true);
+                    passwordFieldTeacher.setDisable(true);
+                    ageFieldTeacher.setDisable(true);
+                    teacherIDField.setDisable(true);
+
 
                 }
+
                 case "Admin" -> {
                     name = nameFieldAdmin.getText();
                     email = emailFieldAdmin.getText();
@@ -232,6 +248,12 @@ public class RegisterController {
 
                     successIcon4.setVisible(true);
                     successIcon4.setManaged(true);
+
+                    nameFieldAdmin.setDisable(true);
+                    emailFieldAdmin.setDisable(true);
+                    passwordFieldAdmin.setDisable(true);
+                    ageFieldAdmin.setDisable(true);
+                    adminIDField.setDisable(true);
 
                     // TODO: Error handling for incorrect user inputs
                 }

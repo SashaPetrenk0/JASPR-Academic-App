@@ -16,7 +16,7 @@ public class LoginController {
     @FXML
     private TextField loginEmailField;
     @FXML
-    private TextField loginPasswordField;
+    private PasswordField loginPasswordField;
     @FXML
     private Label loginIncorrectError;
     @FXML

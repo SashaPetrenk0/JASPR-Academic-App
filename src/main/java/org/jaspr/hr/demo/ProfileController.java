@@ -108,18 +108,16 @@ public class ProfileController {
 
         List<Integer> classroomNumbers = classroomDAO.getClassroomNumbersForStudent(student.getStudentID());
 
-        // Message if no classroom assignment yet
-        if (classroomNumbers == null || classroomNumbers.isEmpty()) {
-            enrollmentLabel.setText("No classroom assigned");
+        if (classroomNumbers != null && !classroomNumbers.isEmpty()) {
+            String text = "Classroom: " + classroomNumbers.toString().replaceAll("[\\[\\]]", "");
+            classroomField.setText(text);
         } else {
-            StringBuilder classroomText = new StringBuilder();
-            for (Integer number : classroomNumbers) {
-                classroomText.append("Classroom: ").append(number).append("\n");
-            }
-            enrollmentLabel.setText(classroomText.toString());
+            classroomField.setText("No classroom assigned");
         }
-        enrollmentLabel.setVisible(true);
+
+        enrollmentLabel.setVisible(false);
     }
+
 
     /**
      * Loads teacher-specific profile details into the UI.
@@ -138,7 +136,6 @@ public class ProfileController {
             classroomField.setText("No classroom assigned");
         }
 
-        // You don’t need enrollmentLabel to be visible anymore
         enrollmentLabel.setVisible(false);
     }
 

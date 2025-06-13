@@ -32,9 +32,20 @@ public class AdminController {
 
     /** Currently logged-in user retrieved from the session */
     User user = UserSession.getInstance().getCurrentUser();
+    private final String role = UserSession.getInstance().getRole();
 
     // Initialise current user object
     private Object currentUser;
+
+    /**
+     * Initialise admin user and print personalised greeting
+     */
+    public void initialize() {
+        if ("Admin".equals(role) && user instanceof Admin) {
+            Admin admin = (Admin) user;
+            personalisedGreeting.setText("Hi, " + admin.getName() + "!");
+        }
+    }
 
     /**
      * Set the current user for user related actions on this page
@@ -42,12 +53,8 @@ public class AdminController {
      */
     public void setCurrentUser(Object user){
         this.currentUser = user;
-        if (user instanceof Teacher){
-            Teacher teacher = (Teacher) user;
-            personalisedGreeting.setText(teacher.getName() + "'s Dashboard");
-        } else if (user instanceof Admin){
+        if (user instanceof Admin){
             Admin admin = (Admin) user;
-            personalisedGreeting.setText(admin.getName() + "'s Dashboard");
         }
     }
 
