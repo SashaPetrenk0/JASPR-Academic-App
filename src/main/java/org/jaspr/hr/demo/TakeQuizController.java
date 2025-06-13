@@ -100,7 +100,7 @@ public class TakeQuizController {
         } else {
            //if there is no next question, display results
             double grade = ((double) quizHelper.getCorrectCount() / quizHelper.getTotalQuestions()) * 100;
-            questionLabel.setText("Quiz Finished! You scored"+ quizHelper.getCorrectCount() + "/"+ quizHelper.getTotalQuestions());
+            questionLabel.setText("Quiz Finished! You scored "+ quizHelper.getCorrectCount() + "/"+ quizHelper.getTotalQuestions());
            //add the quiz result to the database
             resultsDAO.addQuizResult(quizId, studentId, grade);
 

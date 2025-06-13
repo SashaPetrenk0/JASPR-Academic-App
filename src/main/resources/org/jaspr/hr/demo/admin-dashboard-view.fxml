@@ -39,7 +39,7 @@
                            <children>
                               <HBox alignment="TOP_CENTER">
                                  <children>
-                                    <Label fx:id="personalisedGreeting1" style="-fx-font-size: 18px;" text="Hi">
+                                    <Label fx:id="personalisedGreeting" style="-fx-font-size: 18px;" text="Hi">
                                        <HBox.margin>
                                           <Insets bottom="20.0" top="20.0" />
                                        </HBox.margin>

@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #fff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.jaspr.hr.demo.QuizAssignmentDetailsController">
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jaspr.hr.demo.QuizAssignmentDetailsController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -58,11 +57,11 @@
                            </Label>
                         </children>
                      </HBox>
-                     <HBox alignment="CENTER" maxWidth="550.0" prefHeight="40.0" prefWidth="777.0" spacing="25.0">
+                     <HBox alignment="CENTER" maxWidth="550.0" prefHeight="40.0" prefWidth="777.0" spacing="20.0">
                         <children>
-                           <Label fx:id="topicLabel" alignment="TOP_LEFT" minWidth="200.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="Quiz Topic: ">
+                           <Label fx:id="topicLabel" minHeight="40.0" minWidth="280.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="Quiz Topic: ">
                               <font>
-                                 <Font name="Arial" size="20.0" />
+                                 <Font name="Arial" size="12.0" />
                               </font>
                               <HBox.margin>
                                  <Insets bottom="10.0" top="10.0" />
@@ -71,11 +70,17 @@
                                  <Insets bottom="10.0" left="10.0" top="10.0" />
                               </padding>
                            </Label>
-                           <TextArea maxWidth="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="275.0">
+                           <Label fx:id="numQuestionsLabel" contentDisplay="CENTER" minHeight="40.0" minWidth="200.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="No. of Questions:">
+                              <font>
+                                 <Font name="Arial" size="12.0" />
+                              </font>
                               <HBox.margin>
                                  <Insets bottom="10.0" top="10.0" />
                               </HBox.margin>
-                           </TextArea>
+                              <padding>
+                                 <Insets bottom="10.0" left="10.0" top="10.0" />
+                              </padding>
+                           </Label>
                         </children>
                         <VBox.margin>
                            <Insets />
@@ -83,9 +88,9 @@
                      </HBox>
                      <HBox alignment="CENTER" maxWidth="550.0" prefHeight="40.0" prefWidth="777.0" spacing="25.0">
                         <children>
-                           <Label fx:id="descriptionLabel" alignment="TOP_LEFT" contentDisplay="CENTER" minWidth="200.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="Quiz Description:">
+                           <Label fx:id="descriptionLabel" contentDisplay="CENTER" minHeight="40.0" minWidth="500.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="Quiz Description:">
                               <font>
-                                 <Font name="Arial" size="20.0" />
+                                 <Font name="Arial" size="12.0" />
                               </font>
                               <HBox.margin>
                                  <Insets bottom="10.0" top="10.0" />
@@ -94,33 +99,9 @@
                                  <Insets bottom="10.0" left="10.0" top="10.0" />
                               </padding>
                            </Label>
-                           <TextArea minHeight="-Infinity" prefHeight="40.0" prefWidth="275.0">
-                              <HBox.margin>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </HBox.margin>
-                           </TextArea>
                         </children>
                      </HBox>
-                     <HBox alignment="CENTER" maxWidth="550.0" prefHeight="40.0" prefWidth="777.0" spacing="25.0">
-                        <children>
-                           <Label fx:id="numQuestionsLabel" alignment="TOP_LEFT" contentDisplay="CENTER" minWidth="200.0" style="-fx-background-color: #f0f0f0; -fx-background-radius: 50;" text="No. of Questions:">
-                              <font>
-                                 <Font name="Arial" size="20.0" />
-                              </font>
-                              <HBox.margin>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </HBox.margin>
-                              <padding>
-                                 <Insets bottom="10.0" left="10.0" top="10.0" />
-                              </padding>
-                           </Label>
-                           <TextArea prefHeight="40.0" prefWidth="275.0">
-                              <HBox.margin>
-                                 <Insets bottom="10.0" top="10.0" />
-                              </HBox.margin>
-                           </TextArea>
-                        </children>
-                     </HBox>
+                     <HBox alignment="CENTER" maxWidth="550.0" prefHeight="40.0" prefWidth="777.0" spacing="25.0" />
                   </children>
                </VBox>
                <VBox alignment="CENTER" minHeight="-Infinity" prefHeight="200.0">
